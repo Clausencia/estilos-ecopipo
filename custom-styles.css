@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (BOTÓN ÚNICO ACTIVO IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA - BOTÓN ÚNICO Y FUNCIONAL) */
 
-/* 1. Anclaje espacial de la tarjeta */
+/* 1. Anclaje espacial de la tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,23 +126,22 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 2. Formulario contenedor activo */
+/* 2. Formulario contenedor activo (Mantiene intactos los inputs de compra) */
 .item-product form,
-.js-item-product form,
-.item-product .js-product-form,
-.js-item-product .js-product-form {
+.js-item-product form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
+  min-height: 38px !important;
 }
 
-/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL BOTÓN ACTIVO DEL FORMULARIO */
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN ACTIVO DENTRO DEL FORMULARIO */
 .item-product form .js-addtocart,
 .js-item-product form .js-addtocart,
-.item-product form input[type="submit"],
-.js-item-product form input[type="submit"],
 .item-product form button[type="submit"],
-.js-item-product form button[type="submit"] {
+.js-item-product form button[type="submit"],
+.item-product form input[type="submit"],
+.js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -209,19 +208,15 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER BOTÓN O ELEMENTO SECUNDARIO DUPLICADO */
-.item-product .js-addtocart ~ .js-addtocart,
-.js-item-product .js-addtocart ~ .js-addtocart,
-.item-product form .js-addtocart ~ .btn,
-.js-item-product form .js-addtocart ~ .btn,
-.item-product form .js-addtocart ~ div,
-.js-item-product form .js-addtocart ~ div,
-.item-product form ~ .btn,
-.js-item-product form ~ .btn,
-.item-product form ~ a,
-.js-item-product form ~ a,
-.item-product form ~ div,
-.js-item-product form ~ div,
+/* 7. OCULTAR CUALQUIER CONTENEDOR O BOTÓN DUPLICADO DESPUÉS DEL FORMULARIO */
+.item-product form ~ *,
+.js-item-product form ~ *,
+.item-product .item-actions,
+.js-item-product .item-actions,
+.item-product .item-product-actions,
+.js-item-product .item-product-actions,
+.item-product .product-item-actions,
+.js-item-product .product-item-actions,
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
@@ -229,9 +224,7 @@ a[href*="checkout"]:active {
 .item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-feedback,
-.item-product .add-to-cart-feedback,
-.js-item-product .add-to-cart-feedback {
+.js-item-product .js-addtocart-feedback {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
