@@ -116,46 +116,20 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. ESTABILIZACIÓN Y REGLA MAESTRA BOTÓN COMPRAR/AGREGAR (TURQUESA) */
+/* 10. ESTABILIZACIÓN ABSOLUTA DEL BOTÓN (INCLUYENDO ESTADO ¡LISTO!) */
 
-/* Contenedores para prevenir desalineación o colapso */
-.product-item-actions,
-.item-actions,
-.js-prod-submit-form,
-.product-item form,
-[data-store*="product-item"] {
-  position: relative !important;
-  min-height: 40px !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* Oculta duplicados fantasma */
-.product-item .js-add-to-cart + .js-add-to-cart,
-.product-item .btn + .btn {
-  display: none !important;
-}
-
-/* SELECCIÓN TOTAL: Fuerza el estilo turquesa en CUALQUIER botón de la parrilla */
-.product-item input[type="submit"],
+/* Estilo base unificado para cualquier botón o contenedor en la parrilla */
+.product-item input,
 .product-item button,
 .product-item .btn,
 .product-item a.btn,
-.product-item .js-add-to-cart,
-.product-item .js-addtocart,
-.item-actions input[type="submit"],
+.product-item [class*="add"],
+.product-item [class*="btn"],
+.item-actions input,
 .item-actions button,
 .item-actions .btn,
-.item-actions a.btn,
-.item-actions .js-add-to-cart,
-.item-actions .js-addtocart,
-[data-store*="product-item-add-to-cart"],
-[data-store*="add-to-cart"] {
+.item-actions [class*="add"],
+.item-actions [class*="btn"] {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -175,55 +149,44 @@ a[href*="checkout"]:active {
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
-  transition: transform .15s, box-shadow .15s, background-color .15s !important;
+  transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
   position: relative !important;
 }
 
-/* Bloqueo de estados de transición (Cargando, ¡Listo!, Agregado) */
-.product-item .is-loading,
-.product-item .loading,
-.product-item [disabled],
-.product-item .js-addtocart-success,
-.product-item .is-added,
-.item-actions .is-loading,
-.item-actions .loading,
-.item-actions [disabled],
-.item-actions .js-addtocart-success,
-.item-actions .is-added {
+/* Fuerza el color turquesa en el estado Deshabilitado / ¡Listo! / Cargando */
+.product-item *:disabled,
+.product-item *[disabled],
+.product-item *.disabled,
+.product-item *[class*="added"],
+.product-item *[class*="success"],
+.product-item *[class*="loading"],
+.item-actions *:disabled,
+.item-actions *[disabled],
+.item-actions *.disabled,
+.item-actions *[class*="added"],
+.item-actions *[class*="success"],
+.item-actions *[class*="loading"] {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
-  border-radius: 50px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  opacity: 0.9 !important;
-}
-
-/* Hijos internos */
-.product-item input *, .product-item button *, .product-item .btn *, .item-actions * {
-  background: transparent !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  box-shadow: none !important;
-  border: none !important;
+  opacity: 1 !important;
 }
 
 /* Efectos de presión */
-.product-item button:hover, .product-item input[type="submit"]:hover, .product-item .btn:hover,
-.item-actions button:hover, .item-actions input[type="submit"]:hover, .item-actions .btn:hover {
+.product-item button:hover, .product-item input:hover, .product-item .btn:hover,
+.item-actions button:hover, .item-actions input:hover, .item-actions .btn:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
 }
 
-.product-item button:active, .product-item input[type="submit"]:active, .product-item .btn:active,
-.item-actions button:active, .item-actions input[type="submit"]:active, .item-actions .btn:active {
+.product-item button:active, .product-item input:active, .product-item .btn:active,
+.item-actions button:active, .item-actions input:active, .item-actions .btn:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
 }
-
 
