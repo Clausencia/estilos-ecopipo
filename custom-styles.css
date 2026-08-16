@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA - BOTÓN ÚNICO Y FUNCIONAL) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (SOLUCIÓN DEFINITIVA EXCLUSIVA DE FORMULARIO) */
 
-/* 1. Anclaje espacial de la tarjeta del producto */
+/* 1. Anclaje de la tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,18 +126,22 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 2. Formulario contenedor activo (Mantiene intactos los inputs de compra) */
+/* 2. Formulario contenedor activo */
 .item-product form,
-.js-item-product form {
+.js-item-product form,
+.item-product .js-product-form,
+.js-item-product .js-product-form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
   min-height: 38px !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN ACTIVO DENTRO DEL FORMULARIO */
+/* 3. ESTILO TURQUESA EXCLUSIVO PARA EL BOTÓN DENTRO DEL FORMULARIO */
 .item-product form .js-addtocart,
 .js-item-product form .js-addtocart,
+.item-product .js-product-form .js-addtocart,
+.js-item-product .js-product-form .js-addtocart,
 .item-product form button[type="submit"],
 .js-item-product form button[type="submit"],
 .item-product form input[type="submit"],
@@ -174,7 +178,7 @@ a[href*="checkout"]:active {
   pointer-events: auto !important;
 }
 
-/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
+/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX DEL FORMULARIO */
 .item-product form .js-addtocart:disabled,
 .item-product form .js-addtocart.is-loading,
 .item-product form .js-addtocart.is-added,
@@ -208,23 +212,23 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER CONTENEDOR O BOTÓN DUPLICADO DESPUÉS DEL FORMULARIO */
-.item-product form ~ *,
-.js-item-product form ~ *,
+/* 7. OCULTAR CUALQUIER BOTÓN O DUPLICADO QUE ESTÉ FUERA DEL FORMULARIO */
+.item-product > *:not(form):not(.js-product-form) .js-addtocart,
+.js-item-product > *:not(form):not(.js-product-form) .js-addtocart,
+.item-product > *:not(form):not(.js-product-form) .btn,
+.js-item-product > *:not(form):not(.js-product-form) .btn,
 .item-product .item-actions,
 .js-item-product .item-actions,
-.item-product .item-product-actions,
-.js-item-product .item-product-actions,
-.item-product .product-item-actions,
-.js-item-product .product-item-actions,
-.item-product .btn-secondary,
-.js-item-product .btn-secondary,
-.item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle,
+.item-product [class*="actions"],
+.js-item-product [class*="actions"],
 .item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-feedback {
+.js-item-product .js-addtocart-feedback,
+.item-product .btn-secondary,
+.js-item-product .btn-secondary,
+.item-product .js-quickshop-toggle,
+.js-item-product .js-quickshop-toggle {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
