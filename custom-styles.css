@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (BLINDAJE TOTAL AJAX IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (REGLA DEFINITIVA IPANEMA) */
 
-/* 1. Anclaje y contenedor rígido en Ipanema */
+/* 1. Anclaje espacial de la tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,44 +126,43 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-.item-product .js-product-form,
-.js-item-product .js-product-form,
-.item-product form,
-.js-item-product form {
-  display: block !important;
-  width: 100% !important;
-  position: relative !important;
-  min-height: 38px !important;
-}
-
-/* 2. Ocultar estrictamente notificadores y placeholders duplicados */
+/* 2. OCULTAR ESTRICTAMENTE MENSAJES DE "¡LISTO!" Y NOTIFICACIONES SECUNDARIAS */
 .item-product .js-addtocart-feedback,
-.item-product .js-addtocart-placeholder,
-.item-product .add-to-cart-feedback,
 .js-item-product .js-addtocart-feedback,
+.item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-placeholder,
+.item-product .js-addtocart-success,
+.js-item-product .js-addtocart-success,
+.item-product .add-to-cart-feedback,
 .js-item-product .add-to-cart-feedback,
+.item-product [class*="feedback"],
+.js-item-product [class*="feedback"],
 .item-product [class*="placeholder"],
 .js-item-product [class*="placeholder"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  width: 0 !important;
   height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   position: absolute !important;
   pointer-events: none !important;
 }
 
-/* 3. REGLA MAESTRA: Todos los botones/inputs del formulario (sin importar cambios de clase durante el AJAX) */
-.item-product form button,
-.item-product form input[type="submit"],
-.item-product form .btn,
-.js-item-product form button,
-.js-item-product form input[type="submit"],
-.js-item-product form .btn {
-  display: flex !important;
-  width: 100% !important;
-  max-width: 100% !important;
+/* 3. REGLA MAESTRA DE COLOR Y ESTILO EN TARJETAS (Pinta turquesa cualquier elemento en la tarjeta) */
+.item-product .btn,
+.js-item-product .btn,
+.item-product .btn-primary,
+.js-item-product .btn-primary,
+.item-product .btn-secondary,
+.js-item-product .btn-secondary,
+.item-product .js-addtocart,
+.js-item-product .js-addtocart,
+.item-product input[type="submit"],
+.js-item-product input[type="submit"],
+.item-product button,
+.js-item-product button {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -175,9 +174,12 @@ a[href*="checkout"]:active {
   border-radius: 50px !important;
   border: none !important;
   padding: 6px 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
+  display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
@@ -192,21 +194,19 @@ a[href*="checkout"]:active {
   white-space: nowrap !important;
 }
 
-/* 4. COBERTURA TOTAL DE ESTADOS TEMPORALES (is-loading, disabled, etc.) */
-.item-product form button:disabled,
-.item-product form button[disabled],
-.item-product form button.disabled,
-.item-product form button.is-loading,
-.item-product form button.loading,
-.item-product form input:disabled,
-.item-product form input[disabled],
-.js-item-product form button:disabled,
-.js-item-product form button[disabled],
-.js-item-product form button.disabled,
-.js-item-product form button.is-loading,
-.js-item-product form button.loading,
-.js-item-product form input:disabled,
-.js-item-product form input[disabled] {
+/* 4. BLINDAJE DE ESTADOS DURANTE EJECUCIÓN AJAX (Cargando, Deshabilitado, Disabled) */
+.item-product .btn:disabled,
+.item-product .btn[disabled],
+.item-product .btn.disabled,
+.item-product .btn.is-loading,
+.item-product .btn.loading,
+.js-item-product .btn:disabled,
+.js-item-product .btn[disabled],
+.js-item-product .btn.disabled,
+.js-item-product .btn.is-loading,
+.js-item-product .btn.loading,
+.item-product .is-loading,
+.js-item-product .is-loading {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -215,29 +215,29 @@ a[href*="checkout"]:active {
   opacity: 0.9 !important;
 }
 
-/* 5. TEXTOS Y CONTENIDOS INTERNOS EN BLANCO */
-.item-product form button *,
-.item-product form input *,
-.js-item-product form button *,
-.js-item-product form input * {
+/* 5. TEXTOS E ICONOS INTERNOS EN BLANCO */
+.item-product .btn *,
+.js-item-product .btn *,
+.item-product button *,
+.js-item-product button * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product form button:hover,
-.item-product form input:hover,
-.js-item-product form button:hover,
-.js-item-product form input:hover {
+.item-product .btn:hover,
+.js-item-product .btn:hover,
+.item-product button:hover,
+.js-item-product button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form button:active,
-.item-product form input:active,
-.js-item-product form button:active,
-.js-item-product form input:active {
+.item-product .btn:active,
+.js-item-product .btn:active,
+.item-product button:active,
+.js-item-product button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
