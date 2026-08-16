@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (COMPATIBILIDAD DEFINITIVA IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (SOLUCIÓN DEFINITIVA IPANEMA) */
 
-/* Anclaje espacial rígido en las tarjetas de Ipanema */
+/* Anclaje espacial de la tarjeta */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,37 +126,52 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* Contenedor del formulario del producto */
-.item-product .js-product-form,
-.js-item-product .js-product-form,
-.item-product-actions {
-  position: relative !important;
-  min-height: 40px !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-/* Ocultar elementos fantasma y duplicados de Ipanema */
-.item-product .js-addtocart + .js-addtocart,
-.item-product .btn + .btn,
+/* OCULTAR ESTRICTAMENTE LA ETIQUETA "¡LISTO!" Y ELEMENTOS SECUNDARIOS */
 .item-product .js-addtocart-feedback,
-.item-product .add-to-cart-feedback {
+.item-product .js-addtocart-success,
+.item-product .add-to-cart-feedback,
+.item-product .add-to-cart-success,
+.js-item-product .js-addtocart-feedback,
+.js-item-product .js-addtocart-success,
+.js-item-product .add-to-cart-feedback,
+.js-item-product .add-to-cart-success,
+.item-product [style*="display: none"],
+.item-product [style*="display:none"],
+.js-item-product [style*="display: none"],
+.js-item-product [style*="display:none"],
+.item-product .d-none,
+.js-item-product .d-none,
+.item-product .hidden,
+.js-item-product .hidden {
   display: none !important;
 }
 
-/* Estilo turquesa universal para el botón en Ipanema */
+/* Ocultar duplicados consecutivos */
+.item-product .js-addtocart + .js-addtocart,
+.js-item-product .js-addtocart + .js-addtocart,
+.item-product .btn + .btn,
+.js-item-product .btn + .btn {
+  display: none !important;
+}
+
+/* Contenedor del formulario: bloque único a ancho completo */
+.item-product .js-product-form,
+.js-item-product .js-product-form,
+.item-product form,
+.js-item-product form {
+  display: block !important;
+  width: 100% !important;
+  position: relative !important;
+  min-height: 38px !important;
+}
+
+/* Estilo turquesa ÚNICAMENTE para el botón principal */
 .item-product .js-addtocart,
-.item-product input[type="submit"],
-.item-product button[type="submit"],
-.item-product .btn-primary,
-.item-product .btn-secondary,
-.item-product [data-store*="product-item-add-to-cart"],
 .js-item-product .js-addtocart,
+.item-product input[type="submit"],
 .js-item-product input[type="submit"],
-.js-item-product button[type="submit"],
-.js-item-product .btn-primary,
-.js-item-product .btn-secondary {
+.item-product button[type="submit"],
+.js-item-product button[type="submit"] {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -184,20 +199,15 @@ a[href*="checkout"]:active {
   transform: none !important;
   transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
-  opacity: 1 !important;
 }
 
-/* Forzar turquesa en estados de carga / deshabilitado durante AJAX */
+/* Mantiene el color turquesa durante la carga AJAX */
 .item-product .js-addtocart:disabled,
 .item-product .js-addtocart[disabled],
-.item-product .js-addtocart.disabled,
 .item-product .js-addtocart.is-loading,
-.item-product .js-addtocart.loading,
 .js-item-product .js-addtocart:disabled,
 .js-item-product .js-addtocart[disabled],
-.js-item-product .js-addtocart.disabled,
-.js-item-product .js-addtocart.is-loading,
-.js-item-product .js-addtocart.loading {
+.js-item-product .js-addtocart.is-loading {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -206,7 +216,7 @@ a[href*="checkout"]:active {
   opacity: 0.9 !important;
 }
 
-/* Forzar que el texto interno siempre sea blanco */
+/* Texto interno en blanco */
 .item-product .js-addtocart *,
 .js-item-product .js-addtocart * {
   background: transparent !important;
