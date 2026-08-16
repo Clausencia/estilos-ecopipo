@@ -115,37 +115,48 @@ a[href*="checkout"]:active {
   transform:translateY(4px)!important;
   box-shadow:0 0 0 #FF9030!important;
 }
+/* 10. REGLA DEFINITIVA Y ANCLAJE DE POSICIÓN BOTÓN PARRILLA (TURQUESA) */
 
-/* 10. REGLA BLINDADA BOTÓN PARRILLA (PREVIENE PARPADEO Y DESPLAZAMIENTO) */
+/* 1. ANCLAJE OBLIGATORIO: Fuerza a la tarjeta de cada producto a ser la referencia espacial */
+.product-item,
+.js-product-container,
+[data-store*="product-item"] {
+  position: relative !important;
+}
 
-/* Contenedor padre rígido: Mantiene el espacio bloqueado sin saltos */
-.product-item .js-prod-submit-form,
+/* 2. BLOQUEO DEL CONTENEDOR: Evita que pierda su lugar o se vuelva absoluto */
 .product-item .product-item-actions,
 .product-item .item-actions,
-.product-item form[action*="cart"] {
+.product-item .js-prod-submit-form,
+.product-item form {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
   min-height: 40px !important;
-  height: 40px !important;
   width: 100% !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  position: relative !important;
   margin: 0 auto !important;
 }
 
-/* Respeta elementos ocultos dinámicos de Tiendanube */
-.product-item .d-none,
-.product-item .hidden,
-.product-item [style*="display: none"],
-.product-item [style*="display:none"] {
-  display: none !important;
-}
-
-/* REGLA UNIVERSAL: Aplica el diseño turquesa a CUALQUIER etiqueta que cree el script */
-.product-item .js-prod-submit-form *,
-.product-item .item-actions *,
+/* 3. ESTILO Y ANCLAJE DEL BOTÓN: Prohíbe el desplazamiento en todos los estados */
+.product-item .btn,
+.product-item input[type="submit"],
+.product-item button,
 .product-item .js-add-to-cart,
-.product-item .js-addtocart {
+.product-item .js-addtocart,
+.product-item .btn-primary,
+.product-item .btn-secondary {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -158,37 +169,51 @@ a[href*="checkout"]:active {
   border: none !important;
   padding: 6px 18px !important;
   width: 100% !important;
-  max-width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
-  max-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
-  cursor: pointer !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
-  position: relative !important;
-  top: 0 !important;
-  left: 0 !important;
-  transform: none !important;
   transition: transform .15s, box-shadow .15s !important;
 }
 
-/* Efectos al presionar */
-.product-item .js-prod-submit-form *:hover,
-.product-item .item-actions *:hover {
+/* 4. PERSISTENCIA TURQUESA EN ESTADOS DE CARGA / DESHABILITADO */
+.product-item .btn:disabled,
+.product-item .btn[disabled],
+.product-item .btn.disabled,
+.product-item .btn.is-loading,
+.product-item .btn.loading,
+.product-item .js-addtocart-success {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  opacity: 1 !important;
+}
+
+/* 5. Respeta elementos ocultos dinámicos */
+.product-item .d-none,
+.product-item .hidden,
+.product-item [style*="display: none"],
+.product-item [style*="display:none"] {
+  display: none !important;
+}
+
+/* 6. EFECTOS AL PRESIONAR (Preservando posición) */
+.product-item .btn:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
 }
 
-.product-item .js-prod-submit-form *:active,
-.product-item .item-actions *:active {
+.product-item .btn:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
 }
-
