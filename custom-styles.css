@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (AISLAMIENTO STRICTO IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (ESPECÍFICO TIENDANUBE IPANEMA) */
 
 /* 1. Anclaje de la tarjeta del producto */
 .item-product,
@@ -137,15 +137,10 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL PRIMER BOTÓN/SUBMIT DEL FORMULARIO */
-.item-product form > input[type="submit"]:first-of-type,
-.item-product form > button:first-of-type,
-.item-product form > .btn:first-of-type,
-.js-item-product form > input[type="submit"]:first-of-type,
-.js-item-product form > button:first-of-type,
-.js-item-product form > .btn:first-of-type,
-.item-product form .js-addtocart:first-of-type,
-.js-item-product form .js-addtocart:first-of-type {
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN PRINCIPAL DE TIENDANUBE */
+.item-product form .js-addtocart,
+.js-item-product form .js-addtocart,
+.item-product .js-addtocart {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -177,6 +172,7 @@ a[href*="checkout"]:active {
   transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
   white-space: nowrap !important;
+  z-index: 2 !important;
 }
 
 /* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
@@ -213,23 +209,23 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER ELEMENTO SECUNDARIO DENTRO O FUERA DEL FORMULARIO */
-.item-product form > * + *,
-.js-item-product form > * + *,
-.item-product form ~ *,
-.js-item-product form ~ *,
+/* 7. OCULTAR BOTÓN SECUNDARIO Y PLACEHOLDERS NATIVOS DE IPANEMA */
+.item-product form > *:not(.js-addtocart),
+.js-item-product form > *:not(.js-addtocart),
+.item-product form .js-addtocart ~ *,
+.js-item-product form .js-addtocart ~ *,
+.item-product .js-quickshop-toggle,
+.item-product .btn-secondary,
 .item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
 .item-product .add-to-cart-feedback,
 .item-product .js-addtocart-success,
-.item-product [class*="placeholder"],
-.item-product [class*="feedback"],
+.js-item-product .js-quickshop-toggle,
+.js-item-product .btn-secondary,
 .js-item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-feedback,
 .js-item-product .add-to-cart-feedback,
-.js-item-product .js-addtocart-success,
-.js-item-product [class*="placeholder"],
-.js-item-product [class*="feedback"] {
+.js-item-product .js-addtocart-success {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -241,4 +237,5 @@ a[href*="checkout"]:active {
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
+  z-index: -1 !important;
 }
