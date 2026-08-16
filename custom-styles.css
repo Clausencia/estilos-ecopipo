@@ -115,48 +115,39 @@ a[href*="checkout"]:active {
   transform:translateY(4px)!important;
   box-shadow:0 0 0 #FF9030!important;
 }
-/* 10. REGLA DEFINITIVA Y ANCLAJE DE POSICIÓN BOTÓN PARRILLA (TURQUESA) */
 
-/* 1. ANCLAJE OBLIGATORIO: Fuerza a la tarjeta de cada producto a ser la referencia espacial */
+/* 10. REGLA DEFINITIVA Y SOLUCIÓN A BOTÓN FANTASMA */
+
+/* 1. ANCLAJE DE CADA TARJETA: Mantiene el botón dentro de su producto */
 .product-item,
 .js-product-container,
+.item-container,
 [data-store*="product-item"] {
   position: relative !important;
+  box-sizing: border-box !important;
 }
 
-/* 2. BLOQUEO DEL CONTENEDOR: Evita que pierda su lugar o se vuelva absoluto */
-.product-item .product-item-actions,
-.product-item .item-actions,
-.product-item .js-prod-submit-form,
-.product-item form {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  min-height: 40px !important;
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 0 auto !important;
+/* 2. OCULTAR BOTONES FANTASMAS Y ELEMENTOS DUPLICADOS EN LA GRID */
+.product-grid > .btn,
+.product-grid > .js-add-to-cart,
+.product-item .js-addtocart + .js-addtocart,
+.product-item .btn + .btn,
+.product-item [style*="display: none"],
+.product-item [style*="display:none"],
+.product-item .hidden,
+.product-item .d-none {
+  display: none !important;
 }
 
-/* 3. ESTILO Y ANCLAJE DEL BOTÓN: Prohíbe el desplazamiento en todos los estados */
+/* 3. ESTILO BASE UNIFICADO DEL BOTÓN (TURQUESA Y FIJO EN SU LUGAR) */
 .product-item .btn,
 .product-item input[type="submit"],
 .product-item button,
 .product-item .js-add-to-cart,
 .product-item .js-addtocart,
 .product-item .btn-primary,
-.product-item .btn-secondary {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
+.product-item .btn-secondary,
+.product-item .btn-default {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -171,6 +162,7 @@ a[href*="checkout"]:active {
   width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
+  max-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   display: flex !important;
   justify-content: center !important;
@@ -178,42 +170,63 @@ a[href*="checkout"]:active {
   text-transform: uppercase !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
   transition: transform .15s, box-shadow .15s !important;
+  cursor: pointer !important;
+  float: none !important;
 }
 
-/* 4. PERSISTENCIA TURQUESA EN ESTADOS DE CARGA / DESHABILITADO */
+/* 4. BLINDAJE DE ESTADOS (Cargando, ¡Listo!, Deshabilitado, Success) */
 .product-item .btn:disabled,
 .product-item .btn[disabled],
 .product-item .btn.disabled,
 .product-item .btn.is-loading,
 .product-item .btn.loading,
-.product-item .js-addtocart-success {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
+.product-item .js-addtocart-success,
+.product-item .is-added,
+.product-item [class*="loading"],
+.product-item [class*="success"] {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   opacity: 1 !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
 }
 
-/* 5. Respeta elementos ocultos dinámicos */
-.product-item .d-none,
-.product-item .hidden,
-.product-item [style*="display: none"],
-.product-item [style*="display:none"] {
-  display: none !important;
+/* 5. TEXTO INTERNO Y SPINNERS DENTRO DEL BOTÓN */
+.product-item .btn *,
+.product-item input *,
+.product-item button * {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* 6. EFECTOS AL PRESIONAR (Preservando posición) */
-.product-item .btn:hover {
+/* 6. EFECTOS AL PRESIONAR */
+.product-item .btn:hover,
+.product-item input[type="submit"]:hover,
+.product-item button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
+  background-color: #42c6d3 !important;
 }
 
-.product-item .btn:active {
+.product-item .btn:active,
+.product-item input[type="submit"]:active,
+.product-item button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #42c6d3 !important;
 }
