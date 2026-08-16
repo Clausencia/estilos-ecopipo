@@ -116,36 +116,30 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. ESTABILIZACIÓN DEFECTO ÚNICO BOTÓN AGREGAR AL CARRITO */
+/* 10. ESTABILIZACIÓN Y REGLA DEFINITIVA BOTÓN PARRILLA (TURQUESA) */
 
-/* Respetar y forzar ocultamiento de capas secundarias o inactivas de Tiendanube */
-.product-item .hidden,
+/* Contenedor: Reserva el espacio para evitar saltos visuales */
+.product-item .js-prod-submit-form,
+.product-item .product-item-actions,
+.product-item .item-actions {
+  min-height: 40px !important;
+  position: relative !important;
+}
+
+/* Respeta los elementos que Tiendanube oculta dinámicamente */
 .product-item .d-none,
+.product-item .hidden,
 .product-item [style*="display: none"],
-.product-item [style*="display:none"],
-.item-actions .hidden,
-.item-actions .d-none,
-.item-actions [style*="display: none"],
-.item-actions [style*="display:none"] {
+.product-item [style*="display:none"] {
   display: none !important;
 }
 
-/* Ocultar duplicados consecutivos */
-.product-item .js-addtocart + .js-addtocart,
-.product-item .btn + .btn,
-.product-item form + form {
-  display: none !important;
-}
-
-/* Aplicar diseño turquesa ÚNICAMENTE al botón activo principal */
-.product-item .js-add-to-cart,
-.product-item .js-addtocart,
+/* Estilo base para todos los botones visibles en la parrilla */
+.product-item .btn,
 .product-item input[type="submit"],
-.product-item button[type="submit"],
-.item-actions .js-add-to-cart,
-.item-actions .js-addtocart,
-.item-actions input[type="submit"],
-.item-actions button[type="submit"] {
+.product-item button,
+.product-item .js-add-to-cart,
+.product-item .js-addtocart {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -161,23 +155,21 @@ a[href*="checkout"]:active {
   height: 38px !important;
   min-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
   text-transform: uppercase !important;
-  transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
+  transition: transform .15s, box-shadow .15s !important;
 }
 
-/* Mantener turquesa durante carga o deshabilitado sin duplicar botones */
-.product-item .js-addtocart:disabled,
-.product-item .js-addtocart[disabled],
-.product-item .js-addtocart.is-loading,
-.item-actions .js-addtocart:disabled,
-.item-actions .js-addtocart[disabled],
-.item-actions .js-addtocart.is-loading {
+/* Elimina el fondo negro en estados "Deshabilitado", "¡Listo!" o "Cargando" */
+.product-item .btn:disabled,
+.product-item .btn[disabled],
+.product-item .btn.disabled,
+.product-item .btn.is-loading,
+.product-item .btn.loading,
+.product-item .js-addtocart-success,
+.product-item .is-added {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -187,14 +179,16 @@ a[href*="checkout"]:active {
 }
 
 /* Efectos al presionar */
-.product-item .js-addtocart:hover,
-.item-actions .js-addtocart:hover {
+.product-item .btn:hover,
+.product-item input[type="submit"]:hover,
+.product-item button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.product-item .js-addtocart:active,
-.item-actions .js-addtocart:active {
+.product-item .btn:active,
+.product-item input[type="submit"]:active,
+.product-item button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
