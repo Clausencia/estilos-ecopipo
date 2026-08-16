@@ -116,38 +116,46 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. REGLA DEFINITIVA Y SOLUCIÓN A BOTÓN FANTASMA */
+/* 10. REGLA MAESTRA GLOBAL (ELIMINA EL BOTÓN NEGRO Y EL SALTO EN TODO EL SITIO) */
 
-/* 1. ANCLAJE DE CADA TARJETA: Mantiene el botón dentro de su producto */
-.product-item,
-.js-product-container,
-.item-container,
-[data-store*="product-item"] {
-  position: relative !important;
-  box-sizing: border-box !important;
+/* 1. SOBREESCRITURA GLOBAL: Ningún botón nativo del tema volverá a ser negro */
+.btn-primary,
+.btn-secondary,
+.btn-default,
+.js-add-to-cart,
+.js-addtocart {
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  border-radius: 50px !important;
+  border: none !important;
 }
 
-/* 2. OCULTAR BOTONES FANTASMAS Y ELEMENTOS DUPLICADOS EN LA GRID */
+/* 2. OCULTAR CLONES HUÉRFANOS: Oculta botones que el JS pegue fuera de las tarjetas */
+body > .btn,
+body > div > .btn,
 .product-grid > .btn,
-.product-grid > .js-add-to-cart,
-.product-item .js-addtocart + .js-addtocart,
-.product-item .btn + .btn,
-.product-item [style*="display: none"],
-.product-item [style*="display:none"],
-.product-item .hidden,
-.product-item .d-none {
+.js-product-grid > .btn,
+.js-addtocart-feedback,
+.js-cart-notification,
+.product-item .js-addtocart + .js-addtocart {
   display: none !important;
 }
 
-/* 3. ESTILO BASE UNIFICADO DEL BOTÓN (TURQUESA Y FIJO EN SU LUGAR) */
+/* 3. ANCLAJE DE LA TARJETA DEL PRODUCTO */
+.product-item,
+.js-product-container,
+[data-store*="product-item"] {
+  position: relative !important;
+}
+
+/* 4. ESTILO Y ANCLAJE ESTRICTO DE BOTONES EN LA PARRILLA */
 .product-item .btn,
 .product-item input[type="submit"],
 .product-item button,
 .product-item .js-add-to-cart,
-.product-item .js-addtocart,
-.product-item .btn-primary,
-.product-item .btn-secondary,
-.product-item .btn-default {
+.product-item .js-addtocart {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -162,7 +170,6 @@ a[href*="checkout"]:active {
   width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
-  max-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   display: flex !important;
   justify-content: center !important;
@@ -173,60 +180,34 @@ a[href*="checkout"]:active {
   position: relative !important;
   top: 0 !important;
   left: 0 !important;
-  right: auto !important;
-  bottom: auto !important;
   transform: none !important;
   transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
-  float: none !important;
 }
 
-/* 4. BLINDAJE DE ESTADOS (Cargando, ¡Listo!, Deshabilitado, Success) */
-.product-item .btn:disabled,
-.product-item .btn[disabled],
-.product-item .btn.disabled,
-.product-item .btn.is-loading,
-.product-item .btn.loading,
-.product-item .js-addtocart-success,
-.product-item .is-added,
-.product-item [class*="loading"],
-.product-item [class*="success"] {
+/* 5. BLOQUEO GLOBAL DE ESTADOS (Cargando, ¡Listo!, Deshabilitado) */
+.btn:disabled,
+.btn[disabled],
+.btn.disabled,
+.btn.is-loading,
+.btn.loading,
+.js-addtocart-success,
+.is-added {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   opacity: 1 !important;
-  position: relative !important;
-  top: 0 !important;
-  left: 0 !important;
-  transform: none !important;
-}
-
-/* 5. TEXTO INTERNO Y SPINNERS DENTRO DEL BOTÓN */
-.product-item .btn *,
-.product-item input *,
-.product-item button * {
-  background: transparent !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  box-shadow: none !important;
-  border: none !important;
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.product-item .btn:hover,
-.product-item input[type="submit"]:hover,
-.product-item button:hover {
+.product-item .btn:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
 }
 
-.product-item .btn:active,
-.product-item input[type="submit"]:active,
-.product-item button:active {
+.product-item .btn:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
 }
