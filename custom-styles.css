@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (ESPECÍFICO TIENDANUBE IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA CORREGIDO Y FUNCIONAL) */
 
 /* 1. Anclaje de la tarjeta del producto */
 .item-product,
@@ -137,10 +137,13 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN PRINCIPAL DE TIENDANUBE */
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN DE ENVÍO REAL DEL FORMULARIO */
 .item-product form .js-addtocart,
 .js-item-product form .js-addtocart,
-.item-product .js-addtocart {
+.item-product form input[type="submit"],
+.js-item-product form input[type="submit"],
+.item-product form button[type="submit"],
+.js-item-product form button[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -173,9 +176,10 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 2 !important;
+  pointer-events: auto !important;
 }
 
-/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
+/* 4. COBERTURA DE ESTADOS AJAX (Mantiene el botón activo) */
 .item-product form .js-addtocart:disabled,
 .item-product form .js-addtocart.is-loading,
 .item-product form .js-addtocart.is-added,
@@ -209,33 +213,28 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR BOTÓN SECUNDARIO Y PLACEHOLDERS NATIVOS DE IPANEMA */
-.item-product form > *:not(.js-addtocart),
-.js-item-product form > *:not(.js-addtocart),
-.item-product form .js-addtocart ~ *,
-.js-item-product form .js-addtocart ~ *,
+/* 7. OCULTAR ÚNICAMENTE BOTONES SECUNDARIOS Y NOTIFICADORES (SIN TOCAR INPUTS OCULTOS DEL FORMULARIO) */
 .item-product .js-quickshop-toggle,
-.item-product .btn-secondary,
-.item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.item-product .add-to-cart-feedback,
-.item-product .js-addtocart-success,
 .js-item-product .js-quickshop-toggle,
+.item-product .btn-secondary,
 .js-item-product .btn-secondary,
+.item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-placeholder,
+.item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-feedback,
+.item-product .add-to-cart-feedback,
 .js-item-product .add-to-cart-feedback,
-.js-item-product .js-addtocart-success {
+.item-product .js-addtocart-success,
+.js-item-product .js-addtocart-success,
+.item-product a.btn-secondary,
+.js-item-product a.btn-secondary {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
-  max-height: 0 !important;
   width: 0 !important;
-  margin: 0 !important;
   padding: 0 !important;
+  margin: 0 !important;
   position: absolute !important;
   pointer-events: none !important;
-  overflow: hidden !important;
-  z-index: -1 !important;
 }
