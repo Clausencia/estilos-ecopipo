@@ -1,0 +1,187 @@
+/* 1. FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Mansalva&family=Nerko+One&family=Palanquin:wght@400;600;700&display=swap');
+
+/* 2. BASE Y TIPOGRAFIAS GENERALES */
+body,html,input,select,textarea,button{font-family:'Palanquin',sans-serif}
+.nav-list-link{font-family:'Palanquin',sans-serif!important}
+.btn,.slider-btn,.swiper-slide .btn,.sticky-cart-button,.js-cart-widget-amount{font-family:'Baloo 2',sans-serif!important}
+
+/* 3. BANNERS Y BANNER PRINCIPAL */
+.swiper-slide h1,.swiper-slide h2,.swiper-slide h3,.slider-title,.swiper-slide-title,.textbanner-title,.section-slider-title{font-family:'Nerko One',cursive!important;font-weight:400!important;text-transform:uppercase!important;line-height:1.1!important}
+.section-slider .swiper-slide *,.section-slider .swiper-slide span,.section-slider .swiper-slide p,.section-slider .swiper-slide a{color:#FCF5FF!important}
+.section-slider .swiper-slide .btn,.section-slider .swiper-slide .btn *{color:#FFF!important}
+.slider-btn,.swiper-slide .btn,.textbanner-link{position:absolute!important;left:50%!important;transform:translateX(-50%)!important;margin-top:0!important;z-index:10!important}
+@media(min-width:768px){.swiper-slide [class*="title"],.swiper-slide [class*="title"] *{font-size:55px!important}.swiper-slide p,.swiper-slide-text,.slider-description,.textbanner-text,.textbanner-paragraph{font-family:'Baloo 2',sans-serif!important;font-size:22px!important;font-weight:600!important;letter-spacing:1.5px!important;margin:15px 0 20px 0!important}.slider-btn,.swiper-slide .btn,.textbanner-link{bottom:15%!important}}
+@media(max-width:767px){.swiper-slide [class*="title"],.swiper-slide [class*="title"] *{font-size:26px!important;line-height:1.15!important}.swiper-slide p,.swiper-slide-text,.slider-description,.textbanner-text,.textbanner-paragraph{font-family:'Baloo 2',sans-serif!important;font-size:16px!important;letter-spacing:1px!important;margin:12px 0 15px 0!important}.slider-btn,.swiper-slide .btn,.textbanner-link{bottom:12%!important}}
+
+/* 4. HEADER Y NAVEGACION */
+.js-header,.head-main{background-color:var(--header-background)!important}
+.nav-list-link{font-weight:500!important;font-size:16px!important;text-transform:capitalize!important;color:var(--header-foreground)!important;transition:opacity .2s}
+.nav-list-link:hover,.nav-item.active .nav-list-link{opacity:.6}
+.header-icon{color:var(--header-foreground)!important}.header-icon:hover{opacity:.6}
+.header-account svg,.header-account .header-icon svg,.header-account .icon-user{display:none!important}
+.header-account .header-icon{background:url('https://d1a9qnv764bsoo.cloudfront.net/stores/007/906/761/rte/pipo-green-50x50.png') center/contain no-repeat!important;width:32px!important;height:32px!important;display:inline-block!important}
+#ajax-cart .js-modal-open-private{padding:0!important;margin:0!important;border-radius:0!important;background:transparent!important;width:auto!important;min-width:0!important;position:relative!important}
+#ajax-cart .header-icon{width:28px!important;height:28px!important;padding:0!important;margin:0!important;background:transparent!important}
+#ajax-cart .js-cart-widget-amount,#ajax-cart .cart-badge{position:absolute!important;top:auto!important;bottom:-4px!important;right:-6px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;background-color:#3C1053!important;color:#FFF!important;font-family:'Baloo 2',sans-serif!important;font-weight:700!important;font-size:11px!important;width:17px!important;height:17px!important;padding:0!important;border-radius:50%!important;border:2px solid #FFF!important;line-height:1!important;box-sizing:content-box!important}
+@media(min-width:768px){.head-main{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:16px;padding:0 28px!important;box-sizing:border-box!important}.head-row{display:contents!important}#ns-block-logo{order:1!important;flex:0 0 auto!important}.nav-desktop-container{order:2!important;flex:1 1 auto!important;display:flex!important;justify-content:center!important}.js-search-container{order:3!important;flex:0 0 auto!important;position:relative!important}.header-account{order:4!important;flex:0 0 auto!important}#ajax-cart{order:5!important;flex:0 0 auto!important}.js-search-container .search-floating-container{left:auto!important;right:0!important}}
+@media(max-width:767px){.main-categories-container{display:none!important}.header-account{display:grid!important}.head-main{--header-vertical-padding-mobile:8px!important}}
+
+/* 5. SECCION CATEGORIAS */
+[data-store*="categories"],.section-categories{background:url('https://d1a9qnv764bsoo.cloudfront.net/stores/007/906/761/rte/bg-mist-full.png') center repeat!important}
+[data-store*="categories"] .container,[data-store*="categories"] .swiper-container,[data-store*="categories"] .swiper-slide,.section-categories .container,.section-categories .swiper-slide{background-color:transparent!important;background:transparent!important}
+[data-store*="categories"] .swiper-slide a,.section-categories [class*="name"]{color:#b573de!important;font-weight:700!important;font-size:18px!important;text-transform:uppercase!important;letter-spacing:1.2px!important;display:block!important;width:100%!important;text-align:center!important;margin-top:14px!important}
+
+/* 6. ZOOM VARIANTES */
+.parent-id-swatch-item img,[class*="parent-id"] img,.variant-swatch img{transform:scale(2.3)!important;object-fit:cover!important;transform-origin:center center!important}
+
+/* 7. PAQUETES Y KITS */
+.eco-packs-section{max-width:1100px!important;margin:40px auto!important;padding:0 16px!important}
+.eco-packs-title{text-align:center!important;color:#3C1053!important;font-weight:700!important;font-size:28px!important;margin-bottom:30px!important}
+.eco-packs-grid{display:flex!important;flex-direction:row!important;gap:20px!important;overflow-x:auto!important;padding:10px 5px 25px 5px!important;align-items:stretch!important;justify-content:center!important}
+.eco-pack-card{flex:1 1 300px!important;min-width:280px!important;max-width:340px!important;background:#fff!important;border-radius:16px!important;padding:24px 20px!important;box-shadow:0 8px 24px rgba(0,0,0,.08)!important;border-top:4px solid #b573de!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;box-sizing:border-box!important}
+.eco-pack-title{font-size:22px!important;font-weight:700!important;margin:0 0 12px 0!important}
+.eco-pack-title.orange{color:#FF9030!important}.eco-pack-btn.orange{background:#FF9030!important;color:#fff!important}
+.eco-pack-title.lime{color:#bdd930!important}.eco-pack-btn.lime{background:#bdd930!important;color:#3C1053!important}
+.eco-pack-title.cyan{color:#42c6d3!important}.eco-pack-btn.cyan{background:#42c6d3!important;color:#fff!important}
+.eco-pack-features{color:#4A5568!important;font-size:14px!important;line-height:1.5!important;margin-bottom:24px!important}
+.eco-pack-price-box{display:flex!important;align-items:center!important;gap:8px!important;color:#6B307B!important;font-weight:700!important;font-size:16px!important;margin-bottom:20px!important}
+.eco-pack-price-icon{width:20px!important;height:20px!important;flex-shrink:0!important}
+.eco-pack-btn{display:block!important;width:100%!important;padding:12px 0!important;text-align:center!important;border-radius:10px!important;font-family:'Baloo 2',sans-serif!important;font-weight:700!important;font-size:15px!important;text-decoration:none!important;text-transform:uppercase!important;border:none!important;box-sizing:border-box!important;transition:opacity .2s ease!important}
+.eco-pack-btn:hover{opacity:.8!important}
+.eco-whatsapp-cta{text-align:center!important;margin-top:30px!important;font-size:16px!important;color:#2D3748!important;font-weight:600!important}
+.eco-whatsapp-cta a{color:#b573de!important;text-decoration:none!important;font-weight:700!important;margin-left:5px!important}
+@media(max-width:768px){.eco-packs-grid{justify-content:flex-start!important}.eco-pack-card{flex:0 0 280px!important}}
+
+/* 8. BANNERS Y HEADINGS SECUNDARIOS */
+.eco-page-banner{width:100vw!important;position:relative!important;left:50%!important;right:50%!important;margin:-40px -50vw 25px -50vw!important;height:250px!important;overflow:hidden!important;background:#FCF5FF!important}
+.eco-page-banner img{width:100vw!important;height:100%!important;object-fit:cover!important;object-position:center 20%!important}
+h1,h2,h3,.kit-title,.step-title,summary,div[class*="step-header"]{font-family:'Nerko One',cursive!important;letter-spacing:.5px!important}
+div[class*="header"] p,div[class*="banner"] p,.kit-description{color:#fff!important;font-weight:600!important;text-shadow:0 1px 2px rgba(0,0,0,.1)!important}
+
+/* 9. SCROLL CARRITO Y BOTÓN CHECKOUT (CÁPSULA LIMA) */
+body.modal-open,html.modal-open{overflow:hidden!important}
+.modal-dock-right,.modal-dock-right .modal-content,#modal-cart,.js-ajax-cart-panel{max-height:100vh!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important}
+
+[data-store="checkout-button"],
+a.js-cart-submit,
+.js-ajax-cart-submit,
+a[href*="checkout"] {
+  background:#bdd930!important;
+  color:#3C1053!important;
+  font-family:'Baloo 2',sans-serif!important;
+  font-weight:700!important;
+  font-size:15px!important;
+  line-height:1.1!important;
+  border-radius:50px!important;
+  border:none!important;
+  padding:6px 18px!important;
+  width:100%!important;
+  height:40px!important;
+  min-height:0!important;
+  box-shadow:0 4px 0 #FF9030!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-transform:uppercase!important;
+  transition:transform .15s,box-shadow .15s!important;
+  cursor:pointer!important;
+  box-sizing:border-box!important;
+}
+
+[data-store="checkout-button"] *,
+a.js-cart-submit *,
+.js-ajax-cart-submit *,
+a[href*="checkout"] * {
+  background:transparent!important;
+  color:#3C1053!important;
+  box-shadow:none!important;
+  border:none!important;
+  line-height:1.1!important;
+}
+
+[data-store="checkout-button"]:hover,
+a.js-cart-submit:hover,
+.js-ajax-cart-submit:hover,
+a[href*="checkout"]:hover {
+  transform:translateY(2px)!important;
+  box-shadow:0 2px 0 #FF9030!important;
+}
+
+[data-store="checkout-button"]:active,
+a.js-cart-submit:active,
+.js-ajax-cart-submit:active,
+a[href*="checkout"]:active {
+  transform:translateY(4px)!important;
+  box-shadow:0 0 0 #FF9030!important;
+}
+
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (TURQUESA ÚNICO) */
+.js-add-to-cart,
+.js-prod-submit-form,
+.product-item-actions {
+  background:transparent!important;
+  box-shadow:none!important;
+  border:none!important;
+  padding:0!important;
+  height:auto!important;
+}
+
+/* Oculta cualquier duplicado fantasma en la parrilla */
+.product-item .js-add-to-cart + .js-add-to-cart,
+.product-item .btn + .btn {
+  display:none!important;
+}
+
+.product-item input[type="submit"],
+.product-item button.js-add-to-cart,
+.product-item a.js-add-to-cart,
+[data-store*="product-item-add-to-cart"] {
+  background:#42c6d3!important;
+  color:#FFF!important;
+  font-family:'Baloo 2',sans-serif!important;
+  font-weight:700!important;
+  font-size:14px!important;
+  line-height:1.1!important;
+  border-radius:50px!important;
+  border:none!important;
+  padding:6px 18px!important;
+  width:100%!important;
+  height:38px!important;
+  min-height:0!important;
+  box-shadow:0 4px 0 #3C1053!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-transform:uppercase!important;
+  transition:transform .15s,box-shadow .15s!important;
+  cursor:pointer!important;
+  box-sizing:border-box!important;
+  margin:0 auto!important;
+}
+
+.product-item input[type="submit"] *,
+.product-item button.js-add-to-cart *,
+.product-item a.js-add-to-cart *,
+[data-store*="product-item-add-to-cart"] * {
+  background:transparent!important;
+  color:#FFF!important;
+  box-shadow:none!important;
+  border:none!important;
+}
+
+.product-item input[type="submit"]:hover,
+.product-item button.js-add-to-cart:hover,
+.product-item a.js-add-to-cart:hover,
+[data-store*="product-item-add-to-cart"]:hover {
+  transform:translateY(2px)!important;
+  box-shadow:0 2px 0 #3C1053!important;
+}
+
+.product-item input[type="submit"]:active,
+.product-item button.js-add-to-cart:active,
+.product-item a.js-add-to-cart:active,
+[data-store*="product-item-add-to-cart"]:active {
+  transform:translateY(4px)!important;
+  box-shadow:0 0 0 #3C1053!important;
+}
