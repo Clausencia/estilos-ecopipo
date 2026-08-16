@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (FILTRADO DE PRIMER BOTÓN IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (CASCADA DEFINITIVA IPANEMA) */
 
 /* 1. Anclaje de la tarjeta del producto */
 .item-product,
@@ -126,45 +126,13 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 2. OCULTAR CUALQUIER SEGUNDO BOTÓN, PLACEHOLDER O ELEMENTO EXTRA EN LA TARJETA */
-.item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-feedback,
-.item-product .add-to-cart-feedback,
-.js-item-product .add-to-cart-feedback,
-.item-product [class*="placeholder"],
-.js-item-product [class*="placeholder"],
-.item-product [class*="feedback"],
-.js-item-product [class*="feedback"],
-.item-product .btn:nth-of-type(n+2),
-.js-item-product .btn:nth-of-type(n+2),
-.item-product .js-addtocart:nth-of-type(n+2),
-.js-item-product .js-addtocart:nth-of-type(n+2),
-.item-product .btn + .btn,
-.js-item-product .btn + .btn,
-.item-product .js-addtocart + .js-addtocart,
-.js-item-product .js-addtocart + .js-addtocart,
-.item-product form ~ *,
-.js-item-product form ~ * {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  pointer-events: none !important;
-}
-
-/* 3. ESTILO TURQUESA ÚNICAMENTE PARA EL PRIMER BOTÓN ACTIVO DE LA TARJETA */
-.item-product .js-addtocart:first-of-type,
-.js-item-product .js-addtocart:first-of-type,
-.item-product form input[type="submit"]:first-of-type,
-.js-item-product form input[type="submit"]:first-of-type,
-.item-product form button[type="submit"]:first-of-type,
-.js-item-product form button[type="submit"]:first-of-type {
+/* 2. Estilo turquesa únicamente para el botón principal del formulario */
+.item-product form .js-addtocart,
+.item-product form button[type="submit"],
+.item-product form input[type="submit"],
+.js-item-product form .js-addtocart,
+.js-item-product form button[type="submit"],
+.js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -198,49 +166,64 @@ a[href*="checkout"]:active {
   white-space: nowrap !important;
 }
 
-/* 4. MANTENER VISIBILIDAD Y COLOR DURANTE CARGA AJAX / ESTADO DESHABILITADO */
-.item-product .js-addtocart:first-of-type:disabled,
-.item-product .js-addtocart:first-of-type[disabled],
-.item-product .js-addtocart:first-of-type.disabled,
-.item-product .js-addtocart:first-of-type.is-loading,
-.item-product .js-addtocart:first-of-type.loading,
-.item-product .js-addtocart:first-of-type.is-added,
-.js-item-product .js-addtocart:first-of-type:disabled,
-.js-item-product .js-addtocart:first-of-type[disabled],
-.js-item-product .js-addtocart:first-of-type.disabled,
-.js-item-product .js-addtocart:first-of-type.is-loading,
-.js-item-product .js-addtocart:first-of-type.loading,
-.js-item-product .js-addtocart:first-of-type.is-added {
+/* 3. Cobertura de estados AJAX (Cargando / Deshabilitado / Agregado) */
+.item-product form .js-addtocart:disabled,
+.item-product form .js-addtocart.is-loading,
+.item-product form .js-addtocart.is-added,
+.js-item-product form .js-addtocart:disabled,
+.js-item-product form .js-addtocart.is-loading,
+.js-item-product form .js-addtocart.is-added {
   display: flex !important;
-  visibility: visible !important;
-  opacity: 0.9 !important;
   background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
+  opacity: 0.9 !important;
 }
 
-/* 5. REMOVER BORDES E INTERIORES BLANCOS EXTRAS */
-.item-product .js-addtocart:first-of-type *,
-.js-item-product .js-addtocart:first-of-type * {
+/* 4. Textos e iconos internos */
+.item-product form .js-addtocart *,
+.js-item-product form .js-addtocart * {
   background: transparent !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
   border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
 }
 
-/* 6. EFECTOS AL PRESIONAR */
-.item-product .js-addtocart:first-of-type:hover,
-.js-item-product .js-addtocart:first-of-type:hover {
+/* 5. Efectos al presionar */
+.item-product form .js-addtocart:hover,
+.js-item-product form .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product .js-addtocart:first-of-type:active,
-.js-item-product .js-addtocart:first-of-type:active {
+.item-product form .js-addtocart:active,
+.js-item-product form .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
+}
+
+/* 6. REGLA FINAL DE OCULTAMIENTO (Gana por orden de cascada CSS) */
+.item-product .js-addtocart-placeholder,
+.item-product .js-addtocart-feedback,
+.item-product .add-to-cart-feedback,
+.item-product .js-addtocart-success,
+.item-product [class*="placeholder"],
+.item-product [class*="feedback"],
+.js-item-product .js-addtocart-placeholder,
+.js-item-product .js-addtocart-feedback,
+.js-item-product .add-to-cart-feedback,
+.js-item-product .js-addtocart-success,
+.js-item-product [class*="placeholder"],
+.js-item-product [class*="feedback"],
+.item-product .js-addtocart + *,
+.js-item-product .js-addtocart + *,
+.item-product form + *,
+.js-item-product form + * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
 }
