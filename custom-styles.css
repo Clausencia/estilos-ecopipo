@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (TRANSICIÓN CONTINUA IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (ELIMINACIÓN DE BOTÓN DUPLICADO IPANEMA) */
 
-/* 1. Anclaje de tarjeta */
+/* 1. Anclaje de la tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,29 +126,46 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 2. Respetar el ocultamiento nativo de Tiendanube cuando JS apaga un elemento */
-.item-product .hidden,
-.item-product .d-none,
-.item-product [style*="display: none"],
-.item-product [style*="display:none"],
-.js-item-product .hidden,
-.js-item-product .d-none,
-.js-item-product [style*="display: none"],
-.js-item-product [style*="display:none"] {
-  display: none !important;
-}
-
-/* 3. Estilo turquesa idéntico para el botón Y para la etiqueta de confirmación */
-.item-product .js-addtocart,
-.js-item-product .js-addtocart,
+/* 2. OCULTAR ESTRICTAMENTE CUALQUIER BOTÓN O CONTENEDOR SECUNDARIO / DUPLICADO */
 .item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-feedback,
+.item-product .js-addtocart-placeholder,
+.js-item-product .js-addtocart-placeholder,
 .item-product .add-to-cart-feedback,
 .js-item-product .add-to-cart-feedback,
-.item-product input[type="submit"],
-.js-item-product input[type="submit"],
-.item-product button[type="submit"],
-.js-item-product button[type="submit"] {
+.item-product [class*="feedback"],
+.js-item-product [class*="feedback"],
+.item-product [class*="placeholder"],
+.js-item-product [class*="placeholder"],
+.item-product .js-addtocart ~ *,
+.js-item-product .js-addtocart ~ *,
+.item-product .btn ~ .btn,
+.js-item-product .btn ~ .btn,
+.item-product form ~ form,
+.js-item-product form ~ form {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+}
+
+/* 3. ESTILO TURQUESA ÚNICAMENTE PARA EL BOTÓN PRINCIPAL ACTIVO (.js-addtocart) */
+.item-product .js-addtocart,
+.js-item-product .js-addtocart,
+.item-product form input[type="submit"],
+.js-item-product form input[type="submit"],
+.item-product form button[type="submit"],
+.js-item-product form button[type="submit"] {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -160,7 +177,6 @@ a[href*="checkout"]:active {
   border-radius: 50px !important;
   border: none !important;
   padding: 6px 12px !important;
-  width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
@@ -178,37 +194,46 @@ a[href*="checkout"]:active {
   white-space: nowrap !important;
 }
 
-/* 4. Muestra en flex únicamente el elemento activo en ese instante */
-.item-product .js-addtocart:not(.hidden):not(.d-none),
-.js-item-product .js-addtocart:not(.hidden):not(.d-none),
-.item-product .js-addtocart-feedback:not(.hidden):not(.d-none),
-.js-item-product .js-addtocart-feedback:not(.hidden):not(.d-none) {
+/* 4. BLINDAJE DE ESTADOS DEL BOTÓN PRINCIPAL (CARGANDO / DESHABILITADO / ÉXITO) */
+.item-product .js-addtocart:disabled,
+.item-product .js-addtocart[disabled],
+.item-product .js-addtocart.disabled,
+.item-product .js-addtocart.is-loading,
+.item-product .js-addtocart.loading,
+.item-product .js-addtocart.is-added,
+.js-item-product .js-addtocart:disabled,
+.js-item-product .js-addtocart[disabled],
+.js-item-product .js-addtocart.disabled,
+.js-item-product .js-addtocart.is-loading,
+.js-item-product .js-addtocart.loading,
+.js-item-product .js-addtocart.is-added {
   display: flex !important;
+  visibility: visible !important;
+  opacity: 0.9 !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
 }
 
-/* 5. Textos internos siempre blancos */
+/* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
 .item-product .js-addtocart *,
-.js-item-product .js-addtocart *,
-.item-product .js-addtocart-feedback *,
-.js-item-product .js-addtocart-feedback * {
+.js-item-product .js-addtocart * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* 6. Efectos al presionar */
+/* 6. EFECTOS AL PRESIONAR */
 .item-product .js-addtocart:hover,
-.js-item-product .js-addtocart:hover,
-.item-product .js-addtocart-feedback:hover,
-.js-item-product .js-addtocart-feedback:hover {
+.js-item-product .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
 .item-product .js-addtocart:active,
-.js-item-product .js-addtocart:active,
-.item-product .js-addtocart-feedback:active,
-.js-item-product .js-addtocart-feedback:active {
+.js-item-product .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
