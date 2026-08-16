@@ -116,17 +116,24 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. ESTABILIZACIÓN Y REGLA DEFINITIVA BOTÓN PARRILLA (TURQUESA) */
+/* 10. REGLA BLINDADA BOTÓN PARRILLA (PREVIENE PARPADEO Y DESPLAZAMIENTO) */
 
-/* Contenedor: Reserva el espacio para evitar saltos visuales */
+/* Contenedor padre rígido: Mantiene el espacio bloqueado sin saltos */
 .product-item .js-prod-submit-form,
 .product-item .product-item-actions,
-.product-item .item-actions {
+.product-item .item-actions,
+.product-item form[action*="cart"] {
   min-height: 40px !important;
+  height: 40px !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   position: relative !important;
+  margin: 0 auto !important;
 }
 
-/* Respeta los elementos que Tiendanube oculta dinámicamente */
+/* Respeta elementos ocultos dinámicos de Tiendanube */
 .product-item .d-none,
 .product-item .hidden,
 .product-item [style*="display: none"],
@@ -134,10 +141,9 @@ a[href*="checkout"]:active {
   display: none !important;
 }
 
-/* Estilo base para todos los botones visibles en la parrilla */
-.product-item .btn,
-.product-item input[type="submit"],
-.product-item button,
+/* REGLA UNIVERSAL: Aplica el diseño turquesa a CUALQUIER etiqueta que cree el script */
+.product-item .js-prod-submit-form *,
+.product-item .item-actions *,
 .product-item .js-add-to-cart,
 .product-item .js-addtocart {
   background-color: #42c6d3 !important;
@@ -152,44 +158,37 @@ a[href*="checkout"]:active {
   border: none !important;
   padding: 6px 18px !important;
   width: 100% !important;
+  max-width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
+  max-height: 38px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   text-transform: uppercase !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
   transition: transform .15s, box-shadow .15s !important;
 }
 
-/* Elimina el fondo negro en estados "Deshabilitado", "¡Listo!" o "Cargando" */
-.product-item .btn:disabled,
-.product-item .btn[disabled],
-.product-item .btn.disabled,
-.product-item .btn.is-loading,
-.product-item .btn.loading,
-.product-item .js-addtocart-success,
-.product-item .is-added {
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  opacity: 0.9 !important;
-}
-
 /* Efectos al presionar */
-.product-item .btn:hover,
-.product-item input[type="submit"]:hover,
-.product-item button:hover {
+.product-item .js-prod-submit-form *:hover,
+.product-item .item-actions *:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
+  background-color: #42c6d3 !important;
 }
 
-.product-item .btn:active,
-.product-item input[type="submit"]:active,
-.product-item button:active {
+.product-item .js-prod-submit-form *:active,
+.product-item .item-actions *:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #42c6d3 !important;
 }
 
