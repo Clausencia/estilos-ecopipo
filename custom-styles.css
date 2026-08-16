@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA FUNCIONAL - OCULTAR DUPLICADO VISUAL) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (BOTÓN ÚNICO ACTIVO IPANEMA) */
 
 /* 1. Anclaje espacial de la tarjeta */
 .item-product,
@@ -128,17 +128,21 @@ a[href*="checkout"]:active {
 
 /* 2. Formulario contenedor activo */
 .item-product form,
-.js-item-product form {
+.js-item-product form,
+.item-product .js-product-form,
+.js-item-product .js-product-form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
 }
 
-/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL BOTÓN ACTIVO QUE SÍ FUNCIONA (.js-addtocart) */
+/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL BOTÓN ACTIVO DEL FORMULARIO */
 .item-product form .js-addtocart,
 .js-item-product form .js-addtocart,
-.item-product .js-addtocart,
-.js-item-product .js-addtocart {
+.item-product form input[type="submit"],
+.js-item-product form input[type="submit"],
+.item-product form button[type="submit"],
+.js-item-product form button[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -172,12 +176,12 @@ a[href*="checkout"]:active {
 }
 
 /* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
-.item-product .js-addtocart:disabled,
-.item-product .js-addtocart.is-loading,
-.item-product .js-addtocart.is-added,
-.js-item-product .js-addtocart:disabled,
-.js-item-product .js-addtocart.is-loading,
-.js-item-product .js-addtocart.is-added {
+.item-product form .js-addtocart:disabled,
+.item-product form .js-addtocart.is-loading,
+.item-product form .js-addtocart.is-added,
+.js-item-product form .js-addtocart:disabled,
+.js-item-product form .js-addtocart.is-loading,
+.js-item-product form .js-addtocart.is-added {
   display: flex !important;
   background-color: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -185,27 +189,39 @@ a[href*="checkout"]:active {
 }
 
 /* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
-.item-product .js-addtocart *,
-.js-item-product .js-addtocart * {
+.item-product form .js-addtocart *,
+.js-item-product form .js-addtocart * {
   background: transparent !important;
   color: #FFFFFF !important;
   border: none !important;
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product .js-addtocart:hover,
-.js-item-product .js-addtocart:hover {
+.item-product form .js-addtocart:hover,
+.js-item-product form .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product .js-addtocart:active,
-.js-item-product .js-addtocart:active {
+.item-product form .js-addtocart:active,
+.js-item-product form .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAMIENTO ESTRICTO DEL SEGUNDO BOTÓN VISUAL Y NOTIFICACIONES SECUNDARIAS */
+/* 7. OCULTAR CUALQUIER BOTÓN O ELEMENTO SECUNDARIO DUPLICADO */
+.item-product .js-addtocart ~ .js-addtocart,
+.js-item-product .js-addtocart ~ .js-addtocart,
+.item-product form .js-addtocart ~ .btn,
+.js-item-product form .js-addtocart ~ .btn,
+.item-product form .js-addtocart ~ div,
+.js-item-product form .js-addtocart ~ div,
+.item-product form ~ .btn,
+.js-item-product form ~ .btn,
+.item-product form ~ a,
+.js-item-product form ~ a,
+.item-product form ~ div,
+.js-item-product form ~ div,
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
@@ -215,20 +231,17 @@ a[href*="checkout"]:active {
 .item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-feedback,
 .item-product .add-to-cart-feedback,
-.js-item-product .add-to-cart-feedback,
-.item-product .js-addtocart + a,
-.js-item-product .js-addtocart + a,
-.item-product .js-addtocart + button,
-.js-item-product .js-addtocart + button,
-.item-product .js-addtocart + div,
-.js-item-product .js-addtocart + div {
+.js-item-product .add-to-cart-feedback {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
-  width: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  border: none !important;
   position: absolute !important;
   pointer-events: none !important;
+  overflow: hidden !important;
 }
