@@ -116,9 +116,39 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (SOLUCIÓN DEFINITIVA IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA - REGLA GLOBAL ANTI-PARPADEO IPANEMA */
 
-/* Anclaje espacial de la tarjeta del producto */
+/* 1. OVERRIDE GLOBAL DE ESTADOS Y CLASES NATIVAS (Anula el color negro en todo el sitio) */
+.btn-primary,
+.btn-secondary,
+.btn-default,
+.js-addtocart,
+.js-add-to-cart {
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  border-color: transparent !important;
+}
+
+/* 2. ESTADOS TRANSITORIOS GLOBALES (Cargando, Deshabilitado, Procesando AJAX) */
+.btn:disabled,
+.btn[disabled],
+.btn.disabled,
+.btn.is-loading,
+.btn.loading,
+.is-loading,
+.loading,
+[disabled] {
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  border-color: transparent !important;
+  opacity: 0.9 !important;
+}
+
+/* 3. ANCLAJE Y TAMAÑO DE TARJETA EN IPANEMA */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,53 +156,36 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* Formulario contenedor: Bloque a ancho completo */
 .item-product .js-product-form,
 .js-item-product .js-product-form,
 .item-product form,
 .js-item-product form {
   display: block !important;
   width: 100% !important;
-  min-width: 100% !important;
   position: relative !important;
   min-height: 38px !important;
 }
 
-/* ELIMINAR POR COMPLETO EL ELEMENTO "¡LISTO!" Y PLACEHOLDERS SECUNDARIOS DE TIENDANUBE */
+/* 4. OCULTAR NODOS EXTRA Y PLACEHOLDERS DE TRANSICIÓN */
 .item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-placeholder-inline,
 .item-product .js-addtocart-feedback,
 .item-product .js-addtocart-success,
-.item-product .js-addtocart-adding,
-.item-product .add-to-cart-feedback,
-.item-product .add-to-cart-success,
 .js-item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-placeholder-inline,
 .js-item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-success,
-.js-item-product .js-addtocart-adding,
-.js-item-product .add-to-cart-feedback,
-.js-item-product .add-to-cart-success,
 .item-product [class*="placeholder"],
-.js-item-product [class*="placeholder"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  position: absolute !important;
-  pointer-events: none !important;
-}
-
-/* Ocultar cualquier elemento duplicado consecutivo */
+.js-item-product [class*="placeholder"],
 .item-product .js-addtocart + *,
 .js-item-product .js-addtocart + * {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  position: absolute !important;
 }
 
-/* ÚNICO BOTÓN VISIBLE: "AGREGAR AL CARRITO" (100% ANCHO) */
+/* 5. BOTÓN PRINCIPAL DE LA PARRILLA DE PRODUCTOS */
 .item-product .js-addtocart,
 .js-item-product .js-addtocart,
 .item-product input[type="submit"],
@@ -182,7 +195,6 @@ a[href*="checkout"]:active {
   display: flex !important;
   width: 100% !important;
   max-width: 100% !important;
-  flex: 0 0 100% !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -211,22 +223,7 @@ a[href*="checkout"]:active {
   white-space: nowrap !important;
 }
 
-/* Mantener turquesa durante carga AJAX */
-.item-product .js-addtocart:disabled,
-.item-product .js-addtocart[disabled],
-.item-product .js-addtocart.is-loading,
-.js-item-product .js-addtocart:disabled,
-.js-item-product .js-addtocart[disabled],
-.js-item-product .js-addtocart.is-loading {
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  opacity: 0.9 !important;
-}
-
-/* Texto interno siempre en blanco */
+/* 6. HIJOS Y TEXTOS INTERNOS */
 .item-product .js-addtocart *,
 .js-item-product .js-addtocart * {
   background: transparent !important;
@@ -234,7 +231,7 @@ a[href*="checkout"]:active {
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* Efectos al presionar */
+/* 7. EFECTOS AL PRESIONAR */
 .item-product .js-addtocart:hover,
 .js-item-product .js-addtocart:hover {
   transform: translateY(2px) !important;
