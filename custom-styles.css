@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA FUNCIONAL - UN SOLO BOTÓN) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA FUNCIONAL - OCULTAR DUPLICADO VISUAL) */
 
 /* 1. Anclaje espacial de la tarjeta */
 .item-product,
@@ -134,7 +134,9 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN PRINCIPAL (.js-addtocart) */
+/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL BOTÓN ACTIVO QUE SÍ FUNCIONA (.js-addtocart) */
+.item-product form .js-addtocart,
+.js-item-product form .js-addtocart,
 .item-product .js-addtocart,
 .js-item-product .js-addtocart {
   display: flex !important;
@@ -166,6 +168,7 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 5 !important;
+  pointer-events: auto !important;
 }
 
 /* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
@@ -181,7 +184,7 @@ a[href*="checkout"]:active {
   opacity: 0.9 !important;
 }
 
-/* 5. TEXTOS E ICONOS INTERNOS EN BLANCO */
+/* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
 .item-product .js-addtocart *,
 .js-item-product .js-addtocart * {
   background: transparent !important;
@@ -190,19 +193,19 @@ a[href*="checkout"]:active {
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product .js-addtocart:hover, 
+.item-product .js-addtocart:hover,
 .js-item-product .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product .js-addtocart:active, 
+.item-product .js-addtocart:active,
 .js-item-product .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAMIENTO QUIRÚRGICO DEL SEGUNDO BOTÓN (SIN TOCAR LOS INPUTS OCULTOS DEL CARRITO) */
+/* 7. OCULTAMIENTO ESTRICTO DEL SEGUNDO BOTÓN VISUAL Y NOTIFICACIONES SECUNDARIAS */
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
@@ -213,19 +216,19 @@ a[href*="checkout"]:active {
 .js-item-product .js-addtocart-feedback,
 .item-product .add-to-cart-feedback,
 .js-item-product .add-to-cart-feedback,
-.item-product button + button,
-.js-item-product button + button,
-.item-product .js-addtocart + .btn,
-.js-item-product .js-addtocart + .btn {
+.item-product .js-addtocart + a,
+.js-item-product .js-addtocart + a,
+.item-product .js-addtocart + button,
+.js-item-product .js-addtocart + button,
+.item-product .js-addtocart + div,
+.js-item-product .js-addtocart + div {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
   height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
+  width: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
-  border: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  overflow: hidden !important;
   position: absolute !important;
   pointer-events: none !important;
 }
