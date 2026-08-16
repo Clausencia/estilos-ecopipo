@@ -14,7 +14,7 @@ body,html,input,select,textarea,button{font-family:'Palanquin',sans-serif}
 @media(min-width:768px){.swiper-slide [class*="title"],.swiper-slide [class*="title"] *{font-size:55px!important}.swiper-slide p,.swiper-slide-text,.slider-description,.textbanner-text,.textbanner-paragraph{font-family:'Baloo 2',sans-serif!important;font-size:22px!important;font-weight:600!important;letter-spacing:1.5px!important;margin:15px 0 20px 0!important}.slider-btn,.swiper-slide .btn,.textbanner-link{bottom:15%!important}}
 @media(max-width:767px){.swiper-slide [class*="title"],.swiper-slide [class*="title"] *{font-size:26px!important;line-height:1.15!important}.swiper-slide p,.swiper-slide-text,.slider-description,.textbanner-text,.textbanner-paragraph{font-family:'Baloo 2',sans-serif!important;font-size:16px!important;letter-spacing:1px!important;margin:12px 0 15px 0!important}.slider-btn,.swiper-slide .btn,.textbanner-link{bottom:12%!important}}
 
-/* 4. HEADER Y NAVEGACION */
+/* 4. HEADER Y NAVEGACIÓN */
 .js-header,.head-main{background-color:var(--header-background)!important}
 .nav-list-link{font-weight:500!important;font-size:16px!important;text-transform:capitalize!important;color:var(--header-foreground)!important;transition:opacity .2s}
 .nav-list-link:hover,.nav-item.active .nav-list-link{opacity:.6}
@@ -27,7 +27,7 @@ body,html,input,select,textarea,button{font-family:'Palanquin',sans-serif}
 @media(min-width:768px){.head-main{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:16px;padding:0 28px!important;box-sizing:border-box!important}.head-row{display:contents!important}#ns-block-logo{order:1!important;flex:0 0 auto!important}.nav-desktop-container{order:2!important;flex:1 1 auto!important;display:flex!important;justify-content:center!important}.js-search-container{order:3!important;flex:0 0 auto!important;position:relative!important}.header-account{order:4!important;flex:0 0 auto!important}#ajax-cart{order:5!important;flex:0 0 auto!important}.js-search-container .search-floating-container{left:auto!important;right:0!important}}
 @media(max-width:767px){.main-categories-container{display:none!important}.header-account{display:grid!important}.head-main{--header-vertical-padding-mobile:8px!important}}
 
-/* 5. SECCION CATEGORIAS */
+/* 5. SECCIÓN CATEGORÍAS */
 [data-store*="categories"],.section-categories{background:url('https://d1a9qnv764bsoo.cloudfront.net/stores/007/906/761/rte/bg-mist-full.png') center repeat!important}
 [data-store*="categories"] .container,[data-store*="categories"] .swiper-container,[data-store*="categories"] .swiper-slide,.section-categories .container,.section-categories .swiper-slide{background-color:transparent!important;background:transparent!important}
 [data-store*="categories"] .swiper-slide a,.section-categories [class*="name"]{color:#b573de!important;font-weight:700!important;font-size:18px!important;text-transform:uppercase!important;letter-spacing:1.2px!important;display:block!important;width:100%!important;text-align:center!important;margin-top:14px!important}
@@ -116,46 +116,47 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. REGLA MAESTRA GLOBAL (ELIMINA EL BOTÓN NEGRO Y EL SALTO EN TODO EL SITIO) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (COMPATIBILIDAD DEFINITIVA IPANEMA) */
 
-/* 1. SOBREESCRITURA GLOBAL: Ningún botón nativo del tema volverá a ser negro */
-.btn-primary,
-.btn-secondary,
-.btn-default,
-.js-add-to-cart,
-.js-addtocart {
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  border-radius: 50px !important;
-  border: none !important;
-}
-
-/* 2. OCULTAR CLONES HUÉRFANOS: Oculta botones que el JS pegue fuera de las tarjetas */
-body > .btn,
-body > div > .btn,
-.product-grid > .btn,
-.js-product-grid > .btn,
-.js-addtocart-feedback,
-.js-cart-notification,
-.product-item .js-addtocart + .js-addtocart {
-  display: none !important;
-}
-
-/* 3. ANCLAJE DE LA TARJETA DEL PRODUCTO */
+/* Anclaje espacial rígido en las tarjetas de Ipanema */
+.item-product,
+.js-item-product,
 .product-item,
-.js-product-container,
 [data-store*="product-item"] {
   position: relative !important;
 }
 
-/* 4. ESTILO Y ANCLAJE ESTRICTO DE BOTONES EN LA PARRILLA */
-.product-item .btn,
-.product-item input[type="submit"],
-.product-item button,
-.product-item .js-add-to-cart,
-.product-item .js-addtocart {
+/* Contenedor del formulario del producto */
+.item-product .js-product-form,
+.js-item-product .js-product-form,
+.item-product-actions {
+  position: relative !important;
+  min-height: 40px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Ocultar elementos fantasma y duplicados de Ipanema */
+.item-product .js-addtocart + .js-addtocart,
+.item-product .btn + .btn,
+.item-product .js-addtocart-feedback,
+.item-product .add-to-cart-feedback {
+  display: none !important;
+}
+
+/* Estilo turquesa universal para el botón en Ipanema */
+.item-product .js-addtocart,
+.item-product input[type="submit"],
+.item-product button[type="submit"],
+.item-product .btn-primary,
+.item-product .btn-secondary,
+.item-product [data-store*="product-item-add-to-cart"],
+.js-item-product .js-addtocart,
+.js-item-product input[type="submit"],
+.js-item-product button[type="submit"],
+.js-item-product .btn-primary,
+.js-item-product .btn-secondary {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -183,31 +184,45 @@ body > div > .btn,
   transform: none !important;
   transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
+  opacity: 1 !important;
 }
 
-/* 5. BLOQUEO GLOBAL DE ESTADOS (Cargando, ¡Listo!, Deshabilitado) */
-.btn:disabled,
-.btn[disabled],
-.btn.disabled,
-.btn.is-loading,
-.btn.loading,
-.js-addtocart-success,
-.is-added {
+/* Forzar turquesa en estados de carga / deshabilitado durante AJAX */
+.item-product .js-addtocart:disabled,
+.item-product .js-addtocart[disabled],
+.item-product .js-addtocart.disabled,
+.item-product .js-addtocart.is-loading,
+.item-product .js-addtocart.loading,
+.js-item-product .js-addtocart:disabled,
+.js-item-product .js-addtocart[disabled],
+.js-item-product .js-addtocart.disabled,
+.js-item-product .js-addtocart.is-loading,
+.js-item-product .js-addtocart.loading {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  opacity: 1 !important;
+  opacity: 0.9 !important;
 }
 
-/* 6. EFECTOS AL PRESIONAR */
-.product-item .btn:hover {
+/* Forzar que el texto interno siempre sea blanco */
+.item-product .js-addtocart *,
+.js-item-product .js-addtocart * {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Efectos al presionar */
+.item-product .js-addtocart:hover,
+.js-item-product .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.product-item .btn:active {
+.item-product .js-addtocart:active,
+.js-item-product .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
