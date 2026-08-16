@@ -116,20 +116,36 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. ESTABILIZACIÓN ABSOLUTA DEL BOTÓN (INCLUYENDO ESTADO ¡LISTO!) */
+/* 10. ESTABILIZACIÓN DEFECTO ÚNICO BOTÓN AGREGAR AL CARRITO */
 
-/* Estilo base unificado para cualquier botón o contenedor en la parrilla */
-.product-item input,
-.product-item button,
-.product-item .btn,
-.product-item a.btn,
-.product-item [class*="add"],
-.product-item [class*="btn"],
-.item-actions input,
-.item-actions button,
-.item-actions .btn,
-.item-actions [class*="add"],
-.item-actions [class*="btn"] {
+/* Respetar y forzar ocultamiento de capas secundarias o inactivas de Tiendanube */
+.product-item .hidden,
+.product-item .d-none,
+.product-item [style*="display: none"],
+.product-item [style*="display:none"],
+.item-actions .hidden,
+.item-actions .d-none,
+.item-actions [style*="display: none"],
+.item-actions [style*="display:none"] {
+  display: none !important;
+}
+
+/* Ocultar duplicados consecutivos */
+.product-item .js-addtocart + .js-addtocart,
+.product-item .btn + .btn,
+.product-item form + form {
+  display: none !important;
+}
+
+/* Aplicar diseño turquesa ÚNICAMENTE al botón activo principal */
+.product-item .js-add-to-cart,
+.product-item .js-addtocart,
+.product-item input[type="submit"],
+.product-item button[type="submit"],
+.item-actions .js-add-to-cart,
+.item-actions .js-addtocart,
+.item-actions input[type="submit"],
+.item-actions button[type="submit"] {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -153,39 +169,32 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   box-sizing: border-box !important;
   margin: 0 auto !important;
-  position: relative !important;
 }
 
-/* Fuerza el color turquesa en el estado Deshabilitado / ¡Listo! / Cargando */
-.product-item *:disabled,
-.product-item *[disabled],
-.product-item *.disabled,
-.product-item *[class*="added"],
-.product-item *[class*="success"],
-.product-item *[class*="loading"],
-.item-actions *:disabled,
-.item-actions *[disabled],
-.item-actions *.disabled,
-.item-actions *[class*="added"],
-.item-actions *[class*="success"],
-.item-actions *[class*="loading"] {
+/* Mantener turquesa durante carga o deshabilitado sin duplicar botones */
+.product-item .js-addtocart:disabled,
+.product-item .js-addtocart[disabled],
+.product-item .js-addtocart.is-loading,
+.item-actions .js-addtocart:disabled,
+.item-actions .js-addtocart[disabled],
+.item-actions .js-addtocart.is-loading {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  opacity: 1 !important;
+  opacity: 0.9 !important;
 }
 
-/* Efectos de presión */
-.product-item button:hover, .product-item input:hover, .product-item .btn:hover,
-.item-actions button:hover, .item-actions input:hover, .item-actions .btn:hover {
+/* Efectos al presionar */
+.product-item .js-addtocart:hover,
+.item-actions .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.product-item button:active, .product-item input:active, .product-item .btn:active,
-.item-actions button:active, .item-actions input:active, .item-actions .btn:active {
+.product-item .js-addtocart:active,
+.item-actions .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
