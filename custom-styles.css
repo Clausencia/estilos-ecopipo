@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA - SOLUCIÓN DEFINITIVA DE SELECTOR) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA - BOTÓN ÚNICO SIN DUPLICADOS) */
 
 /* 1. Anclaje de la tarjeta del producto */
 .item-product,
@@ -137,13 +137,13 @@ a[href*="checkout"]:active {
   margin: 0 auto !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN DENTRO DEL FORMULARIO */
-.item-product form .js-addtocart,
-.js-item-product form .js-addtocart,
-.item-product form button[type="submit"],
-.js-item-product form button[type="submit"],
-.item-product form input[type="submit"],
-.js-item-product form input[type="submit"] {
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL PRIMER BOTÓN DE COMPRA DEL FORMULARIO */
+.item-product form .js-addtocart:first-of-type,
+.js-item-product form .js-addtocart:first-of-type,
+.item-product form button[type="submit"]:first-of-type,
+.js-item-product form button[type="submit"]:first-of-type,
+.item-product form input[type="submit"]:first-of-type,
+.js-item-product form input[type="submit"]:first-of-type {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -177,12 +177,12 @@ a[href*="checkout"]:active {
 }
 
 /* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
-.item-product form .js-addtocart:disabled,
-.item-product form .js-addtocart.is-loading,
-.item-product form .js-addtocart.is-added,
-.js-item-product form .js-addtocart:disabled,
-.js-item-product form .js-addtocart.is-loading,
-.js-item-product form .js-addtocart.is-added {
+.item-product form .js-addtocart:first-of-type:disabled,
+.item-product form .js-addtocart:first-of-type.is-loading,
+.item-product form .js-addtocart:first-of-type.is-added,
+.js-item-product form .js-addtocart:first-of-type:disabled,
+.js-item-product form .js-addtocart:first-of-type.is-loading,
+.js-item-product form .js-addtocart:first-of-type.is-added {
   display: flex !important;
   background-color: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -190,35 +190,43 @@ a[href*="checkout"]:active {
 }
 
 /* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
-.item-product form .js-addtocart *,
-.js-item-product form .js-addtocart * {
+.item-product form .js-addtocart:first-of-type *,
+.js-item-product form .js-addtocart:first-of-type * {
   background: transparent !important;
   color: #FFFFFF !important;
   border: none !important;
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product form .js-addtocart:hover,
-.js-item-product form .js-addtocart:hover {
+.item-product form .js-addtocart:first-of-type:hover,
+.js-item-product form .js-addtocart:first-of-type:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form .js-addtocart:active,
-.js-item-product form .js-addtocart:active {
+.item-product form .js-addtocart:first-of-type:active,
+.js-item-product form .js-addtocart:first-of-type:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER BOTÓN DUPLICADO O ELEMENTO FUERA DEL FORMULARIO */
-.item-product > .js-addtocart,
-.js-item-product > .js-addtocart,
+/* 7. OCULTAR CUALQUIER SEGUNDO BOTÓN O CONTENEDOR DENTRO O FUERA DEL FORMULARIO */
+.item-product form .js-addtocart ~ .js-addtocart,
+.js-item-product form .js-addtocart ~ .js-addtocart,
+.item-product form .js-addtocart ~ button,
+.js-item-product form .js-addtocart ~ button,
+.item-product form div + div .js-addtocart,
+.js-item-product form div + div .js-addtocart,
+.item-product form div + div button,
+.js-item-product form div + div button,
 .item-product form ~ *,
 .js-item-product form ~ *,
-.item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-feedback,
+.item-product > .js-addtocart,
+.js-item-product > .js-addtocart,
+.item-product [class*="placeholder"],
+.js-item-product [class*="placeholder"],
+.item-product [class*="feedback"],
+.js-item-product [class*="feedback"],
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
