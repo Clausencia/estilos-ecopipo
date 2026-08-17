@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (SOLUCIÓN DEFINITIVA ESTADOS Y FEEDBACK) */
+/* 10. BOTÓN AGREGAR AL CARRITO (ELIMINACIÓN DEFINITIVA DE BOTÓN DUPLICADO) */
 
-/* 1. Anclaje de contenedor */
+/* 1. Anclaje espacial de contenedores */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,7 +126,6 @@ a[href*="checkout"]:active {
 .swiper-slide,
 [data-store*="product-item"] {
   position: relative !important;
-  transform: none !important;
 }
 
 .item-product form,
@@ -140,18 +139,16 @@ a[href*="checkout"]:active {
   margin: 0 auto !important;
 }
 
-/* 2. BOTÓN PRINCIPAL (PARRILLA, PDP Y RELACIONADOS) */
-.js-addtocart,
-.item-product form button[type="submit"],
-.item-product form input[type="submit"],
-.js-item-product form button[type="submit"],
-.js-item-product form input[type="submit"],
-.product-form button[type="submit"],
-.product-form input[type="submit"],
-#product-form button[type="submit"],
-#product-form input[type="submit"],
-#product-form .js-addtocart,
-.js-product-container .js-addtocart {
+/* 2. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN PRINCIPAL DENTRO DEL FORMULARIO */
+.item-product form .js-addtocart:first-of-type,
+.js-item-product form .js-addtocart:first-of-type,
+.product-form .js-addtocart:first-of-type,
+.js-product-form .js-addtocart:first-of-type,
+#product-form .js-addtocart:first-of-type,
+.item-product form button[type="submit"]:first-of-type,
+.js-item-product form button[type="submit"]:first-of-type,
+.product-form button[type="submit"]:first-of-type,
+#product-form button[type="submit"]:first-of-type {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -179,62 +176,28 @@ a[href*="checkout"]:active {
   margin: 0 auto !important;
   position: relative !important;
   transform: none !important;
-  transition: transform .1s ease, box-shadow .10s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 5 !important;
+  z-index: 10 !important;
 }
 
-/* 3. EFECTO PUSH TÁCTIL UNIVERSAL (PDP, PARRILLA Y RELACIONADOS) */
-.js-addtocart:hover,
-button[type="submit"]:hover,
-input[type="submit"]:hover {
-  transform: translateY(1px) !important;
-  box-shadow: 0 3px 0 #3C1053 !important;
-}
-
-.js-addtocart:active,
-button[type="submit"]:active,
-input[type="submit"]:active {
-  transform: translateY(3px) !important;
-  box-shadow: 0 1px 0 #3C1053 !important;
-}
-
-/* 4. CONTENEDOR DE CARGA AJAX (EVITA QUE EL BOTÓN DESAPAREZCA) */
-.js-addtocart-placeholder,
-.js-addtocart-feedback,
-.add-to-cart-feedback,
-.js-addtocart-success {
+/* 3. MANTENER EL BOTÓN PRINCIPAL VISIBLE DURANTE AJAX */
+.js-addtocart.is-loading,
+.js-addtocart.is-added,
+.js-addtocart:disabled,
+button[type="submit"].is-loading,
+button[type="submit"].is-added {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 0.9 !important;
   background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  border-radius: 50px !important;
-  border: none !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-transform: uppercase !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  margin: 0 auto !important;
 }
 
-/* Ocultar el contenedor de respuesta solo cuando esté totalmente vacío */
-.js-addtocart-feedback:empty,
-.add-to-cart-feedback:empty,
-.js-addtocart-placeholder:empty {
-  display: none !important;
-}
-
-/* 5. FUENTE Y COLOR DE TEXTOS INTERNOS */
+/* 4. FUENTE Y COLOR DE TEXTOS INTERNOS */
 .js-addtocart *,
-.js-addtocart-feedback * {
+button[type="submit"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -244,21 +207,47 @@ input[type="submit"]:active {
   border: none !important;
 }
 
-/* 6. OCULTAR EXCLUSIVAMENTE CAPAS DE VISTA RÁPIDA Y DUPLICADOS ESTÁTICOS */
+/* 5. EFECTO PUSH TÁCTIL UNIVERSAL */
+.js-addtocart:hover,
+button[type="submit"]:hover {
+  transform: translateY(1px) !important;
+  box-shadow: 0 3px 0 #3C1053 !important;
+}
+
+.js-addtocart:active,
+button[type="submit"]:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #3C1053 !important;
+}
+
+/* 6. OCULTAR DE FORMA ABSOLUTA TODOS LOS DUPLICADOS, FEEDBACKS Y CAPAS SECUNDARIAS */
+.js-addtocart-placeholder,
+.js-addtocart-feedback,
+.add-to-cart-feedback,
+.js-addtocart-success,
 .item-actions,
 .item-product-actions,
 .product-item-actions,
 .js-quickshop-toggle,
 .btn-secondary,
-.item-product > .js-addtocart:nth-of-type(n+2),
-.js-item-product > .js-addtocart:nth-of-type(n+2) {
+.item-product form .js-addtocart ~ *,
+.js-item-product form .js-addtocart ~ *,
+.item-product form button[type="submit"] ~ *,
+.js-item-product form button[type="submit"] ~ *,
+.item-product form ~ *,
+.js-item-product form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
