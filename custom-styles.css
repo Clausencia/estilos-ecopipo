@@ -116,18 +116,20 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA PRINCIPAL Y PARRILLAS - BOTÓN ÚNICO SURGICAL) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA Y PDP (IPANEMA - SOLUCIÓN PERFECCIONADA) */
 
-/* 1. Anclaje de tarjetas y contenedores */
+/* 1. Anclaje y cancelación de desplazamientos laterales en tarjetas y carruseles */
 .item-product,
 .js-item-product,
 .product-item,
 .js-product-container,
+.swiper-slide,
 [data-store*="product-item"] {
   position: relative !important;
+  transform: none !important;
 }
 
-/* 2. Contenedor de formulario */
+/* 2. Contenedor de formulario activo y centrado */
 .item-product form,
 .js-item-product form,
 .product-form,
@@ -137,9 +139,12 @@ a[href*="checkout"]:active {
   width: 100% !important;
   position: relative !important;
   margin: 0 auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
 }
 
-/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL PRIMER BOTÓN SUBMIT REAL DEL FORMULARIO */
+/* 3. ESTILO TURQUESA UNIFICADO Y FIJO PARA EL BOTÓN PRINCIPAL */
 .item-product form button[type="submit"]:first-of-type,
 .item-product form input[type="submit"]:first-of-type,
 .js-item-product form button[type="submit"]:first-of-type,
@@ -151,7 +156,9 @@ a[href*="checkout"]:active {
 #product-form button[type="submit"]:first-of-type,
 #product-form input[type="submit"]:first-of-type,
 .js-product-container form button[type="submit"]:first-of-type,
-.js-product-container form input[type="submit"]:first-of-type {
+.js-product-container form input[type="submit"]:first-of-type,
+.swiper-slide form button[type="submit"]:first-of-type,
+.swiper-slide form input[type="submit"]:first-of-type {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -178,26 +185,40 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
   margin: 0 auto !important;
   position: relative !important;
-  transition: transform .15s, box-shadow .15s !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  float: none !important;
+  transform: none !important; /* Previene el deslizamiento a la derecha */
+  transition: background-color .15s, opacity .15s, box-shadow .15s !important;
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
 }
 
-/* 4. ESTADOS TRANSITORIOS AJAX */
-form button[type="submit"]:disabled,
+/* 4. MANTENER EL BOTÓN VISIBLE Y TURQUESA DURANTE LA CARGA AJAX (Evita el espacio en blanco) */
 form button[type="submit"].is-loading,
 form button[type="submit"].is-added,
-form input[type="submit"]:disabled,
+form button[type="submit"]:disabled,
 form input[type="submit"].is-loading,
-form input[type="submit"].is-added {
+form input[type="submit"].is-added,
+form input[type="submit"]:disabled,
+.js-addtocart.is-loading,
+.js-addtocart.is-added,
+.js-addtocart:disabled {
   display: flex !important;
-  background-color: #42c6d3 !important;
-  color: #FFFFFF !important;
+  visibility: visible !important;
   opacity: 0.9 !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  width: 100% !important;
+  transform: none !important;
 }
 
-/* 5. FUENTE Y TEXTO INTERNO */
+/* 5. FUENTE Y COLOR DE TEXTOS INTERNOS */
 form button[type="submit"] *,
 form input[type="submit"] * {
   background: transparent !important;
@@ -209,20 +230,14 @@ form input[type="submit"] * {
   border: none !important;
 }
 
-/* 6. EFECTOS AL PRESIONAR */
-form button[type="submit"]:hover,
-form input[type="submit"]:hover {
+/* 6. EFECTO AL PRESIONAR (Únicamente vertical, sin movimiento lateral) */
+form button[type="submit"]:active,
+form input[type="submit"]:active {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-form button[type="submit"]:active,
-form input[type="submit"]:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* 7. DESINTEGRAR TOTALMENTE NOTIFICACIONES, VISTAS RÁPIDAS Y SEGUNDOS BOTONES */
+/* 7. DESINTEGRAR CAPA FANTASMA / ACCIONES SECUNDARIAS / DUPLICADOS */
 .item-actions,
 .item-product-actions,
 .product-item-actions,
