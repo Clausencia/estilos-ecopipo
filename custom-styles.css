@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA - TEXTO FORZADO Y BOTÓN ÚNICO) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (SOLUCIÓN DEFINITIVA IPANEMA) */
 
-/* 1. Anclaje espacial de la tarjeta del producto */
+/* 1. Anclaje de tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,27 +126,22 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 2. Formulario contenedor activo (preserva los inputs de compra) */
+/* 2. Contenedor de formulario activo */
 .item-product form,
-.js-item-product form,
-.item-product .js-product-form,
-.js-item-product .js-product-form {
+.js-item-product form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
   margin: 0 auto !important;
 }
 
-/* 3. ESTILO TURQUESA Y REEMPLAZO DE TEXTO A "AGREGAR AL CARRITO" */
-.item-product form .js-addtocart,
-.js-item-product form .js-addtocart,
-.item-product form button[type="submit"],
-.js-item-product form button[type="submit"],
-.item-product form input[type="submit"],
-.js-item-product form input[type="submit"] {
+/* 3. ESTILO Y RECEPTOR DE CLIC DEL BOTÓN REAL (.js-addtocart) */
+.item-product .js-addtocart,
+.js-item-product .js-addtocart {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
   width: 100% !important;
   max-width: 100% !important;
   background-color: #42c6d3 !important;
@@ -173,16 +168,11 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
-  pointer-events: auto !important;
 }
 
-/* Inyección de texto personalizado "AGREGAR AL CARRITO" */
-.item-product form .js-addtocart::before,
-.js-item-product form .js-addtocart::before,
-.item-product form button[type="submit"]::before,
-.js-item-product form button[type="submit"]::before,
-.item-product form input[type="submit"]::before,
-.js-item-product form input[type="submit"]::before {
+/* Inyección de texto "AGREGAR AL CARRITO" (transparente a los clics) */
+.item-product .js-addtocart::before,
+.js-item-product .js-addtocart::before {
   content: "AGREGAR AL CARRITO" !important;
   font-size: 13px !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -191,81 +181,75 @@ a[href*="checkout"]:active {
   -webkit-text-fill-color: #FFFFFF !important;
   text-transform: uppercase !important;
   display: inline-block !important;
+  pointer-events: none !important;
 }
 
-/* Leyendas dinámicas para peticiones AJAX */
-.item-product form .js-addtocart.is-loading::before,
-.js-item-product form .js-addtocart.is-loading::before {
+/* Leyendas dinámicas AJAX */
+.item-product .js-addtocart.is-loading::before,
+.js-item-product .js-addtocart.is-loading::before {
   content: "AGREGANDO..." !important;
 }
 
-.item-product form .js-addtocart.is-added::before,
-.js-item-product form .js-addtocart.is-added::before {
+.item-product .js-addtocart.is-added::before,
+.js-item-product .js-addtocart.is-added::before {
   content: "¡LISTO!" !important;
 }
 
 /* 4. COBERTURA DE ESTADOS DE CARGA */
-.item-product form .js-addtocart:disabled,
-.item-product form .js-addtocart.is-loading,
-.item-product form .js-addtocart.is-added,
-.js-item-product form .js-addtocart:disabled,
-.js-item-product form .js-addtocart.is-loading,
-.js-item-product form .js-addtocart.is-added {
+.item-product .js-addtocart:disabled,
+.item-product .js-addtocart.is-loading,
+.item-product .js-addtocart.is-added,
+.js-item-product .js-addtocart:disabled,
+.js-item-product .js-addtocart.is-loading,
+.js-item-product .js-addtocart.is-added {
   display: flex !important;
   background-color: #42c6d3 !important;
   color: #FFFFFF !important;
   opacity: 0.9 !important;
 }
 
-/* 5. EFECTOS AL PRESIONAR */
-.item-product form .js-addtocart:hover,
-.js-item-product form .js-addtocart:hover {
+/* 5. TEXTO E ICONOS HIJOS */
+.item-product .js-addtocart *,
+.js-item-product .js-addtocart * {
+  background: transparent !important;
+  color: transparent !important;
+  border: none !important;
+  pointer-events: none !important;
+}
+
+/* 6. EFECTOS AL PRESIONAR */
+.item-product .js-addtocart:hover,
+.js-item-product .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form .js-addtocart:active,
-.js-item-product form .js-addtocart:active {
+.item-product .js-addtocart:active,
+.js-item-product .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 6. DESINTEGRAR EL BOTÓN DUPLICADO Y CONTENEDORES SECUNDARIOS */
+/* 7. OCULTAR ÚNICAMENTE DUPLICADOS Y PLACEHOLDERS SECUNDARIOS */
+.item-product .js-addtocart ~ .js-addtocart,
+.js-item-product .js-addtocart ~ .js-addtocart,
 .item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-feedback,
 .item-product .add-to-cart-feedback,
 .js-item-product .add-to-cart-feedback,
-.item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle,
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
-.item-product > .js-addtocart,
-.js-item-product > .js-addtocart,
-.item-product form .js-addtocart ~ .js-addtocart,
-.js-item-product form .js-addtocart ~ .js-addtocart,
-.item-product form .js-addtocart ~ button,
-.js-item-product form .js-addtocart ~ button,
-.item-product form .js-addtocart ~ div,
-.js-item-product form .js-addtocart ~ div,
-.item-product form ~ button,
-.js-item-product form ~ button,
-.item-product form ~ div,
-.js-item-product form ~ div,
-.item-product form ~ a,
-.js-item-product form ~ a {
+.item-product .js-quickshop-toggle,
+.js-item-product .js-quickshop-toggle {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
+  width: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
   position: absolute !important;
   pointer-events: none !important;
-  overflow: hidden !important;
 }
