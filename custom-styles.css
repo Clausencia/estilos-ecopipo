@@ -116,28 +116,35 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA DEFINITIVO ARMONIZADO CON JS) */
+/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA PRINCIPAL DE PRODUCTO Y PARRILLAS) */
 
-/* 1. Anclaje de la tarjeta del producto */
+/* 1. Anclaje espacial */
 .item-product,
 .js-item-product,
 .product-item,
+.js-product-container,
 [data-store*="product-item"] {
   position: relative !important;
 }
 
-/* 2. Contenedor del formulario principal */
+/* 2. Contenedores de formulario activos */
 .item-product form,
-.js-item-product form {
+.js-item-product form,
+.product-form,
+.js-product-form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
   margin: 0 auto !important;
 }
 
-/* 3. ESTILO Y MEDIDAS DEL BOTÓN PRINCIPAL DENTRO DEL FORMULARIO */
+/* 3. ESTILO TURQUESA UNIFICADO (PARRILLAS + PÁGINA DE PRODUCTO INDIVIDUAL) */
 .item-product form .js-addtocart,
 .js-item-product form .js-addtocart,
+.product-form .js-addtocart,
+.js-product-form .js-addtocart,
+.js-product-container .js-addtocart,
+#product-form .js-addtocart,
 .item-product form button[type="submit"],
 .js-item-product form button[type="submit"],
 .item-product form input[type="submit"],
@@ -175,21 +182,17 @@ a[href*="checkout"]:active {
 }
 
 /* 4. ESTADOS TRANSITORIOS AJAX */
-.item-product form .js-addtocart:disabled,
-.item-product form .js-addtocart.is-loading,
-.item-product form .js-addtocart.is-added,
-.js-item-product form .js-addtocart:disabled,
-.js-item-product form .js-addtocart.is-loading,
-.js-item-product form .js-addtocart.is-added {
+.js-addtocart:disabled,
+.js-addtocart.is-loading,
+.js-addtocart.is-added {
   display: flex !important;
   background-color: #42c6d3 !important;
   color: #FFFFFF !important;
   opacity: 0.9 !important;
 }
 
-/* 5. FUENTE E ICONOS DE ELEMENTOS HIJOS */
-.item-product form .js-addtocart *,
-.js-item-product form .js-addtocart * {
+/* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
+.js-addtocart * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -200,19 +203,21 @@ a[href*="checkout"]:active {
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product form .js-addtocart:hover,
-.js-item-product form .js-addtocart:hover {
+.js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form .js-addtocart:active,
-.js-item-product form .js-addtocart:active {
+.js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER ELEMENTO SECUNDARIO O DUPLICADO FUERA DEL FORMULARIO */
+/* 7. OCULTAMIENTO DEFINITIVO DE LA CAPA FANTASMA / ACCIONES SECUNDARIAS */
+.item-product .item-actions,
+.js-item-product .item-actions,
+.item-product .js-quickshop-toggle,
+.js-item-product .js-quickshop-toggle,
 .item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
@@ -221,10 +226,8 @@ a[href*="checkout"]:active {
 .js-item-product .add-to-cart-feedback,
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
-.item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle,
-.item-product > .js-addtocart,
-.js-item-product > .js-addtocart,
+.item-product form .js-addtocart ~ *:not(input[type="hidden"]),
+.js-item-product form .js-addtocart ~ *:not(input[type="hidden"]),
 .item-product form ~ *,
 .js-item-product form ~ * {
   display: none !important;
@@ -234,6 +237,9 @@ a[href*="checkout"]:active {
   width: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
   position: absolute !important;
   pointer-events: none !important;
+  overflow: hidden !important;
 }
