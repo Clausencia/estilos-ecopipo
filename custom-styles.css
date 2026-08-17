@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (FILTRADO POR TIPO SUBMIT IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (SOLUCIÓN DEFINITIVA EXCLUSIVA DE FORMULARIO) */
 
-/* 1. Anclaje espacial de la tarjeta del producto */
+/* 1. Anclaje de tarjeta */
 .item-product,
 .js-item-product,
 .product-item,
@@ -126,22 +126,22 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* 2. Formulario contenedor activo */
+/* 2. Contenedor del formulario principal */
 .item-product form,
-.js-item-product form,
-.item-product .js-product-form,
-.js-item-product .js-product-form {
+.js-item-product form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
-  min-height: 38px !important;
+  margin: 0 auto !important;
 }
 
-/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL BOTÓN DE ENVÍO REAL (INPUT O BUTTON TYPE SUBMIT) */
-.item-product form input[type="submit"],
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN DE ENVÍO REAL DENTRO DEL FORMULARIO */
+.item-product form .js-addtocart,
+.js-item-product form .js-addtocart,
 .item-product form button[type="submit"],
-.js-item-product form input[type="submit"],
-.js-item-product form button[type="submit"] {
+.js-item-product form button[type="submit"],
+.item-product form input[type="submit"],
+.js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -170,17 +170,15 @@ a[href*="checkout"]:active {
   transition: transform .15s, box-shadow .15s !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 5 !important;
+  z-index: 10 !important;
   pointer-events: auto !important;
 }
 
-/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX DEL SUBMIT */
-.item-product form input[type="submit"]:disabled,
-.item-product form button[type="submit"]:disabled,
+/* 4. MANTENER VISIBLE Y TURQUESA DURANTE PROCESOS AJAX */
+.item-product form .js-addtocart:disabled,
 .item-product form .js-addtocart.is-loading,
 .item-product form .js-addtocart.is-added,
-.js-item-product form input[type="submit"]:disabled,
-.js-item-product form button[type="submit"]:disabled,
+.js-item-product form .js-addtocart:disabled,
 .js-item-product form .js-addtocart.is-loading,
 .js-item-product form .js-addtocart.is-added {
   display: flex !important;
@@ -190,60 +188,51 @@ a[href*="checkout"]:active {
 }
 
 /* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
-.item-product form input[type="submit"] *,
-.item-product form button[type="submit"] *,
-.js-item-product form input[type="submit"] *,
-.js-item-product form button[type="submit"] * {
+.item-product form .js-addtocart *,
+.js-item-product form .js-addtocart * {
   background: transparent !important;
   color: #FFFFFF !important;
   border: none !important;
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product form input[type="submit"]:hover,
-.item-product form button[type="submit"]:hover,
-.js-item-product form input[type="submit"]:hover,
-.js-item-product form button[type="submit"]:hover {
+.item-product form .js-addtocart:hover,
+.js-item-product form .js-addtocart:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form input[type="submit"]:active,
-.item-product form button[type="submit"]:active,
-.js-item-product form input[type="submit"]:active,
-.js-item-product form button[type="submit"]:active {
+.item-product form .js-addtocart:active,
+.js-item-product form .js-addtocart:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER DIV SECUNDARIO, PLACEHOLDER O ELEMENTO EXTRA */
-.item-product div.js-addtocart,
-.js-item-product div.js-addtocart,
-.item-product div[class*="addtocart"],
-.js-item-product div[class*="addtocart"],
-.item-product [class*="placeholder"],
-.js-item-product [class*="placeholder"],
-.item-product [class*="feedback"],
-.js-item-product [class*="feedback"],
+/* 7. OCULTAR CUALQUIER ELEMENTO DUPLICADO QUE ESTÉ FUERA DEL FORMULARIO */
+.item-product > .js-addtocart,
+.js-item-product > .js-addtocart,
+.item-product form ~ *,
+.js-item-product form ~ *,
+.item-product .js-addtocart-placeholder,
+.js-item-product .js-addtocart-placeholder,
+.item-product .js-addtocart-feedback,
+.js-item-product .js-addtocart-feedback,
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle,
-.item-product form input[type="submit"] ~ *,
-.item-product form button[type="submit"] ~ *,
-.js-item-product form input[type="submit"] ~ *,
-.js-item-product form button[type="submit"] ~ *,
-.item-product form ~ *,
-.js-item-product form ~ * {
+.js-item-product .js-quickshop-toggle {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
-  min-height: 0 !important;
+  width: 0 !important;
   max-height: 0 !important;
+  min-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
