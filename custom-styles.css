@@ -116,7 +116,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (BOTÓN ÚNICO DEFINITIVO IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (DEFENSA DEFINITIVA IPANEMA) */
 
 /* 1. Anclaje de la tarjeta del producto */
 .item-product,
@@ -132,15 +132,12 @@ a[href*="checkout"]:active {
   display: block !important;
   width: 100% !important;
   position: relative !important;
+  min-height: 38px !important;
 }
 
-/* 3. ESTILO TURQUESA EXCLUSIVO PARA EL BOTÓN PRINCIPAL DE COMPRA */
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL PRIMER BOTÓN PRINCIPAL DE COMPRA */
 .item-product form .js-addtocart,
-.js-item-product form .js-addtocart,
-.item-product form input[type="submit"],
-.js-item-product form input[type="submit"],
-.item-product form button[type="submit"],
-.js-item-product form button[type="submit"] {
+.js-item-product form .js-addtocart {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -207,21 +204,19 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR ELEMENTOS SECUNDARIOS Y DUPLICADOS (PROTEGIENDO INPUTS OCULTOS DE DATOS) */
-.item-product form .js-addtocart ~ *:not(input[type="hidden"]),
-.js-item-product form .js-addtocart ~ *:not(input[type="hidden"]),
-.item-product form ~ *:not(script),
-.js-item-product form ~ *:not(script),
+/* 7. OCULTAR ÚNICAMENTE ELEMENTOS POSTERIORES (BOTÓN 2 / PLACEHOLDERS / FEEDBACKS) */
+.item-product form .js-addtocart ~ *,
+.js-item-product form .js-addtocart ~ *,
+.item-product form ~ *,
+.js-item-product form ~ *,
+.item-product [class*="placeholder"],
+.js-item-product [class*="placeholder"],
+.item-product [class*="feedback"],
+.js-item-product [class*="feedback"],
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle,
-.item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-feedback,
-.item-product .add-to-cart-feedback,
-.js-item-product .add-to-cart-feedback {
+.js-item-product .js-quickshop-toggle {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
