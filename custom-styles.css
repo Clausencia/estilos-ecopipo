@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (DEFENSA DEFINITIVA IPANEMA) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (FILTRADO POR TIPO SUBMIT IPANEMA) */
 
-/* 1. Anclaje de la tarjeta del producto */
+/* 1. Anclaje espacial de la tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -128,16 +128,20 @@ a[href*="checkout"]:active {
 
 /* 2. Formulario contenedor activo */
 .item-product form,
-.js-item-product form {
+.js-item-product form,
+.item-product .js-product-form,
+.js-item-product .js-product-form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
   min-height: 38px !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL PRIMER BOTÓN PRINCIPAL DE COMPRA */
-.item-product form .js-addtocart,
-.js-item-product form .js-addtocart {
+/* 3. ESTILO TURQUESA EXCLUSIVAMENTE AL BOTÓN DE ENVÍO REAL (INPUT O BUTTON TYPE SUBMIT) */
+.item-product form input[type="submit"],
+.item-product form button[type="submit"],
+.js-item-product form input[type="submit"],
+.js-item-product form button[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -170,11 +174,13 @@ a[href*="checkout"]:active {
   pointer-events: auto !important;
 }
 
-/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
-.item-product form .js-addtocart:disabled,
+/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX DEL SUBMIT */
+.item-product form input[type="submit"]:disabled,
+.item-product form button[type="submit"]:disabled,
 .item-product form .js-addtocart.is-loading,
 .item-product form .js-addtocart.is-added,
-.js-item-product form .js-addtocart:disabled,
+.js-item-product form input[type="submit"]:disabled,
+.js-item-product form button[type="submit"]:disabled,
 .js-item-product form .js-addtocart.is-loading,
 .js-item-product form .js-addtocart.is-added {
   display: flex !important;
@@ -184,31 +190,37 @@ a[href*="checkout"]:active {
 }
 
 /* 5. TEXTO E ICONOS INTERNOS EN BLANCO */
-.item-product form .js-addtocart *,
-.js-item-product form .js-addtocart * {
+.item-product form input[type="submit"] *,
+.item-product form button[type="submit"] *,
+.js-item-product form input[type="submit"] *,
+.js-item-product form button[type="submit"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   border: none !important;
 }
 
 /* 6. EFECTOS AL PRESIONAR */
-.item-product form .js-addtocart:hover,
-.js-item-product form .js-addtocart:hover {
+.item-product form input[type="submit"]:hover,
+.item-product form button[type="submit"]:hover,
+.js-item-product form input[type="submit"]:hover,
+.js-item-product form button[type="submit"]:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form .js-addtocart:active,
-.js-item-product form .js-addtocart:active {
+.item-product form input[type="submit"]:active,
+.item-product form button[type="submit"]:active,
+.js-item-product form input[type="submit"]:active,
+.js-item-product form button[type="submit"]:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR ÚNICAMENTE ELEMENTOS POSTERIORES (BOTÓN 2 / PLACEHOLDERS / FEEDBACKS) */
-.item-product form .js-addtocart ~ *,
-.js-item-product form .js-addtocart ~ *,
-.item-product form ~ *,
-.js-item-product form ~ *,
+/* 7. OCULTAR CUALQUIER DIV SECUNDARIO, PLACEHOLDER O ELEMENTO EXTRA */
+.item-product div.js-addtocart,
+.js-item-product div.js-addtocart,
+.item-product div[class*="addtocart"],
+.js-item-product div[class*="addtocart"],
 .item-product [class*="placeholder"],
 .js-item-product [class*="placeholder"],
 .item-product [class*="feedback"],
@@ -216,7 +228,13 @@ a[href*="checkout"]:active {
 .item-product .btn-secondary,
 .js-item-product .btn-secondary,
 .item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle {
+.js-item-product .js-quickshop-toggle,
+.item-product form input[type="submit"] ~ *,
+.item-product form button[type="submit"] ~ *,
+.js-item-product form input[type="submit"] ~ *,
+.js-item-product form button[type="submit"] ~ *,
+.item-product form ~ *,
+.js-item-product form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
