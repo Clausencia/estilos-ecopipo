@@ -116,9 +116,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (SOLUCIÓN DEFINITIVA EXCLUSIVA DE FORMULARIO) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA (IPANEMA - SOLUCIÓN DEFINITIVA DE SELECTOR) */
 
-/* 1. Anclaje de tarjeta */
+/* 1. Anclaje de la tarjeta del producto */
 .item-product,
 .js-item-product,
 .product-item,
@@ -128,14 +128,16 @@ a[href*="checkout"]:active {
 
 /* 2. Contenedor del formulario principal */
 .item-product form,
-.js-item-product form {
+.js-item-product form,
+.item-product .js-product-form,
+.js-item-product .js-product-form {
   display: block !important;
   width: 100% !important;
   position: relative !important;
   margin: 0 auto !important;
 }
 
-/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN DE ENVÍO REAL DENTRO DEL FORMULARIO */
+/* 3. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN DENTRO DEL FORMULARIO */
 .item-product form .js-addtocart,
 .js-item-product form .js-addtocart,
 .item-product form button[type="submit"],
@@ -174,7 +176,7 @@ a[href*="checkout"]:active {
   pointer-events: auto !important;
 }
 
-/* 4. MANTENER VISIBLE Y TURQUESA DURANTE PROCESOS AJAX */
+/* 4. MANTENER VISIBLE Y TURQUESA DURANTE ESTADOS AJAX */
 .item-product form .js-addtocart:disabled,
 .item-product form .js-addtocart.is-loading,
 .item-product form .js-addtocart.is-added,
@@ -208,7 +210,7 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* 7. OCULTAR CUALQUIER ELEMENTO DUPLICADO QUE ESTÉ FUERA DEL FORMULARIO */
+/* 7. OCULTAR CUALQUIER BOTÓN DUPLICADO O ELEMENTO FUERA DEL FORMULARIO */
 .item-product > .js-addtocart,
 .js-item-product > .js-addtocart,
 .item-product form ~ *,
