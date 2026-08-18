@@ -53,6 +53,30 @@ body,html,input,select,textarea,button{font-family:'Palanquin',sans-serif}
 .eco-whatsapp-cta a{color:#b573de!important;text-decoration:none!important;font-weight:700!important;margin-left:5px!important}
 @media(max-width:768px){.eco-packs-grid{justify-content:flex-start!important}.eco-pack-card{flex:0 0 280px!important}}
 
+/* TACHADO PERSONALIZADO AL CENTRO EXACTO */
+.eco-pack-price-box del, 
+.eco-pack-price-box s, 
+.eco-pack-price-box [class*="old"],
+del, s {
+  text-decoration: none !important; /* Desactiva el tachado alto del navegador */
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.eco-pack-price-box del::after, 
+.eco-pack-price-box s::after, 
+.eco-pack-price-box [class*="old"]::after,
+del::after, s::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 55% !important; /* Controla la altura: sube o baja el % según tu preferencia */
+  height: 2px !important; /* Grosor de la línea */
+  background-color: currentColor !important; /* Toma el mismo color morado del texto */
+  border-radius: 1px !important;
+}
+
 /* 8. BANNERS Y HEADINGS SECUNDARIOS */
 .eco-page-banner{width:100vw!important;position:relative!important;left:50%!important;right:50%!important;margin:-40px -50vw 25px -50vw!important;height:250px!important;overflow:hidden!important;background:#FCF5FF!important}
 .eco-page-banner img{width:100vw!important;height:100%!important;object-fit:cover!important;object-position:center 20%!important}
