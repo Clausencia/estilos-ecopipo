@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (ELIMINACIÓN DEFINITIVA DE BOTÓN DUPLICADO) */
+/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA, PDP Y CARRUSEL (SOLUCIÓN DEFINITIVA ESTADOS Y HOVER) */
 
-/* 1. Anclaje espacial de contenedores */
+/* 1. Anclaje estático de tarjetas y cancelación de animaciones laterales */
 .item-product,
 .js-item-product,
 .product-item,
@@ -150,6 +150,14 @@ a[href*="checkout"]:active {
 .swiper-slide,
 [data-store*="product-item"] {
   position: relative !important;
+  transform: none !important;
+}
+
+.item-product:hover,
+.js-item-product:hover,
+.product-item:hover,
+.swiper-slide:hover {
+  transform: none !important;
 }
 
 .item-product form,
@@ -161,18 +169,23 @@ a[href*="checkout"]:active {
   width: 100% !important;
   position: relative !important;
   margin: 0 auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
 }
 
-/* 2. ESTILO TURQUESA ÚNICAMENTE AL BOTÓN PRINCIPAL DENTRO DEL FORMULARIO */
-.item-product form .js-addtocart:first-of-type,
-.js-item-product form .js-addtocart:first-of-type,
-.product-form .js-addtocart:first-of-type,
-.js-product-form .js-addtocart:first-of-type,
-#product-form .js-addtocart:first-of-type,
-.item-product form button[type="submit"]:first-of-type,
-.js-item-product form button[type="submit"]:first-of-type,
-.product-form button[type="submit"]:first-of-type,
-#product-form button[type="submit"]:first-of-type {
+/* 2. BOTÓN PRINCIPAL (SIEMPRE VISIBLE Y FIJO) */
+.js-addtocart,
+.item-product form button[type="submit"],
+.item-product form input[type="submit"],
+.js-item-product form button[type="submit"],
+.js-item-product form input[type="submit"],
+.product-form button[type="submit"],
+.product-form input[type="submit"],
+#product-form button[type="submit"],
+#product-form input[type="submit"],
+#product-form .js-addtocart,
+.js-product-container .js-addtocart {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -199,29 +212,73 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
   margin: 0 auto !important;
   position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  float: none !important;
   transform: none !important;
-  transition: transform .1s ease, box-shadow .1s ease !important;
+  transition: background-color .15s, opacity .15s, box-shadow .15s !important;
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
 }
 
-/* 3. MANTENER EL BOTÓN PRINCIPAL VISIBLE DURANTE AJAX */
-.js-addtocart.is-loading,
-.js-addtocart.is-added,
-.js-addtocart:disabled,
-button[type="submit"].is-loading,
-button[type="submit"].is-added {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 0.9 !important;
-  background-color: #42c6d3 !important;
-  color: #FFFFFF !important;
+/* 3. BLOQUEO RIGUROSO DE MOVIMIENTO LATERAL EN HOVER (PDP, PARRILLA Y CARRUSEL) */
+.item-product:hover .js-addtocart,
+.js-item-product:hover .js-addtocart,
+.product-item:hover .js-addtocart,
+.swiper-slide:hover .js-addtocart,
+.swiper-slide:hover button,
+.swiper-slide:hover input,
+.js-addtocart:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  transform: translateY(1px) !important; /* Micro-push vertical únicamente */
+  box-shadow: 0 3px 0 #3C1053 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
-/* 4. FUENTE Y COLOR DE TEXTOS INTERNOS */
+/* 4. EFECTO PUSH TÁCTIL AL PRESIONAR */
+.js-addtocart:active,
+button[type="submit"]:active,
+input[type="submit"]:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #3C1053 !important;
+}
+
+/* 5. COBERTURA TOTAL DE ESTADOS AJAX (Mantiene el botón visible durante el envío) */
+.js-addtocart.is-loading,
+.js-addtocart.is-added,
+.js-addtocart.loading,
+.js-addtocart.disabled,
+.js-addtocart:disabled,
+button[type="submit"].is-loading,
+button[type="submit"].is-added,
+button[type="submit"]:disabled,
+input[type="submit"].is-loading,
+input[type="submit"].is-added,
+input[type="submit"]:disabled {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 0.85 !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  width: 100% !important;
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+}
+
+/* 6. FUENTE Y COLOR DE TEXTOS INTERNOS */
 .js-addtocart *,
-button[type="submit"] * {
+button[type="submit"] *,
+input[type="submit"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -231,20 +288,7 @@ button[type="submit"] * {
   border: none !important;
 }
 
-/* 5. EFECTO PUSH TÁCTIL UNIVERSAL */
-.js-addtocart:hover,
-button[type="submit"]:hover {
-  transform: translateY(1px) !important;
-  box-shadow: 0 3px 0 #3C1053 !important;
-}
-
-.js-addtocart:active,
-button[type="submit"]:active {
-  transform: translateY(3px) !important;
-  box-shadow: 0 1px 0 #3C1053 !important;
-}
-
-/* 6. OCULTAR DE FORMA ABSOLUTA TODOS LOS DUPLICADOS, FEEDBACKS Y CAPAS SECUNDARIAS */
+/* 7. OCULTAR EXCLUSIVAMENTE BOTONES DUPLICADOS Y CAPAS SECUNDARIAS */
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .add-to-cart-feedback,
@@ -254,10 +298,10 @@ button[type="submit"]:active {
 .product-item-actions,
 .js-quickshop-toggle,
 .btn-secondary,
-.item-product form .js-addtocart ~ *,
-.js-item-product form .js-addtocart ~ *,
-.item-product form button[type="submit"] ~ *,
-.js-item-product form button[type="submit"] ~ *,
+.item-product form .js-addtocart ~ *:not(input[type="hidden"]),
+.js-item-product form .js-addtocart ~ *:not(input[type="hidden"]),
+.item-product form button[type="submit"] ~ *:not(input[type="hidden"]),
+.js-item-product form button[type="submit"] ~ *:not(input[type="hidden"]),
 .item-product form ~ *,
 .js-item-product form ~ * {
   display: none !important;
