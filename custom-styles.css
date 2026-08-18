@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO PARRILLA, PDP Y CARRUSEL (SOLUCIÓN DEFINITIVA ESTADOS Y HOVER) */
+/* 10. BOTÓN AGREGAR AL CARRITO (SOLUCIÓN DEFINITIVA OVERLAY SOBREPUESTO) */
 
-/* 1. Anclaje estático de tarjetas y cancelación de animaciones laterales */
+/* 1. Anclaje de contenedor principal */
 .item-product,
 .js-item-product,
 .product-item,
@@ -150,13 +150,6 @@ a[href*="checkout"]:active {
 .swiper-slide,
 [data-store*="product-item"] {
   position: relative !important;
-  transform: none !important;
-}
-
-.item-product:hover,
-.js-item-product:hover,
-.product-item:hover,
-.swiper-slide:hover {
   transform: none !important;
 }
 
@@ -168,13 +161,14 @@ a[href*="checkout"]:active {
   display: block !important;
   width: 100% !important;
   position: relative !important;
+  min-height: 38px !important;
   margin: 0 auto !important;
   left: 0 !important;
   right: 0 !important;
   transform: none !important;
 }
 
-/* 2. BOTÓN PRINCIPAL (SIEMPRE VISIBLE Y FIJO) */
+/* 2. BOTÓN PRINCIPAL (PARRILLA, PDP Y CARRUSEL) */
 .js-addtocart,
 .item-product form button[type="submit"],
 .item-product form input[type="submit"],
@@ -217,31 +211,61 @@ a[href*="checkout"]:active {
   top: 0 !important;
   float: none !important;
   transform: none !important;
-  transition: background-color .15s, opacity .15s, box-shadow .15s !important;
+  transition: transform .1s ease, box-shadow .1s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 10 !important;
+  z-index: 5 !important;
 }
 
-/* 3. BLOQUEO RIGUROSO DE MOVIMIENTO LATERAL EN HOVER (PDP, PARRILLA Y CARRUSEL) */
-.item-product:hover .js-addtocart,
-.js-item-product:hover .js-addtocart,
-.product-item:hover .js-addtocart,
-.swiper-slide:hover .js-addtocart,
-.swiper-slide:hover button,
-.swiper-slide:hover input,
+/* 3. CONTENEDOR DE RESPUESTA Y CARGA AJAX (POSICIONADO SOBREPUESTO AL 100%) */
+.js-addtocart-placeholder,
+.js-addtocart-feedback,
+.add-to-cart-feedback,
+.js-addtocart-success {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  border-radius: 50px !important;
+  border: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
+  margin: 0 auto !important;
+  z-index: 20 !important;
+  pointer-events: none !important;
+}
+
+/* Ocultar el sobrepuesto únicamente cuando no tenga texto o esté inactivo */
+.js-addtocart-feedback:empty,
+.add-to-cart-feedback:empty,
+.js-addtocart-placeholder:empty {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* 4. EFECTO PUSH TÁCTIL UNIVERSAL */
 .js-addtocart:hover,
 button[type="submit"]:hover,
 input[type="submit"]:hover {
-  transform: translateY(1px) !important; /* Micro-push vertical únicamente */
+  transform: translateY(1px) !important;
   box-shadow: 0 3px 0 #3C1053 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
 }
 
-/* 4. EFECTO PUSH TÁCTIL AL PRESIONAR */
 .js-addtocart:active,
 button[type="submit"]:active,
 input[type="submit"]:active {
@@ -249,36 +273,10 @@ input[type="submit"]:active {
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* 5. COBERTURA TOTAL DE ESTADOS AJAX (Mantiene el botón visible durante el envío) */
-.js-addtocart.is-loading,
-.js-addtocart.is-added,
-.js-addtocart.loading,
-.js-addtocart.disabled,
-.js-addtocart:disabled,
-button[type="submit"].is-loading,
-button[type="submit"].is-added,
-button[type="submit"]:disabled,
-input[type="submit"].is-loading,
-input[type="submit"].is-added,
-input[type="submit"]:disabled {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 0.85 !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  width: 100% !important;
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
-}
-
-/* 6. FUENTE Y COLOR DE TEXTOS INTERNOS */
+/* 5. FUENTE Y COLOR DE TEXTOS INTERNOS */
 .js-addtocart *,
-button[type="submit"] *,
-input[type="submit"] * {
+.js-addtocart-feedback *,
+button[type="submit"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -288,34 +286,21 @@ input[type="submit"] * {
   border: none !important;
 }
 
-/* 7. OCULTAR EXCLUSIVAMENTE BOTONES DUPLICADOS Y CAPAS SECUNDARIAS */
-.js-addtocart-placeholder,
-.js-addtocart-feedback,
-.add-to-cart-feedback,
-.js-addtocart-success,
+/* 6. OCULTAR CAPAS DE VISTA RÁPIDA Y BOTONES SECUNDARIOS REALES */
 .item-actions,
 .item-product-actions,
 .product-item-actions,
 .js-quickshop-toggle,
 .btn-secondary,
-.item-product form .js-addtocart ~ *:not(input[type="hidden"]),
-.js-item-product form .js-addtocart ~ *:not(input[type="hidden"]),
-.item-product form button[type="submit"] ~ *:not(input[type="hidden"]),
-.js-item-product form button[type="submit"] ~ *:not(input[type="hidden"]),
-.item-product form ~ *,
-.js-item-product form ~ * {
+.item-product > .js-addtocart:nth-of-type(n+2),
+.js-item-product > .js-addtocart:nth-of-type(n+2) {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  max-height: 0 !important;
-  min-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
