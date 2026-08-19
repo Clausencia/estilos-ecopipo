@@ -140,15 +140,17 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA DE PRODUCTO, PARRILLA Y SIMILARES - AISLAMIENTO TOTAL) */
+/* 10. BOTÓN AGREGAR AL CARRITO (SOLUCIÓN DEFINITIVA DE BOTÓN ÚNICO Y ESTADOS AJAX) */
 
-/* 1. Anclaje de contenedor */
+/* 1. Anclaje de tarjeta y cancelación de desplazamientos generales */
 .item-product,
 .js-item-product,
 .product-item,
 .js-product-container,
+.swiper-slide,
 [data-store*="product-item"] {
   position: relative !important;
+  transform: none !important;
 }
 
 .item-product form,
@@ -163,22 +165,19 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* 2. BOTÓN TURQUESA EXCLUSIVO DE PRODUCTO (NUNCA TOCA CHECKOUT) */
+/* 2. ESTILO TURQUESA APLICADO EXCLUSIVAMENTE AL BOTÓN REAL DE ENVÍO (<button> e <input>) */
 .item-product form button[type="submit"],
 .item-product form input[type="submit"],
-.item-product form .js-addtocart,
 .js-item-product form button[type="submit"],
 .js-item-product form input[type="submit"],
-.js-item-product form .js-addtocart,
 .product-form button[type="submit"],
 .product-form input[type="submit"],
-.product-form .js-addtocart,
 .js-product-form button[type="submit"],
 .js-product-form input[type="submit"],
-.js-product-form .js-addtocart,
 #product-form button[type="submit"],
 #product-form input[type="submit"],
-#product-form .js-addtocart {
+.js-product-container form button[type="submit"],
+.js-product-container form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -206,54 +205,68 @@ a[href*="checkout"]:active {
   margin: 0 auto !important;
   position: relative !important;
   transform: none !important;
-  transition: transform .1s ease, box-shadow .1s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease, opacity .15s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
 }
 
-/* 3. MANTENER VISIBLE Y CENTRADO DURANTE CARGA AJAX (EVITA EL HUECO EN BLANCO) */
-.item-product form .js-addtocart.is-loading,
-.item-product form .js-addtocart.is-added,
-.js-item-product form .js-addtocart.is-loading,
-.js-item-product form .js-addtocart.is-added,
-.product-form .js-addtocart.is-loading,
-.product-form .js-addtocart.is-added,
-#product-form .js-addtocart.is-loading,
-#product-form .js-addtocart.is-added {
+/* 3. MANTENER EL BOTÓN VISIBLE Y TURQUESA DURANTE AJAX (EVITA QUE SE PONGA EN BLANCO) */
+.item-product form button[type="submit"].is-loading,
+.item-product form button[type="submit"].is-added,
+.item-product form button[type="submit"]:disabled,
+.item-product form input[type="submit"].is-loading,
+.item-product form input[type="submit"].is-added,
+.item-product form input[type="submit"]:disabled,
+.js-item-product form button[type="submit"].is-loading,
+.js-item-product form button[type="submit"].is-added,
+.js-item-product form button[type="submit"]:disabled,
+.product-form button[type="submit"].is-loading,
+.product-form button[type="submit"].is-added,
+.product-form button[type="submit"]:disabled,
+#product-form button[type="submit"].is-loading,
+#product-form button[type="submit"].is-added,
+#product-form button[type="submit"]:disabled {
   display: flex !important;
   visibility: visible !important;
   opacity: 0.9 !important;
   background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
   color: #FFFFFF !important;
-  justify-content: center !important;
-  align-items: center !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  width: 100% !important;
 }
 
-/* 4. HOVER Y PUSH EXCLUSIVOS PARA PRODUCTO (SIN ALTERAR MEDIDAS NI IMÁGENES) */
-.item-product form .js-addtocart:hover,
-.js-item-product form .js-addtocart:hover,
-.product-form .js-addtocart:hover,
-#product-form .js-addtocart:hover {
+/* 4. PUSH TÁCTIL EXCLUSIVAMENTE VERTICAL */
+.item-product form button[type="submit"]:hover,
+.item-product form input[type="submit"]:hover,
+.js-item-product form button[type="submit"]:hover,
+.js-item-product form input[type="submit"]:hover,
+.product-form button[type="submit"]:hover,
+.product-form input[type="submit"]:hover,
+#product-form button[type="submit"]:hover,
+#product-form input[type="submit"]:hover {
   transform: translateY(1px) !important;
   box-shadow: 0 3px 0 #3C1053 !important;
-  width: 100% !important;
 }
 
-.item-product form .js-addtocart:active,
-.js-item-product form .js-addtocart:active,
-.product-form .js-addtocart:active,
-#product-form .js-addtocart:active {
+.item-product form button[type="submit"]:active,
+.item-product form input[type="submit"]:active,
+.js-item-product form button[type="submit"]:active,
+.js-item-product form input[type="submit"]:active,
+.product-form button[type="submit"]:active,
+.product-form input[type="submit"]:active,
+#product-form button[type="submit"]:active,
+#product-form input[type="submit"]:active {
   transform: translateY(3px) !important;
   box-shadow: 0 1px 0 #3C1053 !important;
-  width: 100% !important;
 }
 
 /* 5. FUENTE Y COLOR DE TEXTOS INTERNOS */
-.item-product form .js-addtocart *,
-.js-item-product form .js-addtocart *,
-.product-form .js-addtocart *,
-#product-form .js-addtocart * {
+form button[type="submit"] *,
+form input[type="submit"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -263,7 +276,7 @@ a[href*="checkout"]:active {
   border: none !important;
 }
 
-/* 6. OCULTAR ÚNICAMENTE CAPAS SECUNDARIAS DE TARJETAS */
+/* 6. OCULTAMIENTO TOTAL Y DEFINITIVO DE SEGUNDOS BOTONES, NOTIFICACIONES Y VISTAS RÁPIDAS */
 .item-actions,
 .item-product-actions,
 .product-item-actions,
@@ -272,18 +285,33 @@ a[href*="checkout"]:active {
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .add-to-cart-feedback,
-.item-product form .js-addtocart ~ *:not(input[type="hidden"]),
-.js-item-product form .js-addtocart ~ *:not(input[type="hidden"]),
+.js-addtocart-success,
+[class*="addtocart-placeholder"],
+[class*="addtocart-feedback"],
+.item-product a.js-addtocart,
+.js-item-product a.js-addtocart,
+.item-product div.js-addtocart,
+.js-item-product div.js-addtocart,
+.item-product form button[type="submit"] ~ *,
+.item-product form input[type="submit"] ~ *,
+.js-item-product form button[type="submit"] ~ *,
+.js-item-product form input[type="submit"] ~ *,
 .item-product form ~ *,
-.js-item-product form ~ * {
+.js-item-product form ~ *,
+.swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
   position: absolute !important;
   pointer-events: none !important;
+  overflow: hidden !important;
 }
-
