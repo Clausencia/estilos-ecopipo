@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA DE PRODUCTO Y PARRILLAS - BOTÓN ÚNICO DEFINITIVO) */
+/* 10. BOTÓN AGREGAR AL CARRITO (SOLUCIÓN DEFINITIVA ESTADOS AJAX Y HOVER FIJO) */
 
-/* 1. Anclaje de contenedor */
+/* 1. Anclaje y anulación de desplazamientos en carruseles */
 .item-product,
 .js-item-product,
 .product-item,
@@ -151,6 +151,15 @@ a[href*="checkout"]:active {
 [data-store*="product-item"] {
   position: relative !important;
   transform: none !important;
+}
+
+.swiper-slide:hover,
+.swiper-slide:hover *,
+.item-product:hover *,
+.js-item-product:hover * {
+  transform: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .item-product form,
@@ -162,21 +171,22 @@ a[href*="checkout"]:active {
   width: 100% !important;
   position: relative !important;
   margin: 0 auto !important;
+  min-height: 38px !important;
 }
 
-/* 2. APLICAR TURQUESA EXCLUSIVAMENTE AL BOTÓN DE ENVÍO REAL DEL FORMULARIO */
-.item-product form button[type="submit"],
-.item-product form input[type="submit"],
-.js-item-product form button[type="submit"],
-.js-item-product form input[type="submit"],
-.product-form button[type="submit"],
-.product-form input[type="submit"],
-.js-product-form button[type="submit"],
-.js-product-form input[type="submit"],
-#product-form button[type="submit"],
-#product-form input[type="submit"],
-.js-product-container form button[type="submit"],
-.js-product-container form input[type="submit"] {
+/* 2. ESTILO UNIFICADO Y FIJO DEL BOTÓN PRINCIPAL */
+.item-product form button[type="submit"]:first-of-type,
+.item-product form input[type="submit"]:first-of-type,
+.js-item-product form button[type="submit"]:first-of-type,
+.js-item-product form input[type="submit"]:first-of-type,
+.product-form button[type="submit"]:first-of-type,
+.product-form input[type="submit"]:first-of-type,
+.js-product-form button[type="submit"]:first-of-type,
+.js-product-form input[type="submit"]:first-of-type,
+#product-form button[type="submit"]:first-of-type,
+#product-form input[type="submit"]:first-of-type,
+.js-product-container form button[type="submit"]:first-of-type,
+.js-product-container form input[type="submit"]:first-of-type {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -203,19 +213,26 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
   margin: 0 auto !important;
   position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  float: none !important;
+  transform: none !important;
   transition: transform .1s ease, box-shadow .1s ease, opacity .15s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
 }
 
-/* 3. ESTADOS DE CARGA Y AJAX EN EL BOTÓN PRINCIPAL */
-form button[type="submit"]:disabled,
+/* 3. MANTENER EL BOTÓN SIEMPRE VISIBLE Y CON COLOR DURANTE EL PROCESO AJAX */
 form button[type="submit"].is-loading,
 form button[type="submit"].is-added,
-form input[type="submit"]:disabled,
+form button[type="submit"]:disabled,
 form input[type="submit"].is-loading,
-form input[type="submit"].is-added {
+form input[type="submit"].is-added,
+form input[type="submit"]:disabled,
+.js-addtocart.is-loading,
+.js-addtocart.is-added,
+.js-addtocart:disabled {
   display: flex !important;
   visibility: visible !important;
   opacity: 0.9 !important;
@@ -228,45 +245,32 @@ form input[type="submit"].is-added {
   width: 100% !important;
 }
 
-/* Leyendas de carga */
-form button[type="submit"].is-loading::before,
-form input[type="submit"].is-loading::before {
-  content: "AGREGANDO..." !important;
-  font-size: 13px !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  text-transform: uppercase !important;
+/* Indicador de carga dinámico */
+form button[type="submit"].is-loading::after,
+form input[type="submit"].is-loading::after,
+.js-addtocart.is-loading::after {
+  content: "..." !important;
 }
 
-form button[type="submit"].is-added::before,
-form input[type="submit"].is-added::before {
-  content: "¡LISTO!" !important;
-  font-size: 13px !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  text-transform: uppercase !important;
-}
-
-/* 4. EFECTOS PUSH AL INTERACTUAR */
+/* 4. EFECTO PUSH TÁCTIL (FEEDBACK VISUAL INMEDIATO AL HACER CLIC) */
 form button[type="submit"]:hover,
-form input[type="submit"]:hover {
+form input[type="submit"]:hover,
+.js-addtocart:hover {
   transform: translateY(1px) !important;
   box-shadow: 0 3px 0 #3C1053 !important;
 }
 
 form button[type="submit"]:active,
-form input[type="submit"]:active {
+form input[type="submit"]:active,
+.js-addtocart:active {
   transform: translateY(3px) !important;
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* 5. FUENTE Y TEXTO INTERNO */
+/* 5. FUENTE Y COLOR DE TEXTOS INTERNOS */
 form button[type="submit"] *,
-form input[type="submit"] * {
+form input[type="submit"] *,
+.js-addtocart * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -276,28 +280,23 @@ form input[type="submit"] * {
   border: none !important;
 }
 
-/* 6. DESINTEGRAR CUALQUIER ELEMENTO DUPLICADO, PLACEHOLDER O ACCIÓN SECUNDARIA */
+/* 6. OCULTAR TOTALMENTE SEGUNDOS BOTONES Y NOTIFICACIONES SECUNDARIAS DUPLICADAS */
+.js-addtocart-placeholder,
+.js-addtocart-feedback,
+.add-to-cart-feedback,
+.js-addtocart-success,
 .item-actions,
 .item-product-actions,
 .product-item-actions,
 .js-quickshop-toggle,
 .btn-secondary,
-.js-addtocart-placeholder,
-.js-addtocart-feedback,
-.add-to-cart-feedback,
-.js-addtocart-success,
-[class*="addtocart-placeholder"],
-[class*="addtocart-feedback"],
-.item-product form button[type="submit"] ~ *,
-.item-product form input[type="submit"] ~ *,
-.js-item-product form button[type="submit"] ~ *,
-.js-item-product form input[type="submit"] ~ *,
+.item-product form button[type="submit"] ~ *:not(input[type="hidden"]),
+.item-product form input[type="submit"] ~ *:not(input[type="hidden"]),
+.js-item-product form button[type="submit"] ~ *:not(input[type="hidden"]),
+.js-item-product form input[type="submit"] ~ *:not(input[type="hidden"]),
 .item-product form ~ *,
 .js-item-product form ~ *,
-.item-product a.js-addtocart,
-.js-item-product a.js-addtocart,
-.item-product div.js-addtocart,
-.js-item-product div.js-addtocart {
+.swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
