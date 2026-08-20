@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD AJAX Y FEEDBACK EN GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD Y COLOR DE FEEDBACK EN GRID */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS (CÁPSULA BASE Y MANTENIMIENTO AJAX) --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS (BOTÓN BASE + FEEDBACK TURQUESA) --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -251,39 +251,19 @@ a[href*="checkout"]:active {
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* BLINDAJE TOTAL DE CÁPSULA DURANTE CARGA AJAX EN GRID */
-.item-product form button:disabled,
-.item-product form button.is-loading,
-.item-product form button.loading,
-.item-product form button[class*="loading"],
-.js-item-product form button:disabled,
-.js-item-product form button.is-loading,
-.js-item-product form button.loading,
-.js-item-product form button[class*="loading"],
-.item-product.is-loading form button,
-.js-item-product.is-loading form button {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 0.9 !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  width: 100% !important;
-}
-
-/* SI TIENDANUBE DESPLIEGA UN ELEMENTO SECUNDARIO DE FEEDBACK EN EL GRID */
+/* TURQUESA OBLIGATORIO PARA CUALQUIER ESTADO O CONTENEDOR DE RESPUESTA ("¡LISTO!", "AGREGANDO...") EN GRID */
 .item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-feedback,
 .item-product .add-to-cart-feedback,
 .js-item-product .add-to-cart-feedback,
 .item-product [class*="addtocart-feedback"],
 .js-item-product [class*="addtocart-feedback"],
-.item-product [class*="submitting"],
-.js-item-product [class*="submitting"] {
+.item-product [class*="feedback"],
+.js-item-product [class*="feedback"],
+.item-product .is-added,
+.js-item-product .is-added,
+.item-product .btn-added,
+.js-item-product .btn-added {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -362,7 +342,8 @@ a[href*="checkout"]:active {
 .js-product-form input *,
 .item-product form button *,
 .swiper-slide form button *,
-.js-addtocart-feedback * {
+.js-addtocart-feedback *,
+[class*="feedback"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
