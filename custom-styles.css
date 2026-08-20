@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD Y COLOR DE FEEDBACK EN GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD Y COLOR EN GRID */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS (BOTÓN BASE + FEEDBACK TURQUESA) --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS (BOTÓN BASE + FEEDBACK EN TURQUESA) --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -205,6 +205,7 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
+/* Botón Submit base del Grid */
 .item-product form button[type="submit"],
 .item-product form input[type="submit"],
 .js-item-product form button[type="submit"],
@@ -251,19 +252,21 @@ a[href*="checkout"]:active {
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* TURQUESA OBLIGATORIO PARA CUALQUIER ESTADO O CONTENEDOR DE RESPUESTA ("¡LISTO!", "AGREGANDO...") EN GRID */
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-feedback,
-.item-product .add-to-cart-feedback,
-.js-item-product .add-to-cart-feedback,
-.item-product [class*="addtocart-feedback"],
-.js-item-product [class*="addtocart-feedback"],
-.item-product [class*="feedback"],
-.js-item-product [class*="feedback"],
-.item-product .is-added,
-.js-item-product .is-added,
-.item-product .btn-added,
-.js-item-product .btn-added {
+/* TURQUESA CON MÁXIMA ESPECIFICIDAD PARA TODO TIPO DE BOTÓN/FEEDBACK DURANTE AJAX EN GRID */
+html body .item-product .js-addtocart-feedback,
+html body .js-item-product .js-addtocart-feedback,
+html body .item-product [class*="addtocart-feedback"],
+html body .js-item-product [class*="addtocart-feedback"],
+html body .item-product [class*="feedback"],
+html body .js-item-product [class*="feedback"],
+html body .item-product .is-loading,
+html body .js-item-product .is-loading,
+html body .item-product .is-added,
+html body .js-item-product .is-added,
+html body .item-product .btn-added,
+html body .js-item-product .btn-added,
+html body .item-product button.is-loading,
+html body .js-item-product button.is-loading {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -289,6 +292,7 @@ a[href*="checkout"]:active {
   white-space: nowrap !important;
 }
 
+/* Ocultar feedback vacío en Grid */
 .item-product .js-addtocart-feedback:empty,
 .js-item-product .js-addtocart-feedback:empty,
 .item-product [class*="addtocart-feedback"]:empty,
@@ -367,13 +371,17 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAR BARRAS SECUNDARIAS / VISTAS RÁPIDAS --- */
+/* --- 6. OCULTAR DEFINITIVAMENTE BARRAS SECUNDARIAS / VISTAS RÁPIDAS / BOTONES "COMPRAR" DUPLICADOS --- */
 .item-actions,
 .item-product-actions,
+.product-item-actions,
 .js-quickshop-toggle,
 .btn-secondary,
 .item-product a.js-addtocart,
-.swiper-slide form ~ * {
+.js-item-product a.js-addtocart,
+.swiper-slide form ~ *,
+a.btn-link,
+.item-buy-open-modal {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
