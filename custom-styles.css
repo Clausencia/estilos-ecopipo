@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD AISLADA PARA GRID DE PRODUCTOS */
+/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD AJAX EN GRID DE PRODUCTOS */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS (FUNCIONALIDAD AJAX Y PUSH) --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS (AJAX Y PUSH) --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -234,7 +234,7 @@ a[href*="checkout"]:active {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* Efectos al presionar exclusivamente en Grid */
+/* Efecto al presionar en Grid */
 .item-product form button[type="submit"]:hover,
 .js-item-product form button[type="submit"]:hover {
   transform: translateY(1px) !important;
@@ -247,14 +247,18 @@ a[href*="checkout"]:active {
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* Mantener cápsula turquesa visible en Grid durante el proceso AJAX */
+/* Mantener cápsula turquesa visible en Grid cuando entra en estado de carga AJAX */
+.item-product.is-loading form button[type="submit"],
+.js-item-product.is-loading form button[type="submit"],
+.item-product form.is-loading button[type="submit"],
+.js-item-product form.is-loading button[type="submit"],
 .item-product form button[type="submit"].is-loading,
-.item-product form button[type="submit"]:disabled,
 .js-item-product form button[type="submit"].is-loading,
+.item-product form button[type="submit"]:disabled,
 .js-item-product form button[type="submit"]:disabled {
   display: flex !important;
   visibility: visible !important;
-  opacity: 0.9 !important;
+  opacity: 0.95 !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -263,9 +267,16 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
   max-height: 38px !important;
   width: 100% !important;
+  position: relative !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
-/* Mostrar "AGREGANDO..." centrado sobre el botón de Grid */
+/* Texto dinámico "AGREGANDO..." durante la carga en Grid */
+.item-product.is-loading form button[type="submit"]::before,
+.js-item-product.is-loading form button[type="submit"]::before,
+.item-product form.is-loading button[type="submit"]::before,
+.js-item-product form.is-loading button[type="submit"]::before,
 .item-product form button[type="submit"].is-loading::before,
 .js-item-product form button[type="submit"].is-loading::before {
   content: "AGREGANDO..." !important;
@@ -280,8 +291,14 @@ a[href*="checkout"]:active {
   top: 50% !important;
   transform: translate(-50%, -50%) !important;
   white-space: nowrap !important;
+  z-index: 20 !important;
 }
 
+/* Ocultar el texto/ícono original mientras está cargando */
+.item-product.is-loading form button[type="submit"] *,
+.js-item-product.is-loading form button[type="submit"] *,
+.item-product form.is-loading button[type="submit"] *,
+.js-item-product form.is-loading button[type="submit"] *,
 .item-product form button[type="submit"].is-loading *,
 .js-item-product form button[type="submit"].is-loading * {
   opacity: 0 !important;
