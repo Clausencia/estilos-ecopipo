@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (SOLUCIÓN DEFINITIVA DE BOTÓN ÚNICO Y ESTADOS AJAX) */
+/* 10. BOTÓN AGREGAR AL CARRITO (SOLUCIÓN DEFINITIVA ANCHO Y FEEDBACK AJAX) */
 
-/* 1. Anclaje de tarjeta y cancelación de desplazamientos generales */
+/* 1. Anclaje y control de ancho en carrusel y parrilla */
 .item-product,
 .js-item-product,
 .product-item,
@@ -156,16 +156,26 @@ a[href*="checkout"]:active {
 .item-product form,
 .js-item-product form,
 .product-form,
-.js-product-form,
-#product-form {
+.js-product-form {
   display: block !important;
   width: 100% !important;
+  max-width: 220px !important; /* Limita el ancho en carruseles y tarjetas */
   position: relative !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
 }
 
-/* 2. ESTILO TURQUESA APLICADO EXCLUSIVAMENTE AL BOTÓN REAL DE ENVÍO (<button> e <input>) */
+/* En página de producto el formulario mantiene su ancho normal */
+#product-form {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. ESTILO TURQUESA BASE EN BOTÓN REAL (<button> e <input>) */
 .item-product form button[type="submit"],
 .item-product form input[type="submit"],
 .js-item-product form button[type="submit"],
@@ -211,21 +221,18 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* 3. MANTENER EL BOTÓN VISIBLE Y TURQUESA DURANTE AJAX (EVITA QUE SE PONGA EN BLANCO) */
+/* 3. VISIBILIDAD Y RETROALIMENTACIÓN "AGREGANDO..." EN AJAX */
 .item-product form button[type="submit"].is-loading,
-.item-product form button[type="submit"].is-added,
-.item-product form button[type="submit"]:disabled,
 .item-product form input[type="submit"].is-loading,
-.item-product form input[type="submit"].is-added,
-.item-product form input[type="submit"]:disabled,
 .js-item-product form button[type="submit"].is-loading,
-.js-item-product form button[type="submit"].is-added,
-.js-item-product form button[type="submit"]:disabled,
+.js-item-product form input[type="submit"].is-loading,
 .product-form button[type="submit"].is-loading,
-.product-form button[type="submit"].is-added,
-.product-form button[type="submit"]:disabled,
+.product-form input[type="submit"].is-loading,
 #product-form button[type="submit"].is-loading,
-#product-form button[type="submit"].is-added,
+#product-form input[type="submit"].is-loading,
+.item-product form button[type="submit"]:disabled,
+.js-item-product form button[type="submit"]:disabled,
+.product-form button[type="submit"]:disabled,
 #product-form button[type="submit"]:disabled {
   display: flex !important;
   visibility: visible !important;
@@ -239,7 +246,30 @@ a[href*="checkout"]:active {
   width: 100% !important;
 }
 
-/* 4. PUSH TÁCTIL EXCLUSIVAMENTE VERTICAL */
+/* Ocultar texto interno original durante carga */
+.item-product form button[type="submit"].is-loading *,
+.js-item-product form button[type="submit"].is-loading *,
+.product-form button[type="submit"].is-loading *,
+#product-form button[type="submit"].is-loading * {
+  display: none !important;
+}
+
+/* Inyectar mensaje "AGREGANDO..." directamente sobre el botón */
+.item-product form button[type="submit"].is-loading::before,
+.js-item-product form button[type="submit"].is-loading::before,
+.product-form button[type="submit"].is-loading::before,
+#product-form button[type="submit"].is-loading::before {
+  content: "AGREGANDO..." !important;
+  display: inline-block !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+}
+
+/* 4. HOVER Y PUSH TÁCTIL VERTICAL */
 .item-product form button[type="submit"]:hover,
 .item-product form input[type="submit"]:hover,
 .js-item-product form button[type="submit"]:hover,
@@ -264,7 +294,7 @@ a[href*="checkout"]:active {
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* 5. FUENTE Y COLOR DE TEXTOS INTERNOS */
+/* 5. FUENTE Y COLOR INTERNO */
 form button[type="submit"] *,
 form input[type="submit"] * {
   background: transparent !important;
@@ -276,7 +306,7 @@ form input[type="submit"] * {
   border: none !important;
 }
 
-/* 6. OCULTAMIENTO TOTAL Y DEFINITIVO DE SEGUNDOS BOTONES, NOTIFICACIONES Y VISTAS RÁPIDAS */
+/* 6. OCULTAMIENTO DE SECUNDARIOS Y DUPLICADOS */
 .item-actions,
 .item-product-actions,
 .product-item-actions,
