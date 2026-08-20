@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - PASO 1: DIMENSIONES Y ALINEACIÓN AISLADAS */
+/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD AISLADA PARA GRID DE PRODUCTOS */
 
-/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
+/* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
@@ -156,7 +156,6 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* Selección exclusiva al botón submit real para evitar pintar contenedores envolventes */
 #product-form input[type="submit"]:first-of-type,
 #product-form button[type="submit"]:first-of-type,
 .js-product-form input[type="submit"]:first-of-type,
@@ -191,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS (FUNCIONALIDAD AJAX Y PUSH) --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -232,9 +231,63 @@ a[href*="checkout"]:active {
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
+  transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* --- 3. CARRUSEL (PRODUCTOS SIMILARES) --- */
+/* Efectos al presionar exclusivamente en Grid */
+.item-product form button[type="submit"]:hover,
+.js-item-product form button[type="submit"]:hover {
+  transform: translateY(1px) !important;
+  box-shadow: 0 3px 0 #3C1053 !important;
+}
+
+.item-product form button[type="submit"]:active,
+.js-item-product form button[type="submit"]:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #3C1053 !important;
+}
+
+/* Mantener cápsula turquesa visible en Grid durante el proceso AJAX */
+.item-product form button[type="submit"].is-loading,
+.item-product form button[type="submit"]:disabled,
+.js-item-product form button[type="submit"].is-loading,
+.js-item-product form button[type="submit"]:disabled {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 0.9 !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  width: 100% !important;
+}
+
+/* Mostrar "AGREGANDO..." centrado sobre el botón de Grid */
+.item-product form button[type="submit"].is-loading::before,
+.js-item-product form button[type="submit"].is-loading::before {
+  content: "AGREGANDO..." !important;
+  font-size: 13px !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-transform: uppercase !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  white-space: nowrap !important;
+}
+
+.item-product form button[type="submit"].is-loading *,
+.js-item-product form button[type="submit"].is-loading * {
+  opacity: 0 !important;
+}
+
+/* --- 3. CARRUSEL (PRODUCTOS SIMILARES - ESTÁTICO) --- */
 .swiper-slide form {
   display: block !important;
   width: 80% !important;
