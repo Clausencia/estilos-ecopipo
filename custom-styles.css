@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA PRINCIPAL, PARRILLA Y CARRUSEL - TAMAÑOS Y FEEDBACK PERFECTO) */
+/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA PRINCIPAL, PARRILLA Y CARRUSEL - DEFINITIVO) */
 
-/* 1. Anclaje de tarjetas */
+/* 1. Anclaje y aislamiento de tarjetas */
 .item-product,
 .js-item-product,
 .product-item,
@@ -153,38 +153,40 @@ a[href*="checkout"]:active {
   transform: none !important;
 }
 
-/* 2. CONTENEDOR DEL FORMULARIO (ANCHO ADAPTATIVO EXACTO) */
-
-/* En Parrilla de productos y Carrusel (Swiper): Ancho contenido al 85% y centrado */
+/* 2. FORMULARIO EN PARRILLA Y CARRUSEL (Alineado al 100% del ancho de la tarjeta) */
 .item-product form,
 .js-item-product form,
 .product-item form,
 .swiper-slide form {
   display: block !important;
-  width: 85% !important;
-  max-width: 190px !important;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 10px auto 0 auto !important;
   position: relative !important;
   box-sizing: border-box !important;
 }
 
-/* En Página de Producto (PDP): Integrado junto al selector de cantidad */
+/* FORMULARIO EN PÁGINA DE PRODUCTO (PDP) */
 #product-form,
 .js-product-form {
   display: flex !important;
   flex: 1 1 auto !important;
   width: 100% !important;
-  max-width: 260px !important;
+  max-width: 100% !important;
   margin: 0 !important;
   position: relative !important;
   box-sizing: border-box !important;
 }
 
-/* 3. DISEÑO TURQUESA Y SOMBRA PÚRPURA EN BOTÓN SUBMIT REAL */
+/* 3. ESTILO TURQUESA EXCLUSIVO PARA BOTONES DE FORMULARIO DE PRODUCTO (Excluye Filtro de Precio) */
 .item-product form button[type="submit"],
 .item-product form input[type="submit"],
 .js-item-product form button[type="submit"],
 .js-item-product form input[type="submit"],
+.product-item form button[type="submit"],
+.product-item form input[type="submit"],
+.swiper-slide form button[type="submit"],
+.swiper-slide form input[type="submit"],
 .product-form button[type="submit"],
 .product-form input[type="submit"],
 .js-product-form button[type="submit"],
@@ -196,6 +198,7 @@ a[href*="checkout"]:active {
   opacity: 1 !important;
   pointer-events: auto !important;
   width: 100% !important;
+  flex: 1 1 auto !important;
   height: 38px !important;
   min-height: 38px !important;
   background-color: #42c6d3 !important;
@@ -208,7 +211,7 @@ a[href*="checkout"]:active {
   line-height: 1.1 !important;
   border-radius: 50px !important;
   border: none !important;
-  padding: 6px 12px !important;
+  padding: 6px 14px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   justify-content: center !important;
   align-items: center !important;
@@ -223,32 +226,37 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* 4. FEEDBACK VISUAL Y VISIBILIDAD PERMANENTE DURANTE CUALQUIER ESTADO AJAX */
-button[type="submit"].is-loading,
-button[type="submit"].is-added,
-button[type="submit"]:disabled,
-input[type="submit"].is-loading,
-input[type="submit"].is-added,
-input[type="submit"]:disabled {
+/* 4. RETROALIMENTACIÓN DE CARGA AJAX (AGREGANDO... EN TODOS LOS BOTONES DE PRODUCTO) */
+.item-product form button[type="submit"].is-loading,
+.item-product form input[type="submit"].is-loading,
+.js-item-product form button[type="submit"].is-loading,
+.js-item-product form input[type="submit"].is-loading,
+.product-form button[type="submit"].is-loading,
+.product-form input[type="submit"].is-loading,
+#product-form button[type="submit"].is-loading,
+#product-form input[type="submit"].is-loading,
+.swiper-slide form button[type="submit"].is-loading {
   display: flex !important;
   visibility: visible !important;
   opacity: 0.95 !important;
-  background-color: #38b2be !important;
-  background: #38b2be !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   height: 38px !important;
   min-height: 38px !important;
   width: 100% !important;
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
+  position: relative !important;
   justify-content: center !important;
   align-items: center !important;
 }
 
-/* Muestra "AGREGANDO..." centrado obligatoriamente sobre el botón */
-button[type="submit"].is-loading::after,
-input[type="submit"].is-loading::after {
+/* Inyectar "AGREGANDO..." como contenido sobrepuesto durante la carga */
+.item-product form button[type="submit"].is-loading::before,
+.js-item-product form button[type="submit"].is-loading::before,
+.product-form button[type="submit"].is-loading::before,
+#product-form button[type="submit"].is-loading::before,
+.swiper-slide form button[type="submit"].is-loading::before {
   content: "AGREGANDO..." !important;
   font-size: 13px !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -261,29 +269,37 @@ input[type="submit"].is-loading::after {
   top: 50% !important;
   transform: translate(-50%, -50%) !important;
   white-space: nowrap !important;
+  z-index: 15 !important;
 }
 
-button[type="submit"].is-loading *,
-input[type="submit"].is-loading * {
+/* Ocultar temporalmente el texto interno original mientras está cargando */
+.item-product form button[type="submit"].is-loading *,
+.js-item-product form button[type="submit"].is-loading *,
+.product-form button[type="submit"].is-loading *,
+#product-form button[type="submit"].is-loading *,
+.swiper-slide form button[type="submit"].is-loading * {
   opacity: 0 !important;
 }
 
-/* 5. EFECTO PUSH TÁCTIL (AL PASAR Y PRESIONAR) */
-button[type="submit"]:hover,
-input[type="submit"]:hover {
+/* 5. EFECTO PUSH TÁCTIL */
+.item-product form button[type="submit"]:hover,
+.js-item-product form button[type="submit"]:hover,
+#product-form button[type="submit"]:hover {
   transform: translateY(1px) !important;
   box-shadow: 0 3px 0 #3C1053 !important;
 }
 
-button[type="submit"]:active,
-input[type="submit"]:active {
+.item-product form button[type="submit"]:active,
+.js-item-product form button[type="submit"]:active,
+#product-form button[type="submit"]:active {
   transform: translateY(3px) !important;
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
 /* 6. FUENTE Y COLOR DE TEXTOS INTERNOS */
-button[type="submit"] *,
-input[type="submit"] * {
+.item-product form button[type="submit"] *,
+.js-item-product form button[type="submit"] *,
+#product-form button[type="submit"] * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -293,7 +309,7 @@ input[type="submit"] * {
   border: none !important;
 }
 
-/* 7. OCULTAMIENTO DEFINITIVO DE CAPAS DUPLICADAS O SECUNDARIAS */
+/* 7. DESINTEGRAR EXCLUSIVAMENTE VISTAS RÁPIDAS Y CAPAS SECUNDARIAS DE PRODUCTO */
 .item-actions,
 .item-product-actions,
 .product-item-actions,
