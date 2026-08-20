@@ -140,69 +140,67 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (PÁGINA PRINCIPAL, PDP, PARRILLA Y CARRUSEL - DEFINITIVO SANITIZADO) */
+/* 10. BOTÓN AGREGAR AL CARRITO - PASO 1: DIMENSIONES Y ALINEACIÓN AISLADAS */
 
-/* 1. Anclaje de tarjetas y cancelación de transformaciones */
-.item-product,
-.js-item-product,
-.product-item,
-.js-product-container,
-.swiper-slide,
-[data-store*="product-item"] {
-  position: relative !important;
-  transform: none !important;
-}
-
-/* 2. CONTENEDOR DEL FORMULARIO */
-
-/* En Parrilla y Carrusel: 100% de la tarjeta con padding interno para dar aire exacto */
-.item-product form,
-.js-item-product form,
-.product-item form,
-.swiper-slide form {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  padding: 0 12px !important;
-  margin: 10px 0 0 0 !important;
-  box-sizing: border-box !important;
-}
-
-/* En Página de Producto (PDP): Alineado junto al selector de cantidad */
+/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: nowrap !important;
   align-items: center !important;
   gap: 10px !important;
-  width: 100% !important;
-  max-width: 100% !important;
+  width: auto !important;
   margin: 0 !important;
+}
+
+#product-form button[type="submit"],
+#product-form input[type="submit"] {
+  display: flex !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  width: auto !important;
+  min-width: 180px !important;
+  max-width: 240px !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1.1 !important;
+  border-radius: 50px !important;
+  border: none !important;
+  padding: 6px 16px !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  position: relative !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+/* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
+.item-product form,
+.js-item-product form,
+.product-item form {
+  display: block !important;
+  width: 85% !important;
+  max-width: 190px !important;
+  margin: 10px auto 0 auto !important;
   position: relative !important;
   box-sizing: border-box !important;
 }
 
-/* 3. ESTILO CÁPSULA TURQUESA EXCLUSIVO PARA EL BOTÓN PRINCIPAL REAL DE COMPRA EN PRODUCTOS */
 .item-product form button[type="submit"],
 .item-product form input[type="submit"],
 .js-item-product form button[type="submit"],
-.js-item-product form input[type="submit"],
-.product-item form button[type="submit"],
-.product-item form input[type="submit"],
-.swiper-slide form button[type="submit"],
-.swiper-slide form input[type="submit"],
-.js-product-form button[type="submit"],
-.js-product-form input[type="submit"],
-#product-form button[type="submit"],
-#product-form input[type="submit"],
-#product-form .js-addtocart {
+.js-item-product form input[type="submit"] {
   display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  flex: 1 1 180px !important;
-  min-width: 170px !important;
   width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
@@ -217,72 +215,61 @@ a[href*="checkout"]:active {
   line-height: 1.1 !important;
   border-radius: 50px !important;
   border: none !important;
-  padding: 6px 14px !important;
+  padding: 6px 12px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   position: relative !important;
-  transform: none !important;
-  transition: transform .1s ease, box-shadow .1s ease !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 10 !important;
 }
 
-/* 4. MANTENER EL BOTÓN VISIBLE Y TURQUESA EN CUALQUIER ESTADO AJAX (SIN PONERSE EN BLANCO) */
-.item-product form button[type="submit"].is-loading,
-.item-product form button[type="submit"].is-added,
-.item-product form button[type="submit"]:disabled,
-.js-item-product form button[type="submit"].is-loading,
-.js-item-product form button[type="submit"].is-added,
-.js-item-product form button[type="submit"]:disabled,
-.product-form button[type="submit"].is-loading,
-.product-form button[type="submit"].is-added,
-.product-form button[type="submit"]:disabled,
-#product-form button[type="submit"].is-loading,
-#product-form button[type="submit"].is-added,
-#product-form button[type="submit"]:disabled,
-#product-form .js-addtocart.is-loading,
-#product-form .js-addtocart.is-added,
-#product-form .js-addtocart:disabled {
+/* --- 3. CARRUSEL (PRODUCTOS SIMILARES) --- */
+.swiper-slide form {
+  display: block !important;
+  width: 80% !important;
+  max-width: 170px !important;
+  margin: 10px auto 0 auto !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+.swiper-slide form button[type="submit"],
+.swiper-slide form input[type="submit"] {
   display: flex !important;
-  visibility: visible !important;
-  opacity: 0.9 !important;
+  width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  width: 100% !important;
-  min-width: 170px !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1.1 !important;
+  border-radius: 50px !important;
+  border: none !important;
+  padding: 6px 10px !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
+  margin: 0 auto !important;
+  position: relative !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
 }
 
-/* 5. EFECTO PUSH TÁCTIL VERTICAL */
-.item-product form button[type="submit"]:hover,
-.js-item-product form button[type="submit"]:hover,
-#product-form button[type="submit"]:hover,
-#product-form .js-addtocart:hover {
-  transform: translateY(1px) !important;
-  box-shadow: 0 3px 0 #3C1053 !important;
-}
-
-.item-product form button[type="submit"]:active,
-.js-item-product form button[type="submit"]:active,
-#product-form button[type="submit"]:active,
-#product-form .js-addtocart:active {
-  transform: translateY(3px) !important;
-  box-shadow: 0 1px 0 #3C1053 !important;
-}
-
-/* 6. FUENTE Y COLOR DE TEXTOS INTERNOS */
-.item-product form button[type="submit"] *,
-.js-item-product form button[type="submit"] *,
-#product-form button[type="submit"] *,
-#product-form .js-addtocart * {
+/* --- 4. FUENTE Y COLOR INTERNO --- */
+#product-form button *,
+.item-product form button *,
+.swiper-slide form button * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -292,66 +279,35 @@ a[href*="checkout"]:active {
   border: none !important;
 }
 
-/* 7. RESET / PROTECCIÓN TOTAL AL FILTRO DE PRECIO EN SIDEBAR */
+/* --- 5. PROTECCIÓN FILTRO DE PRECIO --- */
 .js-price-filter-container button,
 .js-price-filter-form button,
 [class*="price-filter"] button,
-[class*="filter-price"] button,
-.filters-container form button,
-.filter-container form button {
+[class*="filter-price"] button {
   background: #fff !important;
-  background-color: #fff !important;
   color: #333 !important;
-  -webkit-text-fill-color: #333 !important;
   box-shadow: none !important;
   border: 1px solid #ccc !important;
   border-radius: 0 4px 4px 0 !important;
-  transform: none !important;
   width: auto !important;
-  min-width: 0 !important;
   height: 38px !important;
-  padding: 0 12px !important;
-  font-family: inherit !important;
 }
 
-/* 8. DESINTEGRAR DEFINITIVAMENTE CONTENEDORES DE FEEDBACK, VISTAS RÁPIDAS Y SEGUNDOS BOTONES */
+/* --- 6. OCULTAR BOTONES DUPLICADOS / VISTAS RÁPIDAS --- */
 .item-actions,
 .item-product-actions,
-.product-item-actions,
 .js-quickshop-toggle,
 .btn-secondary,
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .add-to-cart-feedback,
-.js-addtocart-success,
-[class*="addtocart-placeholder"],
-[class*="addtocart-feedback"],
 .item-product a.js-addtocart,
-.js-item-product a.js-addtocart,
-.item-product div.js-addtocart,
-.js-item-product div.js-addtocart,
-.item-product form button[type="submit"] ~ *,
-.item-product form input[type="submit"] ~ *,
-.js-item-product form button[type="submit"] ~ *,
-.js-item-product form input[type="submit"] ~ *,
-.item-product form ~ *,
-.js-item-product form ~ *,
-.swiper-slide form ~ *,
-#product-form ~ .js-addtocart-feedback,
-#product-form + .js-addtocart-feedback {
+.swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  max-height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
   position: absolute !important;
   pointer-events: none !important;
-  overflow: hidden !important;
 }
