@@ -144,7 +144,9 @@ a[href*="checkout"]:active {
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
-.js-product-form {
+.js-product-form,
+.product-form,
+.js-product-container form {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -153,8 +155,17 @@ a[href*="checkout"]:active {
   margin: 0 !important;
 }
 
-#product-form button[type="submit"],
-#product-form input[type="submit"] {
+#product-form button,
+#product-form input,
+#product-form .js-addtocart,
+.js-product-form button,
+.js-product-form input,
+.js-product-form .js-addtocart,
+.product-form button,
+.product-form input,
+.product-form .js-addtocart,
+.js-product-container .js-addtocart,
+.js-prod-submit-form {
   display: flex !important;
   height: 38px !important;
   min-height: 38px !important;
@@ -268,6 +279,9 @@ a[href*="checkout"]:active {
 
 /* --- 4. FUENTE Y COLOR INTERNO --- */
 #product-form button *,
+#product-form input *,
+.js-product-form button *,
+.js-product-form input *,
 .item-product form button *,
 .swiper-slide form button * {
   background: transparent !important;
