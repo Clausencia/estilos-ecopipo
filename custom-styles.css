@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - COBERTURA TOTAL AJAX EN GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: ELIMINAR DUPLICADO "COMPRAR" Y MANTENER "AGREGANDO..." */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
 #product-form,
@@ -205,9 +205,10 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-.item-product form button,
+/* Botón principal del Grid */
+.item-product form button[type="submit"],
 .item-product form input[type="submit"],
-.js-item-product form button,
+.js-item-product form button[type="submit"],
 .js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
@@ -239,43 +240,34 @@ a[href*="checkout"]:active {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* INTERCEPCIÓN TURQUESA PARA CUALQUIER ELEMENTO QUE SURJA DURANTE EL PROCESO DE COMPRA EN GRID */
-html body .item-product div[class*="addtocart"],
-html body .js-item-product div[class*="addtocart"],
-html body .item-product div[class*="feedback"],
-html body .js-item-product div[class*="feedback"],
-html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback,
-html body .item-product button[disabled],
-html body .js-item-product button[disabled] {
+.item-product form button[type="submit"]:hover,
+.js-item-product form button[type="submit"]:hover {
+  transform: translateY(1px) !important;
+  box-shadow: 0 3px 0 #3C1053 !important;
+}
+
+.item-product form button[type="submit"]:active,
+.js-item-product form button[type="submit"]:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #3C1053 !important;
+}
+
+/* MANTENER EL BOTÓN PRINCIPAL VISIBLE Y CON ESTILO EN CARGA AJAX */
+html body .item-product form button[type="submit"].is-loading,
+html body .js-item-product form button[type="submit"].is-loading,
+html body .item-product form button[type="submit"]:disabled,
+html body .js-item-product form button[type="submit"]:disabled {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 0.95 !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 1.1 !important;
-  border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  width: 85% !important;
-  max-width: 190px !important;
-  margin: 10px auto 0 auto !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-transform: uppercase !important;
-  box-sizing: border-box !important;
-}
-
-/* Ocultar contenedores de feedback vacíos antes del clic */
-.item-product div[class*="feedback"]:empty,
-.js-item-product div[class*="feedback"]:empty {
-  display: none !important;
+  width: 100% !important;
 }
 
 /* --- 3. CARRUSEL (PRODUCTOS SIMILARES - ESTÁTICO PERFECTO) --- */
@@ -323,9 +315,7 @@ html body .js-item-product button[disabled] {
 .js-product-form button *,
 .js-product-form input *,
 .item-product form button *,
-.swiper-slide form button *,
-.js-addtocart-feedback *,
-[class*="feedback"] * {
+.swiper-slide form button * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -349,22 +339,31 @@ html body .js-item-product button[disabled] {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAR ACCIONES SECUNDARIAS QUE ACTIVAN LA LEYENDA "COMPRAR" --- */
+/* --- 6. OCULTAMIENTO TOTAL Y RADICAL DE CUALQUIER CONTENEDOR SECUNDARIO ("COMPRAR") --- */
 html body .item-actions,
 html body .item-product-actions,
 html body .product-item-actions,
 html body .js-quickshop-toggle,
 html body .btn-secondary,
+html body .item-product a,
+html body .js-item-product a,
+html body .item-product div:not(form):not(.js-item-product),
 html body .swiper-slide form ~ *,
 html body a.btn-link,
 html body .item-buy-open-modal,
 html body [class*="quickshop"],
-html body .item-product-buy-modal {
+html body [class*="buy-modal"],
+html body [class*="item-actions"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
