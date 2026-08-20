@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - PASO 2: FUNCIONALIDAD AJAX Y OVERRIDE DE COLOR EN GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO - COBERTURA TOTAL AJAX EN GRID */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS (CÁPSULA Y OVERRIDE TOTAL DE AJAX) --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -205,7 +205,6 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* Botón Submit base del Grid */
 .item-product form button,
 .item-product form input[type="submit"],
 .js-item-product form button,
@@ -240,37 +239,15 @@ a[href*="checkout"]:active {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-.item-product form button:hover,
-.js-item-product form button:hover {
-  transform: translateY(1px) !important;
-  box-shadow: 0 3px 0 #3C1053 !important;
-}
-
-.item-product form button:active,
-.js-item-product form button:active {
-  transform: translateY(3px) !important;
-  box-shadow: 0 1px 0 #3C1053 !important;
-}
-
-/* ANULACIÓN ABSOLUTA DEL NEGRO NATIVO EN CUALQUIER ESTADO DE CARGA/DISABLED DE TIENDANUBE EN GRID */
-html body .item-product form button:disabled,
-html body .item-product form button.is-loading,
-html body .item-product form button.loading,
-html body .item-product form button[class*="loading"],
-html body .js-item-product form button:disabled,
-html body .js-item-product form button.is-loading,
-html body .js-item-product form button.loading,
-html body .js-item-product form button[class*="loading"],
+/* INTERCEPCIÓN TURQUESA PARA CUALQUIER ELEMENTO QUE SURJA DURANTE EL PROCESO DE COMPRA EN GRID */
+html body .item-product div[class*="addtocart"],
+html body .js-item-product div[class*="addtocart"],
+html body .item-product div[class*="feedback"],
+html body .js-item-product div[class*="feedback"],
 html body .item-product .js-addtocart-feedback,
 html body .js-item-product .js-addtocart-feedback,
-html body .item-product [class*="addtocart-feedback"],
-html body .js-item-product [class*="addtocart-feedback"],
-html body .item-product [class*="feedback"],
-html body .js-item-product [class*="feedback"],
-html body .item-product .is-added,
-html body .js-item-product .is-added,
-html body .item-product .btn-added,
-html body .js-item-product .btn-added {
+html body .item-product button[disabled],
+html body .js-item-product button[disabled] {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -278,21 +255,26 @@ html body .js-item-product .btn-added {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
+  line-height: 1.1 !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  width: 100% !important;
-  opacity: 0.95 !important;
+  width: 85% !important;
+  max-width: 190px !important;
+  margin: 10px auto 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
 }
 
-/* Ocultar contenedores de feedback vacíos */
-.item-product .js-addtocart-feedback:empty,
-.js-item-product .js-addtocart-feedback:empty,
-.item-product [class*="addtocart-feedback"]:empty,
-.js-item-product [class*="addtocart-feedback"]:empty {
+/* Ocultar contenedores de feedback vacíos antes del clic */
+.item-product div[class*="feedback"]:empty,
+.js-item-product div[class*="feedback"]:empty {
   display: none !important;
 }
 
@@ -367,28 +349,22 @@ html body .js-item-product .btn-added {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAMIENTO REFORZADO DE BARRAS/ENLACES SECUNDARIOS QUE SE ACTIVAN AL REFRESCAR EL CARRITO --- */
+/* --- 6. OCULTAR ACCIONES SECUNDARIAS QUE ACTIVAN LA LEYENDA "COMPRAR" --- */
 html body .item-actions,
 html body .item-product-actions,
 html body .product-item-actions,
 html body .js-quickshop-toggle,
 html body .btn-secondary,
-html body .item-product a.js-addtocart,
-html body .js-item-product a.js-addtocart,
 html body .swiper-slide form ~ *,
 html body a.btn-link,
 html body .item-buy-open-modal,
-html body [class*="quickshop"] {
+html body [class*="quickshop"],
+html body .item-product-buy-modal {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  max-height: 0 !important;
-  max-width: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
