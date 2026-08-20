@@ -144,29 +144,24 @@ a[href*="checkout"]:active {
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
-.js-product-form,
-.product-form,
-.js-product-container form {
+.js-product-form {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  gap: 10px !important;
-  width: auto !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 0 !important;
+  position: relative !important;
 }
 
-#product-form button,
-#product-form input,
-#product-form .js-addtocart,
-.js-product-form button,
-.js-product-form input,
-.js-product-form .js-addtocart,
-.product-form button,
-.product-form input,
-.product-form .js-addtocart,
-.js-product-container .js-addtocart,
-.js-prod-submit-form {
-  display: flex !important;
+/* Selección exclusiva al botón submit real para evitar pintar contenedores envolventes */
+#product-form input[type="submit"]:first-of-type,
+#product-form button[type="submit"]:first-of-type,
+.js-product-form input[type="submit"]:first-of-type,
+.js-product-form button[type="submit"]:first-of-type {
+  display: inline-flex !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
@@ -183,7 +178,7 @@ a[href*="checkout"]:active {
   line-height: 1.1 !important;
   border-radius: 50px !important;
   border: none !important;
-  padding: 6px 16px !important;
+  padding: 6px 18px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   justify-content: center !important;
   align-items: center !important;
@@ -193,6 +188,7 @@ a[href*="checkout"]:active {
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
+  z-index: 10 !important;
 }
 
 /* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
