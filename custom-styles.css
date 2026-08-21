@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - RESTAURACIÓN DE IMÁGENES Y OCULTAMIENTO PRECISO */
+/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL DE AJAX, COLOR Y OCULTAMIENTO DE "COMPRAR" */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS (CÁPSULA TURQUESA EN TODOS LOS ESTADOS) --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -205,18 +205,26 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* Botón principal del Grid */
-.item-product form button[type="submit"],
-.item-product form input[type="submit"],
-.js-item-product form button[type="submit"],
-.js-item-product form input[type="submit"] {
+/* FORZAR TURQUESA CÁPSULA Y SOMBRA MORADA EN CUALQUIER BOTÓN, SUBMIT, ESTADO O FEEDBACK DE GRID */
+html body .item-product button,
+html body .js-item-product button,
+html body .product-item button,
+html body .item-product input[type="submit"],
+html body .js-item-product input[type="submit"],
+html body .product-item input[type="submit"],
+html body .item-product .js-addtocart-feedback,
+html body .js-item-product .js-addtocart-feedback,
+html body .item-product [class*="addtocart-feedback"],
+html body .js-item-product [class*="addtocart-feedback"],
+html body .item-product .is-loading,
+html body .js-item-product .is-loading,
+html body .item-product .is-added,
+html body .js-item-product .is-added,
+html body .item-product button:disabled,
+html body .js-item-product button:disabled {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
-  width: 100% !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -229,6 +237,10 @@ a[href*="checkout"]:active {
   border: none !important;
   padding: 6px 12px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  width: 100% !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
@@ -240,42 +252,23 @@ a[href*="checkout"]:active {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-.item-product form button[type="submit"]:hover,
-.js-item-product form button[type="submit"]:hover {
+/* Efecto al presionar */
+.item-product form button:hover,
+.js-item-product form button:hover {
   transform: translateY(1px) !important;
   box-shadow: 0 3px 0 #3C1053 !important;
 }
 
-.item-product form button[type="submit"]:active,
-.js-item-product form button[type="submit"]:active {
+.item-product form button:active,
+.js-item-product form button:active {
   transform: translateY(3px) !important;
   box-shadow: 0 1px 0 #3C1053 !important;
 }
 
-/* FORZAR TURQUESA EN CUALQUIER ESTADO O CONTENEDOR DE CARGA EN GRID */
-html body .item-product form button.is-loading,
-html body .js-item-product form button.is-loading,
-html body .item-product form button:disabled,
-html body .js-item-product form button:disabled,
-html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback,
-html body .item-product [class*="addtocart-feedback"],
-html body .js-item-product [class*="addtocart-feedback"] {
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  width: 100% !important;
-  opacity: 0.95 !important;
+/* Ocultar feedback secundario si está vacío */
+.item-product .js-addtocart-feedback:empty,
+.js-item-product .js-addtocart-feedback:empty {
+  display: none !important;
 }
 
 /* --- 3. CARRUSEL (PRODUCTOS SIMILARES - ESTÁTICO PERFECTO) --- */
@@ -317,13 +310,15 @@ html body .js-item-product [class*="addtocart-feedback"] {
   white-space: nowrap !important;
 }
 
-/* --- 4. FUENTE Y COLOR INTERNO --- */
+/* --- 4. FUENTE Y COLOR INTERNO EN TODOS LOS TEXTOS --- */
 #product-form button *,
 #product-form input *,
 .js-product-form button *,
 .js-product-form input *,
-.item-product form button *,
-.swiper-slide form button * {
+.item-product button *,
+.js-item-product button *,
+.swiper-slide form button *,
+.js-addtocart-feedback * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -347,18 +342,24 @@ html body .js-item-product [class*="addtocart-feedback"] {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAR EXCLUSIVAMENTE ACCIONES Y MODALES SECUNDARIOS (SIN AFECTAR IMÁGENES) --- */
-html body .item-actions,
-html body .item-product-actions,
-html body .product-item-actions,
-html body .js-quickshop-toggle,
-html body .js-quickshop-container,
-html body .btn-secondary,
-html body .item-buy-open-modal,
-html body .js-quickshop-modal-open,
-html body [class*="quickshop"],
-html body [class*="buy-modal"],
-html body [class*="item-actions"] {
+/* --- 6. OCULTAR COMPLETAMENTE EL BOTÓN Y ENLACE SECUNDARIO "COMPRAR" / QUICKSHOP --- */
+html body .item-product .item-actions,
+html body .js-item-product .item-actions,
+html body .item-product .item-product-actions,
+html body .js-item-product .item-product-actions,
+html body .item-product .product-item-actions,
+html body .js-item-product .product-item-actions,
+html body .item-product .js-quickshop-toggle,
+html body .js-item-product .js-quickshop-toggle,
+html body .item-product .item-buy-open-modal,
+html body .js-item-product .item-buy-open-modal,
+html body .item-product a.btn-link,
+html body .js-item-product a.btn-link,
+html body .item-product a.js-addtocart,
+html body .js-item-product a.js-addtocart,
+html body .item-product .btn-secondary,
+html body .js-item-product .btn-secondary,
+html body .swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
