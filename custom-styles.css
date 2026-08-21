@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL DE AJAX, COLOR Y OCULTAMIENTO DE "COMPRAR" */
+/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL AJAX Y ESPECIFICIDAD MÁXIMA EN GRID */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS (CÁPSULA TURQUESA EN TODOS LOS ESTADOS) --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS (CÁPSULA TURQUESA BASE) --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -205,23 +205,21 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* FORZAR TURQUESA CÁPSULA Y SOMBRA MORADA EN CUALQUIER BOTÓN, SUBMIT, ESTADO O FEEDBACK DE GRID */
-html body .item-product button,
-html body .js-item-product button,
-html body .product-item button,
-html body .item-product input[type="submit"],
-html body .js-item-product input[type="submit"],
-html body .product-item input[type="submit"],
+/* --- MÁXIMA ESPECIFICIDAD PARA VENCER EL NEGRO NATIVO DE IPANEMA EN "AGREGANDO..." --- */
+html body .item-product form button.btn.btn-primary.js-addtocart,
+html body .js-item-product form button.btn.btn-primary.js-addtocart,
+html body .item-product form button.btn.btn-primary.js-addtocart.is-loading,
+html body .js-item-product form button.btn.btn-primary.js-addtocart.is-loading,
+html body .item-product form button.btn.btn-primary.js-addtocart:disabled,
+html body .js-item-product form button.btn.btn-primary.js-addtocart:disabled,
+html body .item-product form button.btn.is-loading,
+html body .js-item-product form button.btn.is-loading,
+html body .item-product form button.is-loading,
+html body .js-item-product form button.is-loading,
+html body .item-product form button:disabled,
+html body .js-item-product form button:disabled,
 html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback,
-html body .item-product [class*="addtocart-feedback"],
-html body .js-item-product [class*="addtocart-feedback"],
-html body .item-product .is-loading,
-html body .js-item-product .is-loading,
-html body .item-product .is-added,
-html body .js-item-product .is-added,
-html body .item-product button:disabled,
-html body .js-item-product button:disabled {
+html body .js-item-product .js-addtocart-feedback {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -252,7 +250,7 @@ html body .js-item-product button:disabled {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* Efecto al presionar */
+/* Efecto push al interactuar */
 .item-product form button:hover,
 .js-item-product form button:hover {
   transform: translateY(1px) !important;
@@ -263,12 +261,6 @@ html body .js-item-product button:disabled {
 .js-item-product form button:active {
   transform: translateY(3px) !important;
   box-shadow: 0 1px 0 #3C1053 !important;
-}
-
-/* Ocultar feedback secundario si está vacío */
-.item-product .js-addtocart-feedback:empty,
-.js-item-product .js-addtocart-feedback:empty {
-  display: none !important;
 }
 
 /* --- 3. CARRUSEL (PRODUCTOS SIMILARES - ESTÁTICO PERFECTO) --- */
@@ -310,7 +302,7 @@ html body .js-item-product button:disabled {
   white-space: nowrap !important;
 }
 
-/* --- 4. FUENTE Y COLOR INTERNO EN TODOS LOS TEXTOS --- */
+/* --- 4. FUENTE Y COLOR INTERNO DE TEXTOS --- */
 #product-form button *,
 #product-form input *,
 .js-product-form button *,
@@ -342,7 +334,7 @@ html body .js-item-product button:disabled {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAR COMPLETAMENTE EL BOTÓN Y ENLACE SECUNDARIO "COMPRAR" / QUICKSHOP --- */
+/* --- 6. ANULACIÓN PERMANENTE DEL ENLACE Y BOTÓN DE COMPRA RÁPIDA ("COMPRAR") --- */
 html body .item-product .item-actions,
 html body .js-item-product .item-actions,
 html body .item-product .item-product-actions,
@@ -353,10 +345,10 @@ html body .item-product .js-quickshop-toggle,
 html body .js-item-product .js-quickshop-toggle,
 html body .item-product .item-buy-open-modal,
 html body .js-item-product .item-buy-open-modal,
+html body .item-product .js-item-buy,
+html body .js-item-product .js-item-buy,
 html body .item-product a.btn-link,
 html body .js-item-product a.btn-link,
-html body .item-product a.js-addtocart,
-html body .js-item-product a.js-addtocart,
 html body .item-product .btn-secondary,
 html body .js-item-product .btn-secondary,
 html body .swiper-slide form ~ * {
