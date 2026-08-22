@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL GRID (ESTÁTICO UNIFORME Y SIN COMPRAR) */
+/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL GRID */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA Y CARRUSEL DE PRODUCTOS (CÁPSULA UNIFORME) --- */
+/* --- 2. GRID Y CARRUSEL: ÚNICO BOTÓN VISIBLE (FORMULARIO) --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -209,7 +209,6 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* ÚNICO BOTÓN PRINCIPAL DENTRO DEL FORMULARIO */
 html body .item-product form button,
 html body .js-item-product form button,
 html body .product-item form button,
@@ -217,23 +216,10 @@ html body [class*="item-product"] form button,
 html body [class*="product-item"] form button,
 html body .swiper-slide form button,
 html body .item-product form input[type="submit"],
-html body .js-item-product form input[type="submit"],
-html body .item-product form button.is-loading,
-html body .js-item-product form button.is-loading,
-html body .product-item form button.is-loading,
-html body [class*="item-product"] form button.is-loading,
-html body [class*="product-item"] form button.is-loading,
-html body .swiper-slide form button.is-loading,
-html body .item-product form button:disabled,
-html body .js-item-product form button:disabled,
-html body .product-item form button:disabled,
-html body [class*="item-product"] form button:disabled,
-html body [class*="product-item"] form button:disabled,
-html body .swiper-slide form button:disabled {
+html body .js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
-  filter: none !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -260,13 +246,7 @@ html body .swiper-slide form button:disabled {
   white-space: nowrap !important;
 }
 
-/* --- 3. BLOQUEO GENERAL: ELIMINAR CUALQUIER ELEMENTO O BOTÓN SECUNDARIO DESPUÉS DEL FORMULARIO --- */
-.item-product form ~ *,
-.js-item-product form ~ *,
-.product-item form ~ *,
-[class*="item-product"] form ~ *,
-[class*="product-item"] form ~ *,
-.swiper-slide form ~ *,
+/* --- 3. OCULTAMIENTO ESTRICTO DE ELEMENTOS SECUNDARIOS Y FEEDBACK EXTERNO --- */
 html body .item-actions,
 html body .item-product-actions,
 html body .product-item-actions,
@@ -277,7 +257,10 @@ html body [class*="item-actions"],
 html body [class*="quickshop"],
 html body [class*="item-buy"],
 html body a.btn-link,
-html body .btn-secondary {
+html body .btn-secondary,
+html body .js-addtocart-feedback,
+html body [class*="addtocart-feedback"],
+html body .swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
