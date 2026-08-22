@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - FIX DEFINITIVO DE APILAMIENTO Y OCULTAMIENTO EN GRID Y CARRUSEL */
+/* 10. BOTÓN AGREGAR AL CARRITO - TAMAÑO FIJO Y ELIMINACIÓN TOTAL DE COMPRAR */
 
-/* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
+/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
@@ -188,22 +188,9 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-#product-form button[type="submit"]:hover,
-.js-product-form button[type="submit"]:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
-}
-
-#product-form button[type="submit"]:active,
-.js-product-form button[type="submit"]:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* --- 2. GRID / PARRILLA Y CARRUSEL DE PRODUCTOS --- */
+/* --- 2. GRID / PARRILLA Y CARRUSEL: UN SOLO BOTÓN PRINCIPAL POR PRODUCTO --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -222,12 +209,15 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* BOTÓN BASE PRINCIPAL DE CADA TARJETA DE PRODUCTO */
+/* Estilo unificado para el botón del formulario */
+html body .item-product form button,
+html body .js-item-product form button,
+html body .product-item form button,
 html body [class*="item-product"] form button,
 html body [class*="product-item"] form button,
 html body .swiper-slide form button,
-html body [class*="item-product"] form input[type="submit"],
-html body [class*="product-item"] form input[type="submit"] {
+html body .item-product form input[type="submit"],
+html body .js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -255,73 +245,14 @@ html body [class*="product-item"] form input[type="submit"] {
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 10 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* EFECTO PUSH EN HOVER Y ACTIVE */
-html body [class*="item-product"] form button:hover,
-html body [class*="product-item"] form button:hover,
-html body .swiper-slide form button:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
-}
-
-html body [class*="item-product"] form button:active,
-html body [class*="product-item"] form button:active,
-html body .swiper-slide form button:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* --- 3. SUPERPOSICIÓN DEL MENSAJE "AGREGANDO..." / "¡LISTO!" EXACTAMENTE SOBRE EL BOTÓN --- */
-html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback,
-html body .product-item .js-addtocart-feedback,
-html body .swiper-slide .js-addtocart-feedback,
-html body [class*="item-product"] [class*="addtocart-feedback"],
-html body [class*="product-item"] [class*="addtocart-feedback"] {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100% !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  margin: 0 auto !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 1.1 !important;
-  border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-transform: uppercase !important;
-  box-sizing: border-box !important;
-  z-index: 25 !important;
-}
-
-/* OCULTAR EL CONTENEDOR DE FEEDBACK SI ESTÁ VACÍO */
-.js-addtocart-feedback:empty,
-[class*="addtocart-feedback"]:empty {
-  display: none !important;
-}
-
-/* --- 4. DESTRUCCIÓN ABSOLUTA DEL BOTÓN/ENLACE "COMPRAR" SECUNDARIO PARA EVITAR APILAMIENTO --- */
-html body div.item-product div.item-actions,
-html body div.js-item-product div.item-actions,
-html body div.product-item div.item-actions,
-html body [class*="item-product"] [class*="item-actions"],
-html body [class*="product-item"] [class*="item-actions"],
+/* --- 3. ANULACIÓN TOTAL DE CUALQUIER ELEMENTO SECUNDARIO Y FEEDBACK EXTENCIONAL --- */
+html body .item-product .item-actions,
+html body .js-item-product .item-actions,
+html body .product-item .item-actions,
+html body [class*="item-product"] .item-actions,
+html body [class*="product-item"] .item-actions,
 html body [class*="item-product"] [class*="quickshop"],
 html body [class*="product-item"] [class*="quickshop"],
 html body [class*="item-product"] [class*="item-buy"],
@@ -334,6 +265,8 @@ html body [class*="item-product"] a.btn-link,
 html body [class*="product-item"] a.btn-link,
 html body [class*="item-product"] .btn-secondary,
 html body [class*="product-item"] .btn-secondary,
+html body .js-addtocart-feedback,
+html body [class*="addtocart-feedback"],
 html body .swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
@@ -350,14 +283,13 @@ html body .swiper-slide form ~ * {
   overflow: hidden !important;
 }
 
-/* --- 5. FUENTE Y COLOR INTERNO DE TEXTOS --- */
+/* --- 4. FUENTE Y COLOR INTERNO DE TEXTOS --- */
 #product-form button *,
 #product-form input *,
 .js-product-form button *,
 .js-product-form input *,
 .item-product form button *,
-.swiper-slide form button *,
-.js-addtocart-feedback * {
+.swiper-slide form button * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -367,7 +299,7 @@ html body .swiper-slide form ~ * {
   border: none !important;
 }
 
-/* --- 6. PROTECCIÓN FILTRO DE PRECIO --- */
+/* --- 5. PROTECCIÓN FILTRO DE PRECIO --- */
 .js-price-filter-container button,
 .js-price-filter-form button,
 [class*="price-filter"] button,
