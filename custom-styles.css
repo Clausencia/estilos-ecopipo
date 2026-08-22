@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - ESTILO UNIFICADO NATIVO PARA GRID Y CARRUSEL */
+/* 10. BOTÓN AGREGAR AL CARRITO - FIX DEFINITIVO DE APILAMIENTO Y OCULTAMIENTO EN GRID Y CARRUSEL */
 
-/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
+/* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
@@ -203,7 +203,7 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 2. GRID Y CARRUSEL: CÁPSULA TURQUESA EN TODOS LOS BOTONES NATIVOS --- */
+/* --- 2. GRID / PARRILLA Y CARRUSEL DE PRODUCTOS --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -222,20 +222,12 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* ESTILO CÁPSULA A CUALQUIER BOTÓN O ENLACE DE ACCIÓN DE LA TARJETA */
+/* BOTÓN BASE PRINCIPAL DE CADA TARJETA DE PRODUCTO */
 html body [class*="item-product"] form button,
 html body [class*="product-item"] form button,
 html body .swiper-slide form button,
-html body [class*="item-product"] .js-quickshop-toggle,
-html body [class*="product-item"] .js-quickshop-toggle,
-html body [class*="item-product"] .js-item-buy,
-html body [class*="product-item"] .js-item-buy,
-html body [class*="item-product"] .item-buy-open-modal,
-html body [class*="product-item"] .item-buy-open-modal,
-html body [class*="item-product"] .btn-primary,
-html body [class*="product-item"] .btn-primary,
-html body [class*="item-product"] .btn-secondary,
-html body [class*="product-item"] .btn-secondary {
+html body [class*="item-product"] form input[type="submit"],
+html body [class*="product-item"] form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -254,81 +246,118 @@ html body [class*="product-item"] .btn-secondary {
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  width: 85% !important;
-  max-width: 190px !important;
+  width: 100% !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
   box-sizing: border-box !important;
-  margin: 10px auto 0 auto !important;
+  margin: 0 auto !important;
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 20 !important;
-  pointer-events: auto !important;
+  z-index: 10 !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
-  text-decoration: none !important;
 }
 
-/* EFECTO PUSH AL PASAR EL MOUSE (HOVER) Y HACER CLIC (ACTIVE) */
+/* EFECTO PUSH EN HOVER Y ACTIVE */
 html body [class*="item-product"] form button:hover,
 html body [class*="product-item"] form button:hover,
-html body .swiper-slide form button:hover,
-html body [class*="item-product"] .js-quickshop-toggle:hover,
-html body [class*="product-item"] .js-quickshop-toggle:hover,
-html body [class*="item-product"] .js-item-buy:hover,
-html body [class*="product-item"] .js-item-buy:hover {
+html body .swiper-slide form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
-  opacity: 1 !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
 }
 
 html body [class*="item-product"] form button:active,
 html body [class*="product-item"] form button:active,
-html body .swiper-slide form button:active,
-html body [class*="item-product"] .js-quickshop-toggle:active,
-html body [class*="product-item"] .js-quickshop-toggle:active,
-html body [class*="item-product"] .js-item-buy:active,
-html body [class*="product-item"] .js-item-buy:active {
+html body .swiper-slide form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
-  opacity: 1 !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
 }
 
-/* MANTENER SOMBRA Y COLOR DURANTE CARGA AJAX ("AGREGANDO...") */
-html body [class*="item-product"] .is-loading,
-html body [class*="product-item"] .is-loading,
-html body [class*="item-product"] button:disabled,
-html body [class*="product-item"] button:disabled,
-html body [class*="item-product"] .js-addtocart-feedback,
-html body [class*="product-item"] .js-addtocart-feedback {
+/* --- 3. SUPERPOSICIÓN DEL MENSAJE "AGREGANDO..." / "¡LISTO!" EXACTAMENTE SOBRE EL BOTÓN --- */
+html body .item-product .js-addtocart-feedback,
+html body .js-item-product .js-addtocart-feedback,
+html body .product-item .js-addtocart-feedback,
+html body .swiper-slide .js-addtocart-feedback,
+html body [class*="item-product"] [class*="addtocart-feedback"],
+html body [class*="product-item"] [class*="addtocart-feedback"] {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  margin: 0 auto !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
-  opacity: 1 !important;
-  filter: none !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1.1 !important;
+  border-radius: 50px !important;
+  border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
+  z-index: 25 !important;
 }
 
-/* OCULTAR SOLO ENLACES SECUNDARIOS DUPLICADOS SI EL FORMULARIO YA ESTÁ ACTIVO */
-.item-product form ~ .item-actions,
-.js-item-product form ~ .item-actions,
-.product-item form ~ .item-actions {
+/* OCULTAR EL CONTENEDOR DE FEEDBACK SI ESTÁ VACÍO */
+.js-addtocart-feedback:empty,
+[class*="addtocart-feedback"]:empty {
   display: none !important;
 }
 
-/* --- 3. FUENTE Y COLOR INTERNO DE TEXTOS --- */
+/* --- 4. DESTRUCCIÓN ABSOLUTA DEL BOTÓN/ENLACE "COMPRAR" SECUNDARIO PARA EVITAR APILAMIENTO --- */
+html body div.item-product div.item-actions,
+html body div.js-item-product div.item-actions,
+html body div.product-item div.item-actions,
+html body [class*="item-product"] [class*="item-actions"],
+html body [class*="product-item"] [class*="item-actions"],
+html body [class*="item-product"] [class*="quickshop"],
+html body [class*="product-item"] [class*="quickshop"],
+html body [class*="item-product"] [class*="item-buy"],
+html body [class*="product-item"] [class*="item-buy"],
+html body [class*="item-product"] .item-buy-open-modal,
+html body [class*="product-item"] .item-buy-open-modal,
+html body [class*="item-product"] .js-quickshop-toggle,
+html body [class*="product-item"] .js-quickshop-toggle,
+html body [class*="item-product"] a.btn-link,
+html body [class*="product-item"] a.btn-link,
+html body [class*="item-product"] .btn-secondary,
+html body [class*="product-item"] .btn-secondary,
+html body .swiper-slide form ~ * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* --- 5. FUENTE Y COLOR INTERNO DE TEXTOS --- */
 #product-form button *,
 #product-form input *,
 .js-product-form button *,
 .js-product-form input *,
-.item-product button *,
-.swiper-slide button * {
+.item-product form button *,
+.swiper-slide form button *,
+.js-addtocart-feedback * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -338,7 +367,7 @@ html body [class*="product-item"] .js-addtocart-feedback {
   border: none !important;
 }
 
-/* --- 4. PROTECCIÓN FILTRO DE PRECIO --- */
+/* --- 6. PROTECCIÓN FILTRO DE PRECIO --- */
 .js-price-filter-container button,
 .js-price-filter-form button,
 [class*="price-filter"] button,
