@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL AJAX Y ESPECIFICIDAD MÁXIMA EN GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO - SOLUCIÓN DEFINITIVA A PRUEBA DE AJAX EN GRID */
 
-/* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
+/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS (CÁPSULA TURQUESA BASE) --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS: CÁPSULA TURQUESA IMPOSIBLE DE ANULAR POR AJAX --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -205,21 +205,11 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* --- MÁXIMA ESPECIFICIDAD PARA VENCER EL NEGRO NATIVO DE IPANEMA EN "AGREGANDO..." --- */
-html body .item-product form button.btn.btn-primary.js-addtocart,
-html body .js-item-product form button.btn.btn-primary.js-addtocart,
-html body .item-product form button.btn.btn-primary.js-addtocart.is-loading,
-html body .js-item-product form button.btn.btn-primary.js-addtocart.is-loading,
-html body .item-product form button.btn.btn-primary.js-addtocart:disabled,
-html body .js-item-product form button.btn.btn-primary.js-addtocart:disabled,
-html body .item-product form button.btn.is-loading,
-html body .js-item-product form button.btn.is-loading,
-html body .item-product form button.is-loading,
-html body .js-item-product form button.is-loading,
-html body .item-product form button:disabled,
-html body .js-item-product form button:disabled,
-html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback {
+.item-product form button,
+.js-item-product form button,
+.product-item form button,
+.item-product form input[type="submit"],
+.js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -250,20 +240,27 @@ html body .js-item-product .js-addtocart-feedback {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* Efecto push al interactuar */
-.item-product form button:hover,
-.js-item-product form button:hover {
-  transform: translateY(1px) !important;
-  box-shadow: 0 3px 0 #3C1053 !important;
+/* Anular color negro nativo cuando Tiendanube deshabilita o coloca is-loading en el botón */
+.item-product form button:disabled,
+.item-product form button[disabled],
+.item-product form button.is-loading,
+.item-product form button.loading,
+.js-item-product form button:disabled,
+.js-item-product form button[disabled],
+.js-item-product form button.is-loading,
+.js-item-product form button.loading,
+html body .item-product form button[class*="btn"],
+html body .js-item-product form button[class*="btn"] {
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  border: none !important;
+  opacity: 1 !important;
 }
 
-.item-product form button:active,
-.js-item-product form button:active {
-  transform: translateY(3px) !important;
-  box-shadow: 0 1px 0 #3C1053 !important;
-}
-
-/* --- 3. CARRUSEL (PRODUCTOS SIMILARES - ESTÁTICO PERFECTO) --- */
+/* --- 3. CARRUSEL (PRODUCTOS SIMILARES) --- */
 .swiper-slide form {
   display: block !important;
   width: 80% !important;
@@ -307,10 +304,8 @@ html body .js-item-product .js-addtocart-feedback {
 #product-form input *,
 .js-product-form button *,
 .js-product-form input *,
-.item-product button *,
-.js-item-product button *,
-.swiper-slide form button *,
-.js-addtocart-feedback * {
+.item-product form button *,
+.swiper-slide form button * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -334,24 +329,19 @@ html body .js-item-product .js-addtocart-feedback {
   height: 38px !important;
 }
 
-/* --- 6. ANULACIÓN PERMANENTE DEL ENLACE Y BOTÓN DE COMPRA RÁPIDA ("COMPRAR") --- */
-html body .item-product .item-actions,
-html body .js-item-product .item-actions,
-html body .item-product .item-product-actions,
-html body .js-item-product .item-product-actions,
-html body .item-product .product-item-actions,
-html body .js-item-product .product-item-actions,
-html body .item-product .js-quickshop-toggle,
-html body .js-item-product .js-quickshop-toggle,
-html body .item-product .item-buy-open-modal,
-html body .js-item-product .item-buy-open-modal,
-html body .item-product .js-item-buy,
-html body .js-item-product .js-item-buy,
-html body .item-product a.btn-link,
-html body .js-item-product a.btn-link,
-html body .item-product .btn-secondary,
-html body .js-item-product .btn-secondary,
-html body .swiper-slide form ~ * {
+/* --- 6. ELIMINACIÓN ABSOLUTA DE TODO BOTÓN O ENLACE "COMPRAR" SECUNDARIO EN CUALQUIER NODO DEL GRID --- */
+.item-product > a:not(.item-link),
+.item-product .item-actions,
+.item-product .item-product-actions,
+.item-product .product-item-actions,
+.item-product .js-quickshop-toggle,
+.item-product .js-item-buy,
+.item-product .item-buy-open-modal,
+.item-product a.btn-link,
+.item-product .btn-secondary,
+.item-product [class*="buy"],
+.item-product [class*="quickshop"],
+.swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -367,11 +357,10 @@ html body .swiper-slide form ~ * {
   overflow: hidden !important;
 }
 
-/* GARANTIZAR VISIBILIDAD DE IMÁGENES Y ENLACES DE PRODUCTO */
+/* GARANTIZAR VISIBILIDAD DE FOTOS E IMÁGENES */
 .item-product a.item-link,
 .item-product .item-link,
-.item-product img,
-.js-item-product img {
+.item-product img {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
