@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - TAMAÑO FIJO Y ELIMINACIÓN TOTAL DE COMPRAR */
+/* 10. BOTÓN AGREGAR AL CARRITO - TAMAÑO FIJO Y ELIMINACIÓN DE "COMPRAR" */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA Y CARRUSEL: UN SOLO BOTÓN PRINCIPAL POR PRODUCTO --- */
+/* --- 2. GRID / PARRILLA Y CARRUSEL: BOTÓN PRINCIPAL UNIFORME --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -209,7 +209,6 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* Estilo unificado para el botón del formulario */
 html body .item-product form button,
 html body .js-item-product form button,
 html body .product-item form button,
@@ -247,24 +246,18 @@ html body .js-item-product form input[type="submit"] {
   white-space: nowrap !important;
 }
 
-/* --- 3. ANULACIÓN TOTAL DE CUALQUIER ELEMENTO SECUNDARIO Y FEEDBACK EXTENCIONAL --- */
-html body .item-product .item-actions,
-html body .js-item-product .item-actions,
-html body .product-item .item-actions,
-html body [class*="item-product"] .item-actions,
-html body [class*="product-item"] .item-actions,
-html body [class*="item-product"] [class*="quickshop"],
-html body [class*="product-item"] [class*="quickshop"],
-html body [class*="item-product"] [class*="item-buy"],
-html body [class*="product-item"] [class*="item-buy"],
-html body [class*="item-product"] .item-buy-open-modal,
-html body [class*="product-item"] .item-buy-open-modal,
-html body [class*="item-product"] .js-quickshop-toggle,
-html body [class*="product-item"] .js-quickshop-toggle,
-html body [class*="item-product"] a.btn-link,
-html body [class*="product-item"] a.btn-link,
-html body [class*="item-product"] .btn-secondary,
-html body [class*="product-item"] .btn-secondary,
+/* --- 3. ANULACIÓN GLOBAL DEL BOTÓN SECUNDARIO "COMPRAR" EN TODA LA TIENDA --- */
+html body .item-actions,
+html body .item-product-actions,
+html body .product-item-actions,
+html body .js-quickshop-toggle,
+html body .item-buy-open-modal,
+html body .js-item-buy,
+html body [class*="item-actions"],
+html body [class*="quickshop"],
+html body [class*="item-buy"],
+html body a.btn-link,
+html body .btn-secondary,
 html body .js-addtocart-feedback,
 html body [class*="addtocart-feedback"],
 html body .swiper-slide form ~ * {
