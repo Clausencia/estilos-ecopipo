@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - BLINDAJE DE SOMBRA Y OPACIDAD EN AJAX */
+/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL DE AJAX, EFECTO PUSH Y ELIMINACIÓN DE "COMPRAR" */
 
-/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
+/* --- 1. PÁGINA DE PRODUCTO (PDP - ESTÁTICO PERFECTO) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
@@ -188,9 +188,22 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   white-space: nowrap !important;
   z-index: 10 !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* --- 2. GRID Y CARRUSEL: BOTÓN Y ESTADO DE CARGA UNIFORMES --- */
+#product-form button[type="submit"]:hover,
+.js-product-form button[type="submit"]:hover {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+}
+
+#product-form button[type="submit"]:active,
+.js-product-form button[type="submit"]:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
+
+/* --- 2. GRID / PARRILLA Y CARRUSEL DE PRODUCTOS --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -207,25 +220,16 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* BOTÓN BASE, IS-LOADING Y DISABLED (TODOS CON SOMBRA Y SIN OPACIDAD) */
+/* BOTÓN BASE DEL GRID (CON EFECTO PUSH Y SOMBRA MORADA FIRME) */
 html body .item-product form button,
 html body .js-item-product form button,
 html body .product-item form button,
 html body .swiper-slide form button,
-html body .item-product form button.is-loading,
-html body .js-item-product form button.is-loading,
-html body .product-item form button.is-loading,
-html body .swiper-slide form button.is-loading,
-html body .item-product form button:disabled,
-html body .js-item-product form button:disabled,
-html body .product-item form button:disabled,
-html body .swiper-slide form button:disabled,
-html body [class*="addtocart-feedback"],
-html body .js-addtocart-feedback {
+html body .item-product form input[type="submit"],
+html body .js-item-product form input[type="submit"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
-  filter: none !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -250,36 +254,77 @@ html body .js-addtocart-feedback {
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* REMOVER PSEUDO-ELEMENTOS NATIVOS QUE ATENÚAN EL BOTÓN */
-html body .item-product form button::before,
-html body .item-product form button::after,
-html body .js-item-product form button::before,
-html body .js-item-product form button::after {
-  box-shadow: none !important;
+/* EFECTO PUSH AL HACER HOVER Y ACTIVE (IDÉNTICO AL BOTÓN DE CHECKOUT) */
+html body .item-product form button:hover,
+html body .js-item-product form button:hover,
+html body .product-item form button:hover,
+html body .swiper-slide form button:hover {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
   opacity: 1 !important;
 }
 
-/* --- 3. OCULTAR ENLACE SECUNDARIO DE MODAL --- */
-.item-product .js-quickshop-toggle,
-.js-item-product .js-quickshop-toggle,
-.item-product .item-buy-open-modal,
-.js-item-product .item-buy-open-modal,
-.item-product .js-item-buy,
-.js-item-product .js-item-buy,
-.item-product a.btn-link,
-.js-item-product a.btn-link,
-.item-product .btn-secondary,
-.js-item-product .btn-secondary,
-.item-product .item-actions,
-.js-item-product .item-actions,
-.swiper-slide form ~ * {
+html body .item-product form button:active,
+html body .js-item-product form button:active,
+html body .product-item form button:active,
+html body .swiper-slide form button:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  opacity: 1 !important;
+}
+
+/* RETENER DISEÑO / SOMBRA Y EVITAR OPACIDAD / ATENUACIÓN DURANTE AJAX (AGREGANDO...) */
+html body .item-product form button.is-loading,
+html body .js-item-product form button.is-loading,
+html body .product-item form button.is-loading,
+html body .swiper-slide form button.is-loading,
+html body .item-product form button:disabled,
+html body .js-item-product form button:disabled,
+html body .product-item form button:disabled,
+html body .swiper-slide form button:disabled {
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  opacity: 1 !important;
+  filter: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  font-size: 13px !important;
+}
+
+/* --- 3. BLINDAJE TOTAL: ERRADICAR EL BOTÓN/ENLACE "COMPRAR" DE TODAS LAS TARJETAS DEL GRID --- */
+html body .item-product .item-actions,
+html body .js-item-product .item-actions,
+html body .product-item .item-actions,
+html body [class*="item-product"] [class*="quickshop"],
+html body [class*="item-product"] [class*="item-buy"],
+html body [class*="item-product"] [class*="item-actions"],
+html body .item-product .item-buy-open-modal,
+html body .js-item-product .item-buy-open-modal,
+html body .product-item .item-buy-open-modal,
+html body .item-product .js-quickshop-toggle,
+html body .js-item-product .js-quickshop-toggle,
+html body .item-product a.btn-link,
+html body .js-item-product a.btn-link,
+html body .item-product .btn-secondary,
+html body .js-item-product .btn-secondary,
+html body .swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
@@ -315,7 +360,7 @@ html body .js-item-product form button::after {
   height: 38px !important;
 }
 
-/* GARANTIZAR VISIBILIDAD DE IMÁGENES */
+/* GARANTIZAR VISIBILIDAD DE IMÁGENES Y ENLACES PRINCIPALES DE PRODUCTO */
 .item-product a.item-link,
 .item-product .item-link,
 .item-product img {
