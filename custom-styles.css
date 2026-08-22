@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - SOLUCIÓN DEFINITIVA PARA GRID Y VARIANTES */
+/* 10. BOTÓN AGREGAR AL CARRITO - COBERTURA TOTAL DE CARGA EN GRID */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS: CÁPSULA ÚNICA --- */
+/* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
 .item-product form,
 .js-item-product form,
 .product-item form {
@@ -205,10 +205,10 @@ a[href*="checkout"]:active {
   min-height: 38px !important;
 }
 
-/* Un solo botón principal por tarjeta */
-.item-product form button[type="submit"],
-.js-item-product form button[type="submit"],
-.product-item form button[type="submit"],
+/* Botón base */
+.item-product form button,
+.js-item-product form button,
+.product-item form button,
 .item-product form input[type="submit"],
 .js-item-product form input[type="submit"] {
   display: flex !important;
@@ -241,15 +241,15 @@ a[href*="checkout"]:active {
   transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* Blindaje de color turquesa durante carga AJAX en Grid */
-html body div.item-product form button.is-loading,
-html body div.js-item-product form button.is-loading,
-html body div.item-product form button:disabled,
-html body div.js-item-product form button:disabled,
-html body div.item-product form button[disabled],
-html body div.js-item-product form button[disabled],
-html body div.item-product .js-addtocart-feedback,
-html body div.js-item-product .js-addtocart-feedback {
+/* Anulación del fondo oscuro durante "Agregando..." / "¡Listo!" */
+html body .item-product form button,
+html body .js-item-product form button,
+html body .item-product form button.is-loading,
+html body .js-item-product form button.is-loading,
+html body .item-product form button:disabled,
+html body .js-item-product form button:disabled,
+html body .item-product .js-addtocart-feedback,
+html body .js-item-product .js-addtocart-feedback {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -328,7 +328,7 @@ html body div.js-item-product .js-addtocart-feedback {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAR EL BOTÓN SECUNDARIO DE MODAL/VARIANTES PARA TENER SOLO 1 BOTÓN POR TARJETA --- */
+/* --- 6. OCULTAR DEFINITIVAMENTE EL ENLACE DE COMPRA RÁPIDA SECUNDARIO --- */
 .item-product .js-quickshop-toggle,
 .js-item-product .js-quickshop-toggle,
 .item-product .item-buy-open-modal,
