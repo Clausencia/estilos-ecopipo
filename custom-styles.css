@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - COBERTURA TOTAL DE CARGA EN GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO - FIX DE POSICIONAMIENTO Y DESPLAZAMIENTO EN GRID Y CARRUSEL */
 
-/* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
+/* --- 1. PÁGINA DE PRODUCTO (PDP - FUNCIONANDO PERFECTO) --- */
 #product-form,
 .js-product-form {
   display: flex !important;
@@ -190,10 +190,11 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID / PARRILLA DE PRODUCTOS --- */
+/* --- 2. GRID Y CARRUSEL: CONTENEDOR Y BOTÓN BASE --- */
 .item-product form,
 .js-item-product form,
-.product-item form {
+.product-item form,
+.swiper-slide form {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -203,12 +204,13 @@ a[href*="checkout"]:active {
   position: relative !important;
   box-sizing: border-box !important;
   min-height: 38px !important;
+  height: 38px !important;
 }
 
-/* Botón base */
 .item-product form button,
 .js-item-product form button,
 .product-item form button,
+.swiper-slide form button,
 .item-product form input[type="submit"],
 .js-item-product form input[type="submit"] {
   display: flex !important;
@@ -238,44 +240,26 @@ a[href*="checkout"]:active {
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* Anulación del fondo oscuro durante "Agregando..." / "¡Listo!" */
-html body .item-product form button,
-html body .js-item-product form button,
-html body .item-product form button.is-loading,
-html body .js-item-product form button.is-loading,
-html body .item-product form button:disabled,
-html body .js-item-product form button:disabled,
+/* --- 3. SUPERPOSICIÓN EXACTA DEL CONTENEDOR DE FEEDBACK ("AGREGANDO..." / "¡LISTO!") --- */
+/* Posicionamiento absoluto para solaparse exactamente sobre el área del botón y evitar saltos visuales hacia abajo */
 html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback {
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  border: none !important;
-  opacity: 1 !important;
-}
-
-/* --- 3. CARRUSEL (PRODUCTOS SIMILARES) --- */
-.swiper-slide form {
-  display: block !important;
-  width: 80% !important;
-  max-width: 170px !important;
-  margin: 10px auto 0 auto !important;
-  position: relative !important;
-  box-sizing: border-box !important;
-}
-
-.swiper-slide form button[type="submit"],
-.swiper-slide form input[type="submit"] {
-  display: flex !important;
+html body .js-item-product .js-addtocart-feedback,
+html body .swiper-slide .js-addtocart-feedback,
+html body .item-product [class*="addtocart-feedback"],
+html body .js-item-product [class*="addtocart-feedback"],
+html body .swiper-slide [class*="addtocart-feedback"] {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
+  margin: 0 auto !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -286,16 +270,19 @@ html body .js-item-product .js-addtocart-feedback {
   line-height: 1.1 !important;
   border-radius: 50px !important;
   border: none !important;
-  padding: 6px 10px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
+  display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
   box-sizing: border-box !important;
-  margin: 0 auto !important;
-  position: relative !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
+  z-index: 25 !important;
+}
+
+/* Ocultar feedback cuando está vacío */
+.js-addtocart-feedback:empty,
+[class*="addtocart-feedback"]:empty {
+  display: none !important;
 }
 
 /* --- 4. FUENTE Y COLOR INTERNO DE TEXTOS --- */
@@ -304,7 +291,8 @@ html body .js-item-product .js-addtocart-feedback {
 .js-product-form button *,
 .js-product-form input *,
 .item-product form button *,
-.swiper-slide form button * {
+.swiper-slide form button *,
+.js-addtocart-feedback * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -328,7 +316,7 @@ html body .js-item-product .js-addtocart-feedback {
   height: 38px !important;
 }
 
-/* --- 6. OCULTAR DEFINITIVAMENTE EL ENLACE DE COMPRA RÁPIDA SECUNDARIO --- */
+/* --- 6. OCULTAR ENLACE SECUNDARIO DE MODAL --- */
 .item-product .js-quickshop-toggle,
 .js-item-product .js-quickshop-toggle,
 .item-product .item-buy-open-modal,
@@ -352,7 +340,7 @@ html body .js-item-product .js-addtocart-feedback {
   overflow: hidden !important;
 }
 
-/* GARANTIZAR VISIBILIDAD DE FOTOS E IMÁGENES */
+/* GARANTIZAR VISIBILIDAD DE IMÁGENES */
 .item-product a.item-link,
 .item-product .item-link,
 .item-product img {
