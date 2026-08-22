@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL TOTAL DE AJAX, HOVER PUSH Y ELIMINACIÓN DE "COMPRAR" */
+/* 10. BOTÓN AGREGAR AL CARRITO - ESTILO UNIFICADO NATIVO PARA GRID Y CARRUSEL */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
@@ -203,7 +203,7 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 2. GRID Y CARRUSEL DE PRODUCTOS (BASE Y CÁPSULA TURQUESA) --- */
+/* --- 2. GRID Y CARRUSEL: CÁPSULA TURQUESA EN TODOS LOS BOTONES NATIVOS --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -220,15 +220,22 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
   min-height: 38px !important;
   height: 38px !important;
-  z-index: 10 !important;
 }
 
-/* BOTÓN PRINCIPAL DEL GRID CON Z-INDEX PARA CAPTURAR EL HOVER */
+/* ESTILO CÁPSULA A CUALQUIER BOTÓN O ENLACE DE ACCIÓN DE LA TARJETA */
 html body [class*="item-product"] form button,
 html body [class*="product-item"] form button,
 html body .swiper-slide form button,
-html body [class*="item-product"] form input[type="submit"],
-html body [class*="product-item"] form input[type="submit"] {
+html body [class*="item-product"] .js-quickshop-toggle,
+html body [class*="product-item"] .js-quickshop-toggle,
+html body [class*="item-product"] .js-item-buy,
+html body [class*="product-item"] .js-item-buy,
+html body [class*="item-product"] .item-buy-open-modal,
+html body [class*="product-item"] .item-buy-open-modal,
+html body [class*="item-product"] .btn-primary,
+html body [class*="product-item"] .btn-primary,
+html body [class*="item-product"] .btn-secondary,
+html body [class*="product-item"] .btn-secondary {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -247,23 +254,30 @@ html body [class*="product-item"] form input[type="submit"] {
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  width: 100% !important;
+  width: 85% !important;
+  max-width: 190px !important;
   justify-content: center !important;
   align-items: center !important;
   text-transform: uppercase !important;
   box-sizing: border-box !important;
-  margin: 0 auto !important;
+  margin: 10px auto 0 auto !important;
   position: relative !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  z-index: 15 !important;
+  z-index: 20 !important;
+  pointer-events: auto !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
+  text-decoration: none !important;
 }
 
-/* EFECTO PUSH AL HACER HOVER Y ACTIVE (ACTIVO DIRECTAMENTE) */
+/* EFECTO PUSH AL PASAR EL MOUSE (HOVER) Y HACER CLIC (ACTIVE) */
 html body [class*="item-product"] form button:hover,
 html body [class*="product-item"] form button:hover,
-html body .swiper-slide form button:hover {
+html body .swiper-slide form button:hover,
+html body [class*="item-product"] .js-quickshop-toggle:hover,
+html body [class*="product-item"] .js-quickshop-toggle:hover,
+html body [class*="item-product"] .js-item-buy:hover,
+html body [class*="product-item"] .js-item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   opacity: 1 !important;
@@ -273,7 +287,11 @@ html body .swiper-slide form button:hover {
 
 html body [class*="item-product"] form button:active,
 html body [class*="product-item"] form button:active,
-html body .swiper-slide form button:active {
+html body .swiper-slide form button:active,
+html body [class*="item-product"] .js-quickshop-toggle:active,
+html body [class*="product-item"] .js-quickshop-toggle:active,
+html body [class*="item-product"] .js-item-buy:active,
+html body [class*="product-item"] .js-item-buy:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   opacity: 1 !important;
@@ -281,13 +299,13 @@ html body .swiper-slide form button:active {
   background: #42c6d3 !important;
 }
 
-/* RETENER DISEÑO Y SOMBRA MORADA DURANTE CARGA AJAX ("AGREGANDO...") */
-html body [class*="item-product"] form button.is-loading,
-html body [class*="product-item"] form button.is-loading,
-html body .swiper-slide form button.is-loading,
-html body [class*="item-product"] form button:disabled,
-html body [class*="product-item"] form button:disabled,
-html body .swiper-slide form button:disabled {
+/* MANTENER SOMBRA Y COLOR DURANTE CARGA AJAX ("AGREGANDO...") */
+html body [class*="item-product"] .is-loading,
+html body [class*="product-item"] .is-loading,
+html body [class*="item-product"] button:disabled,
+html body [class*="product-item"] button:disabled,
+html body [class*="item-product"] .js-addtocart-feedback,
+html body [class*="product-item"] .js-addtocart-feedback {
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -295,52 +313,22 @@ html body .swiper-slide form button:disabled {
   opacity: 1 !important;
   filter: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  font-size: 13px !important;
 }
 
-/* --- 3. BLINDAJE ABSOLUTO: ELIMINAR EL BOTÓN/ENLACE "COMPRAR" EN CUALQUIER CONTENEDOR DEL GRID --- */
-html body [class*="item-product"] .item-actions,
-html body [class*="product-item"] .item-actions,
-html body [class*="item-product"] [class*="quickshop"],
-html body [class*="product-item"] [class*="quickshop"],
-html body [class*="item-product"] [class*="item-buy"],
-html body [class*="product-item"] [class*="item-buy"],
-html body [class*="item-product"] [class*="item-actions"],
-html body [class*="product-item"] [class*="item-actions"],
-html body [class*="item-product"] .item-buy-open-modal,
-html body [class*="product-item"] .item-buy-open-modal,
-html body [class*="item-product"] .js-quickshop-toggle,
-html body [class*="product-item"] .js-quickshop-toggle,
-html body [class*="item-product"] a.btn-link,
-html body [class*="product-item"] a.btn-link,
-html body [class*="item-product"] .btn-secondary,
-html body [class*="product-item"] .btn-secondary,
-html body .swiper-slide form ~ * {
+/* OCULTAR SOLO ENLACES SECUNDARIOS DUPLICADOS SI EL FORMULARIO YA ESTÁ ACTIVO */
+.item-product form ~ .item-actions,
+.js-item-product form ~ .item-actions,
+.product-item form ~ .item-actions {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
-  max-height: 0 !important;
-  max-width: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  position: absolute !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
 }
 
-/* --- 4. FUENTE Y COLOR INTERNO DE TEXTOS --- */
+/* --- 3. FUENTE Y COLOR INTERNO DE TEXTOS --- */
 #product-form button *,
 #product-form input *,
 .js-product-form button *,
 .js-product-form input *,
-.item-product form button *,
-.swiper-slide form button * {
+.item-product button *,
+.swiper-slide button * {
   background: transparent !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -350,7 +338,7 @@ html body .swiper-slide form ~ * {
   border: none !important;
 }
 
-/* --- 5. PROTECCIÓN FILTRO DE PRECIO --- */
+/* --- 4. PROTECCIÓN FILTRO DE PRECIO --- */
 .js-price-filter-container button,
 .js-price-filter-form button,
 [class*="price-filter"] button,
@@ -364,7 +352,7 @@ html body .swiper-slide form ~ * {
   height: 38px !important;
 }
 
-/* GARANTIZAR VISIBILIDAD DE IMÁGENES Y ENLACES PRINCIPALES DE PRODUCTO */
+/* GARANTIZAR VISIBILIDAD DE IMÁGENES */
 .item-product a.item-link,
 .item-product .item-link,
 .item-product img {
