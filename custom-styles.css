@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO - CONTROL ESTÁTICO PERMANENTE EN GRID Y CARRUSEL */
+/* 10. BOTÓN AGREGAR AL CARRITO - BLINDAJE DE SOMBRA Y OPACIDAD EN AJAX */
 
 /* --- 1. PÁGINA DE PRODUCTO (PDP) --- */
 #product-form,
@@ -190,7 +190,7 @@ a[href*="checkout"]:active {
   z-index: 10 !important;
 }
 
-/* --- 2. GRID Y CARRUSEL: BOTÓN PRINCIPAL SIEMPRE VISIBLE --- */
+/* --- 2. GRID Y CARRUSEL: BOTÓN Y ESTADO DE CARGA UNIFORMES --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -207,16 +207,25 @@ a[href*="checkout"]:active {
   height: 38px !important;
 }
 
-/* FORZAR QUE EL BOTÓN DEL FORMULARIO NUNCA SE OCULTE NI DESAPAREZCA */
+/* BOTÓN BASE, IS-LOADING Y DISABLED (TODOS CON SOMBRA Y SIN OPACIDAD) */
 html body .item-product form button,
 html body .js-item-product form button,
 html body .product-item form button,
 html body .swiper-slide form button,
-html body .item-product form input[type="submit"],
-html body .js-item-product form input[type="submit"] {
+html body .item-product form button.is-loading,
+html body .js-item-product form button.is-loading,
+html body .product-item form button.is-loading,
+html body .swiper-slide form button.is-loading,
+html body .item-product form button:disabled,
+html body .js-item-product form button:disabled,
+html body .product-item form button:disabled,
+html body .swiper-slide form button:disabled,
+html body [class*="addtocart-feedback"],
+html body .js-addtocart-feedback {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
+  filter: none !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -243,29 +252,34 @@ html body .js-item-product form input[type="submit"] {
   white-space: nowrap !important;
 }
 
-/* --- 3. DESACTIVAR DE RAÍZ EL CONTENEDOR DE FEEDBACK Y ACCIONES SECUNDARIAS --- */
-html body .item-product .js-addtocart-feedback,
-html body .js-item-product .js-addtocart-feedback,
-html body .swiper-slide .js-addtocart-feedback,
-html body .item-product [class*="addtocart-feedback"],
-html body .js-item-product [class*="addtocart-feedback"],
-html body .item-product .item-actions,
-html body .js-item-product .item-actions,
-html body .item-product .item-buy-open-modal,
-html body .js-item-product .item-buy-open-modal,
-html body .item-product .js-quickshop-toggle,
-html body .js-item-product .js-quickshop-toggle,
-html body .item-product a.btn-link,
-html body .js-item-product a.btn-link,
-html body .item-product .btn-secondary,
-html body .js-item-product .btn-secondary {
+/* REMOVER PSEUDO-ELEMENTOS NATIVOS QUE ATENÚAN EL BOTÓN */
+html body .item-product form button::before,
+html body .item-product form button::after,
+html body .js-item-product form button::before,
+html body .js-item-product form button::after {
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* --- 3. OCULTAR ENLACE SECUNDARIO DE MODAL --- */
+.item-product .js-quickshop-toggle,
+.js-item-product .js-quickshop-toggle,
+.item-product .item-buy-open-modal,
+.js-item-product .item-buy-open-modal,
+.item-product .js-item-buy,
+.js-item-product .js-item-buy,
+.item-product a.btn-link,
+.js-item-product a.btn-link,
+.item-product .btn-secondary,
+.js-item-product .btn-secondary,
+.item-product .item-actions,
+.js-item-product .item-actions,
+.swiper-slide form ~ * {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
   position: absolute !important;
   pointer-events: none !important;
   overflow: hidden !important;
