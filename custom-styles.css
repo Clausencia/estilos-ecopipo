@@ -142,50 +142,51 @@ a[href*="checkout"]:active {
 
 /* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX - CONTROL TOTAL GRID */
 
-/* --- 10.1 ANCLAJE RELATIVO DE CONTENEDORES --- */
-.item-product,
-.js-item-product,
-.product-item,
+/* --- 10.1 CONTENEDOR RELATIVO UNIFICADO EN GRID (.item-buy) --- */
 .item-buy,
 .js-item-buy,
-.item-product form,
-.js-item-product form,
-.product-item form,
-.swiper-slide form {
+.item-product .item-buy,
+.js-item-product .item-buy {
   position: relative !important;
-}
-
-/* --- 10.2 FORMULARIO GRID Y CARRUSEL --- */
-.item-product form,
-.js-item-product form,
-.product-item form,
-[class*="item-product"] form,
-[class*="product-item"] form,
-.swiper-slide form {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
   width: 85% !important;
   max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
   margin: 10px auto 0 auto !important;
+  display: block !important;
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 ESTILO BASE Y EFECTO PUSH (BUTTON, INPUT Y ENLACES) --- */
+/* --- 10.2 FORMULARIO DENTRO DE ITEM-BUY --- */
+.item-buy form,
+.js-item-buy form,
+.item-product form,
+.js-item-product form,
+.product-item form,
+.swiper-slide form {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+/* --- 10.3 ESTILO BASE Y EFECTO PUSH EN BOTÓN PRINCIPAL --- */
+html body .item-buy form button,
+html body .item-buy form input[type="submit"],
 html body .item-product form button,
 html body .item-product form input[type="submit"],
 html body .js-item-product form button,
 html body .js-item-product form input[type="submit"],
 html body .product-item form button,
 html body .product-item form input[type="submit"],
-html body [class*="item-product"] form button,
-html body [class*="item-product"] form input[type="submit"],
 html body .swiper-slide form button,
 html body .swiper-slide form input[type="submit"],
-html body .js-addtocart-btn,
-html body a.js-addtocart {
+html body .js-addtocart-btn {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -196,7 +197,7 @@ html body a.js-addtocart {
   min-height: 38px !important;
   max-height: 38px !important;
   padding: 6px 12px !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -218,6 +219,8 @@ html body a.js-addtocart {
 }
 
 /* HOVER Y ACTIVE (EFECTO PUSH) */
+html body .item-buy form button:hover,
+html body .item-buy form input[type="submit"]:hover,
 html body .item-product form button:hover,
 html body .item-product form input[type="submit"]:hover,
 html body .js-item-product form button:hover,
@@ -226,12 +229,13 @@ html body .product-item form button:hover,
 html body .product-item form input[type="submit"]:hover,
 html body .swiper-slide form button:hover,
 html body .swiper-slide form input[type="submit"]:hover,
-html body .js-addtocart-btn:hover,
-html body a.js-addtocart:hover {
+html body .js-addtocart-btn:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
+html body .item-buy form button:active,
+html body .item-buy form input[type="submit"]:active,
 html body .item-product form button:active,
 html body .item-product form input[type="submit"]:active,
 html body .js-item-product form button:active,
@@ -240,29 +244,30 @@ html body .product-item form button:active,
 html body .product-item form input[type="submit"]:active,
 html body .swiper-slide form button:active,
 html body .swiper-slide form input[type="submit"]:active,
-html body .js-addtocart-btn:active,
-html body a.js-addtocart:active {
+html body .js-addtocart-btn:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 COBERTURA Y SUPERPOSICIÓN EXACTA DEL FEEDBACK AJAX --- */
+/* --- 10.4 SUPERPOSICIÓN EXACTA DEL FEEDBACK AJAX EN LA MISMA CÁPSULA --- */
 .js-addtocart-feedback,
-[class*="addtocart-feedback"],
 .js-addtocart-success,
+[class*="addtocart-feedback"],
 [class*="addtocart-success"] {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
   width: 100% !important;
-  height: 100% !important;
+  height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
+  background-color: #3C1053 !important;
   background: #3C1053 !important;
   color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   border-radius: 50px !important;
+  border: none !important;
+  box-shadow: 0 4px 0 #FF9030 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -270,24 +275,28 @@ html body a.js-addtocart:active {
   font-weight: 700 !important;
   font-size: 12px !important;
   text-transform: uppercase !important;
-  z-index: 50 !important;
+  z-index: 20 !important;
   box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 10px !important;
   pointer-events: none !important;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 .js-addtocart-feedback *,
-[class*="addtocart-feedback"] * {
+.js-addtocart-success *,
+[class*="addtocart-feedback"] *,
+[class*="addtocart-success"] * {
   color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 12px !important;
   background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* --- 10.5 OCULTAR CONTENEDORES SECUNDARIOS NATIVOS --- */
+/* --- 10.5 OCULTAR OTROS CONTENEDORES NATIVOS NO DESEADOS --- */
 html body .item-actions,
 html body .item-product-actions,
 html body .product-item-actions,
