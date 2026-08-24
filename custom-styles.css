@@ -142,7 +142,7 @@ a[href*="checkout"]:active {
 
 /* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (CORRECCIÓN TOCAYO) */
 
-/* Asegura que el placeholder se superponga EXACTO sobre el botÃ³n real */
+/* Asegura que el placeholder se superponga EXACTO sobre el botón real */
 .js-product-form {
   position: relative;
 }
@@ -168,7 +168,7 @@ a[href*="checkout"]:active {
   justify-content: center;
 }
 
-/* Los estados "Agregando..." y "Â¡Listo!" deben cubrir todo el botÃ³n, no solo centrarse */
+/* Los estados "Agregando..." y "¡Listo!" deben cubrir todo el botón, no solo centrarse */
 .js-addtocart-placeholder .transition-container {
   top: 0;
   left: 0;
