@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK ALINEADO SOBRE CADA PRODUCTO */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK DINÁMICO (CONTROL TEMPORAL AJAX) */
 
-/* --- 10.1 ANCLAJE RELATIVO OBLIGATORIO DE CONTENEDORES --- */
+/* --- 10.1 ANCLAJE RELATIVO EN CONTENEDORES --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -152,7 +152,7 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* --- 10.2 OCULTAR ENLACE SECUNDARIO AZUL NATIVO --- */
+/* --- 10.2 OCULTAR ENLACES SECUNDARIOS NATIVOS --- */
 a.js-item-buy,
 a[class*="item-buy"],
 .item-actions,
@@ -165,12 +165,14 @@ a.btn-link,
   display: none !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
+/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL (ESTADO REPOSO) --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
 .swiper-slide form {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   width: 85% !important;
   max-width: 190px !important;
   height: 38px !important;
@@ -218,7 +220,7 @@ a.btn-link,
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* EFECTO PUSH EN HOVER Y ACTIVE */
+/* EFECTO PUSH (HOVER Y ACTIVE) */
 .item-product form input[type="submit"]:hover,
 .item-product form button:hover,
 .js-item-product form input[type="submit"]:hover,
@@ -243,7 +245,15 @@ a.btn-link,
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 ESTILO Y SUPERPOSICIÓN EXACTA DEL PLACEHOLDER DE FEEDBACK --- */
+/* --- 10.4 CÁPSULA MORADA DE FEEDBACK (SOLO VISIBLE DURANTE AJAX) --- */
+/* Oculto por defecto */
+.js-addtocart-placeholder,
+.js-addtocart-feedback,
+.js-addtocart-success {
+  display: none;
+}
+
+/* Estilo base superpuesto */
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .js-addtocart-success {
@@ -261,7 +271,6 @@ a.btn-link,
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #FF9030 !important;
-  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -273,6 +282,13 @@ a.btn-link,
   margin: 0 !important;
   padding: 0 10px !important;
   pointer-events: none !important;
+}
+
+/* Activa el diseño Flex ÚNICAMENTE cuando Tiendanube retira el estado oculto */
+.js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
+.js-addtocart-feedback:not([style*="display: none"]):not([style*="display:none"]),
+.js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]) {
+  display: flex !important;
 }
 
 .js-addtocart-placeholder *,
