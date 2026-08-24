@@ -140,6 +140,15 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
+/* XX. SECCION SIN NUMERO PORQUE AUN NO QUEDA LA 10 */
+
+/* Evita que la foto principal se deforme o pixele al alargarse el selector de Bundle Flow */
+.js-product-image-container, 
+.product-slider-container {
+    align-self: flex-start !important;
+    height: auto !important;
+}
+
 /* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK (UNIFORME TURQUESA Y SOMBRA MORADA) */
 
 /* --- 10.1 ANCLAJE RELATIVO DE CONTENEDORES --- */
