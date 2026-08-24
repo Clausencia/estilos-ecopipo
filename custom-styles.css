@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK DINÁMICO (CONTROL TEMPORAL AJAX) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (AJUSTE FINO Y CENTRADO) */
 
-/* --- 10.1 ANCLAJE RELATIVO EN CONTENEDORES --- */
+/* --- 10.1 ANCLAJE RELATIVO DE CONTENEDORES --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -165,7 +165,7 @@ a.btn-link,
   display: none !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL (ESTADO REPOSO) --- */
+/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -245,18 +245,24 @@ a.btn-link,
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 CÁPSULA MORADA DE FEEDBACK (SOLO VISIBLE DURANTE AJAX) --- */
-/* Oculto por defecto */
+/* --- 10.4 CÁPSULA MORADA DE FEEDBACK (SÓLO CON ESTADO ACTIVO) --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .js-addtocart-success {
-  display: none;
+  display: none !important;
 }
 
-/* Estilo base superpuesto */
-.js-addtocart-placeholder,
-.js-addtocart-feedback,
-.js-addtocart-success {
+/* Muestra la cápsula únicamente si contiene elementos activos de carga o éxito */
+.js-addtocart-placeholder.active,
+.js-addtocart-placeholder.loading,
+.js-addtocart-placeholder:has(.js-addtocart-loading),
+.js-addtocart-placeholder:has(.js-addtocart-success),
+.js-addtocart-placeholder:has([class*="loading"]),
+.js-addtocart-placeholder:has([class*="success"]),
+.js-addtocart-feedback.active,
+.js-addtocart-feedback:has(.js-addtocart-loading),
+.js-addtocart-feedback:has(.js-addtocart-success) {
+  display: flex !important;
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -282,18 +288,23 @@ a.btn-link,
   margin: 0 !important;
   padding: 0 10px !important;
   pointer-events: none !important;
+  overflow: hidden !important;
 }
 
-/* Activa el diseño Flex ÚNICAMENTE cuando Tiendanube retira el estado oculto */
-.js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
-.js-addtocart-feedback:not([style*="display: none"]):not([style*="display:none"]),
-.js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]) {
-  display: flex !important;
-}
-
+/* CENTRADO Y REINICIO DE DESPLAZAMIENTOS INTERNOS */
 .js-addtocart-placeholder *,
 .js-addtocart-feedback *,
 .js-addtocart-success * {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  top: 0 !important;
+  line-height: 1 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
