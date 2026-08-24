@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO (FLUJO CONTINUO SIN ESPACIOS EN BLANCO) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y CONTROL ABSOLUTO DE GRID */
 
-/* --- 10.1 ELIMINACIÓN GLOBAL DEL CONTENEDOR FANTASMA Y AVISOS NATIVOS --- */
+/* --- 10.1 EXPULSIÓN DEFINITIVA DE AVISOS FANTASMA Y BOTONES SECUNDARIOS --- */
 .js-addtocart-feedback,
 .js-addtocart-success,
 [class*="addtocart-feedback"],
@@ -159,19 +159,15 @@ a.btn-link,
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
-  max-height: 0 !important;
-  max-width: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
   position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
   pointer-events: none !important;
-  overflow: hidden !important;
 }
 
-/* --- 10.2 CONTENEDOR Y FORMULARIO GRID --- */
+/* --- 10.2 FIJAR CONTENEDOR Y FORMULARIO EN GRID --- */
 .item-buy,
 .js-item-buy,
 .item-product form,
@@ -190,21 +186,23 @@ a.btn-link,
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 BOTÓN CIAN: INMUNIZADO CONTRA TRANSPARENCIA Y OCULTAMIENTO --- */
-html body .item-product form input[type="submit"],
-html body .item-product form button,
-html body .js-item-product form input[type="submit"],
-html body .js-item-product form button,
-html body .product-item form input[type="submit"],
-html body .product-item form button,
-html body .swiper-slide form input[type="submit"],
-html body .swiper-slide form button,
-html body .item-product form input[type="submit"]:disabled,
-html body .item-product form button:disabled,
-html body .item-product form input[type="submit"].disabled,
-html body .item-product form button.disabled,
-html body .item-product form input[type="submit"].loading,
-html body .item-product form button.loading {
+/* --- 10.3 BOTÓN CIAN INDESTRUCTIBLE (INMUNIZADO A ESTADOS AJAX) --- */
+.item-product form input[type="submit"],
+.item-product form button,
+.js-item-product form input[type="submit"],
+.js-item-product form button,
+.product-item form input[type="submit"],
+.product-item form button,
+.swiper-slide form input[type="submit"],
+.swiper-slide form button,
+.item-product form input[type="submit"]:disabled,
+.item-product form button:disabled,
+.item-product form input[type="submit"].disabled,
+.item-product form button.disabled,
+.item-product form input[type="submit"].loading,
+.item-product form button.loading,
+.item-product form [style*="display"],
+.js-item-product form [style*="display"] {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -237,27 +235,27 @@ html body .item-product form button.loading {
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* EFECTO PUSH EN HOVER Y ACTIVE */
-html body .item-product form input[type="submit"]:hover,
-html body .item-product form button:hover,
-html body .js-item-product form input[type="submit"]:hover,
-html body .js-item-product form button:hover,
-html body .product-item form input[type="submit"]:hover,
-html body .product-item form button:hover,
-html body .swiper-slide form input[type="submit"]:hover,
-html body .swiper-slide form button:hover {
+/* EFECTO PUSH (HOVER Y ACTIVE) */
+.item-product form input[type="submit"]:hover,
+.item-product form button:hover,
+.js-item-product form input[type="submit"]:hover,
+.js-item-product form button:hover,
+.product-item form input[type="submit"]:hover,
+.product-item form button:hover,
+.swiper-slide form input[type="submit"]:hover,
+.swiper-slide form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-html body .item-product form input[type="submit"]:active,
-html body .item-product form button:active,
-html body .js-item-product form input[type="submit"]:active,
-html body .js-item-product form button:active,
-html body .product-item form input[type="submit"]:active,
-html body .product-item form button:active,
-html body .swiper-slide form input[type="submit"]:active,
-html body .swiper-slide form button:active {
+.item-product form input[type="submit"]:active,
+.item-product form button:active,
+.js-item-product form input[type="submit"]:active,
+.js-item-product form button:active,
+.product-item form input[type="submit"]:active,
+.product-item form button:active,
+.swiper-slide form input[type="submit"]:active,
+.swiper-slide form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
