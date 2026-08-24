@@ -140,9 +140,12 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (BLOQUEO DEFINITIVO DE ESTADOS AJAX) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (UNIFICADO) */
 
-/* --- 10.1 ELIMINACIÓN PERMANENTE DEL AVISO NATIVO (CÁPSULA AZUL CON BORDE NARANJA) --- */
+/* --- 10.1 DESTRUIR TODO LO QUE NO SEA EL FORMULARIO PRINCIPAL --- */
+.item-buy > *:not(form),
+.js-item-buy > *:not(form),
+.item-product form > *:not(input):not(button),
 .js-addtocart-feedback,
 .js-addtocart-success,
 [class*="addtocart-feedback"],
@@ -161,8 +164,6 @@ a.btn-link,
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  max-height: 0 !important;
-  max-width: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -171,42 +172,42 @@ a.btn-link,
   overflow: hidden !important;
 }
 
-/* --- 10.2 MANTENER CONTENEDOR Y FORMULARIO SIEMPRE VISIBLES --- */
+/* --- 10.2 CONTENEDORES CONTENIDOS Y TRANSPARENTES --- */
 .item-buy,
-.js-item-buy,
+.js-item-buy {
+  display: block !important;
+  width: 85% !important;
+  max-width: 190px !important;
+  height: 38px !important;
+  margin: 10px auto 0 auto !important;
+  position: relative !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 .item-product form,
 .js-item-product form,
 .product-item form,
 .swiper-slide form {
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  width: 85% !important;
-  max-width: 190px !important;
+  width: 100% !important;
   height: 38px !important;
-  min-height: 38px !important;
-  margin: 10px auto 0 auto !important;
-  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  background: transparent !important;
 }
 
-/* --- 10.3 BOTÓN CIAN: INMUNIZADO ANTE OCULTAMIENTO POR JAVASCRIPT --- */
-html body .item-product form input[type="submit"],
-html body .item-product form button,
-html body .js-item-product form input[type="submit"],
-html body .js-item-product form button,
-html body .product-item form input[type="submit"],
-html body .product-item form button,
-html body .swiper-slide form input[type="submit"],
-html body .swiper-slide form button,
-html body .item-product form input[type="submit"]:disabled,
-html body .item-product form button:disabled,
-html body .item-product form input[type="submit"].disabled,
-html body .item-product form button.disabled,
-html body .item-product form input[type="submit"].loading,
-html body .item-product form button.loading,
-html body .item-product form [style*="display"],
-html body .js-item-product form [style*="display"] {
+/* --- 10.3 ÚNICO BOTÓN CIAN VISIBLE CON EFECTO PUSH --- */
+.item-product form input[type="submit"],
+.item-product form button,
+.js-item-product form input[type="submit"],
+.js-item-product form button,
+.product-item form input[type="submit"],
+.product-item form button,
+.swiper-slide form input[type="submit"],
+.swiper-slide form button {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -235,31 +236,30 @@ html body .js-item-product form [style*="display"] {
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 10 !important;
-  pointer-events: auto !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
 /* EFECTO PUSH (HOVER Y ACTIVE) */
-html body .item-product form input[type="submit"]:hover,
-html body .item-product form button:hover,
-html body .js-item-product form input[type="submit"]:hover,
-html body .js-item-product form button:hover,
-html body .product-item form input[type="submit"]:hover,
-html body .product-item form button:hover,
-html body .swiper-slide form input[type="submit"]:hover,
-html body .swiper-slide form button:hover {
+.item-product form input[type="submit"]:hover,
+.item-product form button:hover,
+.js-item-product form input[type="submit"]:hover,
+.js-item-product form button:hover,
+.product-item form input[type="submit"]:hover,
+.product-item form button:hover,
+.swiper-slide form input[type="submit"]:hover,
+.swiper-slide form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-html body .item-product form input[type="submit"]:active,
-html body .item-product form button:active,
-html body .js-item-product form input[type="submit"]:active,
-html body .js-item-product form button:active,
-html body .product-item form input[type="submit"]:active,
-html body .product-item form button:active,
-html body .swiper-slide form input[type="submit"]:active,
-html body .swiper-slide form button:active {
+.item-product form input[type="submit"]:active,
+.item-product form button:active,
+.js-item-product form input[type="submit"]:active,
+.js-item-product form button:active,
+.product-item form input[type="submit"]:active,
+.product-item form button:active,
+.swiper-slide form input[type="submit"]:active,
+.swiper-slide form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
