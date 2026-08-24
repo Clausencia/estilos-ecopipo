@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (AJUSTE FINO Y CENTRADO) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (SIN OVERLAP EN REPOSO) */
 
-/* --- 10.1 ANCLAJE RELATIVO DE CONTENEDORES --- */
+/* --- 10.1 ANCLAJE RELATIVO DE CONTENEDORES PADRE --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -152,7 +152,7 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* --- 10.2 OCULTAR ENLACES SECUNDARIOS NATIVOS --- */
+/* --- 10.2 OCULTAR ENLACES Y BOTONES SECUNDARIOS NATIVOS --- */
 a.js-item-buy,
 a[class*="item-buy"],
 .item-actions,
@@ -165,7 +165,7 @@ a.btn-link,
   display: none !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
+/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL (ÚNICO VISIBLE EN REPOSO) --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -245,23 +245,20 @@ a.btn-link,
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 CÁPSULA MORADA DE FEEDBACK (SÓLO CON ESTADO ACTIVO) --- */
+/* --- 10.4 CÁPSULA MORADA DE FEEDBACK (OCULTA EN REPOSO, ACTIVA SÓLO EN AJAX) --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .js-addtocart-success {
   display: none !important;
 }
 
-/* Muestra la cápsula únicamente si contiene elementos activos de carga o éxito */
-.js-addtocart-placeholder.active,
-.js-addtocart-placeholder.loading,
-.js-addtocart-placeholder:has(.js-addtocart-loading),
-.js-addtocart-placeholder:has(.js-addtocart-success),
-.js-addtocart-placeholder:has([class*="loading"]),
-.js-addtocart-placeholder:has([class*="success"]),
-.js-addtocart-feedback.active,
-.js-addtocart-feedback:has(.js-addtocart-loading),
-.js-addtocart-feedback:has(.js-addtocart-success) {
+/* Revela la cápsula morada ÚNICAMENTE cuando Tiendanube le quita el display:none con JS */
+.js-addtocart-placeholder[style*="display: block"],
+.js-addtocart-placeholder[style*="display: flex"],
+.js-addtocart-placeholder[style*="display: inline"],
+.js-addtocart-feedback[style*="display: block"],
+.js-addtocart-feedback[style*="display: flex"],
+.js-addtocart-feedback[style*="display: inline"] {
   display: flex !important;
   position: absolute !important;
   top: 0 !important;
@@ -291,7 +288,13 @@ a.btn-link,
   overflow: hidden !important;
 }
 
-/* CENTRADO Y REINICIO DE DESPLAZAMIENTOS INTERNOS */
+/* Ocultar enlaces nativos "Comprar" dentro del placeholder */
+.js-addtocart-placeholder a,
+.js-addtocart-feedback a {
+  display: none !important;
+}
+
+/* Centrado y formateo de textos de carga/éxito */
 .js-addtocart-placeholder *,
 .js-addtocart-feedback *,
 .js-addtocart-success * {
