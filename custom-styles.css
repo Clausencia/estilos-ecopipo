@@ -140,215 +140,43 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (CORRECCIÓN DEFINITIVA) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (CORRECCIÓN TOCAYO) */
 
-/* --- 10.1 OCULTAR FEEDBACK Y BOTÓN NATIVO SECUNDARIO --- */
-.js-addtocart-feedback,
-.js-addtocart-success,
-[class*="addtocart-feedback"],
-[class*="addtocart-success"],
-a.js-item-buy,
-a[class*="item-buy"],
-.item-actions,
-.item-product-actions,
-.product-item-actions,
-.js-quickshop-toggle,
-.item-buy-open-modal,
-a.btn-link,
-.btn-secondary {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  position: absolute !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
-}
-
-/* --- 10.2 FORMULARIO CONTENEDOR EN GRID --- */
-.item-product form,
-.js-item-product form,
-.product-item form,
-.swiper-slide form {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  width: 85% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  margin: 10px auto 0 auto !important;
-  box-sizing: border-box !important;
-}
-
-/* --- 10.3 ÚNICO BOTÓN CIAN (SUBMIT/BUTTON DEL FORMULARIO) --- */
-.item-product form input[type="submit"],
-.item-product form button[type="submit"],
-.item-product form button,
-.js-item-product form input[type="submit"],
-.js-item-product form button,
-.product-item form input[type="submit"],
-.product-item form button,
-.swiper-slide form input[type="submit"],
-.swiper-slide form button {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  padding: 6px 12px !important;
-  margin: 0 auto !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 1.1 !important;
-  text-transform: uppercase !important;
-  border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  z-index: 10 !important;
-  pointer-events: auto !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
-}
-
-/* INMUNIDAD A ESTADOS DE CARGA/DISABLED EN EL BOTÓN CIAN */
-.item-product form input[type="submit"]:disabled,
-.item-product form button:disabled,
-.item-product form input[type="submit"].disabled,
-.item-product form button.disabled,
-.item-product form input[type="submit"].loading,
-.item-product form button.loading {
-  opacity: 1 !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-}
-
-/* EFECTO PUSH (HOVER Y ACTIVE) */
-.item-product form input[type="submit"]:hover,
-.item-product form button:hover,
-.js-item-product form input[type="submit"]:hover,
-.js-item-product form button:hover,
-.product-item form input[type="submit"]:hover,
-.product-item form button:hover,
-.swiper-slide form input[type="submit"]:hover,
-.swiper-slide form button:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
-}
-
-.item-product form input[type="submit"]:active,
-.item-product form button:active,
-.js-item-product form input[type="submit"]:active,
-.js-item-product form button:active,
-.product-item form input[type="submit"]:active,
-.product-item form button:active,
-.swiper-slide form input[type="submit"]:active,
-.swiper-slide form button:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* --- 10.4 PÁGINA DE PRODUCTO (PDP) --- */
-#product-form,
+/* Asegura que el placeholder se superponga EXACTO sobre el botÃ³n real */
 .js-product-form {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 12px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  position: relative !important;
+  position: relative;
 }
 
-#product-form input[type="submit"]:first-of-type,
-#product-form button[type="submit"]:first-of-type,
-.js-product-form input[type="submit"]:first-of-type,
-.js-product-form button[type="submit"]:first-of-type {
-  display: inline-flex !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  width: auto !important;
-  min-width: 180px !important;
-  max-width: 240px !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 1.1 !important;
-  border-radius: 50px !important;
-  border: none !important;
-  padding: 6px 18px !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-transform: uppercase !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  position: relative !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  z-index: 10 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+.js-addtocart-placeholder {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#product-form button[type="submit"]:hover,
-#product-form input[type="submit"]:hover,
-.js-product-form button[type="submit"]:hover,
-.js-product-form input[type="submit"]:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
+.js-addtocart-placeholder .d-inline-block {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#product-form button[type="submit"]:active,
-#product-form input[type="submit"]:active,
-.js-product-form button[type="submit"]:active,
-.js-product-form input[type="submit"]:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* --- 10.5 PROTECCIÓN DE FILTROS E IMÁGENES --- */
-.js-price-filter-container button,
-.js-price-filter-form button,
-[class*="price-filter"] button {
-  background: #fff !important;
-  color: #333 !important;
-  box-shadow: none !important;
-  border: 1px solid #ccc !important;
-  border-radius: 0 4px 4px 0 !important;
-  width: auto !important;
-  height: 38px !important;
-}
-
-.item-product a.item-link,
-.item-product .item-link,
-.item-product img {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Los estados "Agregando..." y "Â¡Listo!" deben cubrir todo el botÃ³n, no solo centrarse */
+.js-addtocart-placeholder .transition-container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
