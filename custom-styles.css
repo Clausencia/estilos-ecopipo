@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y CONTROL ABSOLUTO DE GRID */
+/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (CORRECCIÓN DEFINITIVA) */
 
-/* --- 10.1 EXPULSIÓN DEFINITIVA DE AVISOS FANTASMA Y BOTONES SECUNDARIOS --- */
+/* --- 10.1 OCULTAR FEEDBACK Y BOTÓN NATIVO SECUNDARIO --- */
 .js-addtocart-feedback,
 .js-addtocart-success,
 [class*="addtocart-feedback"],
@@ -159,17 +159,17 @@ a.btn-link,
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-  top: -9999px !important;
-  width: 0 !important;
   height: 0 !important;
+  width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  position: absolute !important;
   pointer-events: none !important;
+  overflow: hidden !important;
 }
 
-/* --- 10.2 FIJAR CONTENEDOR Y FORMULARIO EN GRID --- */
-.item-buy,
-.js-item-buy,
+/* --- 10.2 FORMULARIO CONTENEDOR EN GRID --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -186,23 +186,16 @@ a.btn-link,
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 BOTÓN CIAN INDESTRUCTIBLE (INMUNIZADO A ESTADOS AJAX) --- */
+/* --- 10.3 ÚNICO BOTÓN CIAN (SUBMIT/BUTTON DEL FORMULARIO) --- */
 .item-product form input[type="submit"],
+.item-product form button[type="submit"],
 .item-product form button,
 .js-item-product form input[type="submit"],
 .js-item-product form button,
 .product-item form input[type="submit"],
 .product-item form button,
 .swiper-slide form input[type="submit"],
-.swiper-slide form button,
-.item-product form input[type="submit"]:disabled,
-.item-product form button:disabled,
-.item-product form input[type="submit"].disabled,
-.item-product form button.disabled,
-.item-product form input[type="submit"].loading,
-.item-product form button.loading,
-.item-product form [style*="display"],
-.js-item-product form [style*="display"] {
+.swiper-slide form button {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -233,6 +226,20 @@ a.btn-link,
   z-index: 10 !important;
   pointer-events: auto !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
+}
+
+/* INMUNIDAD A ESTADOS DE CARGA/DISABLED EN EL BOTÓN CIAN */
+.item-product form input[type="submit"]:disabled,
+.item-product form button:disabled,
+.item-product form input[type="submit"].disabled,
+.item-product form button.disabled,
+.item-product form input[type="submit"].loading,
+.item-product form button.loading {
+  opacity: 1 !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
 }
 
 /* EFECTO PUSH (HOVER Y ACTIVE) */
