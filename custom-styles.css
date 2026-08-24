@@ -140,66 +140,68 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (FLUJO DIRECTO SIN FEEDBACK) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (FLUJO DIRECTO SIN AVISOS) */
 
-/* --- 10.1 OCULTAMIENTO TOTAL DE FEEDBACKS Y BOTONES SECUNDARIOS NATIVOS --- */
-.js-addtocart-feedback,
-.js-addtocart-success,
+/* --- 10.1 OCULTAMIENTO DE AVISOS Y BOTONES SECUNDARIOS NATIVOS --- */
+/* Desactiva únicamente avisos flotantes y enlaces nativos ("Comprar"), protegiendo los contenedores base */
+div.js-addtocart-feedback,
+span.js-addtocart-feedback,
+div.js-addtocart-success,
+span.js-addtocart-success,
 [class*="addtocart-feedback"],
 [class*="addtocart-success"],
-html body a.js-item-buy,
-html body .js-item-buy:not(form),
-html body .item-buy > a,
-html body [class*="item-buy"] > a,
-html body .item-actions,
-html body .item-product-actions,
-html body .product-item-actions,
-html body .js-quickshop-toggle,
-html body .item-buy-open-modal,
-html body a.btn-link,
-html body .btn-secondary {
+a.js-item-buy,
+a[class*="item-buy"],
+.item-actions,
+.item-product-actions,
+.product-item-actions,
+.js-quickshop-toggle,
+.item-buy-open-modal,
+a.btn-link,
+.btn-secondary {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  margin: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
   padding: 0 !important;
+  margin: 0 !important;
   border: none !important;
-  pointer-events: none !important;
   position: absolute !important;
+  pointer-events: none !important;
   overflow: hidden !important;
 }
 
-/* --- 10.2 FORMULARIO Y CONTENEDOR EN GRID --- */
-.item-buy,
-.js-item-buy,
+/* --- 10.2 CONTENEDOR Y FORMULARIO BASE EN GRID --- */
+div.item-buy,
+div.js-item-buy,
 .item-product form,
 .js-item-product form,
 .product-item form,
 .swiper-slide form {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   position: relative !important;
   width: 85% !important;
   max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
   margin: 10px auto 0 auto !important;
-  display: block !important;
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 BOTÓN ÚNICO Y EFECTO PUSH --- */
-html body .item-buy form button,
-html body .item-buy form input[type="submit"],
-html body .item-product form button,
+/* --- 10.3 BOTÓN PRINCIPAL: SIEMPRE VISIBLE Y ESTÁTICO DURANTE AJAX --- */
 html body .item-product form input[type="submit"],
-html body .js-item-product form button,
+html body .item-product form button,
 html body .js-item-product form input[type="submit"],
-html body .product-item form button,
+html body .js-item-product form button,
 html body .product-item form input[type="submit"],
-html body .swiper-slide form button,
+html body .product-item form button,
 html body .swiper-slide form input[type="submit"],
-html body .js-addtocart-btn {
+html body .swiper-slide form button {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -227,37 +229,32 @@ html body .js-addtocart-btn {
   white-space: nowrap !important;
   box-sizing: border-box !important;
   position: relative !important;
-  z-index: 5 !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* HOVER Y ACTIVE (EFECTO PUSH) */
-html body .item-buy form button:hover,
-html body .item-buy form input[type="submit"]:hover,
-html body .item-product form button:hover,
+/* EFECTO PUSH (HOVER Y ACTIVE) */
 html body .item-product form input[type="submit"]:hover,
-html body .js-item-product form button:hover,
+html body .item-product form button:hover,
 html body .js-item-product form input[type="submit"]:hover,
-html body .product-item form button:hover,
+html body .js-item-product form button:hover,
 html body .product-item form input[type="submit"]:hover,
-html body .swiper-slide form button:hover,
+html body .product-item form button:hover,
 html body .swiper-slide form input[type="submit"]:hover,
-html body .js-addtocart-btn:hover {
+html body .swiper-slide form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-html body .item-buy form button:active,
-html body .item-buy form input[type="submit"]:active,
-html body .item-product form button:active,
 html body .item-product form input[type="submit"]:active,
-html body .js-item-product form button:active,
+html body .item-product form button:active,
 html body .js-item-product form input[type="submit"]:active,
-html body .product-item form button:active,
+html body .js-item-product form button:active,
 html body .product-item form input[type="submit"]:active,
-html body .swiper-slide form button:active,
+html body .product-item form button:active,
 html body .swiper-slide form input[type="submit"]:active,
-html body .js-addtocart-btn:active {
+html body .swiper-slide form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
