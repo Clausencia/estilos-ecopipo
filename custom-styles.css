@@ -140,13 +140,36 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (SOLUCIÓN DEFINITIVA GRID) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (CONTROL DEFINITIVO GRID) */
 
-/* --- 10.1 CONTENEDOR CONTENEDOR PADRE RELATIVO EN GRID --- */
+/* --- 10.1 OCULTAMIENTO ESTRICTO DE ENLACES SECUNDARIOS NATIVOS --- */
+/* Desactiva el botón nativo azul marino ("Comprar") que Tiendanube despierta por AJAX */
+html body a.js-item-buy,
+html body .js-item-buy:not(form),
+html body .item-buy > a,
+html body [class*="item-buy"] > a,
+html body .item-actions,
+html body .item-product-actions,
+html body .product-item-actions,
+html body .js-quickshop-toggle,
+html body .item-buy-open-modal,
+html body a.btn-link,
+html body .btn-secondary {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --- 10.2 CONTENEDOR Y FORMULARIO EN GRID --- */
 .item-buy,
 .js-item-buy,
-.item-product .item-buy,
-.js-item-product .item-buy {
+.item-product form,
+.js-item-product form,
+.product-item form,
+.swiper-slide form {
   position: relative !important;
   width: 85% !important;
   max-width: 190px !important;
@@ -157,7 +180,7 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL Y EFECTO PUSH EN GRID --- */
+/* --- 10.3 BOTÓN PRINCIPAL Y EFECTO PUSH --- */
 html body .item-buy form button,
 html body .item-buy form input[type="submit"],
 html body .item-product form button,
@@ -200,7 +223,7 @@ html body .js-addtocart-btn {
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* EFECTO PUSH (HOVER, ACTIVE Y FOCUS) */
+/* EFECTO PUSH (HOVER Y ACTIVE) */
 html body .item-buy form button:hover,
 html body .item-buy form input[type="submit"]:hover,
 html body .item-product form button:hover,
@@ -231,8 +254,7 @@ html body .js-addtocart-btn:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.3 ESTILO Y SUPERPOSICIÓN DEL FEEDBACK ("AGREGANDO..." / "¡LISTO!") --- */
-/* Se activa únicamente cuando Tiendanube retira el estado oculto */
+/* --- 10.4 MENSAJES DE FEEDBACK AJAX ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-feedback,
 .js-addtocart-success,
 [class*="addtocart-feedback"],
@@ -262,12 +284,7 @@ html body .js-addtocart-btn:active {
   margin: 0 !important;
   padding: 0 10px !important;
   pointer-events: none !important;
-}
-
-/* Fuerza el diseño flex solo si NO tiene estilo oculto inline */
-.js-addtocart-feedback:not([style*="display: none"]):not([style*="display:none"]),
-.js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]) {
-  display: flex !important;
+  overflow: hidden !important;
 }
 
 .js-addtocart-feedback *,
@@ -282,17 +299,6 @@ html body .js-addtocart-btn:active {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-/* --- 10.4 OCULTAR ELEMENTOS SECUNDARIOS NATIVOS --- */
-html body .item-actions,
-html body .item-product-actions,
-html body .product-item-actions,
-html body .js-quickshop-toggle,
-html body .item-buy-open-modal,
-html body a.btn-link,
-html body .btn-secondary {
-  display: none !important;
 }
 
 /* --- 10.5 PÁGINA DE PRODUCTO (PDP) --- */
