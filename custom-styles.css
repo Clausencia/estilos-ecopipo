@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (SOLUCIÓN DEFINITIVA Y CENTRADO EXACTO) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (SOLUCIÓN DEFINITIVA Y UNIFICADA) */
 
-/* --- 10.1 ANCLAJE RELATIVO OBLIGATORIO DE CONTENEDORES --- */
+/* --- 10.1 ANCLAJE RELATIVO DE CONTENEDORES PADRE --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -153,7 +153,7 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* --- 10.2 DESTRUCCIÓN PERMANENTE DE ENLACES Y ELEMENTOS "COMPRAR" --- */
+/* --- 10.2 ELIMINACIÓN TOTAL Y STRICTA DE ENLACES "COMPRAR" --- */
 a.js-item-buy,
 a[class*="item-buy"],
 .js-addtocart-placeholder a,
@@ -173,7 +173,7 @@ a.btn-link,
   pointer-events: none !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
+/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL (AGREGAR AL CARRITO) --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -189,14 +189,14 @@ a.btn-link,
   position: relative !important;
 }
 
-.item-product form input[type="submit"],
-.item-product form button,
-.js-item-product form input[type="submit"],
-.js-item-product form button,
-.product-item form input[type="submit"],
-.product-item form button,
-.swiper-slide form input[type="submit"],
-.swiper-slide form button {
+html body .item-product form input[type="submit"],
+html body .item-product form button,
+html body .js-item-product form input[type="submit"],
+html body .js-item-product form button,
+html body .product-item form input[type="submit"],
+html body .product-item form button,
+html body .swiper-slide form input[type="submit"],
+html body .swiper-slide form button {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -229,58 +229,52 @@ a.btn-link,
 }
 
 /* EFECTO PUSH (HOVER Y ACTIVE) */
-.item-product form input[type="submit"]:hover,
-.item-product form button:hover,
-.js-item-product form input[type="submit"]:hover,
-.js-item-product form button:hover,
-.product-item form input[type="submit"]:hover,
-.product-item form button:hover,
-.swiper-slide form input[type="submit"]:hover,
-.swiper-slide form button:hover {
+html body .item-product form input[type="submit"]:hover,
+html body .item-product form button:hover,
+html body .js-item-product form input[type="submit"]:hover,
+html body .js-item-product form button:hover,
+html body .product-item form input[type="submit"]:hover,
+html body .product-item form button:hover,
+html body .swiper-slide form input[type="submit"]:hover,
+html body .swiper-slide form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-.item-product form input[type="submit"]:active,
-.item-product form button:active,
-.js-item-product form input[type="submit"]:active,
-.js-item-product form button:active,
-.product-item form input[type="submit"]:active,
-.product-item form button:active,
-.swiper-slide form input[type="submit"]:active,
-.swiper-slide form button:active {
+html body .item-product form input[type="submit"]:active,
+html body .item-product form button:active,
+html body .js-item-product form input[type="submit"]:active,
+html body .js-item-product form button:active,
+html body .product-item form input[type="submit"]:active,
+html body .product-item form button:active,
+html body .swiper-slide form input[type="submit"]:active,
+html body .swiper-slide form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 CONTENEDOR CONTENEDOR EXTERNO TOTALMENTE TRANSPARENTE --- */
+/* --- 10.4 CÁPSULAS DE FEEDBACK (OCULTAS EN REPOSO) --- */
 .js-addtocart-placeholder,
-.js-addtocart-feedback {
+.js-addtocart-feedback,
+.js-addtocart-loading,
+.js-addtocart-success {
+  display: none;
+}
+
+/* --- 10.5 CÁPSULA CIAN UNIFICADA Y CENTRADO EXACTO AL ACTIVARSE --- */
+.js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
+.js-addtocart-feedback:not([style*="display: none"]):not([style*="display:none"]),
+.js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+.js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]),
+.js-addtocart-placeholder.active,
+.js-addtocart-feedback.active {
+  display: flex !important;
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
   width: 85% !important;
   max-width: 190px !important;
-  height: 38px !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  pointer-events: none !important;
-  z-index: 20 !important;
-}
-
-/* --- 10.5 CÁPSULAS EXCLUSIVAS DE CARGA Y ÉXITO (CIAN SÓLIDO Y CENTRADO) --- */
-.js-addtocart-loading,
-.js-addtocart-success,
-[class*="addtocart-loading"],
-[class*="addtocart-success"] {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
@@ -291,32 +285,24 @@ a.btn-link,
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  text-align: center !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 12px !important;
   line-height: 1.1 !important;
   text-transform: uppercase !important;
+  z-index: 25 !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   padding: 0 10px !important;
   pointer-events: none !important;
   overflow: hidden !important;
-  z-index: 30 !important;
 }
 
-/* OCULTAMIENTO ESTRICTO CUANDO TIENDANUBE LES APLICA DISPLAY:NONE */
-.js-addtocart-loading[style*="display: none"],
-.js-addtocart-loading[style*="display:none"],
-.js-addtocart-success[style*="display: none"],
-.js-addtocart-success[style*="display:none"] {
-  display: none !important;
-}
-
-/* NORMALIZACIÓN Y CENTRADO EXACTO DE TEXTOS INTERNOS */
+/* RESETEO DE TRANSFORMACIONES Y CENTRADO TOTAL DE TEXTOS INTERNOS */
+.js-addtocart-placeholder *,
+.js-addtocart-feedback *,
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
