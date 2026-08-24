@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (SOLUCIÓN DEFINITIVA DE RAÍZ) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (BLINDAJE Y CENTRADO ABSOLUTO) */
 
-/* --- 10.1 ANCLAJE RELATIVO EN CONTENEDORES PADRE --- */
+/* --- 10.1 CONTENEDOR PADRE RELATIVO --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -153,7 +153,7 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* --- 10.2 DESTRUCCIÓN DE ENLACES "COMPRAR" (TAGS <a> EN ZONA DE COMPRA) --- */
+/* --- 10.2 DESTRUCCIÓN TOTAL Y DEFINITIVA DE "COMPRAR" Y ENLACES SECUNDARIOS --- */
 .item-buy a,
 .js-item-buy a,
 .item-product .item-buy a,
@@ -178,6 +178,7 @@ a.btn-link,
   pointer-events: none !important;
   position: absolute !important;
   left: -9999px !important;
+  top: -9999px !important;
 }
 
 /* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL ("AGREGAR AL CARRITO") --- */
