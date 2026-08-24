@@ -140,128 +140,83 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (BLINDAJE Y CENTRADO ABSOLUTO) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (ESTRUCTURA SIMPLIFICADA Y LIMPIA) */
 
-/* --- 10.1 CONTENEDOR PADRE RELATIVO --- */
-.item-product,
-.js-item-product,
-.product-item,
-.item-buy,
-.js-item-buy,
-.js-product-form,
-#product-form {
-  position: relative !important;
-}
-
-/* --- 10.2 DESTRUCCIÓN TOTAL Y DEFINITIVA DE "COMPRAR" Y ENLACES SECUNDARIOS --- */
-.item-buy a,
-.js-item-buy a,
-.item-product .item-buy a,
-.js-addtocart-placeholder a,
-.js-addtocart-feedback a,
+/* --- 10.1 OCULTAMIENTO DE ENLACES SECUNDARIOS NATIVOS ("COMPRAR") --- */
 a.js-item-buy,
 a[class*="item-buy"],
-a[class*="buy"],
+.js-addtocart-placeholder a,
+.js-addtocart-feedback a,
 .item-actions,
-.item-product-actions,
-.product-item-actions,
-.js-quickshop-toggle,
-.item-buy-open-modal,
-a.btn-link,
 .btn-secondary {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
-  font-size: 0 !important;
   pointer-events: none !important;
-  position: absolute !important;
-  left: -9999px !important;
-  top: -9999px !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL ("AGREGAR AL CARRITO") --- */
+/* --- 10.2 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
 .swiper-slide form {
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  position: relative !important;
   width: 85% !important;
   max-width: 190px !important;
   height: 38px !important;
-  min-height: 38px !important;
   margin: 10px auto 0 auto !important;
-  position: relative !important;
 }
 
-html body .item-product form input[type="submit"],
-html body .item-product form button,
-html body .js-item-product form input[type="submit"],
-html body .js-item-product form button,
-html body .product-item form input[type="submit"],
-html body .product-item form button,
-html body .swiper-slide form input[type="submit"],
-html body .swiper-slide form button {
+.item-product form input[type="submit"],
+.item-product form button,
+.js-item-product form input[type="submit"],
+.js-item-product form button,
+.product-item form input[type="submit"],
+.product-item form button,
+.swiper-slide form input[type="submit"],
+.swiper-slide form button {
   display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
   height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
   padding: 0 12px !important;
   margin: 0 auto !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 1.1 !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
-  white-space: nowrap !important;
-  box-sizing: border-box !important;
   position: relative !important;
   z-index: 5 !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* EFECTO PUSH (HOVER Y ACTIVE) EN BOTÓN CIAN */
-html body .item-product form input[type="submit"]:hover,
-html body .item-product form button:hover,
-html body .js-item-product form input[type="submit"]:hover,
-html body .js-item-product form button:hover,
-html body .product-item form input[type="submit"]:hover,
-html body .product-item form button:hover,
-html body .swiper-slide form input[type="submit"]:hover,
-html body .swiper-slide form button:hover {
+/* EFECTO PUSH */
+.item-product form input[type="submit"]:hover,
+.item-product form button:hover,
+.js-item-product form input[type="submit"]:hover,
+.js-item-product form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-html body .item-product form input[type="submit"]:active,
-html body .item-product form button:active,
-html body .js-item-product form input[type="submit"]:active,
-html body .js-item-product form button:active,
-html body .product-item form input[type="submit"]:active,
-html body .product-item form button:active,
-html body .swiper-slide form input[type="submit"]:active,
-html body .swiper-slide form button:active {
+.item-product form input[type="submit"]:active,
+.item-product form button:active,
+.js-item-product form input[type="submit"]:active,
+.js-item-product form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 CONTENEDOR ENVOLVENTE TRANSPARENTE --- */
+/* --- 10.3 CAPA DE FEEDBACK Y ESTADOS AJAX ("AGREGANDO...", "¡LISTO!") --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback {
   position: absolute !important;
@@ -278,63 +233,47 @@ html body .swiper-slide form button:active {
   z-index: 20 !important;
 }
 
-/* --- 10.5 CÁPSULAS CIAN DE CARGA Y ¡LISTO! (ACTIVAS SÓLO AL EJECUTARSE) --- */
+/* Estilos para las cajas internas cuando Tiendanube las activa */
 .js-addtocart-loading,
-.js-addtocart-success {
-  display: none;
-}
-
-.js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
-.js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]),
-.js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]) .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
-.js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]) .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]) {
+.js-addtocart-success,
+.js-addtocart-placeholder .js-addtocart-loading,
+.js-addtocart-placeholder .js-addtocart-success {
   display: flex !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: 100% !important;
   height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 1.1 !important;
   text-transform: uppercase !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
-  padding: 0 10px !important;
-  z-index: 25 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
+  text-align: center !important;
 }
 
-/* CENTRADO DE TEXTO INTERNO ("AGREGANDO...", "¡LISTO!") */
+/* Respetar el ocultamiento nativo cuando no hay acción AJAX */
+[style*="display: none"],
+[style*="display:none"] {
+  display: none !important;
+}
+
+/* Normalización de texto interno */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  text-align: center !important;
   width: 100% !important;
   height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   transform: none !important;
-  position: static !important;
-  line-height: 1.1 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
@@ -343,88 +282,17 @@ html body .swiper-slide form button:active {
   box-shadow: none !important;
 }
 
-/* --- 10.6 PÁGINA DE PRODUCTO (PDP) --- */
-#product-form,
-.js-product-form {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 12px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  position: relative !important;
-}
-
+/* --- 10.4 PÁGINA DE PRODUCTO Y FILTROS --- */
+#product-form, .js-product-form { display: flex !important; gap: 12px !important; width: 100% !important; }
 #product-form input[type="submit"]:first-of-type,
-#product-form button[type="submit"]:first-of-type,
-.js-product-form input[type="submit"]:first-of-type,
-.js-product-form button[type="submit"]:first-of-type {
-  display: inline-flex !important;
+#product-form button[type="submit"]:first-of-type {
   height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  width: auto !important;
-  min-width: 180px !important;
-  max-width: 240px !important;
-  background-color: #42c6d3 !important;
   background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
+  color: #FFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 1.1 !important;
   border-radius: 50px !important;
   border: none !important;
-  padding: 6px 18px !important;
   box-shadow: 0 4px 0 #3C1053 !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-transform: uppercase !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  position: relative !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  z-index: 10 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
-}
-
-#product-form button[type="submit"]:hover,
-#product-form input[type="submit"]:hover,
-.js-product-form button[type="submit"]:hover,
-.js-product-form input[type="submit"]:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
-}
-
-#product-form button[type="submit"]:active,
-#product-form input[type="submit"]:active,
-.js-product-form button[type="submit"]:active,
-.js-product-form input[type="submit"]:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* --- 10.7 PROTECCIÓN DE FILTROS E IMÁGENES --- */
-.js-price-filter-container button,
-.js-price-filter-form button,
-[class*="price-filter"] button {
-  background: #fff !important;
-  color: #333 !important;
-  box-shadow: none !important;
-  border: 1px solid #ccc !important;
-  border-radius: 0 4px 4px 0 !important;
-  width: auto !important;
-  height: 38px !important;
-}
-
-.item-product a.item-link,
-.item-product .item-link,
-.item-product img {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  padding: 6px 18px !important;
 }
