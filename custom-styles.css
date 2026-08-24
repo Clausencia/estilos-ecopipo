@@ -140,14 +140,11 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (FLUJO DIRECTO SIN AVISOS) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (BLOQUEO TOTAL AJAX) */
 
-/* --- 10.1 OCULTAMIENTO DE AVISOS Y BOTONES SECUNDARIOS NATIVOS --- */
-/* Desactiva únicamente avisos flotantes y enlaces nativos ("Comprar"), protegiendo los contenedores base */
-div.js-addtocart-feedback,
-span.js-addtocart-feedback,
-div.js-addtocart-success,
-span.js-addtocart-success,
+/* --- 10.1 OCULTAMIENTO ABSOLUTO DE AVISOS Y ENLACES SECUNDARIOS --- */
+.js-addtocart-feedback,
+.js-addtocart-success,
 [class*="addtocart-feedback"],
 [class*="addtocart-success"],
 a.js-item-buy,
@@ -164,8 +161,6 @@ a.btn-link,
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
-  max-height: 0 !important;
-  max-width: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -174,9 +169,9 @@ a.btn-link,
   overflow: hidden !important;
 }
 
-/* --- 10.2 CONTENEDOR Y FORMULARIO BASE EN GRID --- */
-div.item-buy,
-div.js-item-buy,
+/* --- 10.2 CONTENEDOR BASE EN GRID --- */
+.item-buy,
+.js-item-buy,
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -193,7 +188,7 @@ div.js-item-buy,
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 BOTÓN PRINCIPAL: SIEMPRE VISIBLE Y ESTÁTICO DURANTE AJAX --- */
+/* --- 10.3 BOTÓN PRINCIPAL: BLINDAJE EN ESTADOS NORMAL, DESHABILITADO Y CARGANDO --- */
 html body .item-product form input[type="submit"],
 html body .item-product form button,
 html body .js-item-product form input[type="submit"],
@@ -201,7 +196,13 @@ html body .js-item-product form button,
 html body .product-item form input[type="submit"],
 html body .product-item form button,
 html body .swiper-slide form input[type="submit"],
-html body .swiper-slide form button {
+html body .swiper-slide form button,
+html body .item-product form input[type="submit"]:disabled,
+html body .item-product form button:disabled,
+html body .item-product form input[type="submit"].disabled,
+html body .item-product form button.disabled,
+html body .item-product form input[type="submit"].loading,
+html body .item-product form button.loading {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -230,7 +231,6 @@ html body .swiper-slide form button {
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 10 !important;
-  pointer-events: auto !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
@@ -276,7 +276,9 @@ html body .swiper-slide form button:active {
 #product-form input[type="submit"]:first-of-type,
 #product-form button[type="submit"]:first-of-type,
 .js-product-form input[type="submit"]:first-of-type,
-.js-product-form button[type="submit"]:first-of-type {
+.js-product-form button[type="submit"]:first-of-type,
+#product-form input[type="submit"]:disabled,
+#product-form button[type="submit"]:disabled {
   display: inline-flex !important;
   height: 38px !important;
   min-height: 38px !important;
