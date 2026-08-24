@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (CORRECCIÓN TOCAYO) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y EFECTO PUSH EN GRID (CORRECCIÓN SIMPLE) */
 
 /* Asegura que el placeholder se superponga EXACTO sobre el botón real */
 .js-product-form {
