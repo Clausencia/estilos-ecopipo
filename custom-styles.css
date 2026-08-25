@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (FIX DE ANCHO, CENTRADO Y COMPRAR) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (SOLUCIÓN DEFINITIVA DE CENTRADO Y COMPRAR) */
 
 /* --- 10.1 ANCLAJE RELATIVO --- */
 .item-product,
@@ -149,37 +149,26 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* --- 10.2 ELIMINACIÓN ABSOLUTA DEL ENLACE "COMPRAR" --- */
-.js-item-product a.js-item-buy,
-.js-item-product a[class*="buy"],
+/* --- 10.2 ELIMINACIÓN ABSOLUTA DE ENLACES "COMPRAR" --- */
 .item-product a.js-item-buy,
-.item-product a[class*="buy"],
-.js-addtocart-placeholder a,
-.js-addtocart-feedback a,
-a.js-item-buy,
-a[class*="item-buy"] {
+.item-product a.item-buy,
+.item-product a[class*="item-buy"],
+.item-product .js-item-buy-open-popup,
+.item-product .js-addtocart-placeholder a,
+.item-product .js-addtocart-feedback a,
+.js-item-product a.js-item-buy,
+.js-item-product a[class*="item-buy"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
   font-size: 0 !important;
   color: transparent !important;
-  height: 0 !important;
-  width: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
   pointer-events: none !important;
-}
-
-/* Excepción: Preservar enlaces a la ficha del producto (imagen y título) */
-.item-product a.item-link,
-.item-product a.product-image-link,
-.item-product .item-info-container a {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  font-size: inherit !important;
-  color: inherit !important;
-  height: auto !important;
-  width: auto !important;
-  pointer-events: auto !important;
 }
 
 /* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
@@ -229,18 +218,22 @@ a[class*="item-buy"] {
 
 /* EFECTO PUSH */
 .item-product form input[type="submit"]:hover,
-.item-product form button:hover {
+.item-product form button:hover,
+.js-item-product form input[type="submit"]:hover,
+.js-item-product form button:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
 .item-product form input[type="submit"]:active,
-.item-product form button:active {
+.item-product form button:active,
+.js-item-product form input[type="submit"]:active,
+.js-item-product form button:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 CONTENEDOR DE FEEDBACK TRANSPARENTE (FORZADO DE TAMAÑO) --- */
+/* --- 10.4 CONTENEDOR FLOTANTE 100% TRANSPARENTE --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback {
   position: absolute !important;
@@ -253,6 +246,7 @@ a[class*="item-buy"] {
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
+  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   pointer-events: none !important;
@@ -260,7 +254,7 @@ a[class*="item-buy"] {
   font-size: 0 !important;
 }
 
-/* --- 10.5 CÁPSULAS CIAN SÓLIDAS ("AGREGANDO..." Y "¡LISTO!") --- */
+/* --- 10.5 CÁPSULAS SÓLIDAS "AGREGANDO..." Y "¡LISTO!" --- */
 .js-addtocart-loading,
 .js-addtocart-success,
 [class*="addtocart-loading"],
@@ -287,10 +281,11 @@ a[class*="item-buy"] {
   text-align: center !important;
   box-sizing: border-box !important;
   margin: 0 !important;
-  padding: 0 10px !important;
+  padding: 0 5px !important;
   z-index: 30 !important;
   pointer-events: none !important;
   overflow: hidden !important;
+  transform: none !important;
 }
 
 .js-addtocart-loading[style*="display: none"],
@@ -300,7 +295,7 @@ a[class*="item-buy"] {
   display: none !important;
 }
 
-/* CENTRADO DEFINITIVO DE HIJOS (ANULA DESFASE VERTICAL DE IPANEMA) */
+/* CENTRADO DEFINITIVO DE HIJOS (CERO CORTE EN "¡LISTO!") */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
@@ -313,6 +308,8 @@ a[class*="item-buy"] {
   padding: 0 !important;
   transform: none !important;
   position: static !important;
+  top: auto !important;
+  bottom: auto !important;
   line-height: 1 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
