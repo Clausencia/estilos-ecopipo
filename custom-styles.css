@@ -140,36 +140,18 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (FIX DEFINITIVO DE COMPRAR Y ALINEACIÓN) */
+/* 10. BOTONES GLOBALES, FEEDBACK AJAX Y CATÁLOGO (BLINDAJE TOTAL) */
 
-/* --- 10.1 ANCLAJE RELATIVO DEL CONTENEDOR PADRE --- */
+/* --- 10.1 ANCLAJE Y BOTÓN CIAN PRINCIPAL (AGREGAR AL CARRITO) --- */
 .item-product,
 .js-item-product,
-.product-item {
+.product-item,
+.item-buy,
+.js-product-form,
+#product-form {
   position: relative !important;
 }
 
-/* --- 10.2 ELIMINACIÓN TOTAL Y ESTRICTA DE ENLACES "COMPRAR" --- */
-a.js-item-buy,
-a.item-buy,
-a[class*="item-buy"],
-.js-addtocart-placeholder a,
-.js-addtocart-feedback a,
-.item-product a.js-item-buy,
-.js-item-product a.js-item-buy {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  position: absolute !important;
-  left: -9999px !important;
-  pointer-events: none !important;
-}
-
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -190,7 +172,8 @@ a[class*="item-buy"],
 .product-item form input[type="submit"],
 .product-item form button,
 .swiper-slide form input[type="submit"],
-.swiper-slide form button {
+.swiper-slide form button,
+.js-addtocart-button {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -203,6 +186,7 @@ a[class*="item-buy"],
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
@@ -236,11 +220,27 @@ a[class*="item-buy"],
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 ENVOLVENTE FLOTANTE 100% TRANSPARENTE --- */
-.item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-feedback,
+/* --- 10.2 ELIMINACIÓN ABSOLUTA DE ENLACES "COMPRAR" --- */
+a.js-item-buy,
+a.item-buy,
+a[class*="item-buy"],
+.js-addtocart-placeholder a,
+.js-addtocart-feedback a,
+.item-product a.js-item-buy,
+.product-item-actions a.btn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  position: absolute !important;
+  left: -9999px !important;
+  pointer-events: none !important;
+}
+
+/* --- 10.3 CONTENEDOR FLOTANTE PADRE (TRANSPARENTE E INVISIBLE) --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback {
   position: absolute !important;
@@ -258,15 +258,15 @@ a[class*="item-buy"],
   box-shadow: none !important;
   pointer-events: none !important;
   z-index: 20 !important;
+  font-size: 0 !important;
+  color: transparent !important;
 }
 
-/* --- 10.5 CÁPSULAS SÓLIDAS "AGREGANDO..." Y "¡LISTO!" --- */
-.item-product .js-addtocart-loading,
-.item-product .js-addtocart-success,
-.js-item-product .js-addtocart-loading,
-.js-item-product .js-addtocart-success,
+/* --- 10.4 CÁPSULAS CIAN ACTIVAS ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-loading,
-.js-addtocart-success {
+.js-addtocart-success,
+[class*="addtocart-loading"],
+[class*="addtocart-success"] {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -280,6 +280,11 @@ a[class*="item-buy"],
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
@@ -293,11 +298,10 @@ a[class*="item-buy"],
   z-index: 30 !important;
   pointer-events: none !important;
   overflow: hidden !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  transform: none !important;
 }
 
-/* OCULTAMIENTO ESTRICTO CUANDO NO HAY ACCIÓN AJAX */
+/* OCULTAMIENTO ESTRICTO EN REPOSO */
 .js-addtocart-loading[style*="display: none"],
 .js-addtocart-loading[style*="display:none"],
 .js-addtocart-success[style*="display: none"],
@@ -305,7 +309,7 @@ a[class*="item-buy"],
   display: none !important;
 }
 
-/* CENTRADO ABSOLUTO Y DESACTIVACIÓN DE DESPLAZAMIENTOS DE IPANEMA */
+/* CENTRADO DEFINITIVO DE HIJOS Y ANULACIÓN DE DESPLAZAMIENTOS IPANEMA */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
@@ -318,7 +322,10 @@ a[class*="item-buy"],
   padding: 0 !important;
   transform: none !important;
   position: static !important;
-  top: 0 !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
   line-height: 1 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
@@ -330,7 +337,7 @@ a[class*="item-buy"],
   box-shadow: none !important;
 }
 
-/* --- 10.6 PÁGINA DE PRODUCTO (PDP) Y FILTROS --- */
+/* --- 10.5 PÁGINA DE PRODUCTO (PDP) Y FILTROS --- */
 #product-form,
 .js-product-form {
   display: flex !important;
