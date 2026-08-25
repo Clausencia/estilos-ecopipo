@@ -149,25 +149,23 @@ a[href*="checkout"]:active {
     height: auto !important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (BLINDAJE Y CENTRADO DEFECTO CERO) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (COBERTURA SÓLIDA Y CAMUFLAJE) */
 
-/* --- 10.1 CONTENEDOR PADRE RELATIVO --- */
+/* --- 10.1 ANCLAJE RELATIVO DEL CONTENEDOR PADRE --- */
 .item-product,
 .js-item-product,
 .product-item {
   position: relative !important;
 }
 
-/* --- 10.2 ELIMINACIÓN ABSOLUTA DEL ENLACE "COMPRAR" --- */
+/* --- 10.2 ELIMINACIÓN TOTAL DEL TEXTO "COMPRAR" --- */
 .item-product a.js-item-buy,
 .item-product a.item-buy,
 .item-product a[class*="item-buy"],
-.item-product .js-addtocart-placeholder a,
-.item-product .js-addtocart-feedback a,
+.item-product .js-addtocart-placeholder > a,
+.item-product .js-addtocart-feedback > a,
 .js-item-product a.js-item-buy,
-.js-item-product a.item-buy,
-.js-item-product .js-addtocart-placeholder a,
-.js-item-product .js-addtocart-feedback a {
+.js-item-product a.item-buy {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -217,7 +215,7 @@ a[href*="checkout"]:active {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 1 !important;
+  line-height: 38px !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
@@ -247,29 +245,28 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 ENVOLVENTE FLOTANTE 100% TRANSPARENTE --- */
+/* --- 10.4 ENVOLVENTE FLOTANTE TRANSPARENTE --- */
 .item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
 .js-item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-feedback {
   position: absolute !important;
   top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 85% !important;
+  max-width: 190px !important;
   height: 38px !important;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
-  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   pointer-events: none !important;
   z-index: 20 !important;
-  font-size: 0 !important;
-  color: transparent !important;
 }
 
-/* --- 10.5 CÁPSULAS DE CARGA Y ÉXITO (ESTILO TURQUESA Y CENTRADO EXACTO) --- */
+/* --- 10.5 CÁPSULAS SÓLIDAS DE CARGA Y ÉXITO (COBERTURA TOTAL Y CENTRADO) --- */
 .item-product .js-addtocart-loading,
 .item-product .js-addtocart-success,
 .js-item-product .js-addtocart-loading,
@@ -290,7 +287,7 @@ a[href*="checkout"]:active {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 1 !important;
+  line-height: 38px !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
@@ -305,10 +302,11 @@ a[href*="checkout"]:active {
   z-index: 25 !important;
   pointer-events: none !important;
   overflow: hidden !important;
-  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-/* CENTRADO ABSOLUTO DE TEXTOS INTERNOS ("AGREGANDO...", "¡LISTO!") */
+/* CENTRADO EXACTO DE TEXTOS INTERNOS ("AGREGANDO...", "¡LISTO!") */
 .item-product .js-addtocart-loading *,
 .item-product .js-addtocart-success *,
 .js-item-product .js-addtocart-loading *,
@@ -323,7 +321,7 @@ a[href*="checkout"]:active {
   padding: 0 !important;
   transform: none !important;
   position: static !important;
-  line-height: 1 !important;
+  line-height: 38px !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -334,7 +332,7 @@ a[href*="checkout"]:active {
   box-shadow: none !important;
 }
 
-/* OCULTAMIENTO NATIVO SI TIENDANUBE DESACTIVA LA ACCIÓN */
+/* OCULTAMIENTO STRICTO CUANDO TIENDANUBE DESACTIVA LA ACCIÓN */
 .item-product .js-addtocart-loading[style*="display: none"],
 .item-product .js-addtocart-loading[style*="display:none"],
 .item-product .js-addtocart-success[style*="display: none"],
