@@ -149,7 +149,7 @@ a[href*="checkout"]:active {
     height: auto !important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (COBERTURA SÓLIDA Y CAMUFLAJE) */
+/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (CAMUFLAJE SÓLIDO 100% Y CENTRADO) */
 
 /* --- 10.1 ANCLAJE RELATIVO DEL CONTENEDOR PADRE --- */
 .item-product,
@@ -158,27 +158,7 @@ a[href*="checkout"]:active {
   position: relative !important;
 }
 
-/* --- 10.2 ELIMINACIÓN TOTAL DEL TEXTO "COMPRAR" --- */
-.item-product a.js-item-buy,
-.item-product a.item-buy,
-.item-product a[class*="item-buy"],
-.item-product .js-addtocart-placeholder > a,
-.item-product .js-addtocart-feedback > a,
-.js-item-product a.js-item-buy,
-.js-item-product a.item-buy {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  position: absolute !important;
-  left: -9999px !important;
-  pointer-events: none !important;
-}
-
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
+/* --- 10.2 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -215,7 +195,7 @@ a[href*="checkout"]:active {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 38px !important;
+  line-height: 1 !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
@@ -245,28 +225,49 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 ENVOLVENTE FLOTANTE TRANSPARENTE --- */
+/* --- 10.3 CAMUFLAJE SÓLIDO PARA EL PLACEHOLDER Y ENLACE "COMPRAR" --- */
 .item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
+.item-product a.js-item-buy,
+.item-product a.item-buy,
+.item-product a[class*="item-buy"],
 .js-item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-feedback {
+.js-item-product .js-addtocart-feedback,
+.js-item-product a.js-item-buy,
+.js-item-product a.item-buy {
   position: absolute !important;
   top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 85% !important;
-  max-width: 190px !important;
+  left: 0 !important;
+  width: 100% !important;
   height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: transparent !important;
+  border-radius: 50px !important;
+  border: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  z-index: 15 !important;
   pointer-events: none !important;
-  z-index: 20 !important;
+  overflow: hidden !important;
 }
 
-/* --- 10.5 CÁPSULAS SÓLIDAS DE CARGA Y ÉXITO (COBERTURA TOTAL Y CENTRADO) --- */
+/* Ocultar el texto "Comprar" nativo dentro del contenedor */
+.item-product .js-addtocart-placeholder a,
+.item-product .js-addtocart-feedback a,
+.js-item-product .js-addtocart-placeholder a,
+.js-item-product .js-addtocart-feedback a {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  font-size: 0 !important;
+}
+
+/* --- 10.4 CÁPSULAS SÓLIDAS DE ESTADO ("AGREGANDO..." Y "¡LISTO!") --- */
 .item-product .js-addtocart-loading,
 .item-product .js-addtocart-success,
 .js-item-product .js-addtocart-loading,
@@ -284,11 +285,6 @@ a[href*="checkout"]:active {
   background: #42c6d3 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 38px !important;
-  text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
@@ -296,17 +292,33 @@ a[href*="checkout"]:active {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
   box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 10px !important;
-  z-index: 25 !important;
+  z-index: 30 !important;
   pointer-events: none !important;
   overflow: hidden !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-/* CENTRADO EXACTO DE TEXTOS INTERNOS ("AGREGANDO...", "¡LISTO!") */
+/* Respetar ocultamiento cuando Tiendanube desactiva los estados */
+.item-product .js-addtocart-loading[style*="display: none"],
+.item-product .js-addtocart-loading[style*="display:none"],
+.item-product .js-addtocart-success[style*="display: none"],
+.item-product .js-addtocart-success[style*="display:none"],
+.js-item-product .js-addtocart-loading[style*="display: none"],
+.js-item-product .js-addtocart-loading[style*="display:none"],
+.js-item-product .js-addtocart-success[style*="display: none"],
+.js-item-product .js-addtocart-success[style*="display:none"] {
+  display: none !important;
+}
+
+/* CENTRADO VERTICAL Y HORIZONTAL EXACTO DE LOS TEXTOS INTERNOS */
 .item-product .js-addtocart-loading *,
 .item-product .js-addtocart-success *,
 .js-item-product .js-addtocart-loading *,
@@ -321,7 +333,7 @@ a[href*="checkout"]:active {
   padding: 0 !important;
   transform: none !important;
   position: static !important;
-  line-height: 38px !important;
+  line-height: 1 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -332,19 +344,7 @@ a[href*="checkout"]:active {
   box-shadow: none !important;
 }
 
-/* OCULTAMIENTO STRICTO CUANDO TIENDANUBE DESACTIVA LA ACCIÓN */
-.item-product .js-addtocart-loading[style*="display: none"],
-.item-product .js-addtocart-loading[style*="display:none"],
-.item-product .js-addtocart-success[style*="display: none"],
-.item-product .js-addtocart-success[style*="display:none"],
-.js-item-product .js-addtocart-loading[style*="display: none"],
-.js-item-product .js-addtocart-loading[style*="display:none"],
-.js-item-product .js-addtocart-success[style*="display: none"],
-.js-item-product .js-addtocart-success[style*="display:none"] {
-  display: none !important;
-}
-
-/* --- 10.6 PÁGINA DE PRODUCTO (PDP) Y FILTROS --- */
+/* --- 10.5 PÁGINA DE PRODUCTO (PDP) Y FILTROS --- */
 #product-form,
 .js-product-form {
   display: flex !important;
