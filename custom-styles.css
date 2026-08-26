@@ -140,103 +140,69 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. BOTÓN AGREGAR AL CARRITO Y FEEDBACK AJAX (FIX DE ANCHO, CENTRADO Y COMPRAR) */
+/* 10. BOTONES UNIFICADOS: CATALOGO, PDP Y CARRUSEL (SIN BRINCOS NI AZULES) */
 
-/* --- 10.1 ANCLAJE RELATIVO --- */
+/* --- 10.1 ANCLAJE GENERAL EN CONTENEDORES --- */
 .item-product,
 .js-item-product,
-.product-item {
+.product-item,
+.swiper-slide .item-product,
+#product-form,
+.js-product-form {
   position: relative !important;
 }
 
-.item-product .item-buy,
-.js-item-product .js-item-buy,
-.item-buy {
-  display: block !important;
-  position: relative !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* --- 10.2 DESTRUCCIÓN TOTAL DE ENLACES "COMPRAR" Y NATIVOS --- */
+/* --- 10.2 ELIMINACIÓN DE BOTONES COMPRAR Y NATIVOS TRASEROS --- */
 .item-product a.js-item-buy,
 .item-product a.item-buy,
 .item-product a[class*="buy"],
-.item-product a[class*="item-buy"],
-.item-product .js-item-buy-open-popup,
-.item-product .js-addtocart-placeholder a,
-.item-product .js-addtocart-feedback a,
-.js-item-product a.js-item-buy,
-.js-item-product a[class*="buy"],
+.swiper-slide a.js-item-buy,
+.swiper-slide a[class*="buy"],
 .js-addtocart-placeholder a,
 .js-addtocart-feedback a,
-a.js-item-buy,
-a[class*="item-buy"],
-a[class*="buy-open-popup"] {
+a.js-item-buy {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   width: 0 !important;
   height: 0 !important;
-  max-width: 0 !important;
-  max-height: 0 !important;
   font-size: 0 !important;
-  line-height: 0 !important;
-  color: transparent !important;
   position: absolute !important;
   left: -9999px !important;
-  top: -9999px !important;
   pointer-events: none !important;
-  clip: rect(0,0,0,0) !important;
 }
 
-/* Preservar únicamente enlaces de título e imagen */
+/* Preservar únicamente enlaces de imagen y título */
 .item-product a.item-link,
 .item-product a.product-image-link,
-.item-product .item-info-container a {
+.swiper-slide a.item-link {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  width: auto !important;
-  height: auto !important;
-  font-size: inherit !important;
-  color: inherit !important;
   position: static !important;
   pointer-events: auto !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL --- */
-.item-product form,
-.js-item-product form,
-.product-item form,
-.swiper-slide form {
-  display: block !important;
-  position: relative !important;
-  width: 85% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  margin: 10px auto 0 auto !important;
-}
-
-.item-product form input[type="submit"],
+/* --- 10.3 ESTILO UNIFICADO TURQUESA (GRID, CARRUSEL Y FICHA PDP) --- */
 .item-product form button,
-.js-item-product form input[type="submit"],
+.item-product form input[type="submit"],
 .js-item-product form button,
-.product-item form input[type="submit"],
-.product-item form button,
+.js-item-product form input[type="submit"],
+.swiper-slide form button,
 .swiper-slide form input[type="submit"],
-.swiper-slide form button {
+#product-form button[type="submit"],
+#product-form input[type="submit"],
+.js-addtocart-js {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
+  max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
   padding: 0 12px !important;
-  margin: 0 auto !important;
+  margin: 10px auto 0 auto !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -244,7 +210,7 @@ a[class*="buy-open-popup"] {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 1.1 !important;
+  line-height: 1 !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
@@ -253,34 +219,24 @@ a[class*="buy-open-popup"] {
   white-space: nowrap !important;
   box-sizing: border-box !important;
   position: relative !important;
-  z-index: 5 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+  z-index: 10 !important;
+  /* Anula el brinco u oscilación en carruseles Swiper */
+  transform: none !important;
+  transition: box-shadow .15s ease, background-color .15s ease !important;
 }
 
-/* EFECTO PUSH */
-.item-product form input[type="submit"]:hover,
+/* EFECTO PUSH EXCLUSIVO VERTICAL (SIN TRANSLATE HORIZONTAL) */
 .item-product form button:hover,
-.js-item-product form input[type="submit"]:hover,
-.js-item-product form button:hover {
-  transform: translateY(2px) !important;
+.item-product form input[type="submit"]:hover,
+.swiper-slide form button:hover,
+#product-form button[type="submit"]:hover {
   box-shadow: 0 2px 0 #3C1053 !important;
+  background-color: #38b2bf !important;
 }
 
-.item-product form input[type="submit"]:active,
-.item-product form button:active,
-.js-item-product form input[type="submit"]:active,
-.js-item-product form button:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-/* --- 10.4 CONTENEDOR ENVOLVENTE TRANSPARENTE (ANCHO DE 190PX) --- */
+/* --- 10.4 CÁPSULAS DE FEEDBACK Y CENTRADO DE TEXTO --- */
 .js-addtocart-placeholder,
-.js-addtocart-feedback,
-.item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-feedback {
+.js-addtocart-feedback {
   position: absolute !important;
   top: 0 !important;
   left: 50% !important;
@@ -291,7 +247,6 @@ a[class*="buy-open-popup"] {
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
-  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   pointer-events: none !important;
@@ -299,7 +254,6 @@ a[class*="buy-open-popup"] {
   font-size: 0 !important;
 }
 
-/* --- 10.5 CÁPSULAS CIAN SÓLIDAS ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-loading,
 .js-addtocart-success,
 [class*="addtocart-loading"],
@@ -308,57 +262,34 @@ a[class*="buy-open-popup"] {
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
   height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
   border-radius: 50px !important;
-  border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
-  padding: 0 8px !important;
   z-index: 30 !important;
   pointer-events: none !important;
   overflow: hidden !important;
 }
 
-/* OCULTAMIENTO ESTRICTO CUANDO NO HAY ACCIÓN AJAX */
-.js-addtocart-loading[style*="display: none"],
-.js-addtocart-loading[style*="display:none"],
-.js-addtocart-success[style*="display: none"],
-.js-addtocart-success[style*="display:none"] {
-  display: none !important;
-}
-
-/* CENTRADO PERFECTO Y TIPOGRAFÍA BALOO 2 A 13PX */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: inline-block !important;
-  width: auto !important;
-  height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
   transform: none !important;
-  position: static !important;
   line-height: 1.1 !important;
   color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
   text-transform: uppercase !important;
   background: transparent !important;
   border: none !important;
-  box-shadow: none !important;
-  vertical-align: middle !important;
 }
