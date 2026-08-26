@@ -140,67 +140,59 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN TOTAL: CATÁLOGO, CARRUSELES Y PDP (SIN AZULES NI DESPLAZAMIENTOS) */
+/* 10. UNIFICACIÓN CATÁLOGO, FICHA (PDP) Y CARRUSELES (IMÁGENES VISIBLES + FEEDBACK CORREGIDO) */
 
-/* --- 10.1 CENTRADO Y ESTRUCTURA DE CONTENEDORES --- */
+/* --- 10.1 ESTRUCTURA DE CONTENEDORES Y PROTECCIÓN DE IMÁGENES --- */
 .item-product,
 .js-item-product,
 .product-item,
-.swiper-slide .item-product,
-.item-buy,
-.js-item-buy {
+.swiper-slide {
   position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
 }
 
-/* --- 10.2 ANULACIÓN NUCLEAR DEL BOTÓN "COMPRAR" Y ENLACES NATIVOS --- */
+.item-product img,
+.js-item-product img,
+.product-item img,
+.swiper-slide img,
+.item-image-container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 auto !important;
+}
+
+.item-product a.item-link,
+.swiper-slide a.item-link {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  pointer-events: auto !important;
+}
+
+/* --- 10.2 OCULTAMIENTO ESPECÍFICO DEL BOTÓN "COMPRAR" NATIVO --- */
 a.js-item-buy,
 a.item-buy,
-a[class*="buy"],
-a[class*="item-buy"],
 .js-item-buy-open-popup,
-.item-buy > a,
-.js-item-buy > a,
-.js-addtocart-placeholder a,
-.js-addtocart-feedback a,
-.swiper-slide a[class*="buy"] {
+.item-product .js-addtocart-placeholder a,
+.item-product .js-addtocart-feedback a,
+.swiper-slide .js-addtocart-placeholder a {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   width: 0 !important;
   height: 0 !important;
-  max-width: 0 !important;
-  max-height: 0 !important;
   font-size: 0 !important;
-  line-height: 0 !important;
   color: transparent !important;
   position: absolute !important;
   left: -9999px !important;
   top: -9999px !important;
   pointer-events: none !important;
-  clip: rect(0,0,0,0) !important;
 }
 
-/* Excepción: Enlaces de título e imagen de producto */
-.item-product a.item-link,
-.item-product a.product-image-link,
-.swiper-slide a.item-link {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: auto !important;
-  height: auto !important;
-  font-size: inherit !important;
-  color: inherit !important;
-  position: static !important;
-  pointer-events: auto !important;
-}
-
-/* --- 10.3 FORMULARIO Y BOTÓN PRINCIPAL (GRID Y CARRUSELES) --- */
+/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL (GRID Y CARRUSEL) --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -246,8 +238,7 @@ a[class*="item-buy"],
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 5 !important;
-  transform: none !important;
-  transition: box-shadow .15s ease, transform .15s ease !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
 .item-product form button:hover,
@@ -259,8 +250,7 @@ a[class*="item-buy"],
 
 /* --- 10.4 BOTÓN PRINCIPAL EN FICHA DE PRODUCTO (PDP) --- */
 #product-form,
-.js-product-form,
-.js-product-container {
+.js-product-form {
   position: relative !important;
 }
 
@@ -268,8 +258,7 @@ a[class*="item-buy"],
 #product-form input[type="submit"],
 .js-product-form button[type="submit"],
 .js-product-form input[type="submit"],
-.js-addtocart-js,
-.js-addtocart-js.btn {
+.js-addtocart-js {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -328,6 +317,7 @@ a[class*="item-buy"],
   max-width: 100% !important;
   height: 38px !important;
   min-height: 38px !important;
+  max-height: 38px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
