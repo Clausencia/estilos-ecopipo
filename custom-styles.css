@@ -140,21 +140,24 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN CATÁLOGO, FICHA (PDP) Y CARRUSELES (IMÁGENES VISIBLES + FEEDBACK CORREGIDO) */
+/* 10. UNIFICACIÓN DEFINITIVA: GRID, PDP Y CARRUSELES (SIN HUECOS BLANCOS NI DESFASE) */
 
-/* --- 10.1 ESTRUCTURA DE CONTENEDORES Y PROTECCIÓN DE IMÁGENES --- */
+/* --- 10.1 PROTECCIÓN DE IMÁGENES Y ESTRUCTURA DE SLIDES --- */
 .item-product,
 .js-item-product,
-.product-item,
+.product-item {
+  position: relative !important;
+}
+
 .swiper-slide {
   position: relative !important;
+  box-sizing: border-box !important;
 }
 
 .item-product img,
 .js-item-product img,
 .product-item img,
-.swiper-slide img,
-.item-image-container {
+.swiper-slide img {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -163,21 +166,13 @@ a[href*="checkout"]:active {
   margin: 0 auto !important;
 }
 
-.item-product a.item-link,
-.swiper-slide a.item-link {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: static !important;
-  pointer-events: auto !important;
-}
-
-/* --- 10.2 OCULTAMIENTO ESPECÍFICO DEL BOTÓN "COMPRAR" NATIVO --- */
+/* --- 10.2 ELIMINACIÓN STRICTA DE BOTONES NATIVOS "COMPRAR" --- */
 a.js-item-buy,
 a.item-buy,
 .js-item-buy-open-popup,
-.item-product .js-addtocart-placeholder a,
-.item-product .js-addtocart-feedback a,
+[class*="buy-open-popup"],
+.js-addtocart-placeholder a,
+.js-addtocart-feedback a,
 .swiper-slide .js-addtocart-placeholder a {
   display: none !important;
   visibility: hidden !important;
@@ -192,7 +187,17 @@ a.item-buy,
   pointer-events: none !important;
 }
 
-/* --- 10.3 FORMULARIO Y BOTÓN CIAN PRINCIPAL (GRID Y CARRUSEL) --- */
+/* Preserva únicamente enlaces de imagen y título */
+.item-product a.item-link,
+.swiper-slide a.item-link {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  pointer-events: auto !important;
+}
+
+/* --- 10.3 FORMULARIO Y BOTÓN PRINCIPAL (GRID Y CARRUSELES) --- */
 .item-product form,
 .js-item-product form,
 .product-item form,
@@ -248,10 +253,11 @@ a.item-buy,
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-/* --- 10.4 BOTÓN PRINCIPAL EN FICHA DE PRODUCTO (PDP) --- */
+/* --- 10.4 BOTÓN Y FEEDBACK EN FICHA DE PRODUCTO (PDP - SIN HUECO BLANCO) --- */
 #product-form,
 .js-product-form {
   position: relative !important;
+  min-height: 42px !important;
 }
 
 #product-form button[type="submit"],
@@ -285,7 +291,22 @@ a.item-buy,
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* --- 10.5 CÁPSULAS DE FEEDBACK Y CENTRADO DE TEXTO ("AGREGANDO..." Y "¡LISTO!") --- */
+#product-form .js-addtocart-loading,
+#product-form .js-addtocart-placeholder,
+#product-form .js-addtocart-feedback {
+  position: absolute !important;
+  top: 10px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 220px !important;
+  height: 42px !important;
+  background-color: #42c6d3 !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  z-index: 20 !important;
+}
+
+/* --- 10.5 CÁPSULAS DE FEEDBACK EN GRID Y CARRUSEL ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback {
   position: absolute !important;
@@ -346,17 +367,15 @@ a.item-buy,
 
 .js-addtocart-loading *,
 .js-addtocart-success * {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
+  display: block !important;
   width: 100% !important;
-  height: 100% !important;
+  height: 38px !important;
+  line-height: 38px !important;
   margin: 0 !important;
   padding: 0 !important;
   transform: none !important;
   position: static !important;
-  line-height: 1 !important;
+  text-align: center !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -365,4 +384,5 @@ a.item-buy,
   text-transform: uppercase !important;
   background: transparent !important;
   border: none !important;
+  box-shadow: none !important;
 }
