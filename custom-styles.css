@@ -140,15 +140,12 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN DEFINITIVA: GRID, PDP Y CARRUSELES (SIN HUECOS BLANCOS NI DESFASE) */
+/* 10. UNIFICACIÓN DEFINITIVA: GRID, PDP Y CARRUSELES (CAMUFLAJE DE COMPRAR Y CENTRADO DE LISTO) */
 
-/* --- 10.1 PROTECCIÓN DE IMÁGENES Y ESTRUCTURA DE SLIDES --- */
+/* --- 10.1 ESTRUCTURA BASE Y ALINEACIÓN DE TARJETAS EN CARRUSEL --- */
 .item-product,
 .js-item-product,
-.product-item {
-  position: relative !important;
-}
-
+.product-item,
 .swiper-slide {
   position: relative !important;
   box-sizing: border-box !important;
@@ -166,42 +163,14 @@ a[href*="checkout"]:active {
   margin: 0 auto !important;
 }
 
-/* --- 10.2 ELIMINACIÓN STRICTA DE BOTONES NATIVOS "COMPRAR" --- */
-a.js-item-buy,
-a.item-buy,
-.js-item-buy-open-popup,
-[class*="buy-open-popup"],
-.js-addtocart-placeholder a,
-.js-addtocart-feedback a,
-.swiper-slide .js-addtocart-placeholder a {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  position: absolute !important;
-  left: -9999px !important;
-  top: -9999px !important;
-  pointer-events: none !important;
-}
-
-/* Preserva únicamente enlaces de imagen y título */
-.item-product a.item-link,
-.swiper-slide a.item-link {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: static !important;
-  pointer-events: auto !important;
-}
-
-/* --- 10.3 FORMULARIO Y BOTÓN PRINCIPAL (GRID Y CARRUSELES) --- */
+/* --- 10.2 ENVOLVENTES DE BOTONES (GRID Y CARRUSEL SWIPER) --- */
 .item-product form,
+.item-product .item-buy,
 .js-item-product form,
+.js-item-product .item-buy,
 .product-item form,
-.swiper-slide form {
+.swiper-slide form,
+.swiper-slide .item-buy {
   display: block !important;
   position: relative !important;
   width: 85% !important;
@@ -209,14 +178,24 @@ a.item-buy,
   height: 38px !important;
   min-height: 38px !important;
   margin: 10px auto 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
+/* --- 10.3 CAMUFLAJE UNIFORME: BOTÓN PRINCIPAL Y ENLACES "COMPRAR" NATIVOS --- */
 .item-product form button,
 .item-product form input[type="submit"],
+.item-product a.js-item-buy,
+.item-product a.item-buy,
 .js-item-product form button,
 .js-item-product form input[type="submit"],
+.js-item-product a.js-item-buy,
 .swiper-slide form button,
-.swiper-slide form input[type="submit"] {
+.swiper-slide form input[type="submit"],
+.swiper-slide a.js-item-buy,
+.swiper-slide a.item-buy,
+a.js-item-buy,
+a.item-buy {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -235,6 +214,7 @@ a.item-buy,
   font-size: 13px !important;
   line-height: 1 !important;
   text-transform: uppercase !important;
+  text-decoration: none !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
@@ -248,12 +228,14 @@ a.item-buy,
 
 .item-product form button:hover,
 .item-product form input[type="submit"]:hover,
-.swiper-slide form button:hover {
+.item-product a.js-item-buy:hover,
+.swiper-slide form button:hover,
+.swiper-slide a.js-item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-/* --- 10.4 BOTÓN Y FEEDBACK EN FICHA DE PRODUCTO (PDP - SIN HUECO BLANCO) --- */
+/* --- 10.4 BOTÓN Y FEEDBACK EN FICHA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -308,7 +290,9 @@ a.item-buy,
 
 /* --- 10.5 CÁPSULAS DE FEEDBACK EN GRID Y CARRUSEL ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-placeholder,
-.js-addtocart-feedback {
+.js-addtocart-feedback,
+.swiper-slide .js-addtocart-placeholder,
+.swiper-slide .js-addtocart-feedback {
   position: absolute !important;
   top: 0 !important;
   left: 50% !important;
@@ -365,22 +349,25 @@ a.item-buy,
   display: none !important;
 }
 
+/* FIX DE CENTRADO ABSOLUTO PARA EVITAR RECORTES VERTICALES EN "¡LISTO!" */
 .js-addtocart-loading *,
 .js-addtocart-success * {
-  display: block !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
   width: 100% !important;
-  height: 38px !important;
-  line-height: 38px !important;
+  height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   transform: none !important;
   position: static !important;
-  text-align: center !important;
+  line-height: 1 !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   text-transform: uppercase !important;
   background: transparent !important;
   border: none !important;
