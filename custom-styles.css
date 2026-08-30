@@ -140,27 +140,15 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN DEFINITIVA: GRID, PDP Y CARRUSELES (CAMUFLAJE DE COMPRAR Y CENTRADO DE LISTO) */
+/* 10. UNIFICACIÓN DEFINITIVA: GRID, PDP Y CARRUSELES (CENTRADO ABSOLUTO Y CERO DESFASE) */
 
-/* --- 10.1 ESTRUCTURA BASE Y ALINEACIÓN DE TARJETAS EN CARRUSEL --- */
+/* --- 10.1 ESTRUCTURA BASE DE CONTENEDORES --- */
 .item-product,
 .js-item-product,
 .product-item,
 .swiper-slide {
   position: relative !important;
   box-sizing: border-box !important;
-}
-
-.item-product img,
-.js-item-product img,
-.product-item img,
-.swiper-slide img {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  max-width: 100% !important;
-  height: auto !important;
-  margin: 0 auto !important;
 }
 
 /* --- 10.2 ENVOLVENTES DE BOTONES (GRID Y CARRUSEL SWIPER) --- */
@@ -182,7 +170,7 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 CAMUFLAJE UNIFORME: BOTÓN PRINCIPAL Y ENLACES "COMPRAR" NATIVOS --- */
+/* --- 10.3 CAMUFLAJE EXACTO 1:1: BOTÓN PRINCIPAL Y ENLACES "COMPRAR" --- */
 .item-product form button,
 .item-product form input[type="submit"],
 .item-product a.js-item-buy,
@@ -200,6 +188,7 @@ a.item-buy {
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
+  max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
@@ -212,7 +201,7 @@ a.item-buy {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 1 !important;
+  line-height: 38px !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   border-radius: 50px !important;
@@ -235,7 +224,7 @@ a.item-buy {
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-/* --- 10.4 BOTÓN Y FEEDBACK EN FICHA DE PRODUCTO (PDP) --- */
+/* --- 10.4 BOTÓN Y RESPUESTA INMEDIATA EN FICHA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -261,7 +250,7 @@ a.item-buy {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 14px !important;
-  line-height: 1 !important;
+  line-height: 42px !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
@@ -270,22 +259,16 @@ a.item-buy {
   margin: 10px 0 !important;
   position: relative !important;
   z-index: 10 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-#product-form .js-addtocart-loading,
-#product-form .js-addtocart-placeholder,
-#product-form .js-addtocart-feedback {
-  position: absolute !important;
-  top: 10px !important;
-  left: 0 !important;
-  width: 100% !important;
-  max-width: 220px !important;
-  height: 42px !important;
+/* Evita que Tiendanube oculte o vacíe el botón de PDP durante la carga */
+#product-form button[disabled],
+.js-addtocart-js[disabled] {
+  opacity: 0.9 !important;
   background-color: #42c6d3 !important;
-  border-radius: 50px !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  z-index: 20 !important;
+  cursor: wait !important;
 }
 
 /* --- 10.5 CÁPSULAS DE FEEDBACK EN GRID Y CARRUSEL ("AGREGANDO..." Y "¡LISTO!") --- */
@@ -349,7 +332,7 @@ a.item-buy {
   display: none !important;
 }
 
-/* FIX DE CENTRADO ABSOLUTO PARA EVITAR RECORTES VERTICALES EN "¡LISTO!" */
+/* RESETEO Y CENTRADO DE SUB-ELEMENTOS (ANULA DESPLAZAMIENTOS VERTICALES DE IPANEMA) */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
@@ -360,15 +343,18 @@ a.item-buy {
   height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  transform: none !important;
   position: static !important;
+  transform: none !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
   line-height: 1 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
+  font-size: 12px !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
-  font-size: 12px !important;
-  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
