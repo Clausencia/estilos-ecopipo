@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN DEFINITIVA: GRID, PDP Y CARRUSELES (CENTRADO ABSOLUTO Y CERO DESFASE) */
+/* 10. UNIFICACIÓN Y AISLAMIENTO DE BOTONES (PDP ISOLADO, CARRUSEL Y GRID) */
 
-/* --- 10.1 ESTRUCTURA BASE DE CONTENEDORES --- */
+/* --- 10.1 ESTRUCTURA BASE Y CONTENEDORES --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -151,7 +151,7 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.2 ENVOLVENTES DE BOTONES (GRID Y CARRUSEL SWIPER) --- */
+/* --- 10.2 ENVOLVENTES DE BOTONES EN GRID Y CARRUSEL --- */
 .item-product form,
 .item-product .item-buy,
 .js-item-product form,
@@ -170,7 +170,7 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 CAMUFLAJE EXACTO 1:1: BOTÓN PRINCIPAL Y ENLACES "COMPRAR" --- */
+/* --- 10.3 CAMUFLAJE 1:1: BOTÓN "AGREGAR AL CARRITO" Y "COMPRAR" EN GRID Y CARRUSEL --- */
 .item-product form button,
 .item-product form input[type="submit"],
 .item-product a.js-item-buy,
@@ -201,7 +201,7 @@ a.item-buy {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
-  line-height: 38px !important;
+  line-height: 1 !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   border-radius: 50px !important;
@@ -215,16 +215,28 @@ a.item-buy {
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
+/* EFECTO PUSH GRID Y CARRUSEL */
 .item-product form button:hover,
 .item-product form input[type="submit"]:hover,
 .item-product a.js-item-buy:hover,
 .swiper-slide form button:hover,
-.swiper-slide a.js-item-buy:hover {
+.swiper-slide a.js-item-buy:hover,
+a.js-item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-/* --- 10.4 BOTÓN Y RESPUESTA INMEDIATA EN FICHA DE PRODUCTO (PDP) --- */
+.item-product form button:active,
+.item-product form input[type="submit"]:active,
+.item-product a.js-item-buy:active,
+.swiper-slide form button:active,
+.swiper-slide a.js-item-buy:active,
+a.js-item-buy:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
+
+/* --- 10.4 FICHA DE PRODUCTO (PDP) - TOTALMENTE AISLADO CON EFECTO PUSH --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -236,13 +248,16 @@ a.item-buy {
 .js-product-form button[type="submit"],
 .js-product-form input[type="submit"],
 .js-addtocart-js {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
   max-width: 220px !important;
   height: 42px !important;
   min-height: 42px !important;
+  max-height: 42px !important;
+  padding: 0 16px !important;
+  margin: 10px 0 !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   color: #FFFFFF !important;
@@ -250,28 +265,35 @@ a.item-buy {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 14px !important;
-  line-height: 42px !important;
+  line-height: 1 !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
-  margin: 10px 0 !important;
   position: relative !important;
   z-index: 10 !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* Evita que Tiendanube oculte o vacíe el botón de PDP durante la carga */
-#product-form button[disabled],
-.js-addtocart-js[disabled] {
-  opacity: 0.9 !important;
-  background-color: #42c6d3 !important;
-  cursor: wait !important;
+/* EFECTO PUSH EXCLUSIVO EN PDP */
+#product-form button[type="submit"]:hover,
+#product-form input[type="submit"]:hover,
+.js-product-form button[type="submit"]:hover,
+.js-addtocart-js:hover {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-/* --- 10.5 CÁPSULAS DE FEEDBACK EN GRID Y CARRUSEL ("AGREGANDO..." Y "¡LISTO!") --- */
+#product-form button[type="submit"]:active,
+#product-form input[type="submit"]:active,
+.js-product-form button[type="submit"]:active,
+.js-addtocart-js:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
+
+/* --- 10.5 CÁPSULAS DE FEEDBACK Y CENTRADO DE TEXTO ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .swiper-slide .js-addtocart-placeholder,
@@ -332,7 +354,7 @@ a.item-buy {
   display: none !important;
 }
 
-/* RESETEO Y CENTRADO DE SUB-ELEMENTOS (ANULA DESPLAZAMIENTOS VERTICALES DE IPANEMA) */
+/* FIX DE CENTRADO ABSOLUTO (ANULA MARGENES NATIVOS EN TEXTOS INTERNOS) */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
@@ -343,12 +365,8 @@ a.item-buy {
   height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  position: static !important;
   transform: none !important;
-  top: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  right: auto !important;
+  position: static !important;
   line-height: 1 !important;
   font-size: 12px !important;
   font-family: 'Baloo 2', sans-serif !important;
