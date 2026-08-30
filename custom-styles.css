@@ -140,7 +140,7 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN Y AISLAMIENTO DE BOTONES (PDP ISOLADO, CARRUSEL Y GRID) */
+/* 10. UNIFICACIÓN TOTAL: GRID, CARRUSELES Y PDP (CAMUFLAJE COMPRAR + FEEDBACK CENTRADO) */
 
 /* --- 10.1 ESTRUCTURA BASE Y CONTENEDORES --- */
 .item-product,
@@ -170,20 +170,66 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 CAMUFLAJE 1:1: BOTÓN "AGREGAR AL CARRITO" Y "COMPRAR" EN GRID Y CARRUSEL --- */
-.item-product form button,
-.item-product form input[type="submit"],
+/* --- 10.3 CAMUFLAJE TOTAL DEL BOTÓN "COMPRAR" A "AGREGAR AL CARRITO" --- */
 .item-product a.js-item-buy,
 .item-product a.item-buy,
-.js-item-product form button,
-.js-item-product form input[type="submit"],
 .js-item-product a.js-item-buy,
-.swiper-slide form button,
-.swiper-slide form input[type="submit"],
 .swiper-slide a.js-item-buy,
 .swiper-slide a.item-buy,
 a.js-item-buy,
 a.item-buy {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  border-radius: 50px !important;
+  border: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  position: relative !important;
+  z-index: 5 !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
+}
+
+/* Inyección del texto visual sustituto */
+.item-product a.js-item-buy::after,
+.item-product a.item-buy::after,
+.js-item-product a.js-item-buy::after,
+.swiper-slide a.js-item-buy::after,
+a.js-item-buy::after,
+a.item-buy::after {
+  content: 'AGREGAR AL CARRITO' !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* BOTÓN FORMULARIO REGULAR (GRID Y CARRUSEL) */
+.item-product form button,
+.item-product form input[type="submit"],
+.js-item-product form button,
+.js-item-product form input[type="submit"],
+.swiper-slide form button,
+.swiper-slide form input[type="submit"] {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -203,7 +249,6 @@ a.item-buy {
   font-size: 13px !important;
   line-height: 1 !important;
   text-transform: uppercase !important;
-  text-decoration: none !important;
   border-radius: 50px !important;
   border: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
@@ -215,7 +260,7 @@ a.item-buy {
   transition: transform .15s ease, box-shadow .15s ease !important;
 }
 
-/* EFECTO PUSH GRID Y CARRUSEL */
+/* EFECTO PUSH PARA GRID Y CARRUSEL */
 .item-product form button:hover,
 .item-product form input[type="submit"]:hover,
 .item-product a.js-item-buy:hover,
@@ -236,7 +281,7 @@ a.js-item-buy:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-/* --- 10.4 FICHA DE PRODUCTO (PDP) - TOTALMENTE AISLADO CON EFECTO PUSH --- */
+/* --- 10.4 FICHA DE PRODUCTO (PDP) - RESPUESTA TÁCTIL Y PUSH INSTANTÁNEO --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -273,24 +318,23 @@ a.js-item-buy:active {
   cursor: pointer !important;
   position: relative !important;
   z-index: 10 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease !important;
 }
 
-/* EFECTO PUSH EXCLUSIVO EN PDP */
 #product-form button[type="submit"]:hover,
-#product-form input[type="submit"]:hover,
-.js-product-form button[type="submit"]:hover,
 .js-addtocart-js:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
 #product-form button[type="submit"]:active,
-#product-form input[type="submit"]:active,
-.js-product-form button[type="submit"]:active,
-.js-addtocart-js:active {
+#product-form button[type="submit"]:focus,
+#product-form button[disabled],
+.js-addtocart-js:active,
+.js-addtocart-js[disabled] {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #38b2bf !important;
 }
 
 /* --- 10.5 CÁPSULAS DE FEEDBACK Y CENTRADO DE TEXTO ("AGREGANDO..." Y "¡LISTO!") --- */
@@ -354,7 +398,7 @@ a.js-item-buy:active {
   display: none !important;
 }
 
-/* FIX DE CENTRADO ABSOLUTO (ANULA MARGENES NATIVOS EN TEXTOS INTERNOS) */
+/* CENTRADO FLEXBOX PERFECTO EN CUALQUIER NODO INTERNO */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
@@ -365,8 +409,10 @@ a.js-item-buy:active {
   height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  transform: none !important;
   position: static !important;
+  transform: none !important;
+  top: 0 !important;
+  bottom: 0 !important;
   line-height: 1 !important;
   font-size: 12px !important;
   font-family: 'Baloo 2', sans-serif !important;
