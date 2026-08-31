@@ -142,10 +142,55 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 BOTÓN PRINCIPAL EN CARRUSEL Y GRID --- */
+/* --- 10.1 BLOQUEO TOTAL DE BOTONES Y FEEDBACKS SOBRE LAS IMÁGENES --- */
+.item-image,
+.item-link,
+.item-image-container,
+.item-image-link {
+  position: static !important;
+}
+
+.item-image .item-buy,
+.item-image a.btn,
+.item-image .btn,
+.item-image .item-actions,
+.item-image .js-addtocart-placeholder,
+.item-image .js-addtocart-feedback,
+.item-image .js-addtocart-loading,
+.item-image .js-addtocart-success,
+.item-link .item-buy,
+.item-link a.btn,
+.item-link a.js-item-buy,
+.item-link .js-item-buy,
+.item-link .item-actions,
+.item-link .js-addtocart-placeholder,
+.item-link .js-addtocart-feedback,
+.item-link .js-addtocart-loading,
+.item-link .js-addtocart-success,
+.item-actions,
+.item-actions * {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+}
+
+/* --- 10.2 BOTÓN PRINCIPAL EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
+.item-product,
+.swiper-slide,
+.product-item {
+  position: relative !important;
+}
+
 .item-product .item-buy,
 .swiper-slide .item-buy,
-.product-item .item-buy {
+.product-item .item-buy,
+.item-info .item-buy {
   position: relative !important;
   display: flex !important;
   visibility: visible !important;
@@ -185,7 +230,6 @@ a[href*="checkout"]:active {
   box-shadow: none !important;
 }
 
-/* Enlaces, botones e inputs nativos en carrusel: texto Baloo 2 blanco visible y legible */
 .item-buy a,
 .item-buy button,
 .item-buy input[type="submit"],
@@ -198,8 +242,7 @@ a[href*="checkout"]:active {
 .item-product .item-buy input,
 .product-item .item-buy a,
 .product-item .item-buy button,
-.product-item .item-buy input,
-a.js-item-buy {
+.product-item .item-buy input {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -238,7 +281,7 @@ a.js-item-buy {
   text-decoration: none !important;
 }
 
-/* --- 10.2 EFECTO PUSH TÁCTIL EN CARRUSEL Y GRID (ESTRICTAMENTE VERTICAL) --- */
+/* Efecto push en hover y click en carrusel */
 .item-product .item-buy:hover,
 .swiper-slide .item-buy:hover,
 .product-item .item-buy:hover {
@@ -256,7 +299,7 @@ a.js-item-buy {
 }
 
 /* --- 10.3 BOTONES DE FEEDBACK EN CARRUSEL ("AGREGANDO..." Y "¡LISTO!") --- */
-/* Se anclan abajo en la base de la tarjeta (NUNCA sobre la foto) con el mismo tamaño y estilo que el botón */
+/* Se anclan estrictamente en la base de la tarjeta con el mismo tamaño y estilo que el botón */
 .swiper-slide .js-addtocart-placeholder,
 .item-product .js-addtocart-placeholder,
 .product-item .js-addtocart-placeholder {
@@ -265,7 +308,7 @@ a.js-item-buy {
   bottom: 0 !important;
   left: 0 !important;
   right: 0 !important;
-  margin: 0 auto 10px auto !important;
+  margin: 0 auto !important;
   width: 100% !important;
   max-width: 190px !important;
   height: 38px !important;
@@ -279,15 +322,25 @@ a.js-item-buy {
   box-sizing: border-box !important;
 }
 
-.swiper-slide .js-addtocart-feedback,
-.swiper-slide .js-addtocart-loading,
-.swiper-slide .js-addtocart-success,
-.item-product .js-addtocart-feedback,
-.item-product .js-addtocart-loading,
-.item-product .js-addtocart-success,
-.product-item .js-addtocart-feedback,
-.product-item .js-addtocart-loading,
-.product-item .js-addtocart-success {
+/* Ocultar elementos inactivos para evitar que se encimen */
+.js-addtocart-placeholder .hidden,
+.js-addtocart-placeholder[style*="display: none"],
+.js-addtocart-placeholder[style*="display:none"],
+.js-addtocart-feedback[style*="display: none"],
+.js-addtocart-feedback[style*="display:none"],
+.js-addtocart-loading[style*="display: none"],
+.js-addtocart-loading[style*="display:none"],
+.js-addtocart-success[style*="display: none"],
+.js-addtocart-success[style*="display:none"] {
+  display: none !important;
+}
+
+.swiper-slide .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]):not(.hidden),
+.swiper-slide .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]):not(.hidden),
+.item-product .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]):not(.hidden),
+.item-product .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]):not(.hidden),
+.product-item .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]):not(.hidden),
+.product-item .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]):not(.hidden) {
   width: 100% !important;
   height: 100% !important;
   border-radius: 50px !important;
@@ -323,18 +376,6 @@ a.js-item-buy {
   font-weight: 700 !important;
   font-size: 13px !important;
   text-transform: uppercase !important;
-}
-
-/* Ocultar únicamente estados inactivos */
-.js-addtocart-placeholder[style*="display: none"],
-.js-addtocart-placeholder[style*="display:none"],
-.js-addtocart-feedback[style*="display: none"],
-.js-addtocart-feedback[style*="display:none"],
-.js-addtocart-loading[style*="display: none"],
-.js-addtocart-loading[style*="display:none"],
-.js-addtocart-success[style*="display: none"],
-.js-addtocart-success[style*="display:none"] {
-  display: none !important;
 }
 
 /* --- 10.4 FICHA DE PRODUCTO (PDP) --- */
