@@ -142,7 +142,7 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 ELIMINACIÓN ABSOLUTA DE TODO ELEMENTO SUPERIOR / ANTERIOR A LA DESCRIPCIÓN --- */
+/* --- 10.1 ELIMINACIÓN ABSOLUTA DE BOTONES SOBRE LAS FOTOS DE PRODUCTO --- */
 .item-image .item-actions,
 .item-image .item-buy,
 .item-image a.btn,
@@ -153,10 +153,6 @@ a[href*="checkout"]:active {
 .item-link a.btn,
 .item-link .btn,
 .item-link button,
-.item-image .js-addtocart-placeholder,
-.item-image .js-addtocart-feedback,
-.item-link .js-addtocart-placeholder,
-.item-link .js-addtocart-feedback,
 .item-actions:not(.item-description ~ .item-actions),
 .item-buy:not(.item-description ~ .item-buy):not(.item-info .item-buy):not(.item-info ~ .item-buy),
 a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
@@ -320,98 +316,46 @@ a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
   background-color: #36b1be !important;
 }
 
-/* --- 10.3 ESTADO FIJO "AGREGANDO..." Y "¡LISTO!" EN GRID Y CARRUSEL (SIN ESPACIO VACÍO) --- */
-.item-buy:has([disabled]),
-.item-buy:has(.loading),
-.item-buy:has([class*="loading"]),
-.item-buy.loading,
-.item-buy[style*="display: none"],
-.item-buy[style*="display:none"],
-.item-product:has([class*="loading"]) .item-buy,
-.item-product:has(.js-addtocart-placeholder) .item-buy,
-.item-product:has([disabled]) .item-buy,
-.product-item:has([class*="loading"]) .item-buy,
-.product-item:has(.js-addtocart-placeholder) .item-buy,
-.grid-item:has([class*="loading"]) .item-buy,
-.grid-item:has(.js-addtocart-placeholder) .item-buy,
-.swiper-slide:has([class*="loading"]) .item-buy,
-.swiper-slide:has(.js-addtocart-placeholder) .item-buy,
-.swiper-slide:has([disabled]) .item-buy {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  background-color: #36b1be !important;
-  background: #36b1be !important;
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
+/* --- 10.3 POSICIONAMIENTO Y FEEDBACK DINÁMICO EN EL PIE DE TARJETA (GRID Y CARRUSEL) --- */
+.item-product,
+.product-item,
+.grid-item,
+.swiper-slide {
+  position: relative !important;
 }
 
-.item-buy:has([disabled])::after,
-.item-buy:has(.loading)::after,
-.item-buy:has([class*="loading"])::after,
-.item-buy.loading::after,
-.item-buy[style*="display: none"]::after,
-.item-buy[style*="display:none"]::after,
-.item-product:has([class*="loading"]) .item-buy::after,
-.item-product:has(.js-addtocart-placeholder) .item-buy::after,
-.item-product:has([disabled]) .item-buy::after,
-.product-item:has([class*="loading"]) .item-buy::after,
-.product-item:has(.js-addtocart-placeholder) .item-buy::after,
-.grid-item:has([class*="loading"]) .item-buy::after,
-.grid-item:has(.js-addtocart-placeholder) .item-buy::after,
-.swiper-slide:has([class*="loading"]) .item-buy::after,
-.swiper-slide:has(.js-addtocart-placeholder) .item-buy::after,
-.swiper-slide:has([disabled]) .item-buy::after {
-  content: 'AGREGANDO...' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background-color: #36b1be !important;
-  background: #36b1be !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  text-transform: uppercase !important;
-  border-radius: 50px !important;
-  z-index: 25 !important;
-  line-height: 1 !important;
-  box-sizing: border-box !important;
-}
-
-.item-product:has(.js-addtocart-success) .item-buy::after,
-.product-item:has(.js-addtocart-success) .item-buy::after,
-.grid-item:has(.js-addtocart-success) .item-buy::after,
-.swiper-slide:has(.js-addtocart-success) .item-buy::after {
-  content: '¡LISTO!' !important;
-}
-
-.swiper-slide .js-addtocart-placeholder,
+/* El placeholder se ancla exactamente al pie de la tarjeta (sustituyendo al botón que se oculta) */
 .item-product .js-addtocart-placeholder,
 .product-item .js-addtocart-placeholder,
-.grid-item .js-addtocart-placeholder {
+.grid-item .js-addtocart-placeholder,
+.swiper-slide .js-addtocart-placeholder,
+.item-image .js-addtocart-placeholder,
+.item-link .js-addtocart-placeholder,
+.js-addtocart-placeholder {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 100% !important;
-  min-height: 38px !important;
-  height: 38px !important;
-  margin: 12px auto 0 auto !important;
-  padding: 0 !important;
+  text-align: center !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 15 !important;
 }
 
-.swiper-slide .js-addtocart-feedback,
-.swiper-slide .js-addtocart-loading,
-.swiper-slide .js-addtocart-success,
+/* La píldora de feedback dinámica según longitud del texto ("AGREGANDO..." -> "¡LISTO!") */
+.js-addtocart-feedback,
+.js-addtocart-loading,
+.js-addtocart-success,
 .item-product .js-addtocart-feedback,
 .item-product .js-addtocart-loading,
 .item-product .js-addtocart-success,
@@ -420,15 +364,20 @@ a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
 .product-item .js-addtocart-success,
 .grid-item .js-addtocart-feedback,
 .grid-item .js-addtocart-loading,
-.grid-item .js-addtocart-success {
+.grid-item .js-addtocart-success,
+.swiper-slide .js-addtocart-feedback,
+.swiper-slide .js-addtocart-loading,
+.swiper-slide .js-addtocart-success {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   vertical-align: middle !important;
   width: auto !important;
-  min-height: 38px !important;
+  min-width: 130px !important;
   height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
   margin: 0 auto !important;
   padding: 0 20px !important;
   background-color: #36b1be !important;
@@ -448,9 +397,9 @@ a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
   transition: all .2s ease !important;
 }
 
-.swiper-slide .js-addtocart-feedback *,
-.swiper-slide .js-addtocart-loading *,
-.swiper-slide .js-addtocart-success *,
+.js-addtocart-feedback *,
+.js-addtocart-loading *,
+.js-addtocart-success *,
 .item-product .js-addtocart-feedback *,
 .item-product .js-addtocart-loading *,
 .item-product .js-addtocart-success *,
@@ -459,7 +408,10 @@ a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
 .product-item .js-addtocart-success *,
 .grid-item .js-addtocart-feedback *,
 .grid-item .js-addtocart-loading *,
-.grid-item .js-addtocart-success * {
+.grid-item .js-addtocart-success *,
+.swiper-slide .js-addtocart-feedback *,
+.swiper-slide .js-addtocart-loading *,
+.swiper-slide .js-addtocart-success * {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -471,8 +423,11 @@ a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
   padding: 0 !important;
 }
 
-/* Ocultar únicamente estados inactivos para que cambien limpiamente uno a uno */
+/* Ocultar únicamente cuando no esté activo para que cambie limpiamente de AGREGANDO a ¡LISTO! */
+.js-addtocart-placeholder.hidden,
 .js-addtocart-placeholder .hidden,
+.js-addtocart-placeholder[style*="display: none"],
+.js-addtocart-placeholder[style*="display:none"],
 .js-addtocart-placeholder [style*="display: none"],
 .js-addtocart-placeholder [style*="display:none"],
 .js-addtocart-feedback[style*="display: none"],
