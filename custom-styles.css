@@ -213,7 +213,7 @@ a[href*="checkout"]:active {
   z-index: 2 !important;
 }
 
-/* Capa de click nativa (input / button / a) cubre todo el botón con opacidad interactiva */
+/* Capa de click nativa (input / button / a) cubre todo el botón sin movimientos ni bordes independientes */
 .item-product .item-buy a,
 .item-product .item-buy button,
 .item-product .item-buy input,
@@ -244,9 +244,32 @@ a.js-item-buy {
   z-index: 5 !important;
   font-size: 0 !important;
   color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  transform: none !important;
+  transition: none !important;
 }
 
-/* --- 10.2 EFECTO PUSH TÁCTIL EN CARRUSEL Y GRID --- */
+/* Evitar cualquier desplazamiento o estilo en hover para los elementos hijos nativos */
+.item-product .item-buy a:hover,
+.item-product .item-buy button:hover,
+.item-product .item-buy input:hover,
+.swiper-slide .item-buy a:hover,
+.swiper-slide .item-buy button:hover,
+.swiper-slide .item-buy input:hover,
+.product-item .item-buy a:hover,
+.item-product form input:hover,
+.item-product form button:hover,
+.swiper-slide form input:hover,
+.swiper-slide form button:hover,
+a.js-item-buy:hover {
+  transform: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* --- 10.2 EFECTO PUSH TÁCTIL EN CARRUSEL Y GRID (ESTRICTAMENTE VERTICAL) --- */
 .item-product .item-buy:hover,
 .swiper-slide .item-buy:hover,
 .product-item .item-buy:hover,
@@ -290,14 +313,32 @@ a.js-item-buy {
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* Cápsula de feedback nativa en carrusel */
-.item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.item-product .js-addtocart-loading,
+/* Cápsula de feedback nativa en carrusel: anclada en la parte inferior sobre el botón (NUNCA sobre la foto) */
 .swiper-slide .js-addtocart-placeholder,
+.item-product .js-addtocart-placeholder,
+.js-item-product .js-addtocart-placeholder {
+  position: absolute !important;
+  bottom: 0 !important;
+  top: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  height: 38px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  z-index: 20 !important;
+}
+
 .swiper-slide .js-addtocart-feedback,
 .swiper-slide .js-addtocart-loading,
-.js-item-product .js-addtocart-placeholder,
+.swiper-slide .js-addtocart-success,
+.item-product .js-addtocart-feedback,
+.item-product .js-addtocart-loading,
+.item-product .js-addtocart-success,
 .js-item-product .js-addtocart-feedback {
   position: absolute !important;
   top: 0 !important;
@@ -320,12 +361,11 @@ a.js-item-buy {
   box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 !important;
-  z-index: 10 !important;
+  z-index: 25 !important;
   box-shadow: 0 0 0 #3C1053 !important;
   transform: translateY(4px) !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
   line-height: 1 !important;
+  overflow: hidden !important;
 }
 
 /* --- 10.4 FICHA DE PRODUCTO (PDP) --- */
