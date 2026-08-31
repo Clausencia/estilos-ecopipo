@@ -142,67 +142,13 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 CONTENEDORES BASE EN GRID Y CARRUSEL --- */
+/* --- 10.1 BOTÓN EN CARRUSEL Y GRID (CÁPSULA "AGREGAR AL CARRITO" TOTALMENTE VISIBLE Y FUNCIONAL) --- */
 .item-product .item-buy,
-.item-product form,
-.js-item-product .item-buy,
-.js-item-product form,
-.product-item .item-buy,
-.product-item form,
 .swiper-slide .item-buy,
-.swiper-slide form {
+.product-item .item-buy,
+.item-product > form,
+.swiper-slide > form {
   position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  margin: 10px auto 0 auto !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  box-sizing: border-box !important;
-  overflow: visible !important;
-}
-
-.item-buy::before,
-.item-buy::after,
-.swiper-slide form::before,
-.swiper-slide form::after,
-.item-product form::before,
-.item-product form::after {
-  display: none !important;
-  content: none !important;
-}
-
-/* --- 10.2 BOTÓN REAL EN CARRUSEL Y GRID (TEXTO "AGREGAR AL CARRITO" Y CLICK OPERATIVO) --- */
-.item-product .item-buy a,
-.item-product .item-buy button,
-.item-product .item-buy input[type="submit"],
-.item-product form button,
-.item-product form input[type="submit"],
-.item-product a.js-item-buy,
-.js-item-product .item-buy a,
-.js-item-product .item-buy button,
-.js-item-product .item-buy input[type="submit"],
-.js-item-product form button,
-.js-item-product form input[type="submit"],
-.js-item-product a.js-item-buy,
-.product-item .item-buy a,
-.product-item .item-buy button,
-.product-item .item-buy input[type="submit"],
-.product-item form button,
-.product-item form input[type="submit"],
-.swiper-slide .item-buy a,
-.swiper-slide .item-buy button,
-.swiper-slide .item-buy input[type="submit"],
-.swiper-slide form button,
-.swiper-slide form input[type="submit"],
-.swiper-slide a.js-item-buy,
-a.js-item-buy {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -212,59 +158,40 @@ a.js-item-buy {
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  margin: 0 auto !important;
+  margin: 10px auto 0 auto !important;
   padding: 0 !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
   border-radius: 50px !important;
   border: none !important;
   outline: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
-  text-decoration: none !important;
-  white-space: nowrap !important;
   box-sizing: border-box !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
+  overflow: visible !important;
+}
+
+/* Si .item-buy contiene un formulario adentro, el form hereda el contenedor sin duplicar bordes */
+.item-buy form {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  z-index: 5 !important;
-  opacity: 1 !important;
-  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* Ocultar cualquier texto/nodo nativo ("COMPRAR") dentro del botón */
-.item-buy a *,
-.item-buy button *,
-.item-buy form *,
-.swiper-slide a.js-item-buy *,
-.swiper-slide .item-buy *,
-.swiper-slide form *,
-a.js-item-buy * {
-  display: none !important;
-  font-size: 0 !important;
-  color: transparent !important;
-}
-
-/* Inyección oficial del texto "AGREGAR AL CARRITO" en el botón */
-.item-product .item-buy a::after,
-.item-product .item-buy button::after,
-.item-product form button::after,
-.item-product a.js-item-buy::after,
-.js-item-product .item-buy a::after,
-.js-item-product form button::after,
-.product-item .item-buy a::after,
-.product-item form button::after,
-.swiper-slide .item-buy a::after,
-.swiper-slide .item-buy button::after,
-.swiper-slide form button::after,
-.swiper-slide a.js-item-buy::after,
-a.js-item-buy::after {
+/* Texto oficial visible "AGREGAR AL CARRITO" en carrusel y grid */
+.item-product .item-buy::after,
+.swiper-slide .item-buy::after,
+.product-item .item-buy::after,
+.item-product > form::after,
+.swiper-slide > form::after {
   content: 'AGREGAR AL CARRITO' !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
@@ -272,76 +199,109 @@ a.js-item-buy::after {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   text-transform: uppercase !important;
+  pointer-events: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
   height: 100% !important;
   line-height: 1 !important;
-  pointer-events: none !important;
+  white-space: nowrap !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 2 !important;
 }
 
-/* --- 10.3 EFECTO PUSH TÁCTIL EN CARRUSEL Y GRID (ESTRICTAMENTE VERTICAL) --- */
-.item-product .item-buy a:hover,
-.item-product .item-buy button:hover,
-.item-product .item-buy input[type="submit"]:hover,
-.item-product form button:hover,
-.item-product form input[type="submit"]:hover,
-.item-product a.js-item-buy:hover,
-.js-item-product form button:hover,
-.js-item-product form input[type="submit"]:hover,
-.product-item form button:hover,
-.swiper-slide .item-buy a:hover,
-.swiper-slide .item-buy button:hover,
-.swiper-slide .item-buy input[type="submit"]:hover,
-.swiper-slide form button:hover,
-.swiper-slide form input[type="submit"]:hover,
-.swiper-slide a.js-item-buy:hover,
-a.js-item-buy:hover {
+/* Capa de click nativa (input / button / a) cubre todo el botón con opacidad interactiva */
+.item-product .item-buy a,
+.item-product .item-buy button,
+.item-product .item-buy input,
+.swiper-slide .item-buy a,
+.swiper-slide .item-buy button,
+.swiper-slide .item-buy input,
+.product-item .item-buy a,
+.product-item .item-buy button,
+.product-item .item-buy input,
+.item-product form input,
+.item-product form button,
+.swiper-slide form input,
+.swiper-slide form button,
+a.js-item-buy {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  opacity: 0.001 !important;
+  z-index: 5 !important;
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+/* --- 10.2 EFECTO PUSH TÁCTIL EN CARRUSEL Y GRID --- */
+.item-product .item-buy:hover,
+.swiper-slide .item-buy:hover,
+.product-item .item-buy:hover,
+.item-product > form:hover,
+.swiper-slide > form:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   background-color: #42c6d3 !important;
-  opacity: 1 !important;
 }
 
-.item-product .item-buy a:active,
-.item-product .item-buy button:active,
-.item-product .item-buy input[type="submit"]:active,
-.item-product form button:active,
-.item-product form input[type="submit"]:active,
-.item-product a.js-item-buy:active,
-.js-item-product form button:active,
-.js-item-product form input[type="submit"]:active,
-.product-item form button:active,
-.swiper-slide .item-buy a:active,
-.swiper-slide .item-buy button:active,
-.swiper-slide .item-buy input[type="submit"]:active,
-.swiper-slide form button:active,
-.swiper-slide form input[type="submit"]:active,
-.swiper-slide a.js-item-buy:active,
-a.js-item-buy:active {
+.item-product .item-buy:active,
+.swiper-slide .item-buy:active,
+.product-item .item-buy:active,
+.item-product > form:active,
+.swiper-slide > form:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
-  opacity: 1 !important;
 }
 
-/* Feedback "AGREGANDO..." en Carrusel y Grid */
+/* --- 10.3 ESTADO FIJO "AGREGANDO..." EN CARRUSEL Y GRID --- */
+.item-buy:has([disabled]),
+.item-buy:has(.loading),
+.item-buy:has([class*="loading"]),
+.item-buy.loading,
+.item-product > form:has([disabled]),
+.swiper-slide > form:has([disabled]) {
+  background-color: #36b1be !important;
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
+
+.item-buy:has([disabled])::after,
+.item-buy:has(.loading)::after,
+.item-buy:has([class*="loading"])::after,
+.item-buy.loading::after,
+.item-product > form:has([disabled])::after,
+.swiper-slide > form:has([disabled])::after {
+  content: 'AGREGANDO...' !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Cápsula de feedback nativa en carrusel */
 .item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
 .item-product .js-addtocart-loading,
-.item-product .js-addtocart-success,
 .swiper-slide .js-addtocart-placeholder,
 .swiper-slide .js-addtocart-feedback,
 .swiper-slide .js-addtocart-loading,
-.swiper-slide .js-addtocart-success,
 .js-item-product .js-addtocart-placeholder,
 .js-item-product .js-addtocart-feedback {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
   width: 100% !important;
   height: 100% !important;
   border-radius: 50px !important;
@@ -463,11 +423,12 @@ a.js-item-buy:active {
   opacity: 1 !important;
 }
 
-/* Estado de procesamiento en PDP: mantiene el botón en posición push y oculta texto inferior */
+/* Estado de procesamiento en PDP: mantiene el botón en posición push y oculta texto nativo para mostrar AGREGANDO... */
 #product-form button[disabled],
 #product-form input[disabled],
 .js-product-form button[disabled],
 .js-product-form input[disabled],
+.js-addtocart[disabled],
 .js-addtocart-js[disabled],
 .js-prod-submit-form[disabled],
 #product-form button.disabled,
@@ -488,11 +449,9 @@ a.js-item-buy:active {
 #product-form .js-addtocart-placeholder,
 #product-form .js-addtocart-feedback,
 #product-form .js-addtocart-loading,
-#product-form .js-addtocart-success,
 .js-product-form .js-addtocart-placeholder,
 .js-product-form .js-addtocart-feedback,
-.js-product-form .js-addtocart-loading,
-.js-product-form .js-addtocart-success {
+.js-product-form .js-addtocart-loading {
   position: absolute !important;
   top: 10px !important;
   right: 0 !important;
@@ -526,6 +485,24 @@ a.js-item-buy:active {
   line-height: 1 !important;
 }
 
+#product-form .js-addtocart-placeholder::after,
+#product-form .js-addtocart-loading::after,
+.js-product-form .js-addtocart-placeholder::after,
+.js-product-form .js-addtocart-loading::after {
+  content: 'AGREGANDO...' !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-transform: uppercase !important;
+}
+
+#product-form .js-addtocart-placeholder *,
+#product-form .js-addtocart-loading * {
+  display: none !important;
+}
+
 /* --- 10.5 CONTROL DE VISIBILIDAD Y EXCLUSIONES DEL CARRITO --- */
 .js-addtocart-placeholder[style*="display: none"],
 .js-addtocart-placeholder[style*="display:none"],
@@ -549,44 +526,6 @@ a.js-item-buy:active {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
-}
-
-/* Normalización de textos, iconos y spinners internos del feedback */
-.js-addtocart-loading *,
-.js-addtocart-success *,
-[class*="addtocart-loading"] *,
-[class*="addtocart-success"] * {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  width: auto !important;
-  height: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: static !important;
-  transform: none !important;
-  line-height: 1 !important;
-  font-size: 13px !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.js-addtocart-loading svg,
-.js-addtocart-loading img,
-.js-addtocart-loading .loading-icon,
-.js-addtocart-loading [class*="spinner"] {
-  width: 15px !important;
-  height: 15px !important;
-  margin: 0 6px 0 0 !important;
-  flex-shrink: 0 !important;
-  fill: #FFFFFF !important;
-  color: #FFFFFF !important;
 }
 
 
