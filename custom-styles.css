@@ -142,31 +142,28 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 ELIMINACIÓN ABSOLUTA DE TODO ELEMENTO SUPERIOR / OVERLAY EN LAS FOTOS --- */
-.item-actions,
-.item-actions *,
-.js-item-actions,
-.js-item-actions *,
-[class*="item-action"],
+/* --- 10.1 ELIMINACIÓN ABSOLUTA DE TODO ELEMENTO SUPERIOR / ANTERIOR A LA DESCRIPCIÓN --- */
+.item-image .item-actions,
 .item-image .item-buy,
-.item-image .item-buy *,
-.item-link .item-buy,
-.item-link .item-buy *,
-.item-image [class*="buy"],
-.item-link [class*="buy"],
 .item-image a.btn,
-.item-link a.btn,
 .item-image .btn,
+.item-image button,
+.item-link .item-actions,
+.item-link .item-buy,
+.item-link a.btn,
 .item-link .btn,
-a.js-item-buy,
+.item-link button,
 .item-image .js-addtocart-placeholder,
 .item-image .js-addtocart-feedback,
 .item-link .js-addtocart-placeholder,
 .item-link .js-addtocart-feedback,
-.swiper-slide .item-image .item-buy,
-.swiper-slide .item-link .item-buy,
-.item-product .item-image .item-buy,
-.item-product .item-link .item-buy {
+.item-actions:not(.item-description ~ .item-actions),
+.item-buy:not(.item-description ~ .item-buy):not(.item-info .item-buy):not(.item-info ~ .item-buy),
+a.js-item-buy:not(.item-description ~ .item-buy a):not(.item-description ~ a),
+.swiper-slide > .item-buy:not(.item-description ~ .item-buy),
+.item-product > .item-buy:not(.item-description ~ .item-buy),
+.swiper-slide > .item-actions:not(.item-description ~ .item-actions),
+.item-product > .item-actions:not(.item-description ~ .item-actions) {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -178,16 +175,18 @@ a.js-item-buy,
   left: -9999px !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
+/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LAS TARJETAS (POSTERIOR A .item-description) --- */
 .item-description ~ .item-buy,
 .item-description + .item-buy,
+.item-description ~ form,
+.item-description + form,
+.item-description ~ .item-actions,
+.item-description + .item-actions,
 .item-info ~ .item-buy,
-.item-product > .item-buy:last-of-type,
-.swiper-slide > .item-buy:last-of-type,
-.product-item > .item-buy:last-of-type,
+.item-info + .item-buy,
 .item-info .item-buy {
   position: relative !important;
-  display: inline-flex !important;
+  display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
   align-items: center !important;
@@ -199,7 +198,7 @@ a.js-item-buy,
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  margin: 10px auto 0 auto !important;
+  margin: 12px auto 0 auto !important;
   padding: 0 16px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
@@ -209,6 +208,11 @@ a.js-item-buy,
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
+  transform: none !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease, width .2s ease !important;
 }
 
