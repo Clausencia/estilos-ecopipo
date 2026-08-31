@@ -152,7 +152,45 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
+/* --- 10.2 DESACTIVAR CUALQUIER POSICIONAMIENTO FLOTANTE SOBRE FOTOS EN CARRUSELES Y GRIDS --- */
+.swiper-slide .item-actions,
+.swiper-slide .item-buy,
+.swiper-slide .item-actions .btn,
+.swiper-slide .item-buy .btn,
+.swiper-slide a.btn,
+.swiper-slide a.js-item-buy,
+.section-products-slider .swiper-slide .btn,
+.section-slider .swiper-slide .item-actions .btn,
+.section-slider .swiper-slide .item-buy .btn,
+.section-slider .swiper-slide .item-product .btn,
+.item-image .item-actions .btn,
+.item-image a.btn,
+.item-image .btn {
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* Ocultar cualquier botón secundario que intente posicionarse sobre la imagen */
+.item-image > a.btn,
+.item-image > button,
+.item-link > a.btn,
+.item-link > button {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+}
+
+/* --- 10.3 BOTÓN PRINCIPAL UNIFICADO A 160PX EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
 .item-actions,
 .item-buy,
 .item-description ~ .item-buy,
@@ -164,7 +202,9 @@ a[href*="checkout"]:active {
 .grid-item .item-actions,
 .grid-item .item-buy,
 .swiper-slide .item-actions,
-.swiper-slide .item-buy {
+.swiper-slide .item-buy,
+.item-product a.js-item-buy,
+.swiper-slide a.js-item-buy {
   position: relative !important;
   top: auto !important;
   bottom: auto !important;
@@ -312,7 +352,7 @@ a[href*="checkout"]:active {
   background-color: #36b1be !important;
 }
 
-/* --- 10.3 ESTADO DE FEEDBACK DINÁMICO DIRECTAMENTE EN EL BOTÓN ("AGREGANDO..." -> "¡LISTO!") --- */
+/* --- 10.4 ESTADO DE FEEDBACK DINÁMICO DIRECTAMENTE EN EL BOTÓN ("AGREGANDO..." -> "¡LISTO!") --- */
 .item-actions:has([disabled]),
 .item-actions:has(.loading),
 .item-actions:has([class*="loading"]),
