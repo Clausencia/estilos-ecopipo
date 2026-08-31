@@ -142,14 +142,18 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 ELIMINACIÓN DE ELEMENTOS FLOTANTES SOBRE LAS FOTOS --- */
+/* --- 10.1 ELIMINACIÓN ABSOLUTA DE TODO ELEMENTO SUPERIOR / OVERLAY EN LAS FOTOS --- */
 .item-actions,
+.item-actions *,
 .js-item-actions,
+.js-item-actions *,
 [class*="item-action"],
-.item-image .item-actions,
-.item-link .item-actions,
-.item-image .js-item-buy,
-.item-link .js-item-buy,
+.item-image .item-buy,
+.item-image .item-buy *,
+.item-link .item-buy,
+.item-link .item-buy *,
+.item-image [class*="buy"],
+.item-link [class*="buy"],
 .item-image a.btn,
 .item-link a.btn,
 .item-image .btn,
@@ -158,7 +162,11 @@ a.js-item-buy,
 .item-image .js-addtocart-placeholder,
 .item-image .js-addtocart-feedback,
 .item-link .js-addtocart-placeholder,
-.item-link .js-addtocart-feedback {
+.item-link .js-addtocart-feedback,
+.swiper-slide .item-image .item-buy,
+.swiper-slide .item-link .item-buy,
+.item-product .item-image .item-buy,
+.item-product .item-link .item-buy {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -170,11 +178,14 @@ a.js-item-buy,
   left: -9999px !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
-.item-buy,
-.item-product .item-buy,
-.swiper-slide .item-buy,
-.product-item .item-buy {
+/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
+.item-description ~ .item-buy,
+.item-description + .item-buy,
+.item-info ~ .item-buy,
+.item-product > .item-buy:last-of-type,
+.swiper-slide > .item-buy:last-of-type,
+.product-item > .item-buy:last-of-type,
+.item-info .item-buy {
   position: relative !important;
   display: inline-flex !important;
   visibility: visible !important;
@@ -201,7 +212,8 @@ a.js-item-buy,
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease, width .2s ease !important;
 }
 
-.item-buy form {
+.item-description ~ .item-buy form,
+.item-info .item-buy form {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -214,19 +226,13 @@ a.js-item-buy,
   box-shadow: none !important;
 }
 
-.item-buy a,
-.item-buy button,
-.item-buy input[type="submit"],
-.item-buy input[type="button"],
-.swiper-slide .item-buy a,
-.swiper-slide .item-buy button,
-.swiper-slide .item-buy input,
-.item-product .item-buy a,
-.item-product .item-buy button,
-.item-product .item-buy input,
-.product-item .item-buy a,
-.product-item .item-buy button,
-.product-item .item-buy input {
+.item-description ~ .item-buy a,
+.item-description ~ .item-buy button,
+.item-description ~ .item-buy input[type="submit"],
+.item-description ~ .item-buy input[type="button"],
+.item-info .item-buy a,
+.item-info .item-buy button,
+.item-info .item-buy input {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -253,9 +259,7 @@ a.js-item-buy,
   box-sizing: border-box !important;
 }
 
-.item-buy a *,
-.item-buy button *,
-.swiper-slide .item-buy * {
+.item-description ~ .item-buy * {
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   font-size: 13px !important;
@@ -266,23 +270,21 @@ a.js-item-buy,
 }
 
 /* Efecto push en hover y click en carrusel */
-.item-product .item-buy:hover,
-.swiper-slide .item-buy:hover,
-.product-item .item-buy:hover {
+.item-description ~ .item-buy:hover,
+.item-info .item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   background-color: #42c6d3 !important;
 }
 
-.item-product .item-buy:active,
-.swiper-slide .item-buy:active,
-.product-item .item-buy:active {
+.item-description ~ .item-buy:active,
+.item-info .item-buy:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
 }
 
-/* --- 10.3 BOTONES DE FEEDBACK DINÁMICOS SEGÚN LONGITUD DE TEXTO ("AGREGANDO..." -> "¡LISTO!") --- */
+/* --- 10.3 BOTONES DE FEEDBACK DINÁMICOS Y CENTRADOS EN EL PIE DE LA TARJETA --- */
 .swiper-slide .js-addtocart-placeholder,
 .item-product .js-addtocart-placeholder,
 .product-item .js-addtocart-placeholder {
@@ -290,6 +292,8 @@ a.js-item-buy,
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
+  min-height: 38px !important;
+  height: 38px !important;
   margin: 10px auto 0 auto !important;
   padding: 0 !important;
   background: transparent !important;
@@ -310,9 +314,11 @@ a.js-item-buy,
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
+  vertical-align: middle !important;
   width: auto !important;
   min-height: 38px !important;
   height: 38px !important;
+  margin: 0 auto !important;
   padding: 0 20px !important;
   background-color: #36b1be !important;
   background: #36b1be !important;
@@ -346,6 +352,9 @@ a.js-item-buy,
   font-weight: 700 !important;
   font-size: 13px !important;
   text-transform: uppercase !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Ocultar únicamente estados inactivos para que cambien limpiamente uno a uno */
