@@ -178,9 +178,9 @@ a[href*="checkout"]:active {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  width: auto !important;
+  width: 160px !important;
   min-width: 160px !important;
-  max-width: 100% !important;
+  max-width: 160px !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
@@ -195,7 +195,32 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
   box-sizing: border-box !important;
   z-index: 5 !important;
-  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease, width .2s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
+}
+
+/* Blindar para que el botón NUNCA desaparezca ni deje huecos vacíos durante la compra */
+.item-actions.hidden,
+.item-buy.hidden,
+.item-actions[style*="display: none"],
+.item-actions[style*="display:none"],
+.item-buy[style*="display: none"],
+.item-buy[style*="display:none"],
+.item-product:has(.js-addtocart-placeholder) .item-actions,
+.item-product:has(.js-addtocart-loading) .item-actions,
+.item-product:has(.js-addtocart-success) .item-actions,
+.product-item:has(.js-addtocart-placeholder) .item-actions,
+.product-item:has(.js-addtocart-loading) .item-actions,
+.product-item:has(.js-addtocart-success) .item-actions,
+.grid-item:has(.js-addtocart-placeholder) .item-actions,
+.grid-item:has(.js-addtocart-loading) .item-actions,
+.grid-item:has(.js-addtocart-success) .item-actions,
+.swiper-slide:has(.js-addtocart-placeholder) .item-actions,
+.swiper-slide:has(.js-addtocart-loading) .item-actions,
+.swiper-slide:has(.js-addtocart-success) .item-actions {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* Si ambos existen en el mismo producto, ocultar el duplicado */
@@ -368,7 +393,8 @@ a[href*="checkout"]:active {
 }
 
 .item-actions .js-addtocart-placeholder,
-.item-buy .js-addtocart-placeholder {
+.item-buy .js-addtocart-placeholder,
+.js-addtocart-placeholder {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -391,7 +417,10 @@ a[href*="checkout"]:active {
 .item-actions .js-addtocart-success,
 .item-buy .js-addtocart-feedback,
 .item-buy .js-addtocart-loading,
-.item-buy .js-addtocart-success {
+.item-buy .js-addtocart-success,
+.js-addtocart-feedback,
+.js-addtocart-loading,
+.js-addtocart-success {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -421,7 +450,12 @@ a[href*="checkout"]:active {
 .item-actions .js-addtocart-placeholder[style*="display: none"],
 .item-actions .js-addtocart-placeholder[style*="display:none"],
 .item-actions .js-addtocart-placeholder [style*="display: none"],
-.item-actions .js-addtocart-placeholder [style*="display:none"] {
+.item-actions .js-addtocart-placeholder [style*="display:none"],
+.js-addtocart-placeholder.hidden,
+.js-addtocart-placeholder[style*="display: none"],
+.js-addtocart-placeholder[style*="display:none"],
+.js-addtocart-placeholder [style*="display: none"],
+.js-addtocart-placeholder [style*="display:none"] {
   display: none !important;
 }
 
