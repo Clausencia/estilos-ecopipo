@@ -142,50 +142,32 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 CONTENEDOR DE TARJETA Y DESACTIVACIÓN DE POSICIÓN RELATIVA EN LA FOTO --- */
-.item-product,
-.product-item,
-.grid-item,
-.swiper-slide {
-  position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
-  padding-bottom: 50px !important;
-  box-sizing: border-box !important;
-}
-
-/* Forzar que todos los elementos superiores (foto, links, acciones) sean static para no atrapar el feedback en la foto */
-.item-product > :not(.item-description):not(.item-buy),
-.item-product > :not(.item-description):not(.item-buy) *,
-.product-item > :not(.item-description):not(.item-buy),
-.product-item > :not(.item-description):not(.item-buy) *,
-.grid-item > :not(.item-description):not(.item-buy),
-.grid-item > :not(.item-description):not(.item-buy) *,
-.swiper-slide > :not(.item-description):not(.item-buy),
-.swiper-slide > :not(.item-description):not(.item-buy) * {
-  position: static !important;
-}
-
-/* Ocultar de forma absoluta cualquier botón de reposo sobre la foto del producto */
-.item-actions a,
-.item-actions button,
-.item-actions .btn,
-.item-actions a.js-item-buy,
+/* --- 10.1 ELIMINACIÓN TOTAL DE ELEMENTOS SOBRE LAS FOTOS DE PRODUCTO --- */
+.item-image .item-actions,
 .item-image a.btn,
 .item-image .btn,
 .item-image button,
+.item-link .item-actions,
 .item-link a.btn,
 .item-link .btn,
-.item-link button {
+.item-link button,
+.item-image .js-addtocart-placeholder,
+.item-link .js-addtocart-placeholder,
+.item-image .js-addtocart-feedback,
+.item-link .js-addtocart-feedback,
+.item-actions:not(.item-buy *):not(.item-description ~ .item-actions) {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
   width: 0 !important;
   height: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LA TARJETA (.item-buy) --- */
+/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LAS TARJETAS (.item-buy) --- */
 .item-description ~ .item-buy,
 .item-info ~ .item-buy,
 .item-product .item-buy,
@@ -193,12 +175,7 @@ a[href*="checkout"]:active {
 .grid-item .item-buy,
 .swiper-slide .item-buy,
 .item-buy {
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: auto !important;
-  right: auto !important;
+  position: relative !important;
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -211,7 +188,7 @@ a[href*="checkout"]:active {
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  margin: 0 auto !important;
+  margin: 12px auto 0 auto !important;
   padding: 0 16px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
@@ -221,7 +198,11 @@ a[href*="checkout"]:active {
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
-  z-index: 10 !important;
+  transform: none !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease, width .2s ease !important;
 }
 
@@ -284,60 +265,69 @@ a[href*="checkout"]:active {
 }
 
 .item-buy:hover {
-  transform: translateY(2px) translateX(-50%) !important;
+  transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   background-color: #42c6d3 !important;
 }
 
 .item-buy:active {
-  transform: translateY(4px) translateX(-50%) !important;
+  transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
 }
 
-/* --- 10.3 FEEDBACK DINÁMICO POSICIONADO AL PIE DE LA TARJETA (SOBRE EL BOTÓN) --- */
-.item-product .js-addtocart-placeholder,
-.product-item .js-addtocart-placeholder,
-.grid-item .js-addtocart-placeholder,
-.swiper-slide .js-addtocart-placeholder,
-.js-addtocart-placeholder {
+/* --- 10.3 ESTADO FIJO "AGREGANDO..." Y "¡LISTO!" DIRECTAMENTE EN EL BOTÓN (CENTRADOS) --- */
+.item-buy:has([disabled]),
+.item-buy:has(.loading),
+.item-buy:has([class*="loading"]),
+.item-buy.loading,
+.item-buy[style*="display: none"],
+.item-buy[style*="display:none"],
+.item-product:has([class*="loading"]) .item-buy,
+.item-product:has(.js-addtocart-placeholder) .item-buy,
+.item-product:has([disabled]) .item-buy,
+.product-item:has([class*="loading"]) .item-buy,
+.product-item:has(.js-addtocart-placeholder) .item-buy,
+.grid-item:has([class*="loading"]) .item-buy,
+.grid-item:has(.js-addtocart-placeholder) .item-buy,
+.swiper-slide:has([class*="loading"]) .item-buy,
+.swiper-slide:has(.js-addtocart-placeholder) .item-buy,
+.swiper-slide:has([disabled]) .item-buy {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: #36b1be !important;
+  background: #36b1be !important;
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
+
+.item-buy:has([disabled])::after,
+.item-buy:has(.loading)::after,
+.item-buy:has([class*="loading"])::after,
+.item-buy.loading::after,
+.item-buy[style*="display: none"]::after,
+.item-buy[style*="display:none"]::after,
+.item-product:has([class*="loading"]) .item-buy::after,
+.item-product:has(.js-addtocart-placeholder) .item-buy::after,
+.item-product:has([disabled]) .item-buy::after,
+.product-item:has([class*="loading"]) .item-buy::after,
+.product-item:has(.js-addtocart-placeholder) .item-buy::after,
+.grid-item:has([class*="loading"]) .item-buy::after,
+.grid-item:has(.js-addtocart-placeholder) .item-buy::after,
+.swiper-slide:has([class*="loading"]) .item-buy::after,
+.swiper-slide:has(.js-addtocart-placeholder) .item-buy::after,
+.swiper-slide:has([disabled]) .item-buy::after {
+  content: 'AGREGANDO...' !important;
   position: absolute !important;
-  bottom: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: auto !important;
-  right: auto !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
+  height: 100% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  z-index: 25 !important;
-}
-
-.js-addtocart-feedback,
-.js-addtocart-loading,
-.js-addtocart-success {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  vertical-align: middle !important;
-  width: auto !important;
-  min-width: 130px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  margin: 0 auto !important;
-  padding: 0 20px !important;
   background-color: #36b1be !important;
   background: #36b1be !important;
   color: #FFFFFF !important;
@@ -347,42 +337,19 @@ a[href*="checkout"]:active {
   font-size: 13px !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-  transform: translateY(4px) !important;
-  box-sizing: border-box !important;
-  line-height: 1 !important;
-  transition: all .2s ease !important;
-}
-
-.js-addtocart-feedback *,
-.js-addtocart-loading *,
-.js-addtocart-success * {
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  text-transform: uppercase !important;
+  z-index: 25 !important;
   line-height: 1 !important;
   margin: 0 !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
-/* Ocultar únicamente cuando no esté activo para que cambie limpiamente de AGREGANDO a ¡LISTO! */
-.js-addtocart-placeholder.hidden,
-.js-addtocart-placeholder .hidden,
-.js-addtocart-placeholder[style*="display: none"],
-.js-addtocart-placeholder[style*="display:none"],
-.js-addtocart-placeholder [style*="display: none"],
-.js-addtocart-placeholder [style*="display:none"],
-.js-addtocart-feedback[style*="display: none"],
-.js-addtocart-feedback[style*="display:none"],
-.js-addtocart-loading[style*="display: none"],
-.js-addtocart-loading[style*="display:none"],
-.js-addtocart-success[style*="display: none"],
-.js-addtocart-success[style*="display:none"] {
-  display: none !important;
+.item-product:has(.js-addtocart-success) .item-buy::after,
+.product-item:has(.js-addtocart-success) .item-buy::after,
+.grid-item:has(.js-addtocart-success) .item-buy::after,
+.swiper-slide:has(.js-addtocart-success) .item-buy::after {
+  content: '¡LISTO!' !important;
+  line-height: 1 !important;
 }
 
 /* --- 10.4 FICHA DE PRODUCTO (PDP) --- */
