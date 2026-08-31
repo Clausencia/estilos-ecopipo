@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL (PUSH INSTANTÁNEO Y TEXTO REEMPLAZADO) */
+/* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 CONTENEDORES Y ESTRUCTURA BASE (GRID Y CARRUSELES) --- */
+/* --- 10.1 ESTRUCTURA DE CONTENEDORES (GRID Y CARRUSELES) --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -151,13 +151,15 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.item-product form,
+/* El contenedor .item-buy o form es SOLO un contenedor transparente */
 .item-product .item-buy,
-.js-item-product form,
+.item-product form,
 .js-item-product .item-buy,
+.js-item-product form,
+.product-item .item-buy,
 .product-item form,
-.swiper-slide form,
-.swiper-slide .item-buy {
+.swiper-slide .item-buy,
+.swiper-slide form {
   display: block !important;
   position: relative !important;
   width: 100% !important;
@@ -167,175 +169,159 @@ a[href*="checkout"]:active {
   max-height: 38px !important;
   margin: 10px auto 0 auto !important;
   padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   box-sizing: border-box !important;
 }
 
-/* --- 10.2 SUSTITUCIÓN Y AJUSTE DE "COMPRAR" / "AGREGAR AL CARRITO" EN CARRUSEL Y GRID --- */
-.item-product a.js-item-buy,
-.item-product a.item-buy,
+.item-buy::before,
+.item-buy::after,
+.swiper-slide form::before,
+.swiper-slide form::after,
+.item-product form::before,
+.item-product form::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* --- 10.2 BOTÓN ÚNICO EN CARRUSEL Y GRID (COMPRAR / AGREGAR AL CARRITO) --- */
 .item-product .item-buy a,
+.item-product .item-buy button,
+.item-product .item-buy input[type="submit"],
+.item-product form button,
+.item-product form input[type="submit"],
+.item-product a.js-item-buy,
+.js-item-product .item-buy a,
+.js-item-product .item-buy button,
+.js-item-product .item-buy input[type="submit"],
+.js-item-product form button,
+.js-item-product form input[type="submit"],
 .js-item-product a.js-item-buy,
-.js-item-product a.item-buy,
-.swiper-slide a.js-item-buy,
-.swiper-slide a.item-buy,
+.product-item .item-buy a,
+.product-item .item-buy button,
+.product-item .item-buy input[type="submit"],
+.product-item form button,
+.product-item form input[type="submit"],
 .swiper-slide .item-buy a,
-.product-item a.js-item-buy,
-.product-item a.item-buy,
-a.js-item-buy,
-a.item-buy {
+.swiper-slide .item-buy button,
+.swiper-slide .item-buy input[type="submit"],
+.swiper-slide form button,
+.swiper-slide form input[type="submit"],
+.swiper-slide a.js-item-buy,
+a.js-item-buy {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  text-align: center !important;
   width: 100% !important;
   max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
   margin: 0 auto !important;
-  padding: 0 12px !important;
+  padding: 0 14px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
+  outline: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
   text-decoration: none !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  line-height: 0 !important;
-  position: relative !important;
-  z-index: 5 !important;
+  white-space: nowrap !important;
   box-sizing: border-box !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 5 !important;
   opacity: 1 !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-/* Oculta spans o hijos internos nativos ("COMPRAR") */
-.item-product a.js-item-buy *,
-.item-product a.item-buy *,
-.item-product .item-buy a *,
-.js-item-product a.js-item-buy *,
-.swiper-slide a.js-item-buy *,
-.swiper-slide a.item-buy *,
-.swiper-slide .item-buy a *,
-.product-item a.js-item-buy *,
-a.js-item-buy *,
-a.item-buy * {
-  display: none !important;
-  font-size: 0 !important;
-  color: transparent !important;
-}
-
-/* Inyección del texto sustituto oficial */
-.item-product a.js-item-buy::after,
-.item-product a.item-buy::after,
-.item-product .item-buy a::after,
-.js-item-product a.js-item-buy::after,
-.swiper-slide a.js-item-buy::after,
-.swiper-slide a.item-buy::after,
-.swiper-slide .item-buy a::after,
-.product-item a.js-item-buy::after,
-a.js-item-buy::after,
-a.item-buy::after {
-  content: 'AGREGAR AL CARRITO' !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  text-transform: uppercase !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  line-height: 1 !important;
-  white-space: nowrap !important;
-}
-
-/* --- 10.3 FORMULARIO REGULAR (GRID Y CARRUSELES) --- */
-.item-product form button,
-.item-product form input[type="submit"],
-.js-item-product form button,
-.js-item-product form input[type="submit"],
-.product-item form button,
-.product-item form input[type="submit"],
-.swiper-slide form button,
-.swiper-slide form input[type="submit"] {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  padding: 0 12px !important;
-  margin: 0 auto !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  line-height: 1 !important;
-  text-transform: uppercase !important;
-  border-radius: 50px !important;
+/* Limpieza de elementos hijos del botón para evitar bordes o textos dobles */
+.item-buy a *,
+.item-buy button *,
+.item-buy form *,
+.swiper-slide .item-buy *,
+.swiper-slide form * {
   border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  z-index: 5 !important;
-  opacity: 1 !important;
-  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
 }
 
-/* --- 10.4 RESPUESTA TÁCTIL (EFECTO PUSH INSTANTÁNEO EN GRID Y CARRUSEL) --- */
+.item-buy a::before,
+.item-buy a::after,
+.swiper-slide a.js-item-buy::before,
+.swiper-slide a.js-item-buy::after,
+a.js-item-buy::before,
+a.js-item-buy::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* --- 10.3 EFECTO PUSH TÁCTIL EN CARRUSEL Y GRID --- */
+.item-product .item-buy a:hover,
+.item-product .item-buy button:hover,
+.item-product .item-buy input[type="submit"]:hover,
 .item-product form button:hover,
 .item-product form input[type="submit"]:hover,
 .item-product a.js-item-buy:hover,
-.item-product a.item-buy:hover,
-.item-product .item-buy a:hover,
 .js-item-product form button:hover,
 .js-item-product form input[type="submit"]:hover,
 .product-item form button:hover,
+.swiper-slide .item-buy a:hover,
+.swiper-slide .item-buy button:hover,
+.swiper-slide .item-buy input[type="submit"]:hover,
 .swiper-slide form button:hover,
 .swiper-slide form input[type="submit"]:hover,
 .swiper-slide a.js-item-buy:hover,
-.swiper-slide a.item-buy:hover,
-.swiper-slide .item-buy a:hover,
-a.js-item-buy:hover,
-a.item-buy:hover {
+a.js-item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   opacity: 1 !important;
+  background-color: #42c6d3 !important;
 }
 
+.item-product .item-buy a:active,
+.item-product .item-buy button:active,
+.item-product .item-buy input[type="submit"]:active,
 .item-product form button:active,
 .item-product form input[type="submit"]:active,
 .item-product a.js-item-buy:active,
-.item-product a.item-buy:active,
-.item-product .item-buy a:active,
 .js-item-product form button:active,
 .js-item-product form input[type="submit"]:active,
 .product-item form button:active,
+.swiper-slide .item-buy a:active,
+.swiper-slide .item-buy button:active,
+.swiper-slide .item-buy input[type="submit"]:active,
 .swiper-slide form button:active,
 .swiper-slide form input[type="submit"]:active,
 .swiper-slide a.js-item-buy:active,
-.swiper-slide a.item-buy:active,
-.swiper-slide .item-buy a:active,
-a.js-item-buy:active,
-a.item-buy:active {
+a.js-item-buy:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
   opacity: 1 !important;
 }
 
-/* --- 10.5 FICHA DE PRODUCTO (PDP) - PUSH, OVERLAY FIX Y FEEDBACK --- */
+/* --- 10.4 FICHA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -371,16 +357,16 @@ a.item-buy:active {
   text-transform: uppercase !important;
   border-radius: 50px !important;
   border: none !important;
+  outline: none !important;
   box-shadow: 0 4px 0 #3C1053 !important;
   cursor: pointer !important;
   position: relative !important;
-  z-index: 10 !important;
+  z-index: 5 !important;
   opacity: 1 !important;
   box-sizing: border-box !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-/* Eliminar overlays y pseudo-elementos del tema en PDP */
 #product-form button[type="submit"]::before,
 #product-form button[type="submit"]::after,
 #product-form input[type="submit"]::before,
@@ -393,7 +379,6 @@ a.item-buy:active {
   opacity: 0 !important;
 }
 
-/* Hover en PDP (Push intermedio sin overlay) */
 #product-form button[type="submit"]:hover,
 #product-form input[type="submit"]:hover,
 .js-product-form button[type="submit"]:hover,
@@ -408,7 +393,6 @@ a.item-buy:active {
   background-color: #42c6d3 !important;
 }
 
-/* Active en PDP (Push total) */
 #product-form button[type="submit"]:active,
 #product-form input[type="submit"]:active,
 .js-product-form button[type="submit"]:active,
@@ -423,7 +407,6 @@ a.item-buy:active {
   opacity: 1 !important;
 }
 
-/* Estado de carga / feedback en PDP mientras se añade el producto */
 #product-form button[disabled],
 #product-form input[disabled],
 .js-product-form button[disabled],
@@ -440,11 +423,104 @@ a.item-buy:active {
   cursor: wait !important;
 }
 
-/* Cápsulas de feedback específicas para PDP (llenan todo el botón 220x42) */
-#product-form .js-addtocart-placeholder,
-#product-form .js-addtocart-feedback,
-.js-product-form .js-addtocart-placeholder,
-.js-product-form .js-addtocart-feedback {
+/* --- 10.5 CONTROL ESTRICTO DE VISIBILIDAD DE FEEDBACK --- */
+
+/* 1. Ocultar completamente cuando el estado es inactivo / display:none / vacío */
+.js-addtocart-placeholder[style*="display: none"],
+.js-addtocart-placeholder[style*="display:none"],
+.js-addtocart-feedback[style*="display: none"],
+.js-addtocart-feedback[style*="display:none"],
+.js-addtocart-loading[style*="display: none"],
+.js-addtocart-loading[style*="display:none"],
+.js-addtocart-success[style*="display: none"],
+.js-addtocart-success[style*="display:none"],
+.js-addtocart-placeholder:empty,
+.js-addtocart-feedback:empty,
+#ajax-cart .js-addtocart-placeholder,
+#ajax-cart .js-addtocart-feedback,
+#modal-cart .js-addtocart-placeholder,
+#modal-cart .js-addtocart-feedback,
+.modal-dock-right .js-addtocart-placeholder,
+.modal-dock-right .js-addtocart-feedback,
+.js-ajax-cart-panel .js-addtocart-placeholder,
+.js-ajax-cart-panel .js-addtocart-feedback {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* 2. Feedback en Carrusel y Grid (SOLO visible cuando Tiendanube lo activa) */
+.item-product .js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
+.js-item-product .js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
+.product-item .js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
+.swiper-slide .js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]) {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  z-index: 20 !important;
+}
+
+.item-product .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+.item-product .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]),
+.js-item-product .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+.js-item-product .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]),
+.product-item .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+.product-item .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]),
+.swiper-slide .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+.swiper-slide .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]) {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  background-color: #36b1be !important;
+  background: #36b1be !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  border-radius: 50px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  transform: translateY(4px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  padding: 0 10px !important;
+  z-index: 25 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  line-height: 1 !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+}
+
+/* 3. Feedback en Ficha de Producto PDP (SOLO visible cuando Tiendanube lo activa) */
+#product-form .js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]),
+.js-product-form .js-addtocart-placeholder:not([style*="display: none"]):not([style*="display:none"]) {
   position: absolute !important;
   top: 10px !important;
   left: 0 !important;
@@ -459,15 +535,13 @@ a.item-buy:active {
   border: none !important;
   box-shadow: none !important;
   pointer-events: none !important;
-  z-index: 25 !important;
-  font-size: 0 !important;
-  transform: none !important;
+  z-index: 20 !important;
 }
 
-#product-form .js-addtocart-loading,
-#product-form .js-addtocart-success,
-.js-product-form .js-addtocart-loading,
-.js-product-form .js-addtocart-success {
+#product-form .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+#product-form .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]),
+.js-product-form .js-addtocart-loading:not([style*="display: none"]):not([style*="display:none"]),
+.js-product-form .js-addtocart-success:not([style*="display: none"]):not([style*="display:none"]) {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -495,98 +569,12 @@ a.item-buy:active {
   font-size: 14px !important;
   text-transform: uppercase !important;
   line-height: 1 !important;
-  z-index: 30 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
-}
-
-/* --- 10.6 CÁPSULAS DE FEEDBACK EN CARRUSEL Y GRID (AGREGANDO Y LISTO CENTRADOS) --- */
-.swiper-slide .js-addtocart-placeholder,
-.swiper-slide .js-addtocart-feedback,
-.item-product .js-addtocart-placeholder,
-.item-product .js-addtocart-feedback,
-.js-item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-feedback,
-.product-item .js-addtocart-placeholder,
-.product-item .js-addtocart-feedback,
-.js-addtocart-placeholder,
-.js-addtocart-feedback {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  pointer-events: none !important;
   z-index: 25 !important;
-  font-size: 0 !important;
-  transform: none !important;
-}
-
-.swiper-slide .js-addtocart-loading,
-.swiper-slide .js-addtocart-success,
-.item-product .js-addtocart-loading,
-.item-product .js-addtocart-success,
-.js-item-product .js-addtocart-loading,
-.js-item-product .js-addtocart-success,
-.product-item .js-addtocart-loading,
-.product-item .js-addtocart-success,
-.js-addtocart-loading,
-.js-addtocart-success,
-[class*="addtocart-loading"],
-[class*="addtocart-success"] {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  background-color: #36b1be !important;
-  background: #36b1be !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  border-radius: 50px !important;
-  border: none !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-  transform: translateY(4px) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-  padding: 0 10px !important;
-  z-index: 30 !important;
   pointer-events: none !important;
   overflow: hidden !important;
-  line-height: 1 !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  text-transform: uppercase !important;
 }
 
-.js-addtocart-loading[style*="display: none"],
-.js-addtocart-loading[style*="display:none"],
-.js-addtocart-success[style*="display: none"],
-.js-addtocart-success[style*="display:none"] {
-  display: none !important;
-}
-
-/* Alineación y normalización vertical exacta de texto e iconos internos */
+/* 4. Normalización de textos, iconos y spinners internos del feedback */
 .js-addtocart-loading *,
 .js-addtocart-success *,
 [class*="addtocart-loading"] *,
@@ -601,10 +589,6 @@ a.item-buy:active {
   padding: 0 !important;
   position: static !important;
   transform: none !important;
-  top: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  right: auto !important;
   line-height: 1 !important;
   font-size: 13px !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -627,3 +611,4 @@ a.item-buy:active {
   fill: #FFFFFF !important;
   color: #FFFFFF !important;
 }
+
