@@ -142,7 +142,7 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL (PUSH INSTANTÁNEO Y TEXTO REEMPLAZADO) */
 
-/* --- 10.1 CONTENEDORES Y ESTRUCTURA BASE --- */
+/* --- 10.1 CONTENEDORES Y ESTRUCTURA BASE (GRID Y CARRUSELES) --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -160,21 +160,27 @@ a[href*="checkout"]:active {
 .swiper-slide .item-buy {
   display: block !important;
   position: relative !important;
-  width: 85% !important;
+  width: 100% !important;
   max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
+  max-height: 38px !important;
   margin: 10px auto 0 auto !important;
   padding: 0 !important;
   box-sizing: border-box !important;
 }
 
-/* --- 10.2 SUSTITUCIÓN DEFINITIVA DE "COMPRAR" A "AGREGAR AL CARRITO" --- */
+/* --- 10.2 SUSTITUCIÓN Y AJUSTE DE "COMPRAR" / "AGREGAR AL CARRITO" EN CARRUSEL Y GRID --- */
 .item-product a.js-item-buy,
 .item-product a.item-buy,
+.item-product .item-buy a,
 .js-item-product a.js-item-buy,
+.js-item-product a.item-buy,
 .swiper-slide a.js-item-buy,
 .swiper-slide a.item-buy,
+.swiper-slide .item-buy a,
+.product-item a.js-item-buy,
+.product-item a.item-buy,
 a.js-item-buy,
 a.item-buy {
   display: flex !important;
@@ -186,7 +192,7 @@ a.item-buy {
   min-height: 38px !important;
   max-height: 38px !important;
   margin: 0 auto !important;
-  padding: 0 !important;
+  padding: 0 12px !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
   border-radius: 50px !important;
@@ -199,14 +205,20 @@ a.item-buy {
   line-height: 0 !important;
   position: relative !important;
   z-index: 5 !important;
+  box-sizing: border-box !important;
+  opacity: 1 !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
 /* Oculta spans o hijos internos nativos ("COMPRAR") */
 .item-product a.js-item-buy *,
 .item-product a.item-buy *,
+.item-product .item-buy a *,
 .js-item-product a.js-item-buy *,
 .swiper-slide a.js-item-buy *,
+.swiper-slide a.item-buy *,
+.swiper-slide .item-buy a *,
+.product-item a.js-item-buy *,
 a.js-item-buy *,
 a.item-buy * {
   display: none !important;
@@ -217,8 +229,12 @@ a.item-buy * {
 /* Inyección del texto sustituto oficial */
 .item-product a.js-item-buy::after,
 .item-product a.item-buy::after,
+.item-product .item-buy a::after,
 .js-item-product a.js-item-buy::after,
 .swiper-slide a.js-item-buy::after,
+.swiper-slide a.item-buy::after,
+.swiper-slide .item-buy a::after,
+.product-item a.js-item-buy::after,
 a.js-item-buy::after,
 a.item-buy::after {
   content: 'AGREGAR AL CARRITO' !important;
@@ -234,6 +250,7 @@ a.item-buy::after {
   width: 100% !important;
   height: 100% !important;
   line-height: 1 !important;
+  white-space: nowrap !important;
 }
 
 /* --- 10.3 FORMULARIO REGULAR (GRID Y CARRUSELES) --- */
@@ -241,6 +258,8 @@ a.item-buy::after {
 .item-product form input[type="submit"],
 .js-item-product form button,
 .js-item-product form input[type="submit"],
+.product-item form button,
+.product-item form input[type="submit"],
 .swiper-slide form button,
 .swiper-slide form input[type="submit"] {
   display: flex !important;
@@ -270,35 +289,53 @@ a.item-buy::after {
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 5 !important;
+  opacity: 1 !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-/* --- 10.4 RESPUESTA TÁCTIL (EFECTO PUSH INSTANTÁNEO EN TODAS LAS VISTAS) --- */
+/* --- 10.4 RESPUESTA TÁCTIL (EFECTO PUSH INSTANTÁNEO EN GRID Y CARRUSEL) --- */
 .item-product form button:hover,
 .item-product form input[type="submit"]:hover,
 .item-product a.js-item-buy:hover,
+.item-product a.item-buy:hover,
+.item-product .item-buy a:hover,
+.js-item-product form button:hover,
+.js-item-product form input[type="submit"]:hover,
+.product-item form button:hover,
 .swiper-slide form button:hover,
+.swiper-slide form input[type="submit"]:hover,
 .swiper-slide a.js-item-buy:hover,
-a.js-item-buy:hover {
+.swiper-slide a.item-buy:hover,
+.swiper-slide .item-buy a:hover,
+a.js-item-buy:hover,
+a.item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
+  opacity: 1 !important;
 }
 
 .item-product form button:active,
 .item-product form input[type="submit"]:active,
 .item-product a.js-item-buy:active,
+.item-product a.item-buy:active,
+.item-product .item-buy a:active,
+.js-item-product form button:active,
+.js-item-product form input[type="submit"]:active,
+.product-item form button:active,
 .swiper-slide form button:active,
+.swiper-slide form input[type="submit"]:active,
 .swiper-slide a.js-item-buy:active,
+.swiper-slide a.item-buy:active,
+.swiper-slide .item-buy a:active,
 a.js-item-buy:active,
-#product-form button[type="submit"]:active,
-#product-form input[type="submit"]:active,
-.js-addtocart-js:active {
+a.item-buy:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
+  opacity: 1 !important;
 }
 
-/* --- 10.5 FICHA DE PRODUCTO (PDP) --- */
+/* --- 10.5 FICHA DE PRODUCTO (PDP) - PUSH, OVERLAY FIX Y FEEDBACK --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -309,7 +346,10 @@ a.js-item-buy:active,
 #product-form input[type="submit"],
 .js-product-form button[type="submit"],
 .js-product-form input[type="submit"],
-.js-addtocart-js {
+#product-form .js-addtocart,
+.js-product-form .js-addtocart,
+.js-addtocart-js,
+.js-prod-submit-form {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -335,35 +375,84 @@ a.js-item-buy:active,
   cursor: pointer !important;
   position: relative !important;
   z-index: 10 !important;
+  opacity: 1 !important;
+  box-sizing: border-box !important;
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-#product-form button[type="submit"]:hover,
-.js-addtocart-js:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
+/* Eliminar overlays y pseudo-elementos del tema en PDP */
+#product-form button[type="submit"]::before,
+#product-form button[type="submit"]::after,
+#product-form input[type="submit"]::before,
+#product-form input[type="submit"]::after,
+.js-product-form button[type="submit"]::before,
+.js-product-form button[type="submit"]::after,
+.js-addtocart-js::before,
+.js-addtocart-js::after {
+  display: none !important;
+  opacity: 0 !important;
 }
 
-#product-form button[disabled],
-.js-addtocart-js[disabled] {
+/* Hover en PDP (Push intermedio sin overlay) */
+#product-form button[type="submit"]:hover,
+#product-form input[type="submit"]:hover,
+.js-product-form button[type="submit"]:hover,
+.js-product-form input[type="submit"]:hover,
+#product-form .js-addtocart:hover,
+.js-product-form .js-addtocart:hover,
+.js-addtocart-js:hover,
+.js-prod-submit-form:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
-  opacity: 0.9 !important;
+  opacity: 1 !important;
+  background-color: #42c6d3 !important;
+}
+
+/* Active en PDP (Push total) */
+#product-form button[type="submit"]:active,
+#product-form input[type="submit"]:active,
+.js-product-form button[type="submit"]:active,
+.js-product-form input[type="submit"]:active,
+#product-form .js-addtocart:active,
+.js-product-form .js-addtocart:active,
+.js-addtocart-js:active,
+.js-prod-submit-form:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #36b1be !important;
+  opacity: 1 !important;
+}
+
+/* Estado de carga / feedback en PDP mientras se añade el producto */
+#product-form button[disabled],
+#product-form input[disabled],
+.js-product-form button[disabled],
+.js-product-form input[disabled],
+.js-addtocart-js[disabled],
+.js-prod-submit-form[disabled],
+#product-form button.disabled,
+.js-product-form button.disabled,
+.js-addtocart-js.disabled {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #36b1be !important;
+  opacity: 1 !important;
   cursor: wait !important;
 }
 
-/* --- 10.6 CÁPSULAS DE FEEDBACK Y CENTRADO ABSOLUTO ("AGREGANDO..." Y "¡LISTO!") --- */
-.js-addtocart-placeholder,
-.js-addtocart-feedback,
-.swiper-slide .js-addtocart-placeholder,
-.swiper-slide .js-addtocart-feedback {
+/* Cápsulas de feedback específicas para PDP (llenan todo el botón 220x42) */
+#product-form .js-addtocart-placeholder,
+#product-form .js-addtocart-feedback,
+.js-product-form .js-addtocart-placeholder,
+.js-product-form .js-addtocart-feedback {
   position: absolute !important;
-  top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 85% !important;
-  max-width: 190px !important;
-  height: 38px !important;
+  top: 10px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 220px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
@@ -372,8 +461,85 @@ a.js-item-buy:active,
   pointer-events: none !important;
   z-index: 25 !important;
   font-size: 0 !important;
+  transform: none !important;
 }
 
+#product-form .js-addtocart-loading,
+#product-form .js-addtocart-success,
+.js-product-form .js-addtocart-loading,
+.js-product-form .js-addtocart-success {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 220px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  border-radius: 50px !important;
+  background-color: #36b1be !important;
+  background: #36b1be !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  transform: translateY(4px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 16px !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  z-index: 30 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* --- 10.6 CÁPSULAS DE FEEDBACK EN CARRUSEL Y GRID (AGREGANDO Y LISTO CENTRADOS) --- */
+.swiper-slide .js-addtocart-placeholder,
+.swiper-slide .js-addtocart-feedback,
+.item-product .js-addtocart-placeholder,
+.item-product .js-addtocart-feedback,
+.js-item-product .js-addtocart-placeholder,
+.js-item-product .js-addtocart-feedback,
+.product-item .js-addtocart-placeholder,
+.product-item .js-addtocart-feedback,
+.js-addtocart-placeholder,
+.js-addtocart-feedback {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  z-index: 25 !important;
+  font-size: 0 !important;
+  transform: none !important;
+}
+
+.swiper-slide .js-addtocart-loading,
+.swiper-slide .js-addtocart-success,
+.item-product .js-addtocart-loading,
+.item-product .js-addtocart-success,
+.js-item-product .js-addtocart-loading,
+.js-item-product .js-addtocart-success,
+.product-item .js-addtocart-loading,
+.product-item .js-addtocart-success,
 .js-addtocart-loading,
 .js-addtocart-success,
 [class*="addtocart-loading"],
@@ -381,29 +547,36 @@ a.js-item-buy:active,
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  margin: 0 auto !important;
   width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
+  max-width: 190px !important;
   height: 38px !important;
   min-height: 38px !important;
   max-height: 38px !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
+  background-color: #36b1be !important;
+  background: #36b1be !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   border-radius: 50px !important;
   border: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  transform: translateY(4px) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 10px !important;
   z-index: 30 !important;
   pointer-events: none !important;
   overflow: hidden !important;
+  line-height: 1 !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
 }
 
 .js-addtocart-loading[style*="display: none"],
@@ -413,22 +586,27 @@ a.js-item-buy:active,
   display: none !important;
 }
 
+/* Alineación y normalización vertical exacta de texto e iconos internos */
 .js-addtocart-loading *,
-.js-addtocart-success * {
-  display: flex !important;
+.js-addtocart-success *,
+[class*="addtocart-loading"] *,
+[class*="addtocart-success"] * {
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  width: 100% !important;
-  height: 100% !important;
+  width: auto !important;
+  height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
   position: static !important;
   transform: none !important;
   top: auto !important;
   bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
   line-height: 1 !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
   font-family: 'Baloo 2', sans-serif !important;
   font-weight: 700 !important;
   color: #FFFFFF !important;
@@ -436,4 +614,16 @@ a.js-item-buy:active,
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+.js-addtocart-loading svg,
+.js-addtocart-loading img,
+.js-addtocart-loading .loading-icon,
+.js-addtocart-loading [class*="spinner"] {
+  width: 15px !important;
+  height: 15px !important;
+  margin: 0 6px 0 0 !important;
+  flex-shrink: 0 !important;
+  fill: #FFFFFF !important;
+  color: #FFFFFF !important;
 }
