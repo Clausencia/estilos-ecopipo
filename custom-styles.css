@@ -142,7 +142,7 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 BOTÓN EN CARRUSEL Y GRID (CÁPSULA "AGREGAR AL CARRITO" TOTALMENTE VISIBLE Y FUNCIONAL) --- */
+/* --- 10.1 BOTÓN EN CARRUSEL Y GRID (CÁPSULA "AGREGAR AL CARRITO" PERMANENTE Y FUNCIONAL) --- */
 .item-product .item-buy,
 .swiper-slide .item-buy,
 .product-item .item-buy,
@@ -150,6 +150,8 @@ a[href*="checkout"]:active {
 .swiper-slide > form {
   position: relative !important;
   display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
@@ -187,20 +189,15 @@ a[href*="checkout"]:active {
 }
 
 /* Ocultar texto nativo COMPRAR en todas las combinaciones posibles */
-.item-buy,
 .item-buy *,
 .item-buy a,
 .item-buy button,
 .item-buy input,
 .item-buy span,
-.swiper-slide .item-buy,
 .swiper-slide .item-buy *,
 .swiper-slide a.js-item-buy,
-.swiper-slide a.js-item-buy *,
-.item-product .item-buy,
 .item-product .item-buy *,
-a.js-item-buy,
-a.js-item-buy * {
+a.js-item-buy {
   font-size: 0 !important;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
@@ -240,7 +237,7 @@ a.js-item-buy::after {
   z-index: 10 !important;
 }
 
-/* Capa de click nativa (input / button / a) cubre todo el botón sin movimientos ni bordes independientes */
+/* Capa de click nativa (input / button / a) cubre todo el botón 100% transparente sin desplazamientos */
 .item-product .item-buy a,
 .item-product .item-buy button,
 .item-product .item-buy input,
@@ -267,7 +264,7 @@ a.js-item-buy {
   background: transparent !important;
   box-shadow: none !important;
   cursor: pointer !important;
-  opacity: 0.001 !important;
+  opacity: 0 !important;
   z-index: 15 !important;
   font-size: 0 !important;
   color: transparent !important;
@@ -317,14 +314,18 @@ a.js-item-buy:hover {
   background-color: #36b1be !important;
 }
 
-/* --- 10.3 ESTADO FIJO "AGREGANDO..." EN CARRUSEL Y GRID --- */
+/* --- 10.3 ESTADO FIJO "AGREGANDO..." Y "¡LISTO!" EN CARRUSEL (SIN ESPACIO VACÍO) --- */
 .item-buy:has([disabled]),
 .item-buy:has(.loading),
 .item-buy:has([class*="loading"]),
 .item-buy.loading,
-.item-product > form:has([disabled]),
-.swiper-slide > form:has([disabled]) {
+.swiper-slide:has(.js-addtocart-placeholder) .item-buy,
+.swiper-slide:has(.js-addtocart-loading) .item-buy,
+.item-product:has(.js-addtocart-placeholder) .item-buy,
+.item-product:has(.js-addtocart-loading) .item-buy {
+  display: flex !important;
   background-color: #36b1be !important;
+  background: #36b1be !important;
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
@@ -333,66 +334,52 @@ a.js-item-buy:hover {
 .item-buy:has(.loading)::after,
 .item-buy:has([class*="loading"])::after,
 .item-buy.loading::after,
-.item-product > form:has([disabled])::after,
-.swiper-slide > form:has([disabled])::after {
+.swiper-slide:has(.js-addtocart-placeholder) .item-buy::after,
+.swiper-slide:has(.js-addtocart-loading) .item-buy::after,
+.item-product:has(.js-addtocart-placeholder) .item-buy::after,
+.item-product:has(.js-addtocart-loading) .item-buy::after {
   content: 'AGREGANDO...' !important;
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* Cápsula de feedback nativa en carrusel: anclada en la parte inferior sobre el botón (NUNCA sobre la foto) */
-.swiper-slide .js-addtocart-placeholder,
-.item-product .js-addtocart-placeholder,
-.js-item-product .js-addtocart-placeholder {
-  position: absolute !important;
-  bottom: 0 !important;
-  top: auto !important;
-  left: 0 !important;
-  right: 0 !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-  max-width: 190px !important;
-  height: 38px !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  pointer-events: none !important;
-  z-index: 20 !important;
+.swiper-slide:has(.js-addtocart-success) .item-buy,
+.item-product:has(.js-addtocart-success) .item-buy {
+  display: flex !important;
+  background-color: #36b1be !important;
+  background: #36b1be !important;
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
 }
 
-.swiper-slide .js-addtocart-feedback,
-.swiper-slide .js-addtocart-loading,
-.swiper-slide .js-addtocart-success,
+.swiper-slide:has(.js-addtocart-success) .item-buy::after,
+.item-product:has(.js-addtocart-success) .item-buy::after {
+  content: '¡LISTO!' !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* OCULTAR COMPLETAMENTE cualquier feedback flotante sobre la foto o cuerpo del producto */
+.item-image .js-addtocart-placeholder,
+.item-image .js-addtocart-feedback,
+.item-image .js-addtocart-loading,
+.item-image .js-addtocart-success,
+.item-product .js-addtocart-placeholder,
 .item-product .js-addtocart-feedback,
 .item-product .js-addtocart-loading,
 .item-product .js-addtocart-success,
-.js-item-product .js-addtocart-feedback {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 50px !important;
-  background-color: #36b1be !important;
-  background: #36b1be !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  text-transform: uppercase !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  z-index: 25 !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-  transform: translateY(4px) !important;
-  line-height: 1 !important;
-  overflow: hidden !important;
+.swiper-slide .js-addtocart-placeholder,
+.swiper-slide .js-addtocart-feedback,
+.swiper-slide .js-addtocart-loading,
+.swiper-slide .js-addtocart-success,
+.product-item .js-addtocart-placeholder,
+.product-item .js-addtocart-feedback,
+.product-item .js-addtocart-loading,
+.product-item .js-addtocart-success {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* --- 10.4 FICHA DE PRODUCTO (PDP) --- */
