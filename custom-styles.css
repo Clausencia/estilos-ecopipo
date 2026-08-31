@@ -299,6 +299,17 @@ a.js-item-buy:active,
 }
 
 /* --- 10.5 FICHA DE PRODUCTO (PDP) --- */
+.product-name,
+.js-product-name,
+.product-title,
+.js-product-title,
+[data-store="product-name"],
+.product-detail-name,
+.section-product h1,
+.product-detail h1 {
+  color: red !important;
+}
+
 #product-form,
 .js-product-form {
   position: relative !important;
