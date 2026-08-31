@@ -140,9 +140,9 @@ a[href*="checkout"]:active {
   box-shadow:0 0 0 #FF9030!important;
 }
 
-/* 10. UNIFICACIÓN TOTAL: GRID, CARRUSELES Y PDP (CAMUFLAJE COMPRAR + FEEDBACK CENTRADO) */
+/* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL (PUSH INSTANTÁNEO Y TEXTO REEMPLAZADO) */
 
-/* --- 10.1 ESTRUCTURA BASE Y CONTENEDORES --- */
+/* --- 10.1 CONTENEDORES Y ESTRUCTURA BASE --- */
 .item-product,
 .js-item-product,
 .product-item,
@@ -151,7 +151,6 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.2 ENVOLVENTES DE BOTONES EN GRID Y CARRUSEL --- */
 .item-product form,
 .item-product .item-buy,
 .js-item-product form,
@@ -170,7 +169,7 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-/* --- 10.3 CAMUFLAJE TOTAL DEL BOTÓN "COMPRAR" A "AGREGAR AL CARRITO" --- */
+/* --- 10.2 SUSTITUCIÓN DEFINITIVA DE "COMPRAR" A "AGREGAR AL CARRITO" --- */
 .item-product a.js-item-buy,
 .item-product a.item-buy,
 .js-item-product a.js-item-buy,
@@ -197,12 +196,25 @@ a.item-buy {
   text-decoration: none !important;
   font-size: 0 !important;
   color: transparent !important;
+  line-height: 0 !important;
   position: relative !important;
   z-index: 5 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-/* Inyección del texto visual sustituto */
+/* Oculta spans o hijos internos nativos ("COMPRAR") */
+.item-product a.js-item-buy *,
+.item-product a.item-buy *,
+.js-item-product a.js-item-buy *,
+.swiper-slide a.js-item-buy *,
+a.js-item-buy *,
+a.item-buy * {
+  display: none !important;
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+/* Inyección del texto sustituto oficial */
 .item-product a.js-item-buy::after,
 .item-product a.item-buy::after,
 .js-item-product a.js-item-buy::after,
@@ -221,9 +233,10 @@ a.item-buy::after {
   justify-content: center !important;
   width: 100% !important;
   height: 100% !important;
+  line-height: 1 !important;
 }
 
-/* BOTÓN FORMULARIO REGULAR (GRID Y CARRUSEL) */
+/* --- 10.3 FORMULARIO REGULAR (GRID Y CARRUSELES) --- */
 .item-product form button,
 .item-product form input[type="submit"],
 .js-item-product form button,
@@ -257,10 +270,10 @@ a.item-buy::after {
   box-sizing: border-box !important;
   position: relative !important;
   z-index: 5 !important;
-  transition: transform .15s ease, box-shadow .15s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-/* EFECTO PUSH PARA GRID Y CARRUSEL */
+/* --- 10.4 RESPUESTA TÁCTIL (EFECTO PUSH INSTANTÁNEO EN TODAS LAS VISTAS) --- */
 .item-product form button:hover,
 .item-product form input[type="submit"]:hover,
 .item-product a.js-item-buy:hover,
@@ -276,12 +289,16 @@ a.js-item-buy:hover {
 .item-product a.js-item-buy:active,
 .swiper-slide form button:active,
 .swiper-slide a.js-item-buy:active,
-a.js-item-buy:active {
+a.js-item-buy:active,
+#product-form button[type="submit"]:active,
+#product-form input[type="submit"]:active,
+.js-addtocart-js:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #36b1be !important;
 }
 
-/* --- 10.4 FICHA DE PRODUCTO (PDP) - RESPUESTA TÁCTIL Y PUSH INSTANTÁNEO --- */
+/* --- 10.5 FICHA DE PRODUCTO (PDP) --- */
 #product-form,
 .js-product-form {
   position: relative !important;
@@ -318,7 +335,7 @@ a.js-item-buy:active {
   cursor: pointer !important;
   position: relative !important;
   z-index: 10 !important;
-  transition: transform .1s ease, box-shadow .1s ease !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
 #product-form button[type="submit"]:hover,
@@ -327,17 +344,15 @@ a.js-item-buy:active {
   box-shadow: 0 2px 0 #3C1053 !important;
 }
 
-#product-form button[type="submit"]:active,
-#product-form button[type="submit"]:focus,
 #product-form button[disabled],
-.js-addtocart-js:active,
 .js-addtocart-js[disabled] {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-  background-color: #38b2bf !important;
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+  opacity: 0.9 !important;
+  cursor: wait !important;
 }
 
-/* --- 10.5 CÁPSULAS DE FEEDBACK Y CENTRADO DE TEXTO ("AGREGANDO..." Y "¡LISTO!") --- */
+/* --- 10.6 CÁPSULAS DE FEEDBACK Y CENTRADO ABSOLUTO ("AGREGANDO..." Y "¡LISTO!") --- */
 .js-addtocart-placeholder,
 .js-addtocart-feedback,
 .swiper-slide .js-addtocart-placeholder,
@@ -398,7 +413,6 @@ a.js-item-buy:active {
   display: none !important;
 }
 
-/* CENTRADO FLEXBOX PERFECTO EN CUALQUIER NODO INTERNO */
 .js-addtocart-loading *,
 .js-addtocart-success * {
   display: flex !important;
@@ -411,8 +425,8 @@ a.js-item-buy:active {
   padding: 0 !important;
   position: static !important;
   transform: none !important;
-  top: 0 !important;
-  bottom: 0 !important;
+  top: auto !important;
+  bottom: auto !important;
   line-height: 1 !important;
   font-size: 12px !important;
   font-family: 'Baloo 2', sans-serif !important;
