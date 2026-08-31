@@ -142,17 +142,27 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 ELIMINACIÓN TOTAL DE BOTONES FLOTANTES SOBRE LAS FOTOS EN CARRUSEL Y GRID --- */
+/* --- 10.1 ELIMINACIÓN TOTAL DE BOTONES Y WRAPPERS FLOTANTES SUPERIORES --- */
+.swiper-slide,
+.item-product,
+.product-item {
+  position: relative !important;
+}
+
+/* Forzar que ningún contenedor intermedio atrape el posicionamiento del feedback */
+.swiper-slide > *:not(.item-buy):not(.js-addtocart-placeholder),
 .swiper-slide .item-image,
 .swiper-slide .item-link,
 .swiper-slide .item-image-container,
 .swiper-slide .item-img-container,
 .swiper-slide .item-actions,
+.item-product > *:not(.item-buy):not(.js-addtocart-placeholder),
 .item-product .item-image,
 .item-product .item-link,
 .item-product .item-image-container,
 .item-product .item-img-container,
 .item-product .item-actions,
+.product-item > *:not(.item-buy):not(.js-addtocart-placeholder),
 .product-item .item-image,
 .product-item .item-link,
 .product-item .item-image-container,
@@ -161,7 +171,7 @@ a[href*="checkout"]:active {
   transform: none !important;
 }
 
-/* Ocultar cualquier botón, acción o link de compra flotante en la foto */
+/* Ocultar cualquier botón superior o duplicado en la parte alta de la tarjeta */
 .item-actions,
 .js-item-actions,
 [class*="item-action"],
@@ -176,7 +186,14 @@ a[href*="checkout"]:active {
 .item-link a.btn,
 .item-link .btn,
 .item-link .js-item-buy,
-a.js-item-buy {
+a.js-item-buy,
+.item-product .item-buy:not(:last-of-type),
+.swiper-slide .item-buy:not(:last-of-type),
+.product-item .item-buy:not(:last-of-type),
+.item-product .item-image .item-buy,
+.item-product .item-link .item-buy,
+.swiper-slide .item-image .item-buy,
+.swiper-slide .item-link .item-buy {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -186,18 +203,14 @@ a.js-item-buy {
   margin: 0 !important;
   padding: 0 !important;
   position: absolute !important;
+  top: -9999px !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
-.item-product,
-.swiper-slide,
-.product-item {
-  position: relative !important;
-}
-
-.item-product .item-buy,
-.swiper-slide .item-buy,
-.product-item .item-buy,
+/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LAS TARJETAS (CARRUSEL Y GRID) --- */
+.item-product .item-buy:last-of-type,
+.swiper-slide .item-buy:last-of-type,
+.product-item .item-buy:last-of-type,
+.item-description ~ .item-buy,
 .item-info .item-buy {
   position: relative !important;
   display: flex !important;
