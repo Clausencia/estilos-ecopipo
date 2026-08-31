@@ -142,34 +142,41 @@ a[href*="checkout"]:active {
 
 /* 10. UNIFICACIÓN TOTAL: PDP, GRID Y CARRUSEL */
 
-/* --- 10.1 ESTRUCTURA DE TARJETA: PERMITIR QUE LAS ACCIONES SE ANCLEN AL PIE DEL PRODUCTO --- */
+/* --- 10.1 CONTENEDOR DE TARJETA Y DESACTIVACIÓN DE POSICIÓN RELATIVA EN LA FOTO --- */
 .item-product,
 .product-item,
 .grid-item,
 .swiper-slide {
   position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
   padding-bottom: 50px !important;
   box-sizing: border-box !important;
 }
 
-.item-product .item-image,
-.item-product .item-link,
-.product-item .item-image,
-.product-item .item-link,
-.grid-item .item-image,
-.grid-item .item-link,
-.swiper-slide .item-image,
-.swiper-slide .item-link {
+/* Forzar que todos los elementos superiores (foto, links, acciones) sean static para no atrapar el feedback en la foto */
+.item-product > :not(.item-description):not(.item-buy),
+.item-product > :not(.item-description):not(.item-buy) *,
+.product-item > :not(.item-description):not(.item-buy),
+.product-item > :not(.item-description):not(.item-buy) *,
+.grid-item > :not(.item-description):not(.item-buy),
+.grid-item > :not(.item-description):not(.item-buy) *,
+.swiper-slide > :not(.item-description):not(.item-buy),
+.swiper-slide > :not(.item-description):not(.item-buy) * {
   position: static !important;
 }
 
-/* Ocultar el formulario duplicado inferior (.item-buy) para tener UN SOLO BOTÓN por tarjeta */
-.item-product .item-buy,
-.product-item .item-buy,
-.grid-item .item-buy,
-.swiper-slide .item-buy,
-.item-description ~ .item-buy,
-.item-info ~ .item-buy {
+/* Ocultar de forma absoluta cualquier botón de reposo sobre la foto del producto */
+.item-actions a,
+.item-actions button,
+.item-actions .btn,
+.item-actions a.js-item-buy,
+.item-image a.btn,
+.item-image .btn,
+.item-image button,
+.item-link a.btn,
+.item-link .btn,
+.item-link button {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -178,12 +185,122 @@ a[href*="checkout"]:active {
   height: 0 !important;
 }
 
-/* --- 10.2 BOTÓN PRINCIPAL UNIFICADO EN EL PIE DE LAS TARJETAS (.item-actions) --- */
-.item-product .item-actions,
-.product-item .item-actions,
-.grid-item .item-actions,
-.swiper-slide .item-actions,
-.item-actions {
+/* --- 10.2 BOTÓN PRINCIPAL EXCLUSIVO EN EL PIE DE LA TARJETA (.item-buy) --- */
+.item-description ~ .item-buy,
+.item-info ~ .item-buy,
+.item-product .item-buy,
+.product-item .item-buy,
+.grid-item .item-buy,
+.swiper-slide .item-buy,
+.item-buy {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: auto !important;
+  right: auto !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: auto !important;
+  min-width: 160px !important;
+  max-width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  border-radius: 50px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  z-index: 10 !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease, width .2s ease !important;
+}
+
+.item-buy form,
+.item-product form.js-product-form,
+.product-item form.js-product-form,
+.grid-item form.js-product-form,
+.swiper-slide form.js-product-form {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.item-buy a,
+.item-buy button,
+.item-buy input[type="submit"],
+.item-buy input[type="button"],
+.item-buy input {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  text-indent: 0 !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+.item-buy * {
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+}
+
+.item-buy:hover {
+  transform: translateY(2px) translateX(-50%) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+  background-color: #42c6d3 !important;
+}
+
+.item-buy:active {
+  transform: translateY(4px) translateX(-50%) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #36b1be !important;
+}
+
+/* --- 10.3 FEEDBACK DINÁMICO POSICIONADO AL PIE DE LA TARJETA (SOBRE EL BOTÓN) --- */
+.item-product .js-addtocart-placeholder,
+.product-item .js-addtocart-placeholder,
+.grid-item .js-addtocart-placeholder,
+.swiper-slide .js-addtocart-placeholder,
+.js-addtocart-placeholder {
   position: absolute !important;
   bottom: 0 !important;
   left: 50% !important;
@@ -198,100 +315,17 @@ a[href*="checkout"]:active {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  z-index: 15 !important;
-}
-
-/* Botón de reposo COMPRAR */
-.item-actions a,
-.item-actions button,
-.item-actions .btn,
-.item-actions a.js-item-buy {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  width: auto !important;
-  min-width: 160px !important;
-  max-width: 100% !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  padding: 0 16px !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  text-transform: uppercase !important;
-  text-decoration: none !important;
-  text-indent: 0 !important;
-  border-radius: 50px !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: 0 4px 0 #3C1053 !important;
-  cursor: pointer !important;
-  box-sizing: border-box !important;
-  line-height: 1 !important;
-  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
-}
-
-.item-actions * {
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  text-transform: uppercase !important;
-  text-decoration: none !important;
-}
-
-.item-actions a:hover,
-.item-actions button:hover,
-.item-actions .btn:hover {
-  transform: translateY(2px) !important;
-  box-shadow: 0 2px 0 #3C1053 !important;
-  background-color: #42c6d3 !important;
-}
-
-.item-actions a:active,
-.item-actions button:active,
-.item-actions .btn:active {
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-  background-color: #36b1be !important;
-}
-
-/* --- 10.3 BOTONES DE FEEDBACK DINÁMICOS SEGÚN TEXTO ("AGREGANDO..." -> "¡LISTO!") --- */
-.item-actions .js-addtocart-placeholder,
-.js-addtocart-placeholder {
-  position: absolute !important;
-  top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
   padding: 0 !important;
-  z-index: 20 !important;
+  z-index: 25 !important;
 }
 
 .js-addtocart-feedback,
 .js-addtocart-loading,
-.js-addtocart-success,
-.item-actions .js-addtocart-feedback,
-.item-actions .js-addtocart-loading,
-.item-actions .js-addtocart-success {
+.js-addtocart-success {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -323,10 +357,7 @@ a[href*="checkout"]:active {
 
 .js-addtocart-feedback *,
 .js-addtocart-loading *,
-.js-addtocart-success *,
-.item-actions .js-addtocart-feedback *,
-.item-actions .js-addtocart-loading *,
-.item-actions .js-addtocart-success * {
+.js-addtocart-success * {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
