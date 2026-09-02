@@ -674,3 +674,34 @@ form[data-store*="product-form"] .js-addtocart-placeholder * {
   border-color: #a8021a !important;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15) !important;
 }
+
+/* Cuadricula uniforme: imagenes a proporcion 1:1 y tarjetas alineadas */
+.product-item .product-item-image-container {
+  position: relative !important;
+  width: 100% !important;
+  height: 0 !important;
+  padding-bottom: 100% !important;
+  overflow: hidden !important;
+}
+
+.product-item .product-item-image-container img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+.product-item .product-item-information-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.product-item .product-item-quick-shop-container {
+  margin-top: auto !important;
+}
