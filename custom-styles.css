@@ -321,38 +321,16 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
 }
 
-/* Ocultar de raíz CUALQUIER botón flotante o elemento de acción sobre la foto en carrusel */
-.swiper-slide .item-actions,
-.swiper-slide .item-actions *,
-.swiper-slide [class*="item-actions"],
-.swiper-slide [class*="quickshop"],
-.swiper-slide [class*="hover"],
-.swiper-slide [class*="overlay"],
-.swiper-slide a.js-item-buy,
-.swiper-slide .js-item-buy,
-.swiper-slide .item-image a.btn,
+/* Ocultar de raíz los formularios auxiliares y botones sobre la foto */
+.swiper-slide .js-item-variants,
+.swiper-slide .item-buy,
 .swiper-slide .item-image .btn,
+.swiper-slide .item-image a.btn,
 .swiper-slide .item-image button,
-.swiper-slide .item-image [class*="btn"],
-.swiper-slide .item-image .js-addtocart-placeholder,
-.swiper-slide .item-image .js-addtocart-feedback,
-.swiper-slide .item-image .js-addtocart-loading,
-.swiper-slide .item-image .js-addtocart-success,
 .swiper-slide .item-link a.btn,
-.swiper-slide .item-link .btn,
-.swiper-slide .item-link button,
-.swiper-slide .item-link .js-addtocart-placeholder,
-.swiper-slide .item-link .js-addtocart-feedback,
-.swiper-slide [data-component="product-list-item.add-to-cart"],
-.swiper-slide [data-toggle*="quickshop"],
-.swiper-slide > a.btn,
-.swiper-slide > button,
-.section-products-related .item-actions,
-.section-products-related [class*="actions"],
-.section-products-related a.js-item-buy,
-.section-products-related .item-image .btn,
-.section-products-related .item-image [class*="btn"],
-.section-products-related [data-component*="add-to-cart"] {
+.section-products-related .js-item-variants,
+.section-products-related .item-buy,
+.section-products-related .item-image .btn {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -364,9 +342,9 @@ a[href*="checkout"]:active {
   left: -9999px !important;
 }
 
-/* Botón principal único de 160px al pie de cada tarjeta en carrusel */
-.swiper-slide .item-buy,
-.section-products-related .item-buy {
+/* Botón principal único de 170px al pie de cada tarjeta en carrusel */
+.swiper-slide .item-actions,
+.section-products-related .item-actions {
   position: relative !important;
   top: auto !important;
   bottom: auto !important;
@@ -380,13 +358,13 @@ a[href*="checkout"]:active {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  width: 160px !important;
-  min-width: 160px !important;
-  max-width: 160px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  margin: 12px auto 0 auto !important;
+  width: 170px !important;
+  min-width: 170px !important;
+  max-width: 170px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  margin: 14px auto 0 auto !important;
   padding: 0 !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
@@ -400,19 +378,19 @@ a[href*="checkout"]:active {
   transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
 }
 
-.swiper-slide .item-buy[style*="display: none"],
-.swiper-slide .item-buy[style*="display:none"],
-.swiper-slide .item-buy.hidden,
-.section-products-related .item-buy[style*="display: none"],
-.section-products-related .item-buy[style*="display:none"],
-.section-products-related .item-buy.hidden {
+.swiper-slide .item-actions[style*="display: none"],
+.swiper-slide .item-actions[style*="display:none"],
+.swiper-slide .item-actions.hidden,
+.section-products-related .item-actions[style*="display: none"],
+.section-products-related .item-actions[style*="display:none"],
+.section-products-related .item-actions.hidden {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-.swiper-slide .item-buy form,
-.section-products-related .item-buy form {
+.swiper-slide .item-actions form,
+.section-products-related .item-actions form {
   position: static !important;
   display: flex !important;
   align-items: center !important;
@@ -426,16 +404,18 @@ a[href*="checkout"]:active {
   box-shadow: none !important;
 }
 
-.swiper-slide .item-buy input[type="submit"],
-.swiper-slide .item-buy input[type="button"],
-.swiper-slide .item-buy button,
-.swiper-slide .item-buy a,
-.swiper-slide .item-buy input,
-.section-products-related .item-buy input[type="submit"],
-.section-products-related .item-buy input[type="button"],
-.section-products-related .item-buy button,
-.section-products-related .item-buy a,
-.section-products-related .item-buy input {
+.swiper-slide .item-actions input[type="submit"],
+.swiper-slide .item-actions input[type="button"],
+.swiper-slide .item-actions button,
+.swiper-slide .item-actions a,
+.swiper-slide .item-actions a.btn,
+.swiper-slide .item-actions input,
+.section-products-related .item-actions input[type="submit"],
+.section-products-related .item-actions input[type="button"],
+.section-products-related .item-actions button,
+.section-products-related .item-actions a,
+.section-products-related .item-actions a.btn,
+.section-products-related .item-actions input {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -464,32 +444,32 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.swiper-slide .item-buy:hover,
-.section-products-related .item-buy:hover {
+.swiper-slide .item-actions:hover,
+.section-products-related .item-actions:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   background-color: #42c6d3 !important;
 }
 
-.swiper-slide .item-buy:active,
-.section-products-related .item-buy:active {
+.swiper-slide .item-actions:active,
+.section-products-related .item-actions:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
 }
 
 /* Feedback in-situ en el botón de carrusel */
-.swiper-slide .item-buy:has(form[style*="display: none"]),
-.swiper-slide .item-buy:has(form[style*="display:none"]),
-.swiper-slide .item-buy:has(input[style*="display: none"]),
-.swiper-slide .item-buy:has(input[style*="display:none"]),
-.swiper-slide .item-buy:has([disabled]),
-.swiper-slide .item-buy:has(.loading),
-.swiper-slide .item-buy:has([class*="loading"]),
-.swiper-slide .item-buy.loading,
-.swiper-slide:has([class*="loading"]) .item-buy,
-.section-products-related .item-buy:has([class*="loading"]),
-.section-products-related:has([class*="loading"]) .item-buy {
+.swiper-slide .item-actions:has(form[style*="display: none"]),
+.swiper-slide .item-actions:has(form[style*="display:none"]),
+.swiper-slide .item-actions:has(input[style*="display: none"]),
+.swiper-slide .item-actions:has(input[style*="display:none"]),
+.swiper-slide .item-actions:has([disabled]),
+.swiper-slide .item-actions:has(.loading),
+.swiper-slide .item-actions:has([class*="loading"]),
+.swiper-slide .item-actions.loading,
+.swiper-slide:has([class*="loading"]) .item-actions,
+.section-products-related .item-actions:has([class*="loading"]),
+.section-products-related:has([class*="loading"]) .item-actions {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -499,17 +479,17 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-.swiper-slide .item-buy:has(form[style*="display: none"])::after,
-.swiper-slide .item-buy:has(form[style*="display:none"])::after,
-.swiper-slide .item-buy:has(input[style*="display: none"])::after,
-.swiper-slide .item-buy:has(input[style*="display:none"])::after,
-.swiper-slide .item-buy:has([disabled])::after,
-.swiper-slide .item-buy:has(.loading)::after,
-.swiper-slide .item-buy:has([class*="loading"])::after,
-.swiper-slide .item-buy.loading::after,
-.swiper-slide:has([class*="loading"]) .item-buy::after,
-.section-products-related .item-buy:has(form[style*="display: none"])::after,
-.section-products-related .item-buy:has([class*="loading"])::after {
+.swiper-slide .item-actions:has(form[style*="display: none"])::after,
+.swiper-slide .item-actions:has(form[style*="display:none"])::after,
+.swiper-slide .item-actions:has(input[style*="display: none"])::after,
+.swiper-slide .item-actions:has(input[style*="display:none"])::after,
+.swiper-slide .item-actions:has([disabled])::after,
+.swiper-slide .item-actions:has(.loading)::after,
+.swiper-slide .item-actions:has([class*="loading"])::after,
+.swiper-slide .item-actions.loading::after,
+.swiper-slide:has([class*="loading"]) .item-actions::after,
+.section-products-related .item-actions:has(form[style*="display: none"])::after,
+.section-products-related .item-actions:has([class*="loading"])::after {
   content: 'AGREGANDO...' !important;
   position: absolute !important;
   top: 0 !important;
@@ -536,8 +516,8 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.swiper-slide:has(.js-addtocart-success) .item-buy::after,
-.section-products-related:has(.js-addtocart-success) .item-buy::after {
+.swiper-slide:has(.js-addtocart-success) .item-actions::after,
+.section-products-related:has(.js-addtocart-success) .item-actions::after {
   content: '¡LISTO!' !important;
   line-height: 1 !important;
 }
@@ -558,17 +538,16 @@ a[href*="checkout"]:active {
   cursor: pointer !important;
 }
 
-/* Ocultar cualquier botón flotante o elemento de acción sobre la foto en grid */
-.item-product:not(.swiper-slide) .item-actions,
-.item-product:not(.swiper-slide) [class*="item-actions"],
-.item-product:not(.swiper-slide) a.js-item-buy,
-.item-product:not(.swiper-slide) .js-item-buy,
-.grid-item .item-actions,
-.grid-item [class*="item-actions"],
-.grid-item a.js-item-buy,
-.product-item .item-actions,
-.product-item [class*="item-actions"],
-.product-item a.js-item-buy {
+/* Ocultar de raíz los formularios auxiliares y botones sobre la foto en grid */
+.item-product:not(.swiper-slide) .js-item-variants,
+.item-product:not(.swiper-slide) .item-buy,
+.item-product:not(.swiper-slide) .item-image .btn,
+.grid-item .js-item-variants,
+.grid-item .item-buy,
+.grid-item .item-image .btn,
+.product-item .js-item-variants,
+.product-item .item-buy,
+.product-item .item-image .btn {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -581,9 +560,9 @@ a[href*="checkout"]:active {
 }
 
 /* Botón principal único estilo Better Diabla al pie de cada tarjeta en grid */
-.item-product:not(.swiper-slide) .item-buy,
-.grid-item .item-buy,
-.product-item .item-buy {
+.item-product:not(.swiper-slide) .item-actions,
+.grid-item .item-actions,
+.product-item .item-actions {
   position: relative !important;
   top: auto !important;
   bottom: auto !important;
@@ -617,20 +596,20 @@ a[href*="checkout"]:active {
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy[style*="display: none"],
-.item-product:not(.swiper-slide) .item-buy[style*="display:none"],
-.item-product:not(.swiper-slide) .item-buy.hidden,
-.grid-item .item-buy[style*="display: none"],
-.grid-item .item-buy[style*="display:none"],
-.grid-item .item-buy.hidden {
+.item-product:not(.swiper-slide) .item-actions[style*="display: none"],
+.item-product:not(.swiper-slide) .item-actions[style*="display:none"],
+.item-product:not(.swiper-slide) .item-actions.hidden,
+.grid-item .item-actions[style*="display: none"],
+.grid-item .item-actions[style*="display:none"],
+.grid-item .item-actions.hidden {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy form,
-.grid-item .item-buy form,
-.product-item .item-buy form {
+.item-product:not(.swiper-slide) .item-actions form,
+.grid-item .item-actions form,
+.product-item .item-actions form {
   position: static !important;
   display: flex !important;
   align-items: center !important;
@@ -644,17 +623,20 @@ a[href*="checkout"]:active {
   box-shadow: none !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy input[type="submit"],
-.item-product:not(.swiper-slide) .item-buy input[type="button"],
-.item-product:not(.swiper-slide) .item-buy button,
-.item-product:not(.swiper-slide) .item-buy a,
-.item-product:not(.swiper-slide) .item-buy input,
-.grid-item .item-buy input[type="submit"],
-.grid-item .item-buy button,
-.grid-item .item-buy a,
-.product-item .item-buy input[type="submit"],
-.product-item .item-buy button,
-.product-item .item-buy a {
+.item-product:not(.swiper-slide) .item-actions input[type="submit"],
+.item-product:not(.swiper-slide) .item-actions input[type="button"],
+.item-product:not(.swiper-slide) .item-actions button,
+.item-product:not(.swiper-slide) .item-actions a,
+.item-product:not(.swiper-slide) .item-actions a.btn,
+.item-product:not(.swiper-slide) .item-actions input,
+.grid-item .item-actions input[type="submit"],
+.grid-item .item-actions button,
+.grid-item .item-actions a,
+.grid-item .item-actions a.btn,
+.product-item .item-actions input[type="submit"],
+.product-item .item-actions button,
+.product-item .item-actions a,
+.product-item .item-actions a.btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -683,46 +665,46 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy:hover,
-.grid-item .item-buy:hover,
-.product-item .item-buy:hover {
+.item-product:not(.swiper-slide) .item-actions:hover,
+.grid-item .item-actions:hover,
+.product-item .item-actions:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   background: #f7eaff !important;
   background-color: #f7eaff !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy:active,
-.grid-item .item-buy:active,
-.product-item .item-buy:active {
+.item-product:not(.swiper-slide) .item-actions:active,
+.grid-item .item-actions:active,
+.product-item .item-actions:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background: #3C1053 !important;
   background-color: #3C1053 !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy:active input,
-.grid-item .item-buy:active input,
-.product-item .item-buy:active input {
+.item-product:not(.swiper-slide) .item-actions:active input,
+.grid-item .item-actions:active input,
+.product-item .item-actions:active input {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
 /* Feedback in-situ en el botón de grid (AGREGANDO... y ¡LISTO!) */
-.item-product:not(.swiper-slide) .item-buy:has(form[style*="display: none"]),
-.item-product:not(.swiper-slide) .item-buy:has(form[style*="display:none"]),
-.item-product:not(.swiper-slide) .item-buy:has(input[style*="display: none"]),
-.item-product:not(.swiper-slide) .item-buy:has(input[style*="display:none"]),
-.item-product:not(.swiper-slide) .item-buy:has([disabled]),
-.item-product:not(.swiper-slide) .item-buy:has(.loading),
-.item-product:not(.swiper-slide) .item-buy:has([class*="loading"]),
-.item-product:not(.swiper-slide) .item-buy.loading,
-.item-product:not(.swiper-slide):has([class*="loading"]) .item-buy,
-.grid-item .item-buy:has(form[style*="display: none"]),
-.grid-item .item-buy:has(form[style*="display:none"]),
-.grid-item .item-buy:has([disabled]),
-.grid-item .item-buy:has(.loading),
-.grid-item .item-buy.loading {
+.item-product:not(.swiper-slide) .item-actions:has(form[style*="display: none"]),
+.item-product:not(.swiper-slide) .item-actions:has(form[style*="display:none"]),
+.item-product:not(.swiper-slide) .item-actions:has(input[style*="display: none"]),
+.item-product:not(.swiper-slide) .item-actions:has(input[style*="display:none"]),
+.item-product:not(.swiper-slide) .item-actions:has([disabled]),
+.item-product:not(.swiper-slide) .item-actions:has(.loading),
+.item-product:not(.swiper-slide) .item-actions:has([class*="loading"]),
+.item-product:not(.swiper-slide) .item-actions.loading,
+.item-product:not(.swiper-slide):has([class*="loading"]) .item-actions,
+.grid-item .item-actions:has(form[style*="display: none"]),
+.grid-item .item-actions:has(form[style*="display:none"]),
+.grid-item .item-actions:has([disabled]),
+.grid-item .item-actions:has(.loading),
+.grid-item .item-actions.loading {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -733,20 +715,20 @@ a[href*="checkout"]:active {
   box-shadow: 0 0 0 #3C1053 !important;
 }
 
-.item-product:not(.swiper-slide) .item-buy:has(form[style*="display: none"])::after,
-.item-product:not(.swiper-slide) .item-buy:has(form[style*="display:none"])::after,
-.item-product:not(.swiper-slide) .item-buy:has(input[style*="display: none"])::after,
-.item-product:not(.swiper-slide) .item-buy:has(input[style*="display:none"])::after,
-.item-product:not(.swiper-slide) .item-buy:has([disabled])::after,
-.item-product:not(.swiper-slide) .item-buy:has(.loading)::after,
-.item-product:not(.swiper-slide) .item-buy:has([class*="loading"])::after,
-.item-product:not(.swiper-slide) .item-buy.loading::after,
-.item-product:not(.swiper-slide):has([class*="loading"]) .item-buy::after,
-.grid-item .item-buy:has(form[style*="display: none"])::after,
-.grid-item .item-buy:has(form[style*="display:none"])::after,
-.grid-item .item-buy:has([disabled])::after,
-.grid-item .item-buy:has(.loading)::after,
-.grid-item .item-buy.loading::after {
+.item-product:not(.swiper-slide) .item-actions:has(form[style*="display: none"])::after,
+.item-product:not(.swiper-slide) .item-actions:has(form[style*="display:none"])::after,
+.item-product:not(.swiper-slide) .item-actions:has(input[style*="display: none"])::after,
+.item-product:not(.swiper-slide) .item-actions:has(input[style*="display:none"])::after,
+.item-product:not(.swiper-slide) .item-actions:has([disabled])::after,
+.item-product:not(.swiper-slide) .item-actions:has(.loading)::after,
+.item-product:not(.swiper-slide) .item-actions:has([class*="loading"])::after,
+.item-product:not(.swiper-slide) .item-actions.loading::after,
+.item-product:not(.swiper-slide):has([class*="loading"]) .item-actions::after,
+.grid-item .item-actions:has(form[style*="display: none"])::after,
+.grid-item .item-actions:has(form[style*="display:none"])::after,
+.grid-item .item-actions:has([disabled])::after,
+.grid-item .item-actions:has(.loading)::after,
+.grid-item .item-actions.loading::after {
   content: 'AGREGANDO...' !important;
   position: absolute !important;
   top: 0 !important;
@@ -773,8 +755,8 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.item-product:not(.swiper-slide):has(.js-addtocart-success) .item-buy::after,
-.grid-item:has(.js-addtocart-success) .item-buy::after {
+.item-product:not(.swiper-slide):has(.js-addtocart-success) .item-actions::after,
+.grid-item:has(.js-addtocart-success) .item-actions::after {
   content: '¡LISTO!' !important;
   background-color: #42c6d3 !important;
   background: #42c6d3 !important;
