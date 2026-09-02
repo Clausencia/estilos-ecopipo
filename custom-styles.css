@@ -781,7 +781,19 @@ form[data-store*="product-form"] .js-addtocart-placeholder * {
 }
 
 /* Cuadricula uniforme: imagenes a proporcion 1:1 y tarjetas alineadas */
+/* La grilla estira cada tarjeta a la altura de la fila mas alta (p.ej. cuando
+   un producto tiene aviso de "solo quedan X en stock"), pero sin esto el
+   bloque de nombre/precio/boton no crecia con la tarjeta: quedaba a su alto
+   natural y dejaba un espacio vacio al fondo en vez de que el margin-top:auto
+   empuje el boton hasta abajo. Se vuelve la tarjeta un flex column para que
+   el bloque de informacion sí ocupe el espacio restante real. */
+.product-item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 .product-item .product-item-image-container {
+  flex: 0 0 auto !important;
   position: relative !important;
   width: 100% !important;
   height: 0 !important;
@@ -805,6 +817,7 @@ form[data-store*="product-form"] .js-addtocart-placeholder * {
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-start !important;
+  flex: 1 1 auto !important;
 }
 
 .product-item .product-item-quick-shop-container {
