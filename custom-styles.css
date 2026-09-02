@@ -692,6 +692,8 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
+  min-width: auto !important;
+  max-width: none !important;
   height: 42px !important;
   min-height: 42px !important;
   max-height: 42px !important;
@@ -792,6 +794,15 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   text-transform: uppercase !important;
   padding: 0 !important;
   margin: 0 !important;
+}
+
+/* En el carrusel de recomendados el tema deja "Agregando..." y "¡Listo!" con
+   opacity:1 por defecto y solo agrega la clase .active al que corresponde
+   mostrar, en vez de partir del otro en 0. Sin esto ambos mensajes se ven
+   superpuestos/encimados al mismo tiempo. Se oculta el que no está activo. */
+.product-item .product-item-quick-shop-container .js-addtocart-adding:not(.active),
+.product-item .product-item-quick-shop-container .js-addtocart-success:not(.active) {
+  opacity: 0 !important;
 }
 
 /* Cuadricula uniforme: imagenes a proporcion 1:1 y tarjetas alineadas */
