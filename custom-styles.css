@@ -459,41 +459,14 @@ a[href*="checkout"]:active {
 }
 
 /* Feedback in-situ en el botón de carrusel */
-.swiper-slide .item-actions:has(form[style*="display: none"]),
-.swiper-slide .item-actions:has(form[style*="display:none"]),
-.swiper-slide .item-actions:has(input[style*="display: none"]),
-.swiper-slide .item-actions:has(input[style*="display:none"]),
-.swiper-slide .item-actions:has([disabled]),
-.swiper-slide .item-actions:has(.loading),
-.swiper-slide .item-actions:has([class*="loading"]),
-.swiper-slide .item-actions.loading,
-.swiper-slide:has([class*="loading"]) .item-actions,
-.section-products-related .item-actions:has([class*="loading"]),
-.section-products-related:has([class*="loading"]) .item-actions {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  background-color: #36b1be !important;
-  background: #36b1be !important;
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-.swiper-slide .item-actions:has(form[style*="display: none"])::after,
-.swiper-slide .item-actions:has(form[style*="display:none"])::after,
-.swiper-slide .item-actions:has(input[style*="display: none"])::after,
-.swiper-slide .item-actions:has(input[style*="display:none"])::after,
-.swiper-slide .item-actions:has([disabled])::after,
-.swiper-slide .item-actions:has(.loading)::after,
-.swiper-slide .item-actions:has([class*="loading"])::after,
-.swiper-slide .item-actions.loading::after,
-.swiper-slide:has([class*="loading"]) .item-actions::after,
-.section-products-related .item-actions:has(form[style*="display: none"])::after,
-.section-products-related .item-actions:has([class*="loading"])::after {
-  content: 'AGREGANDO...' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+.swiper-slide .item-actions .js-addtocart-placeholder,
+.section-products-related .item-actions .js-addtocart-placeholder {
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
   width: 100% !important;
   height: 100% !important;
   display: flex !important;
@@ -509,17 +482,31 @@ a[href*="checkout"]:active {
   font-size: 13px !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
-  z-index: 25 !important;
-  line-height: 1 !important;
+  border: none !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 16px !important;
+  box-shadow: none !important;
   box-sizing: border-box !important;
+  line-height: 1 !important;
 }
 
-.swiper-slide:has(.js-addtocart-success) .item-actions::after,
-.section-products-related:has(.js-addtocart-success) .item-actions::after {
-  content: '¡LISTO!' !important;
-  line-height: 1 !important;
+.swiper-slide .item-actions .js-addtocart-placeholder *,
+.section-products-related .item-actions .js-addtocart-placeholder * {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+}
+
+.swiper-slide .item-actions .js-addtocart-placeholder[style*="display: none"],
+.swiper-slide .item-actions .js-addtocart-placeholder[style*="display:none"],
+.swiper-slide .item-actions .js-addtocart-placeholder.hidden,
+.section-products-related .item-actions .js-addtocart-placeholder[style*="display: none"],
+.section-products-related .item-actions .js-addtocart-placeholder[style*="display:none"],
+.section-products-related .item-actions .js-addtocart-placeholder.hidden {
+  display: none !important;
 }
 
 /* 12. GRID DE PRODUCTOS (CATÁLOGO Y COLECCIONES) */
@@ -690,49 +677,16 @@ a[href*="checkout"]:active {
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* Feedback in-situ en el botón de grid (AGREGANDO... y ¡LISTO!) */
-.item-product:not(.swiper-slide) .item-actions:has(form[style*="display: none"]),
-.item-product:not(.swiper-slide) .item-actions:has(form[style*="display:none"]),
-.item-product:not(.swiper-slide) .item-actions:has(input[style*="display: none"]),
-.item-product:not(.swiper-slide) .item-actions:has(input[style*="display:none"]),
-.item-product:not(.swiper-slide) .item-actions:has([disabled]),
-.item-product:not(.swiper-slide) .item-actions:has(.loading),
-.item-product:not(.swiper-slide) .item-actions:has([class*="loading"]),
-.item-product:not(.swiper-slide) .item-actions.loading,
-.item-product:not(.swiper-slide):has([class*="loading"]) .item-actions,
-.grid-item .item-actions:has(form[style*="display: none"]),
-.grid-item .item-actions:has(form[style*="display:none"]),
-.grid-item .item-actions:has([disabled]),
-.grid-item .item-actions:has(.loading),
-.grid-item .item-actions.loading {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  background-color: #3C1053 !important;
-  background: #3C1053 !important;
-  border-color: #3C1053 !important;
-  transform: translateY(4px) !important;
-  box-shadow: 0 0 0 #3C1053 !important;
-}
-
-.item-product:not(.swiper-slide) .item-actions:has(form[style*="display: none"])::after,
-.item-product:not(.swiper-slide) .item-actions:has(form[style*="display:none"])::after,
-.item-product:not(.swiper-slide) .item-actions:has(input[style*="display: none"])::after,
-.item-product:not(.swiper-slide) .item-actions:has(input[style*="display:none"])::after,
-.item-product:not(.swiper-slide) .item-actions:has([disabled])::after,
-.item-product:not(.swiper-slide) .item-actions:has(.loading)::after,
-.item-product:not(.swiper-slide) .item-actions:has([class*="loading"])::after,
-.item-product:not(.swiper-slide) .item-actions.loading::after,
-.item-product:not(.swiper-slide):has([class*="loading"]) .item-actions::after,
-.grid-item .item-actions:has(form[style*="display: none"])::after,
-.grid-item .item-actions:has(form[style*="display:none"])::after,
-.grid-item .item-actions:has([disabled])::after,
-.grid-item .item-actions:has(.loading)::after,
-.grid-item .item-actions.loading::after {
-  content: 'AGREGANDO...' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+/* Feedback in-situ en el botón de grid */
+.item-product:not(.swiper-slide) .item-actions .js-addtocart-placeholder,
+.grid-item .item-actions .js-addtocart-placeholder,
+.product-item .item-actions .js-addtocart-placeholder {
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
   width: 100% !important;
   height: 100% !important;
   display: flex !important;
@@ -748,18 +702,30 @@ a[href*="checkout"]:active {
   font-size: 13px !important;
   text-transform: uppercase !important;
   border-radius: 50px !important;
-  z-index: 25 !important;
-  line-height: 1 !important;
+  border: 2px solid #3C1053 !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 16px !important;
+  box-shadow: none !important;
   box-sizing: border-box !important;
+  line-height: 1 !important;
 }
 
-.item-product:not(.swiper-slide):has(.js-addtocart-success) .item-actions::after,
-.grid-item:has(.js-addtocart-success) .item-actions::after {
-  content: '¡LISTO!' !important;
-  background-color: #42c6d3 !important;
-  background: #42c6d3 !important;
-  border-color: #42c6d3 !important;
-  line-height: 1 !important;
+.item-product:not(.swiper-slide) .item-actions .js-addtocart-placeholder *,
+.grid-item .item-actions .js-addtocart-placeholder *,
+.product-item .item-actions .js-addtocart-placeholder * {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+}
+
+.item-product:not(.swiper-slide) .item-actions .js-addtocart-placeholder[style*="display: none"],
+.item-product:not(.swiper-slide) .item-actions .js-addtocart-placeholder[style*="display:none"],
+.item-product:not(.swiper-slide) .item-actions .js-addtocart-placeholder.hidden,
+.grid-item .item-actions .js-addtocart-placeholder[style*="display: none"],
+.grid-item .item-actions .js-addtocart-placeholder[style*="display:none"],
+.grid-item .item-actions .js-addtocart-placeholder.hidden {
+  display: none !important;
 }
