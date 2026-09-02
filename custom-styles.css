@@ -311,20 +311,29 @@ a[href*="checkout"]:active {
 .swiper-slide .item-link,
 .swiper-slide .item-image a,
 .swiper-slide .item-link img,
-.swiper-slide .item-image img {
+.swiper-slide .item-image img,
+.section-products-related .item-image,
+.section-products-related .item-link,
+.section-products-related .item-image a,
+.section-products-related .item-link img,
+.section-products-related .item-image img {
   pointer-events: auto !important;
   cursor: pointer !important;
 }
 
-/* Ocultar cualquier botón flotante o elemento de acción sobre la foto en carrusel */
+/* Ocultar de raíz CUALQUIER botón flotante o elemento de acción sobre la foto en carrusel */
 .swiper-slide .item-actions,
 .swiper-slide .item-actions *,
 .swiper-slide [class*="item-actions"],
+.swiper-slide [class*="quickshop"],
+.swiper-slide [class*="hover"],
+.swiper-slide [class*="overlay"],
 .swiper-slide a.js-item-buy,
 .swiper-slide .js-item-buy,
 .swiper-slide .item-image a.btn,
 .swiper-slide .item-image .btn,
 .swiper-slide .item-image button,
+.swiper-slide .item-image [class*="btn"],
 .swiper-slide .item-image .js-addtocart-placeholder,
 .swiper-slide .item-image .js-addtocart-feedback,
 .swiper-slide .item-image .js-addtocart-loading,
@@ -333,7 +342,17 @@ a[href*="checkout"]:active {
 .swiper-slide .item-link .btn,
 .swiper-slide .item-link button,
 .swiper-slide .item-link .js-addtocart-placeholder,
-.swiper-slide .item-link .js-addtocart-feedback {
+.swiper-slide .item-link .js-addtocart-feedback,
+.swiper-slide [data-component="product-list-item.add-to-cart"],
+.swiper-slide [data-toggle*="quickshop"],
+.swiper-slide > a.btn,
+.swiper-slide > button,
+.section-products-related .item-actions,
+.section-products-related [class*="actions"],
+.section-products-related a.js-item-buy,
+.section-products-related .item-image .btn,
+.section-products-related .item-image [class*="btn"],
+.section-products-related [data-component*="add-to-cart"] {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -346,7 +365,8 @@ a[href*="checkout"]:active {
 }
 
 /* Botón principal único de 160px al pie de cada tarjeta en carrusel */
-.swiper-slide .item-buy {
+.swiper-slide .item-buy,
+.section-products-related .item-buy {
   position: relative !important;
   top: auto !important;
   bottom: auto !important;
@@ -382,13 +402,17 @@ a[href*="checkout"]:active {
 
 .swiper-slide .item-buy[style*="display: none"],
 .swiper-slide .item-buy[style*="display:none"],
-.swiper-slide .item-buy.hidden {
+.swiper-slide .item-buy.hidden,
+.section-products-related .item-buy[style*="display: none"],
+.section-products-related .item-buy[style*="display:none"],
+.section-products-related .item-buy.hidden {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-.swiper-slide .item-buy form {
+.swiper-slide .item-buy form,
+.section-products-related .item-buy form {
   position: static !important;
   display: flex !important;
   align-items: center !important;
@@ -406,7 +430,12 @@ a[href*="checkout"]:active {
 .swiper-slide .item-buy input[type="button"],
 .swiper-slide .item-buy button,
 .swiper-slide .item-buy a,
-.swiper-slide .item-buy input {
+.swiper-slide .item-buy input,
+.section-products-related .item-buy input[type="submit"],
+.section-products-related .item-buy input[type="button"],
+.section-products-related .item-buy button,
+.section-products-related .item-buy a,
+.section-products-related .item-buy input {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -435,13 +464,15 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.swiper-slide .item-buy:hover {
+.swiper-slide .item-buy:hover,
+.section-products-related .item-buy:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   background-color: #42c6d3 !important;
 }
 
-.swiper-slide .item-buy:active {
+.swiper-slide .item-buy:active,
+.section-products-related .item-buy:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
@@ -456,7 +487,9 @@ a[href*="checkout"]:active {
 .swiper-slide .item-buy:has(.loading),
 .swiper-slide .item-buy:has([class*="loading"]),
 .swiper-slide .item-buy.loading,
-.swiper-slide:has([class*="loading"]) .item-buy {
+.swiper-slide:has([class*="loading"]) .item-buy,
+.section-products-related .item-buy:has([class*="loading"]),
+.section-products-related:has([class*="loading"]) .item-buy {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -474,7 +507,9 @@ a[href*="checkout"]:active {
 .swiper-slide .item-buy:has(.loading)::after,
 .swiper-slide .item-buy:has([class*="loading"])::after,
 .swiper-slide .item-buy.loading::after,
-.swiper-slide:has([class*="loading"]) .item-buy::after {
+.swiper-slide:has([class*="loading"]) .item-buy::after,
+.section-products-related .item-buy:has(form[style*="display: none"])::after,
+.section-products-related .item-buy:has([class*="loading"])::after {
   content: 'AGREGANDO...' !important;
   position: absolute !important;
   top: 0 !important;
@@ -501,7 +536,8 @@ a[href*="checkout"]:active {
   box-sizing: border-box !important;
 }
 
-.swiper-slide:has(.js-addtocart-success) .item-buy::after {
+.swiper-slide:has(.js-addtocart-success) .item-buy::after,
+.section-products-related:has(.js-addtocart-success) .item-buy::after {
   content: '¡LISTO!' !important;
   line-height: 1 !important;
 }
