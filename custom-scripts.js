@@ -37,7 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(corregirSimboloPeso, 1500);
 });
 
-/* 3. Auto-Slider Categorias
+/* 4. Texto "Agregar al carrito" en grid y carrusel
+   El boton del grid y del carrusel de recomendados trae "Comprar" por
+   defecto del tema; se renombra para que diga lo mismo que el boton
+   del PDP. Se usa un MutationObserver (no un timeout fijo) porque el
+   grid pagina por AJAX y el carrusel de recomendados carga su
+   contenido de forma asincrona, en momentos que no son predecibles. */
+document.addEventListener('DOMContentLoaded', () => {
+  const TEXTO_BOTON = 'Agregar al carrito';
+  const renombrarBotones = () => {
+    document.querySelectorAll('.product-item .item-submit-container input.js-addtocart').forEach((input) => {
+      if (input.value !== TEXTO_BOTON) input.value = TEXTO_BOTON;
+    });
+  };
+
+  renombrarBotones();
+  new MutationObserver(renombrarBotones).observe(document.body, { childList: true, subtree: true });
+});
+
+/* 5. Auto-Slider Categorias
    Activa el autoplay del slider de categorias (el tema no lo trae
    activado por defecto). Espera a que el swiper exista antes de
    configurarlo. */
