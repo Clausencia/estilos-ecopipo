@@ -677,23 +677,28 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 /* Botón "Comprar" del grid: misma apariencia y funcionamiento que "Agregar al carrito" del PDP */
 .product-item .item-submit-container {
   width: 100% !important;
+  margin-top: 10px !important;
 }
 
 /* El tema oculta el boton real (item-submit-container) con display:none
    mientras dura "Agregando..."; sin una altura fija el formulario colapsa
    a 0px y el mensaje de feedback (posicionado respecto a el) se desplaza,
-   dejando un hueco en blanco donde estaba el boton */
+   dejando un hueco en blanco donde estaba el boton. Se reserva 10px extra
+   de alto (52px en vez de 42px) para separar el boton de la linea de
+   precio; ese espacio lo agrega el margin-top del boton de arriba y el
+   overlay de feedback se ajusta con top:10px mas abajo para no cambiar el
+   punto en que ambos se solapan exactamente. */
 .product-item .product-item-quick-shop-container {
-  height: 42px !important;
-  min-height: 42px !important;
+  height: 52px !important;
+  min-height: 52px !important;
 }
 
 .product-item .product-item-quick-shop-container form.js-product-form {
   position: relative !important;
   display: block !important;
   margin: 0 !important;
-  height: 42px !important;
-  min-height: 42px !important;
+  height: 52px !important;
+  min-height: 52px !important;
 }
 
 .product-item .item-submit-container input.js-addtocart {
@@ -750,7 +755,7 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 /* Feedback "Agregando..."/"Listo" identico al PDP */
 .product-item .product-item-quick-shop-container .js-addtocart-placeholder {
   position: absolute !important;
-  top: 0 !important;
+  top: 10px !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
