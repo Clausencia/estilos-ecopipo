@@ -146,7 +146,7 @@ a[href*="checkout"]:active {
 form[data-store*="product-form"],
 .product-detail .js-product-form,
 .section-product-detail .js-product-form {
-  position: static !important;
+  position: relative !important;
   min-height: 42px !important;
 }
 
@@ -303,6 +303,20 @@ form[data-store*="product-form"] .js-addtocart-placeholder * {
   font-weight: 700 !important;
   font-size: 14px !important;
   text-transform: uppercase !important;
+}
+
+/* El overlay forzaba display:flex sin respetar el style="display:none" que
+   usa el tema para ocultarlo en reposo. Al quedar siempre visible y con el
+   formulario en position:static, se posicionaba respecto al ancestro
+   posicionado mas cercano (variable segun la pagina), apareciendo como un
+   "boton fantasma" flotando en una esquina distinta en cada producto. */
+#product-form .js-addtocart-placeholder[style*="display: none"],
+#product-form .js-addtocart-placeholder[style*="display:none"],
+#product_form .js-addtocart-placeholder[style*="display: none"],
+#product_form .js-addtocart-placeholder[style*="display:none"],
+form[data-store*="product-form"] .js-addtocart-placeholder[style*="display: none"],
+form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"] {
+  display: none !important;
 }
 
 /* Control de visibilidad y exclusiones del carrito */
