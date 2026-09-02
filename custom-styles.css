@@ -141,20 +141,15 @@ a[href*="checkout"]:active {
 }
 
 /* 10. FICHA DE PRODUCTO (PDP) */
-#product-form,
-.js-product-form {
+#product-form {
   position: static !important;
   min-height: 42px !important;
 }
 
 #product-form button[type="submit"],
 #product-form input[type="submit"],
-.js-product-form button[type="submit"],
-.js-product-form input[type="submit"],
 #product-form .js-addtocart,
-.js-product-form .js-addtocart,
-.js-addtocart-js,
-.js-prod-submit-form {
+#product-form .js-prod-submit-form {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -189,12 +184,8 @@ a[href*="checkout"]:active {
 
 #product-form button[type="submit"]:hover,
 #product-form input[type="submit"]:hover,
-.js-product-form button[type="submit"]:hover,
-.js-product-form input[type="submit"]:hover,
 #product-form .js-addtocart:hover,
-.js-product-form .js-addtocart:hover,
-.js-addtocart-js:hover,
-.js-prod-submit-form:hover {
+#product-form .js-prod-submit-form:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   opacity: 1 !important;
@@ -203,12 +194,8 @@ a[href*="checkout"]:active {
 
 #product-form button[type="submit"]:active,
 #product-form input[type="submit"]:active,
-.js-product-form button[type="submit"]:active,
-.js-product-form input[type="submit"]:active,
 #product-form .js-addtocart:active,
-.js-product-form .js-addtocart:active,
-.js-addtocart-js:active,
-.js-prod-submit-form:active {
+#product-form .js-prod-submit-form:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
@@ -218,14 +205,9 @@ a[href*="checkout"]:active {
 /* Estado de procesamiento en PDP */
 #product-form button[disabled],
 #product-form input[disabled],
-.js-product-form button[disabled],
-.js-product-form input[disabled],
-.js-addtocart[disabled],
-.js-addtocart-js[disabled],
-.js-prod-submit-form[disabled],
+#product-form .js-addtocart[disabled],
+#product-form .js-prod-submit-form[disabled],
 #product-form button.disabled,
-.js-product-form button.disabled,
-.js-addtocart-js.disabled,
 #product-form.loading button,
 #product-form.loading input {
   transform: translateY(4px) !important;
@@ -241,11 +223,7 @@ a[href*="checkout"]:active {
 #product-form .js-addtocart-placeholder,
 #product-form .js-addtocart-feedback,
 #product-form .js-addtocart-loading,
-#product-form .js-addtocart-success,
-.js-product-form .js-addtocart-placeholder,
-.js-product-form .js-addtocart-feedback,
-.js-product-form .js-addtocart-loading,
-.js-product-form .js-addtocart-success {
+#product-form .js-addtocart-success {
   position: absolute !important;
   top: 10px !important;
   right: 0 !important;
@@ -279,8 +257,7 @@ a[href*="checkout"]:active {
   line-height: 1 !important;
 }
 
-#product-form .js-addtocart-placeholder *,
-.js-product-form .js-addtocart-placeholder * {
+#product-form .js-addtocart-placeholder * {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -305,6 +282,33 @@ a[href*="checkout"]:active {
 }
 
 /* 11. CARRUSEL DE PRODUCTOS (SLIDERS Y PRODUCTOS SIMILARES) */
+.swiper-slide .item-actions input[type="submit"],
+.swiper-slide .item-actions a,
+.swiper-slide .item-actions button,
+.section-products-related .item-actions input[type="submit"],
+.section-products-related .item-actions a,
+.section-products-related .item-actions button {
+  font-size: 0 !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.swiper-slide .item-actions input[type="submit"]::after,
+.swiper-slide .item-actions a::after,
+.swiper-slide .item-actions button::after,
+.swiper-slide .item-actions::after,
+.section-products-related .item-actions input[type="submit"]::after,
+.section-products-related .item-actions a::after,
+.section-products-related .item-actions button::after,
+.section-products-related .item-actions::after {
+  content: 'COMPRANDO' !important;
+  font-size: 13px !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
 
 /* 12. GRID DE PRODUCTOS (CATÁLOGO Y COLECCIONES) */
 
