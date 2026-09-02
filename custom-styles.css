@@ -141,7 +141,11 @@ a[href*="checkout"]:active {
 }
 
 /* 10. FICHA DE PRODUCTO (PDP) */
-#product-form {
+#product-form,
+#product_form,
+form[data-store*="product-form"],
+.product-detail .js-product-form,
+.section-product-detail .js-product-form {
   position: static !important;
   min-height: 42px !important;
 }
@@ -149,7 +153,15 @@ a[href*="checkout"]:active {
 #product-form button[type="submit"],
 #product-form input[type="submit"],
 #product-form .js-addtocart,
-#product-form .js-prod-submit-form {
+#product-form .js-prod-submit-form,
+#product_form button[type="submit"],
+#product_form input[type="submit"],
+#product_form .js-addtocart,
+#product_form .js-prod-submit-form,
+form[data-store*="product-form"] input[type="submit"],
+form[data-store*="product-form"] button[type="submit"],
+.product-detail .js-product-form input[type="submit"],
+.section-product-detail .js-product-form input[type="submit"] {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -185,7 +197,13 @@ a[href*="checkout"]:active {
 #product-form button[type="submit"]:hover,
 #product-form input[type="submit"]:hover,
 #product-form .js-addtocart:hover,
-#product-form .js-prod-submit-form:hover {
+#product-form .js-prod-submit-form:hover,
+#product_form button[type="submit"]:hover,
+#product_form input[type="submit"]:hover,
+#product_form .js-addtocart:hover,
+#product_form .js-prod-submit-form:hover,
+form[data-store*="product-form"] input[type="submit"]:hover,
+form[data-store*="product-form"] button[type="submit"]:hover {
   transform: translateY(2px) !important;
   box-shadow: 0 2px 0 #3C1053 !important;
   opacity: 1 !important;
@@ -195,7 +213,13 @@ a[href*="checkout"]:active {
 #product-form button[type="submit"]:active,
 #product-form input[type="submit"]:active,
 #product-form .js-addtocart:active,
-#product-form .js-prod-submit-form:active {
+#product-form .js-prod-submit-form:active,
+#product_form button[type="submit"]:active,
+#product_form input[type="submit"]:active,
+#product_form .js-addtocart:active,
+#product_form .js-prod-submit-form:active,
+form[data-store*="product-form"] input[type="submit"]:active,
+form[data-store*="product-form"] button[type="submit"]:active {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
@@ -207,9 +231,16 @@ a[href*="checkout"]:active {
 #product-form input[disabled],
 #product-form .js-addtocart[disabled],
 #product-form .js-prod-submit-form[disabled],
+#product_form button[disabled],
+#product_form input[disabled],
+#product_form .js-addtocart[disabled],
+#product_form .js-prod-submit-form[disabled],
 #product-form button.disabled,
+#product_form button.disabled,
 #product-form.loading button,
-#product-form.loading input {
+#product-form.loading input,
+#product_form.loading button,
+#product_form.loading input {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
   background-color: #36b1be !important;
@@ -223,7 +254,13 @@ a[href*="checkout"]:active {
 #product-form .js-addtocart-placeholder,
 #product-form .js-addtocart-feedback,
 #product-form .js-addtocart-loading,
-#product-form .js-addtocart-success {
+#product-form .js-addtocart-success,
+#product_form .js-addtocart-placeholder,
+#product_form .js-addtocart-feedback,
+#product_form .js-addtocart-loading,
+#product_form .js-addtocart-success,
+form[data-store*="product-form"] .js-addtocart-placeholder,
+form[data-store*="product-form"] .js-addtocart-feedback {
   position: absolute !important;
   top: 10px !important;
   right: 0 !important;
@@ -257,7 +294,9 @@ a[href*="checkout"]:active {
   line-height: 1 !important;
 }
 
-#product-form .js-addtocart-placeholder * {
+#product-form .js-addtocart-placeholder *,
+#product_form .js-addtocart-placeholder *,
+form[data-store*="product-form"] .js-addtocart-placeholder * {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   font-family: 'Baloo 2', sans-serif !important;
@@ -282,33 +321,6 @@ a[href*="checkout"]:active {
 }
 
 /* 11. CARRUSEL DE PRODUCTOS (SLIDERS Y PRODUCTOS SIMILARES) */
-.swiper-slide .item-actions input[type="submit"],
-.swiper-slide .item-actions a,
-.swiper-slide .item-actions button,
-.section-products-related .item-actions input[type="submit"],
-.section-products-related .item-actions a,
-.section-products-related .item-actions button {
-  font-size: 0 !important;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-}
-
-.swiper-slide .item-actions input[type="submit"]::after,
-.swiper-slide .item-actions a::after,
-.swiper-slide .item-actions button::after,
-.swiper-slide .item-actions::after,
-.section-products-related .item-actions input[type="submit"]::after,
-.section-products-related .item-actions a::after,
-.section-products-related .item-actions button::after,
-.section-products-related .item-actions::after {
-  content: 'COMPRANDO' !important;
-  font-size: 13px !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: 'Baloo 2', sans-serif !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-}
 
 /* 12. GRID DE PRODUCTOS (CATÁLOGO Y COLECCIONES) */
 
