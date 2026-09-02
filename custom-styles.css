@@ -322,6 +322,114 @@ form[data-store*="product-form"] .js-addtocart-placeholder * {
 
 /* 11. CARRUSEL DE PRODUCTOS (SLIDERS Y PRODUCTOS SIMILARES) */
 
+/* Contenedor de acciones del carrusel */
+.swiper-slide .item-actions,
+.section-products-related .item-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin-top: 10px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Ocultar cualquier elemento duplicado sobre la foto */
+.swiper-slide .item-image .btn,
+.swiper-slide .item-image a.btn,
+.swiper-slide .js-item-variants,
+.section-products-related .item-image .btn,
+.section-products-related .js-item-variants {
+  display: none !important;
+}
+
+/* Botón estilo píldora cyan con sombra 3D morada idéntico a PDP */
+.swiper-slide .btn,
+.swiper-slide a.btn,
+.swiper-slide input[type="submit"],
+.swiper-slide .js-quickshop-modal-open,
+.swiper-slide .js-prod-submit-form,
+.swiper-slide .js-addtocart,
+.section-products-related .btn,
+.section-products-related a.btn,
+.section-products-related input[type="submit"],
+.section-products-related .js-quickshop-modal-open,
+.section-products-related .js-prod-submit-form,
+.section-products-related .js-addtocart {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 160px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 0 16px !important;
+  margin: 10px auto 0 auto !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  border-radius: 50px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 5 !important;
+  opacity: 1 !important;
+  text-indent: 0 !important;
+  transition: transform .1s ease, box-shadow .1s ease, background-color .1s ease !important;
+}
+
+/* Hover: efecto push intermedio */
+.swiper-slide .btn:hover,
+.swiper-slide a.btn:hover,
+.swiper-slide input[type="submit"]:hover,
+.swiper-slide .js-quickshop-modal-open:hover,
+.swiper-slide .js-prod-submit-form:hover,
+.section-products-related .btn:hover,
+.section-products-related a.btn:hover,
+.section-products-related input[type="submit"]:hover,
+.section-products-related .js-quickshop-modal-open:hover,
+.section-products-related .js-prod-submit-form:hover {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+  opacity: 1 !important;
+  background-color: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Active: efecto push completo al click */
+.swiper-slide .btn:active,
+.swiper-slide a.btn:active,
+.swiper-slide input[type="submit"]:active,
+.swiper-slide .js-quickshop-modal-open:active,
+.swiper-slide .js-prod-submit-form:active,
+.section-products-related .btn:active,
+.section-products-related a.btn:active,
+.section-products-related input[type="submit"]:active,
+.section-products-related .js-quickshop-modal-open:active,
+.section-products-related .js-prod-submit-form:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+  background-color: #36b1be !important;
+  opacity: 1 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
 /* 12. GRID DE PRODUCTOS (CATÁLOGO Y COLECCIONES) */
 
 /* Clic directo en imagen de grid */
