@@ -150,6 +150,15 @@ form[data-store*="product-form"],
   min-height: 42px !important;
 }
 
+/* El formulario incluye tambien el selector de cantidad, asi que ancla el
+   overlay (right:0 respecto al FORM completo) mas a la derecha que el
+   boton real. .buy-button-container envuelve solo al boton y comparte su
+   mismo borde izquierdo, asi que se usa como referencia de posicionamiento
+   en su lugar (mas cercano en el DOM, gana sobre el form). */
+.buy-button-container {
+  position: relative !important;
+}
+
 #product-form button[type="submit"],
 #product-form input[type="submit"],
 #product-form .js-addtocart,
@@ -263,8 +272,8 @@ form[data-store*="product-form"] .js-addtocart-placeholder,
 form[data-store*="product-form"] .js-addtocart-feedback {
   position: absolute !important;
   top: 10px !important;
-  right: 0 !important;
-  left: auto !important;
+  left: 0 !important;
+  right: auto !important;
   width: 100% !important;
   max-width: 220px !important;
   height: 42px !important;
@@ -800,6 +809,27 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   width: auto !important;
   min-width: auto !important;
   max-width: none !important;
+}
+
+/* El tema anima estos estados con un transform: translateY(...) que no
+   siempre se resetea antes de que el JS marque el estado como .active,
+   dejando el texto flotando por encima del pill (visible especialmente
+   ahora que el pill ocupa el ancho completo). Se ancla cada estado con
+   position:absolute cubriendo todo el pill y se anula ese transform, asi
+   la posicion depende solo de nuestro CSS y no de esa animacion. */
+.product-item .product-item-quick-shop-container .js-addtocart-placeholder .d-inline-block,
+.product-item .product-item-quick-shop-container .js-addtocart-placeholder .js-addtocart-text,
+.product-item .product-item-quick-shop-container .js-addtocart-placeholder .js-addtocart-success,
+.product-item .product-item-quick-shop-container .js-addtocart-placeholder .js-addtocart-adding {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: none !important;
 }
 
 /* En el carrusel de recomendados el tema deja "Agregando..." y "¡Listo!" con
