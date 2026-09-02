@@ -656,10 +656,21 @@ form[data-store*="product-form"] .js-addtocart-placeholder * {
   width: 100% !important;
 }
 
+/* El tema oculta el boton real (item-submit-container) con display:none
+   mientras dura "Agregando..."; sin una altura fija el formulario colapsa
+   a 0px y el mensaje de feedback (posicionado respecto a el) se desplaza,
+   dejando un hueco en blanco donde estaba el boton */
+.product-item .product-item-quick-shop-container {
+  height: 42px !important;
+  min-height: 42px !important;
+}
+
 .product-item .product-item-quick-shop-container form.js-product-form {
   position: relative !important;
   display: block !important;
   margin: 0 !important;
+  height: 42px !important;
+  min-height: 42px !important;
 }
 
 .product-item .item-submit-container input.js-addtocart {
