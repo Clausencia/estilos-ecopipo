@@ -42,12 +42,22 @@ document.addEventListener('DOMContentLoaded', () => {
    defecto del tema; se renombra para que diga lo mismo que el boton
    del PDP. Se usa un MutationObserver (no un timeout fijo) porque el
    grid pagina por AJAX y el carrusel de recomendados carga su
-   contenido de forma asincrona, en momentos que no son predecibles. */
+   contenido de forma asincrona, en momentos que no son predecibles.
+
+   El overlay de feedback ("Agregando.../Listo") tiene ademas su propio
+   texto por defecto ("Comprar") hardcodeado en el HTML del tema,
+   independiente del value del input real. Si varios clics simultaneos
+   dejan ese overlay visible en un estado intermedio (bug ya conocido
+   del tema, ver BITACORA.md), ese texto interno tambien debe decir
+   "Agregar al carrito" para no mostrar un mismatch visible. */
 document.addEventListener('DOMContentLoaded', () => {
   const TEXTO_BOTON = 'Agregar al carrito';
   const renombrarBotones = () => {
     document.querySelectorAll('.product-item .item-submit-container input.js-addtocart').forEach((input) => {
       if (input.value !== TEXTO_BOTON) input.value = TEXTO_BOTON;
+    });
+    document.querySelectorAll('.product-item .js-addtocart-placeholder .js-addtocart-text').forEach((textEl) => {
+      if (textEl.textContent.trim() !== TEXTO_BOTON) textEl.textContent = TEXTO_BOTON;
     });
   };
 
