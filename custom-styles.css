@@ -745,6 +745,8 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
+  min-width: auto !important;
+  max-width: none !important;
   height: 42px !important;
   min-height: 42px !important;
   max-height: 42px !important;
@@ -792,8 +794,12 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   font-weight: 700 !important;
   font-size: 13px !important;
   text-transform: uppercase !important;
+  text-align: center !important;
   padding: 0 !important;
   margin: 0 !important;
+  width: auto !important;
+  min-width: auto !important;
+  max-width: none !important;
 }
 
 /* En el carrusel de recomendados el tema deja "Agregando..." y "¡Listo!" con
