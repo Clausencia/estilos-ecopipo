@@ -901,3 +901,20 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 .product-item .product-item-quick-shop-container {
   margin-top: auto !important;
 }
+
+/* 13. BANNER PRINCIPAL DEL HOME (SLIDER) */
+/* El tema aplica la misma clase de alineacion (media-content-*) en
+   desktop y mobile por igual -- no hay control nativo para posiciones
+   distintas por dispositivo. Este slide especifico necesita texto a la
+   derecha en desktop (sobre la pleca naranja lateral) pero abajo-centro
+   en mobile (sobre la pleca ondulada inferior de la imagen mobile), asi
+   que se sobreescribe solo por debajo de 768px. #ns-block-slide_1 es el
+   id estable que Tiendanube asigna a este bloque especifico del slider,
+   no cambia entre recargas ni afecta a los otros slides del carrusel. */
+@media (max-width: 767px) {
+  #ns-block-slide_1 .media-content {
+    align-items: center !important;
+    justify-content: flex-end !important;
+    text-align: center !important;
+  }
+}
