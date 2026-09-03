@@ -918,3 +918,15 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
     text-align: center !important;
   }
 }
+
+/* El bloque de boton del tema trae margin-left/right:auto por defecto
+   (para quedar centrado sin importar la alineacion del texto), lo que
+   lo saca de la agrupacion con el titulo y la descripcion en cuanto la
+   alineacion deja de ser centrada. Se anulan esos margenes para que
+   respete la alineacion real (align-items) del contenedor en ambos
+   breakpoints -- en mobile el propio align-items:center del override
+   de arriba ya lo centra igual, asi que no hace falta excepcion ahi. */
+#ns-block-slide_1 .media-content .btn {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
