@@ -675,9 +675,21 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 }
 
 /* Botón "Comprar" del grid: misma apariencia y funcionamiento que "Agregar al carrito" del PDP */
+/* El tema tiene un bug propio (confirmado con nuestro CSS/JS desactivado): al
+   agregar CUALQUIER producto, a veces tambien muestra el overlay de feedback
+   del PRIMER producto de la pagina (un selector sin acotar en su script),
+   sin ocultar el boton real detras. Si el boton real (posicionado por flujo
+   normal + margin-top) y el overlay (position:absolute + top) no caen en
+   el mismo pixel exacto, se ven las dos leyendas "Agregar al carrito"
+   apiladas. Se posiciona el boton real tambien con position:absolute e
+   identico top para garantizar que siempre coincidan exactamente. */
 .product-item .item-submit-container {
+  position: absolute !important;
+  top: 10px !important;
+  left: 0 !important;
+  right: 0 !important;
   width: 100% !important;
-  margin-top: 10px !important;
+  margin-top: 0 !important;
 }
 
 /* El tema oculta el boton real (item-submit-container) con display:none
