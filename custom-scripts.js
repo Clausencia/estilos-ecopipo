@@ -82,3 +82,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 400);
 });
+
+/* 6. Segundo Cintillo (envio gratis)
+   Tiendanube solo trae un slot nativo de barra de anuncios (el
+   "adbar", arriba del header). Para tener un segundo cintillo debajo
+   del menu y antes del banner principal -- como en referencias de
+   otras tiendas -- se inyecta a mano como seccion hermana de
+   .section-header, fuera del wrapper sticky del header para que
+   se desplace con el resto del contenido en vez de quedar fijo. */
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('ecopipo-cintillo2')) return;
+
+  const header = document.querySelector('.section-header');
+  if (!header) return;
+
+  const ICONO_CAMION =
+    '<svg viewBox="0 0 640 512" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M0 96C0 78.3 14.3 64 32 64H384c17.7 0 32 14.3 32 32V128h60.6c11.3 0 22.2 4.5 30.2 12.5l70.1 70.1c8 8 12.5 18.9 12.5 30.2V352c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H592c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96H32c-17.7 0-32-14.3-32-32V96zM416 160V352h94.2L448 289.8V196.4L416 160zM496 464a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM160 416a48 48 0 1 0 0 96 48 48 0 1 0 0-96z"/></svg>';
+
+  const item =
+    '<span class="ecopipo-cintillo2-item">Envío sin costo a todo el país a partir de $1,500</span>' +
+    '<span class="ecopipo-cintillo2-icon">' + ICONO_CAMION + '</span>';
+
+  const cintillo = document.createElement('div');
+  cintillo.id = 'ecopipo-cintillo2';
+  cintillo.innerHTML = '<div class="ecopipo-cintillo2-track">' + item.repeat(8) + '</div>';
+
+  header.parentNode.insertBefore(cintillo, header.nextSibling);
+});

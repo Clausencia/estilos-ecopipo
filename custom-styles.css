@@ -997,3 +997,38 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   background-size: auto !important;
   background-position: 50% 50% !important;
 }
+
+/* 15. SEGUNDO CINTILLO (ENVIO GRATIS) */
+/* Elemento inyectado por custom-scripts.js (seccion 6). Marquee de
+   scroll infinito: el track duplica el contenido y se anima -50% de
+   su propio ancho, asi el loop no muestra un salto/corte visible. */
+#ecopipo-cintillo2 {
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #FF9030;
+}
+
+.ecopipo-cintillo2-track {
+  display: inline-flex;
+  align-items: center;
+  animation: ecopipo-cintillo2-scroll 20s linear infinite;
+}
+
+.ecopipo-cintillo2-item {
+  color: #fcf5ff;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 16px;
+}
+
+.ecopipo-cintillo2-icon {
+  color: #fcf5ff;
+  display: inline-flex;
+  align-items: center;
+}
+
+@keyframes ecopipo-cintillo2-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
