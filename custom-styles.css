@@ -1032,3 +1032,24 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+/* 16. CINTILLO SUPERIOR (ADBAR) FIJO */
+/* El "adbar" nativo de Tiendanube anima su contenido con un marquee
+   infinito (animation: marquee-scroll) sin opcion en el admin para
+   desactivarlo. Con un solo mensaje configurado no tiene sentido que
+   se desplace, asi que se congela la animacion y se muestra un unico
+   item centrado en vez de la tira repetida usada para el loop. */
+.adbar-marquee-track {
+  animation: none !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.js-adbar-marquee-content {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+.js-adbar-item:not(:first-child) {
+  display: none !important;
+}
