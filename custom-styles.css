@@ -970,3 +970,18 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 #ns-block-slide_1 .media-content .text-block {
   font-size: 20px !important;
 }
+
+/* 14. CARRUSEL DE CATEGORIAS DEL HOME */
+/* El patron decorativo (corazones/estrellas) ya conecta sin cortes
+   entre el banner principal y esta seccion -- el problema no era una
+   transicion faltante, sino puro espaciado: 40px de padding superior
+   mas un titulo vacio (antes tenia un "?" de prueba) que sumaba otros
+   32px de gap de flexbox antes del carrusel de circulos. Se oculta el
+   bloque de titulo (queda vacio) y se reduce el padding superior. */
+.featured-categories-section .text-center.flex-shrink-0 {
+  display: none !important;
+}
+
+.featured-categories-section .d-flex.flex-column {
+  padding-top: 16px !important;
+}
