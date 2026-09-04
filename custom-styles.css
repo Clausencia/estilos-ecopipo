@@ -1053,3 +1053,43 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 .js-adbar-item:not(:first-child) {
   display: none !important;
 }
+
+/* 17. ACORDEONES DE PREGUNTAS FRECUENTES DEL HOME */
+/* El acordeon nativo de la seccion FAQ traia el estilo generico del
+   tema (solo una linea divisoria, sin jerarquia visual). Se reestiliza
+   como tarjeta con borde de color, replicando el patron ya usado en
+   los acordeones de la descripcion de producto (fondo lavanda en el
+   encabezado, borde izquierdo de acento por color de marca). El color
+   de acento rota por item para que cada pregunta se distinga a
+   simple vista. */
+.faq-list .accordion-item {
+  border: 1px solid #E2E8F0 !important;
+  border-left: 6px solid #FF9030 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  margin-bottom: 14px !important;
+}
+
+.faq-list .accordion-item:nth-child(5n+2) { border-left-color: #BDD930 !important; }
+.faq-list .accordion-item:nth-child(5n+3) { border-left-color: #42C6D3 !important; }
+.faq-list .accordion-item:nth-child(5n+4) { border-left-color: #B573DE !important; }
+.faq-list .accordion-item:nth-child(5n+5) { border-left-color: #3C1053 !important; }
+
+.faq-list .accordion-item-toggle {
+  padding: 14px 18px !important;
+  background-color: #fcf5ff !important;
+  font-weight: bold !important;
+  font-size: 17px !important;
+  color: #1a202c !important;
+  border-bottom: none !important;
+}
+
+.faq-list .accordion-item-body {
+  padding: 18px 20px !important;
+  color: #4a5568 !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  background-color: #ffffff !important;
+}
