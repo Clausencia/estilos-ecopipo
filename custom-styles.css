@@ -985,3 +985,15 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 .featured-categories-section .d-flex.flex-column {
   padding-top: 16px !important;
 }
+
+/* La franja blanca donde viven los controles del slider (paginado y
+   flechas) quedaba en blanco solido, cortando la transicion entre la
+   ola del banner y el patron decorativo de la seccion de categorias.
+   Se extiende el mismo patron (bg-mist-full.png) al contenedor del
+   slider para que la transicion se vea continua en vez de "cortada". */
+.js-slideshow-container {
+  background-image: url("https://d1a9qnv764bsoo.cloudfront.net/stores/007/906/761/rte/bg-mist-full.png") !important;
+  background-repeat: repeat !important;
+  background-size: auto !important;
+  background-position: 50% 50% !important;
+}
