@@ -930,3 +930,14 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+/* Color de marca con mejor contraste que el teal por defecto (2.05:1
+   con texto blanco, insuficiente) contra el nuevo fondo lima de este
+   banner. El morado oscuro ya se usa en el sitio como color de sombra
+   3D, asi que es consistente con la marca; con texto blanco da 15:1
+   de contraste (WCAG AAA). Probado en vivo contra el fondo lima en
+   desktop y mobile antes de fijarlo. */
+#ns-block-slide_1 .media-content .btn {
+  background-color: #3C1053 !important;
+  border-color: #3C1053 !important;
+}
