@@ -1136,16 +1136,21 @@ body.template-home .section-slideshow .heading-block {
 /* Los titulos de columna (24px) y la lista de links (16px de gap)
    traian mucho mas aire del necesario, dando un footer disperso. Se
    reduce el espaciado y se agrega una linea debajo de cada titulo
-   para separarlo visualmente del contenido, ajustada al ancho del
-   texto (no de toda la columna). display:inline-block no bastaba en
-   mobile porque el contenedor padre del titulo (el acordeon) es un
-   grid que estira sus hijos por defecto -- se fija con
-   width:fit-content para que la linea no ocupe el ancho completo. */
+   para separarlo visualmente del contenido. El largo de la linea es
+   fijo (24px, igual en todos los titulos) en vez de ajustarse al
+   ancho de cada texto -- se eligio ese valor porque es
+   aproximadamente donde termina la "g" de "Legal", la referencia que
+   se pidio igualar. display:inline-block no bastaba en mobile porque
+   el contenedor padre del titulo (el acordeon) es un grid que estira
+   sus hijos por defecto -- se fija un width explicito para que la
+   linea no ocupe el ancho completo. */
 .footer-menu-title,
 .footer-payment-shipping-label,
 .footer-newsletter-title {
   display: inline-block !important;
-  width: fit-content !important;
+  width: 24px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
   margin-bottom: 8px !important;
   padding-bottom: 6px !important;
   border-bottom: 2px solid rgba(252,245,255,0.4) !important;
@@ -1157,4 +1162,20 @@ body.template-home .section-slideshow .heading-block {
 
 .footer-menu-list {
   row-gap: 10px !important;
+}
+
+/* Los iconos de "Formas de pago" y "Medios de envio" quedaban en la
+   misma linea que su titulo (label y logos son ambos <span>, inline
+   por naturaleza). Se pasa el label a block para que el navegador
+   fuerce el salto de linea antes de los logos, sin depender de un
+   ancho completo -- un elemento de bloque siempre empuja al
+   siguiente hermano a la linea de abajo aunque su propio ancho
+   (24px) sea angosto. */
+.footer-payment-shipping-label {
+  display: block !important;
+}
+
+.footer-logos-wrapper {
+  display: flex !important;
+  margin-top: 4px !important;
 }
