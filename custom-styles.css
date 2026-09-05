@@ -1194,3 +1194,11 @@ body.template-home .section-slideshow .heading-block {
   display: flex !important;
   margin-top: 4px !important;
 }
+
+/* El parrafo del Newsletter usa line-height:normal, que en Palanquin
+   resuelve a un valor inusualmente grande (~1.8) -- se ve como si
+   cada linea envuelta fuera un item de lista separado en vez de un
+   solo parrafo. Se fija un line-height explicito mas ajustado. */
+.footer-newsletter-description {
+  line-height: 1.4 !important;
+}
