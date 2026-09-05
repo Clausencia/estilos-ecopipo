@@ -109,4 +109,29 @@ document.addEventListener('DOMContentLoaded', () => {
   cintillo.innerHTML = '<div class="ecopipo-cintillo2-track">' + item.repeat(8) + '</div>';
 
   header.parentNode.insertBefore(cintillo, header.nextSibling);
+
+  /* Olas decorativas arriba/abajo del cintillo (misma tecnica del
+     generador "getwaves.io": un path repetido 4 veces en capas
+     .ecopipo-wave-parallaxN, cada una animada a distinta velocidad
+     y opacidad, dando el efecto de agua en movimiento). El SVG usa
+     fill="currentColor" para heredar el color via CSS. */
+  const waveSVG =
+    '<svg class="ecopipo-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">' +
+    '<defs><path id="ecopipo-wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs>' +
+    '<g class="ecopipo-wave-parallax1"><use xlink:href="#ecopipo-wave-path" x="50" y="3" fill="currentColor"></use></g>' +
+    '<g class="ecopipo-wave-parallax2"><use xlink:href="#ecopipo-wave-path" x="50" y="0" fill="currentColor"></use></g>' +
+    '<g class="ecopipo-wave-parallax3"><use xlink:href="#ecopipo-wave-path" x="50" y="9" fill="currentColor"></use></g>' +
+    '<g class="ecopipo-wave-parallax4"><use xlink:href="#ecopipo-wave-path" x="50" y="6" fill="currentColor"></use></g>' +
+    '</svg>';
+
+  const waveTop = document.createElement('div');
+  waveTop.className = 'ecopipo-wave-divider ecopipo-wave-divider-top';
+  waveTop.innerHTML = waveSVG;
+
+  const waveBottom = document.createElement('div');
+  waveBottom.className = 'ecopipo-wave-divider ecopipo-wave-divider-bottom';
+  waveBottom.innerHTML = waveSVG;
+
+  cintillo.parentNode.insertBefore(waveTop, cintillo);
+  cintillo.parentNode.insertBefore(waveBottom, cintillo.nextSibling);
 });

@@ -1202,3 +1202,42 @@ body.template-home .section-slideshow .heading-block {
 .footer-newsletter-description {
   line-height: 1.4 !important;
 }
+
+/* 21. OLAS DECORATIVAS DEL SEGUNDO CINTILLO */
+/* Efecto "wave divider" (referencia: luneaclean.store) inyectado por
+   custom-scripts.js (seccion 6) arriba y abajo de #ecopipo-cintillo2.
+   El divisor de abajo es el mismo SVG que el de arriba, solo que
+   volteado verticalmente (scaleY(-1)) para cerrar el efecto de forma
+   simetrica, igual que en el sitio de referencia. */
+.ecopipo-wave-divider {
+  position: relative;
+  overflow: hidden;
+  height: 32px;
+  color: #FF9030;
+  line-height: 0;
+}
+
+.ecopipo-wave-divider-bottom {
+  transform: scaleY(-1);
+}
+
+.ecopipo-wave-divider .ecopipo-wave {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ecopipo-wave-parallax1 > use { animation: ecopipo-wave-move1 10s linear infinite; }
+.ecopipo-wave-parallax2 > use { animation: ecopipo-wave-move2 8s linear infinite; opacity: .4; }
+.ecopipo-wave-parallax3 > use { animation: ecopipo-wave-move1 6s linear infinite; opacity: .3; }
+.ecopipo-wave-parallax4 > use { animation: ecopipo-wave-move2 4s linear infinite; opacity: .2; }
+
+@keyframes ecopipo-wave-move1 {
+  0% { transform: translate(85px, 0); }
+  100% { transform: translate(-90px, 0); }
+}
+
+@keyframes ecopipo-wave-move2 {
+  0% { transform: translate(-90px, 0); }
+  100% { transform: translate(85px, 0); }
+}
