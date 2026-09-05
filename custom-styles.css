@@ -1158,10 +1158,25 @@ body.template-home .section-slideshow .heading-block {
 
 .footer-menu-title {
   justify-self: start !important;
+  margin-bottom: 14px !important;
 }
 
 .footer-menu-list {
-  row-gap: 10px !important;
+  row-gap: 4px !important;
+}
+
+/* En desktop las columnas de links quedan al lado del parrafo de
+   marca (primera columna), asi que un margen chico entre la linea y
+   el primer link los dejaba iniciando mas arriba que ese parrafo --
+   inconsistente visualmente. Se agranda el margen solo en desktop
+   (33px, calculado para que el primer link alinee con el inicio del
+   parrafo) porque en mobile las columnas se apilan en un acordeon
+   vertical y esa alineacion lateral ya no aplica -- ahi un margen
+   grande solo se veria como un hueco injustificado. */
+@media (min-width: 768px) {
+  .footer-menu-title {
+    margin-bottom: 33px !important;
+  }
 }
 
 /* Los iconos de "Formas de pago" y "Medios de envio" quedaban en la
