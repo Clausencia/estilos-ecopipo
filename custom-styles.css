@@ -1241,3 +1241,54 @@ body.template-home .section-slideshow .heading-block {
   0% { transform: translate(-90px, 0); }
   100% { transform: translate(85px, 0); }
 }
+
+/* 22. BANNER "LA MAMA DETRAS DE ECOPIPO" -- TEXTO SOBRE LA IMAGEN */
+/* El rosa/turquesa de estas dos imagenes esta "horneado" en el
+   archivo (no es un fondo CSS), por lo que superponer el texto en
+   vez de dejarlo debajo aprovecha ese espacio de color solido ya
+   reservado alrededor de la foto/circulo. Se ancla el titulo arriba
+   (margin-bottom:auto lo empuja al tope) y el parrafo+boton juntos
+   abajo, replicando la composicion pedida. Escopado por ID de
+   seccion (no por .section-banners generico) para no afectar otros
+   bloques de banners del sitio que no deben llevar este tratamiento. */
+#ns-section-banners_1788583047003 .banner-block {
+  position: relative !important;
+}
+
+#ns-section-banners_1788583047003 .media-content {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 32px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+#ns-section-banners_1788583047003 .media-content .heading-block {
+  margin-top: 0 !important;
+  margin-bottom: auto !important;
+}
+
+#ns-section-banners_1788583047003 .media-content .text-block {
+  margin-bottom: 8px !important;
+}
+
+#ns-section-banners_1788583047003 .banner-item:nth-of-type(1) .media-content,
+#ns-section-banners_1788583047003 .banner-item:nth-of-type(1) .media-content * {
+  color: #3C1053 !important;
+}
+
+#ns-section-banners_1788583047003 .banner-item:nth-of-type(2) .media-content,
+#ns-section-banners_1788583047003 .banner-item:nth-of-type(2) .media-content * {
+  color: #ffffff !important;
+}
+
+#ns-section-banners_1788583047003 .media-content .btn {
+  color: #ffffff !important;
+  background-color: #3C1053 !important;
+  border-color: #3C1053 !important;
+}
