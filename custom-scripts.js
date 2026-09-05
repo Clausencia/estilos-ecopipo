@@ -268,6 +268,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (distribuidoras) return distribuidoras;
     const res = await fetch(DISTRIBUIDORAS_CSV_URL);
     const texto = await res.text();
+    // Si el Sheet deja de estar publicado, Google responde con una
+    // pagina HTML de error (a veces incluso con status 200) en vez
+    // del CSV -- se detecta y se lanza un error explicito en vez de
+    // intentar parsear HTML como si fueran filas validas, que dejaba
+    // el buscador colgado en "Buscando..." sin avisar del problema.
+    if (!res.ok || /^\s*<(!doctype|html)/i.test(texto)) {
+      throw new Error('El CSV de distribuidoras no esta disponible (revisar publicacion del Sheet).');
+    }
     const filas = parseCSV(texto);
     const encabezado = filas[0].map((h) => h.trim().toLowerCase());
     const idx = {
@@ -326,7 +334,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function buscarPorCP(cp, contenedor) {
     contenedor.innerHTML = '<p class="ecopipo-dist-empty">Buscando...</p>';
-    const [lista, tabla] = await Promise.all([cargarDistribuidoras(), cargarTablaCP()]);
+    let lista, tabla;
+    try {
+      [lista, tabla] = await Promise.all([cargarDistribuidoras(), cargarTablaCP()]);
+    } catch (err) {
+      contenedor.innerHTML =
+        '<p class="ecopipo-dist-empty">No pudimos cargar el directorio de distribuidoras en este momento. Intenta de nuevo en unos minutos o escríbenos por WhatsApp.</p>';
+      return;
+    }
     const info = tabla[cp];
     if (!info) {
       contenedor.innerHTML =
