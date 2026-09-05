@@ -1221,6 +1221,17 @@ body.template-home .section-slideshow .heading-block {
   transform: scaleY(-1);
 }
 
+/* En mobile el margen blanco entre los picos de la ola y el borde del
+   contenedor se nota mucho mas, porque la misma altura fija (32px)
+   ocupa un porcentaje mayor de una pantalla angosta. Se reduce solo
+   en mobile para que el cintillo se sienta compacto en vez de dejar
+   franjas blancas visibles arriba/abajo. */
+@media (max-width: 767px) {
+  .ecopipo-wave-divider {
+    height: 14px !important;
+  }
+}
+
 .ecopipo-wave-divider .ecopipo-wave {
   display: block;
   width: 100%;
