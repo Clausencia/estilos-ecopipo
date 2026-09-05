@@ -1120,3 +1120,14 @@ body.template-home .heading-block {
 body.template-home .section-slideshow .heading-block {
   font-family: 'Nerko One', cursive !important;
 }
+
+/* 19. IMAGEN DE LA SECCION DE PREGUNTAS FRECUENTES */
+/* El tema usa object-fit:fill en esta imagen -- la estira para llenar
+   la caja en vez de recortarla, deformando cualquier imagen que no
+   coincida exacto con la proporcion (que ademas varia: cuadrada en
+   mobile, horizontal en desktop segun la altura del acordeon). Con
+   cover, el navegador recorta los bordes sobrantes sin deformar,
+   permitiendo subir una sola imagen que sirva para ambos layouts. */
+.faq-group .image-block img {
+  object-fit: cover !important;
+}
