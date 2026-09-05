@@ -1527,18 +1527,22 @@ body.template-home .section-slideshow .heading-block {
    el footer reutiliza el mismo layout input+boton (.newsletter-form
    ya traia esa disposicion), para que el cambio se sienta nativo del
    tema en vez de un parche visual distinto. */
+/* La columna del footer es angosta (mismo ancho que el resto de las
+   columnas de navegacion), no cabe el input y el boton lado a lado
+   sin recortarse -- se detecto en vivo que el boton quedaba oculto
+   fuera del contenedor (overflow:hidden lo cortaba). Se apilan en
+   columna en vez de en fila. */
 .ecopipo-dist-footer-field {
   display: flex;
-  max-width: 320px;
-  border: 1px solid #fcf5ff;
-  border-radius: 8px;
-  overflow: hidden;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 100%;
   margin-top: 8px;
 }
 
 .ecopipo-dist-footer-input {
-  flex: 1 1 auto;
-  border: none;
+  border: 1px solid #fcf5ff;
+  border-radius: 8px;
   background: transparent;
   padding: 10px 14px;
   color: #fcf5ff;
@@ -1551,8 +1555,8 @@ body.template-home .section-slideshow .heading-block {
 }
 
 .ecopipo-dist-footer-buscar {
-  border: none;
-  border-left: 1px solid #fcf5ff;
+  border: 1px solid #fcf5ff;
+  border-radius: 8px;
   background: transparent;
   color: #fcf5ff;
   font-family: 'Baloo 2', sans-serif;
