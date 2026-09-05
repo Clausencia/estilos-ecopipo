@@ -1131,3 +1131,30 @@ body.template-home .section-slideshow .heading-block {
 .faq-group .image-block img {
   object-fit: cover !important;
 }
+
+/* 20. ESPACIADO DE TITULOS DEL FOOTER */
+/* Los titulos de columna (24px) y la lista de links (16px de gap)
+   traian mucho mas aire del necesario, dando un footer disperso. Se
+   reduce el espaciado y se agrega una linea debajo de cada titulo
+   para separarlo visualmente del contenido, ajustada al ancho del
+   texto (no de toda la columna). display:inline-block no bastaba en
+   mobile porque el contenedor padre del titulo (el acordeon) es un
+   grid que estira sus hijos por defecto -- se fija con
+   width:fit-content para que la linea no ocupe el ancho completo. */
+.footer-menu-title,
+.footer-payment-shipping-label,
+.footer-newsletter-title {
+  display: inline-block !important;
+  width: fit-content !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 6px !important;
+  border-bottom: 2px solid rgba(252,245,255,0.4) !important;
+}
+
+.footer-menu-title {
+  justify-self: start !important;
+}
+
+.footer-menu-list {
+  row-gap: 10px !important;
+}
