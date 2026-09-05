@@ -1401,3 +1401,164 @@ body.template-home .section-slideshow .heading-block {
   align-items: center;
   justify-content: center;
 }
+
+/* 24. BUSCADOR DE DISTRIBUIDORAS (MODAL + CAMPO EN FOOTER) */
+/* Inyectado por custom-scripts.js (seccion 8). Reutiliza las clases
+   .ecopipo-modal-backdrop/-content/-close ya definidas arriba para el
+   modal de Ixchel; solo se agrega el selector de ID para el toggle de
+   apertura porque cada modal es un elemento independiente. */
+#ecopipo-modal-distribuidoras {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+#ecopipo-modal-distribuidoras.is-open {
+  display: flex;
+}
+
+#ecopipo-modal-distribuidoras .ecopipo-modal-content {
+  max-width: 560px;
+}
+
+#ecopipo-modal-distribuidoras h3 {
+  font-family: 'Baloo 2', sans-serif;
+  color: #FF9030;
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
+.ecopipo-dist-buscador {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ecopipo-dist-input {
+  flex: 1 1 auto;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Palanquin', sans-serif;
+  font-size: 15px;
+  color: #3C1053;
+}
+
+.ecopipo-dist-buscar {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  background: #3C1053;
+  color: #ffffff;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ecopipo-dist-resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.ecopipo-dist-empty {
+  font-family: 'Palanquin', sans-serif;
+  color: #3C1053;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ecopipo-dist-card {
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid #42C6D3;
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #ffffff;
+}
+
+.ecopipo-dist-card h4 {
+  font-family: 'Baloo 2', sans-serif;
+  color: #3C1053;
+  font-size: 17px;
+  margin: 0 0 4px;
+}
+
+.ecopipo-dist-ciudad {
+  font-family: 'Palanquin', sans-serif;
+  color: #4a5568;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.ecopipo-dist-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ecopipo-dist-actions a {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.ecopipo-dist-actions a:first-child {
+  background: #25D366;
+  color: #ffffff;
+}
+
+.ecopipo-dist-actions a:last-child {
+  background: #3C1053;
+  color: #ffffff;
+}
+
+/* El campo de CP que reemplaza el formulario nativo de newsletter en
+   el footer reutiliza el mismo layout input+boton (.newsletter-form
+   ya traia esa disposicion), para que el cambio se sienta nativo del
+   tema en vez de un parche visual distinto. */
+.ecopipo-dist-footer-field {
+  display: flex;
+  max-width: 320px;
+  border: 1px solid #fcf5ff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.ecopipo-dist-footer-input {
+  flex: 1 1 auto;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  color: #fcf5ff;
+  font-family: 'Palanquin', sans-serif;
+  font-size: 14px;
+}
+
+.ecopipo-dist-footer-input::placeholder {
+  color: rgba(252, 245, 255, 0.7);
+}
+
+.ecopipo-dist-footer-buscar {
+  border: none;
+  border-left: 1px solid #fcf5ff;
+  background: transparent;
+  color: #fcf5ff;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}

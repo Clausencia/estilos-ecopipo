@@ -181,3 +181,238 @@ document.addEventListener('DOMContentLoaded', () => {
     abrirModal();
   });
 });
+
+/* 8. Buscador de distribuidoras (por codigo postal)
+   Reemplaza el formulario nativo de "Newsletter" del footer (que
+   estaba duplicado: la misma captura de correo ya vive en la franja
+   negra de arriba) por un campo de codigo postal. Al buscar, se abre
+   un modal con las distribuidoras de ese estado.
+
+   Fuentes de datos, ambas externas para no requerir tocar codigo
+   cuando cambien:
+   - Google Sheet publicado como CSV: la dueña edita filas ahi
+     (nombre, tienda, url, telefono, ciudad/estado) sin pedir cambios
+     de codigo.
+   - cp-mexico.json: tabla CP -> [municipio, estado] de SEPOMEX
+     (32,247 codigos postales), servida desde este mismo repo, para
+     resolver el CP que escribe el usuario a un estado sin depender
+     de las APIs de pago de Google (Places/Geocoding). */
+document.addEventListener('DOMContentLoaded', () => {
+  const DISTRIBUIDORAS_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTPkZzKLH3gLlYqyji4zfFWn7hhOv1o19U-RlQ1crP6xDyVGDjcUFpma9ZlJ1WU8W---lvvtSgL1b6l/pub?gid=0&single=true&output=csv';
+  const CP_JSON_URL = 'https://estilos-ecopipo.vercel.app/cp-mexico.json';
+
+  let distribuidoras = null;
+  let cpTabla = null;
+
+  const normalizar = (str) =>
+    (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .trim();
+
+  // Parser de CSV simple que respeta comillas (necesario porque
+  // "Ciudad, Estado" trae una coma dentro de un campo entrecomillado).
+  function parseCSV(texto) {
+    const filas = [];
+    let fila = [];
+    let campo = '';
+    let entreComillas = false;
+
+    for (let i = 0; i < texto.length; i++) {
+      const c = texto[i];
+      if (entreComillas) {
+        if (c === '"' && texto[i + 1] === '"') {
+          campo += '"';
+          i++;
+        } else if (c === '"') {
+          entreComillas = false;
+        } else {
+          campo += c;
+        }
+      } else if (c === '"') {
+        entreComillas = true;
+      } else if (c === ',') {
+        fila.push(campo);
+        campo = '';
+      } else if (c === '\n' || c === '\r') {
+        if (c === '\r' && texto[i + 1] === '\n') i++;
+        fila.push(campo);
+        filas.push(fila);
+        fila = [];
+        campo = '';
+      } else {
+        campo += c;
+      }
+    }
+    if (campo || fila.length) {
+      fila.push(campo);
+      filas.push(fila);
+    }
+    return filas.filter((f) => f.length > 1 || f[0]);
+  }
+
+  function parseCiudadEstado(texto) {
+    if (/ciudad de m[eé]xico/i.test(texto)) {
+      return { ciudad: 'Ciudad de México', estado: 'Ciudad de México' };
+    }
+    const partes = texto.split(',');
+    if (partes.length >= 2) {
+      return { ciudad: partes[0].trim(), estado: partes.slice(1).join(',').trim() };
+    }
+    return { ciudad: texto.trim(), estado: texto.trim() };
+  }
+
+  async function cargarDistribuidoras() {
+    if (distribuidoras) return distribuidoras;
+    const res = await fetch(DISTRIBUIDORAS_CSV_URL);
+    const texto = await res.text();
+    const filas = parseCSV(texto);
+    const encabezado = filas[0].map((h) => h.trim().toLowerCase());
+    const idx = {
+      nombre: encabezado.indexOf('nombre'),
+      tienda: encabezado.indexOf('tienda'),
+      url: encabezado.indexOf('url'),
+      telefono: encabezado.indexOf('teléfono') !== -1 ? encabezado.indexOf('teléfono') : encabezado.indexOf('telefono'),
+      ciudadEstado: encabezado.findIndex((h) => h.includes('ciudad')),
+    };
+
+    distribuidoras = filas.slice(1).map((fila) => {
+      const { ciudad, estado } = parseCiudadEstado(fila[idx.ciudadEstado] || '');
+      return {
+        nombre: fila[idx.nombre] || '',
+        tienda: fila[idx.tienda] || '',
+        url: fila[idx.url] || '#',
+        telefono: (fila[idx.telefono] || '').replace(/\D/g, ''),
+        ciudad,
+        estado,
+      };
+    });
+    return distribuidoras;
+  }
+
+  async function cargarTablaCP() {
+    if (cpTabla) return cpTabla;
+    const res = await fetch(CP_JSON_URL);
+    cpTabla = await res.json();
+    return cpTabla;
+  }
+
+  function renderResultados(contenedor, lista, estadoUsuario) {
+    if (!lista.length) {
+      contenedor.innerHTML =
+        '<p class="ecopipo-dist-empty">Por ahora no tenemos distribuidoras registradas en ' +
+        (estadoUsuario || 'tu zona') +
+        '. Escríbenos y con gusto te ayudamos a conseguir tu pañal Ecopipo.</p>';
+      return;
+    }
+    contenedor.innerHTML = lista
+      .map(
+        (d) =>
+          '<div class="ecopipo-dist-card">' +
+          '<h4>' + d.tienda + '</h4>' +
+          '<p class="ecopipo-dist-ciudad">' + d.ciudad + '</p>' +
+          '<div class="ecopipo-dist-actions">' +
+          (d.telefono
+            ? '<a href="https://wa.me/52' + d.telefono + '" target="_blank" rel="noopener">WhatsApp</a>'
+            : '') +
+          '<a href="' + d.url + '" target="_blank" rel="noopener">Visitar tienda</a>' +
+          '</div>' +
+          '</div>'
+      )
+      .join('');
+  }
+
+  async function buscarPorCP(cp, contenedor) {
+    contenedor.innerHTML = '<p class="ecopipo-dist-empty">Buscando...</p>';
+    const [lista, tabla] = await Promise.all([cargarDistribuidoras(), cargarTablaCP()]);
+    const info = tabla[cp];
+    if (!info) {
+      contenedor.innerHTML =
+        '<p class="ecopipo-dist-empty">No reconocemos ese código postal. Verifica que tenga 5 dígitos.</p>';
+      return;
+    }
+    const estadoUsuario = info[1];
+    const coincidencias = lista.filter((d) => normalizar(d.estado) === normalizar(estadoUsuario));
+    renderResultados(contenedor, coincidencias, estadoUsuario);
+  }
+
+  // ---- Modal ----
+  const modal = document.createElement('div');
+  modal.id = 'ecopipo-modal-distribuidoras';
+  modal.innerHTML =
+    '<div class="ecopipo-modal-backdrop"></div>' +
+    '<div class="ecopipo-modal-content" role="dialog" aria-modal="true" aria-labelledby="ecopipo-modal-dist-title">' +
+    '<button type="button" class="ecopipo-modal-close" aria-label="Cerrar">&times;</button>' +
+    '<h3 id="ecopipo-modal-dist-title">Encuentra tu distribuidora</h3>' +
+    '<div class="ecopipo-dist-buscador">' +
+    '<input type="text" inputmode="numeric" maxlength="5" placeholder="Tu código postal" class="ecopipo-dist-input">' +
+    '<button type="button" class="ecopipo-dist-buscar">Buscar</button>' +
+    '</div>' +
+    '<div class="ecopipo-dist-resultados"></div>' +
+    '</div>';
+  document.body.appendChild(modal);
+
+  const inputModal = modal.querySelector('.ecopipo-dist-input');
+  const botonModal = modal.querySelector('.ecopipo-dist-buscar');
+  const resultadosModal = modal.querySelector('.ecopipo-dist-resultados');
+
+  const ejecutarBusquedaModal = () => {
+    const cp = inputModal.value.trim();
+    if (cp.length === 5) buscarPorCP(cp, resultadosModal);
+  };
+  botonModal.addEventListener('click', ejecutarBusquedaModal);
+  inputModal.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') ejecutarBusquedaModal();
+  });
+
+  const abrirModalDist = (cpInicial) => {
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    if (cpInicial) {
+      inputModal.value = cpInicial;
+      ejecutarBusquedaModal();
+    }
+  };
+  const cerrarModalDist = () => {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+  modal.querySelector('.ecopipo-modal-close').addEventListener('click', cerrarModalDist);
+  modal.querySelector('.ecopipo-modal-backdrop').addEventListener('click', cerrarModalDist);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') cerrarModalDist();
+  });
+
+  // ---- Reemplazo del formulario de Newsletter en el footer ----
+  const contenedorFooter = document.querySelector('.footer-newsletter-container');
+  if (!contenedorFooter) return;
+
+  const tituloFooter = contenedorFooter.querySelector('.footer-newsletter-title');
+  const descFooter = contenedorFooter.querySelector('.footer-newsletter-description');
+  const formFooter = contenedorFooter.querySelector('.footer-newsletter-form');
+
+  if (tituloFooter) tituloFooter.textContent = 'Encuentra tu distribuidora';
+  if (descFooter) descFooter.textContent = 'Ingresa tu código postal para ver las tiendas más cercanas a ti.';
+  if (formFooter) formFooter.style.display = 'none';
+
+  const campoFooter = document.createElement('div');
+  campoFooter.className = 'ecopipo-dist-footer-field';
+  campoFooter.innerHTML =
+    '<input type="text" inputmode="numeric" maxlength="5" placeholder="Tu código postal" class="ecopipo-dist-footer-input">' +
+    '<button type="button" class="ecopipo-dist-footer-buscar">Buscar</button>';
+  contenedorFooter.appendChild(campoFooter);
+
+  const inputFooter = campoFooter.querySelector('.ecopipo-dist-footer-input');
+  const botonFooter = campoFooter.querySelector('.ecopipo-dist-footer-buscar');
+
+  const ejecutarBusquedaFooter = () => {
+    const cp = inputFooter.value.trim();
+    if (cp.length === 5) abrirModalDist(cp);
+  };
+  botonFooter.addEventListener('click', ejecutarBusquedaFooter);
+  inputFooter.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') ejecutarBusquedaFooter();
+  });
+});
