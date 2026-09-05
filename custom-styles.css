@@ -1102,3 +1102,21 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 .faq-list .accordion-item-body {
   font-family: 'Palanquin Dark', sans-serif !important;
 }
+
+/* 18. TIPOGRAFIA DE TITULOS DEL HOME */
+/* La guia de marca pide Nerko One para titulos, y asi se usa en PDP
+   y T&C (sobre h1/h2/h3 reales, ver regla global mas arriba). El home
+   no usa tags h1-h3 para sus titulos de seccion (usa .heading-block),
+   asi que caia al tipo por defecto del tema (Sofia Sans Extra
+   Condensed). Por UX, un home tiene muchos titulos de seccion
+   seguidos (categorias, banners, FAQ) y una fuente tipo manuscrita
+   pierde "escaneabilidad" si se repite tanto -- se reserva Nerko One
+   solo para el banner principal (el momento "hero" de marca) y se usa
+   Baloo 2, mas legible, en el resto de titulos de seccion del home. */
+body.template-home .heading-block {
+  font-family: 'Baloo 2', sans-serif !important;
+}
+
+body.template-home .section-slideshow .heading-block {
+  font-family: 'Nerko One', cursive !important;
+}
