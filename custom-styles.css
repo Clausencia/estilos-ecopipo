@@ -1627,3 +1627,16 @@ body.template-home .section-slideshow .heading-block {
 #ns-section-featured_categories_pills .ecopipo-cat-right .heading-column {
   text-align: left !important;
 }
+
+/* El contenedor estandar del tema centra su contenido dejando ~81px
+   de margen de pagina + 16px de padding propio antes de la foto --
+   correcto para secciones de texto, pero hacia que la foto se sintiera
+   muy alejada del borde comparado con la referencia (mezcaleroboots.com),
+   donde la imagen llega casi al borde. Se quita el max-width del
+   contenedor SOLO en esta seccion para que la foto quede a ~16px del
+   borde, el mismo espaciado que ya existe entre cada pill de categoria. */
+#ns-section-featured_categories_pills .container {
+  max-width: 100% !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
