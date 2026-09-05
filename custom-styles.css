@@ -971,6 +971,19 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   font-size: 20px !important;
 }
 
+/* La altura del slider viene fijada por el tema en linea
+   (min-height:65vh), lo que en mobile ocupaba casi 30% del viewport
+   antes de llegar a cualquier seccion "vendible" (categorias,
+   productos). Se reduce a un alto fijo mas compacto solo en mobile;
+   desktop no se toca porque ahi el banner no compite tanto por
+   espacio vertical. */
+@media (max-width: 767px) {
+  .js-slideshow-container,
+  .js-slideshow .swiper-slide {
+    min-height: 400px !important;
+  }
+}
+
 /* 14. CARRUSEL DE CATEGORIAS DEL HOME */
 /* El patron decorativo (corazones/estrellas) ya conecta sin cortes
    entre el banner principal y esta seccion -- el problema no era una
