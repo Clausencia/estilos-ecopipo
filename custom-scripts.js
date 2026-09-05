@@ -190,7 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
    Fuentes de datos, ambas externas para no requerir tocar codigo
    cuando cambien:
-   - Google Sheet publicado como CSV: la dueña edita filas ahi
+   - Google Sheet leido via URL de exportacion directa
+     (/export?format=csv&gid=), NO via "Publicar en la Web": con
+     varias pestañas en el mismo archivo, publicar una desactivaba la
+     otra (bug/comportamiento confuso de Sheets detectado en vivo).
+     El export directo solo requiere que el archivo tenga activado
+     "Cualquiera con el enlace puede ver". La dueña edita filas ahi
      (nombre, tienda, url, telefono, ciudad/estado) sin pedir cambios
      de codigo.
    - cp-mexico.json: tabla CP -> [municipio, estado] de SEPOMEX
@@ -199,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
      de las APIs de pago de Google (Places/Geocoding). */
 document.addEventListener('DOMContentLoaded', () => {
   const DISTRIBUIDORAS_CSV_URL =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTPkZzKLH3gLlYqyji4zfFWn7hhOv1o19U-RlQ1crP6xDyVGDjcUFpma9ZlJ1WU8W---lvvtSgL1b6l/pub?gid=0&single=true&output=csv';
+    'https://docs.google.com/spreadsheets/d/1D30antKw7uOxgZlKUU6G3COGF3kFPKV10mn95qPE1OI/export?format=csv&gid=0';
   const CP_JSON_URL = 'https://estilos-ecopipo.vercel.app/cp-mexico.json';
 
   let distribuidoras = null;
@@ -436,13 +441,15 @@ document.addEventListener('DOMContentLoaded', () => {
    Reestructura #ns-section-featured_categories_pills (titulo +
    carrusel de pills, antes en una sola fila) para agregar una imagen
    fija a la izquierda -- inspirado en el layout de mezcaleroboots.com.
-   La URL de la imagen se lee de un Google Sheet publicado (una sola
-   celda) en vez de venir escrita aqui, para que la dueña pueda
-   cambiar la foto ella misma editando esa celda, sin pedir cambios
+   La URL de la imagen se lee de una celda de Google Sheets (via URL
+   de exportacion directa, ver seccion 8 sobre por que no se usa
+   "Publicar en la Web") en vez de venir escrita aqui, para que la
+   dueña pueda cambiar la foto ella misma editando esa celda, sin
+   pedir cambios
    de codigo. */
 document.addEventListener('DOMContentLoaded', () => {
   const FOTO_CATEGORIAS_CSV_URL =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTPkZzKLH3gLlYqyji4zfFWn7hhOv1o19U-RlQ1crP6xDyVGDjcUFpma9ZlJ1WU8W---lvvtSgL1b6l/pub?gid=270158370&single=true&output=csv';
+    'https://docs.google.com/spreadsheets/d/1D30antKw7uOxgZlKUU6G3COGF3kFPKV10mn95qPE1OI/export?format=csv&gid=270158370';
 
   const section = document.getElementById('ns-section-featured_categories_pills');
   if (!section) return;
