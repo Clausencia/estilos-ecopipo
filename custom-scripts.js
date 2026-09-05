@@ -416,3 +416,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') ejecutarBusquedaFooter();
   });
 });
+
+/* 9. Foto estatica junto al carrusel de "Categorias destacadas"
+   Reestructura #ns-section-featured_categories_pills (titulo +
+   carrusel de pills, antes en una sola fila) para agregar una imagen
+   fija a la izquierda -- inspirado en el layout de mezcaleroboots.com.
+   La URL de la imagen se lee de un Google Sheet publicado (una sola
+   celda) en vez de venir escrita aqui, para que la dueña pueda
+   cambiar la foto ella misma editando esa celda, sin pedir cambios
+   de codigo. */
+document.addEventListener('DOMContentLoaded', () => {
+  const FOTO_CATEGORIAS_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTPkZzKLH3gLlYqyji4zfFWn7hhOv1o19U-RlQ1crP6xDyVGDjcUFpma9ZlJ1WU8W---lvvtSgL1b6l/pub?gid=270158370&single=true&output=csv';
+
+  const section = document.getElementById('ns-section-featured_categories_pills');
+  if (!section) return;
+
+  const flexRow = section.querySelector('.d-flex.flex-row');
+  if (!flexRow) return;
+
+  fetch(FOTO_CATEGORIAS_CSV_URL)
+    .then((res) => res.text())
+    .then((texto) => {
+      const filas = texto.trim().split('\n');
+      const url = (filas[1] || '').trim();
+      if (!url) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'ecopipo-cat-right';
+      while (flexRow.firstChild) {
+        wrapper.appendChild(flexRow.firstChild);
+      }
+      flexRow.appendChild(wrapper);
+
+      const img = document.createElement('img');
+      img.className = 'ecopipo-cat-photo';
+      img.src = url;
+      img.alt = 'Categorías destacadas';
+      flexRow.insertBefore(img, wrapper);
+    })
+    .catch(() => {});
+});

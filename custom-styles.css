@@ -1585,3 +1585,28 @@ body.template-home .section-slideshow .heading-block {
   cursor: pointer;
   white-space: nowrap;
 }
+
+/* 25. FOTO ESTATICA EN "CATEGORIAS DESTACADAS" (PILLS) */
+/* Inyectado por custom-scripts.js (seccion 9). El titulo y el
+   carrusel de pills quedan agrupados en .ecopipo-cat-right para que
+   la foto ocupe la altura completa de ambos, no solo la del
+   carrusel. */
+#ns-section-featured_categories_pills .ecopipo-cat-photo {
+  width: 22%;
+  flex: 0 0 22%;
+  object-fit: cover;
+  border-radius: 12px;
+  align-self: stretch;
+}
+
+#ns-section-featured_categories_pills .ecopipo-cat-right {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 12px;
+}
+
+#ns-section-featured_categories_pills .ecopipo-cat-right .heading-column {
+  text-align: left !important;
+}
