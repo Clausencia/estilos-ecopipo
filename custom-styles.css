@@ -1006,6 +1006,8 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   overflow: hidden;
   white-space: nowrap;
   background-color: #FF9030;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .ecopipo-cintillo2-track {
@@ -1014,12 +1016,21 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   animation: ecopipo-cintillo2-scroll 20s linear infinite;
 }
 
+/* Safari en iPhone real infla automaticamente el tamano del texto en
+   ciertos contenedores (text-size-adjust), algo que el emulador del
+   navegador no reproduce -- por eso se veia bien en las pruebas pero
+   en un celular real el texto salia mas grande de lo definido (14px)
+   y de paso empujaba el alto de linea, haciendo que el espacio
+   blanco alrededor del cintillo se notara mas. Se desactiva ese
+   auto-ajuste para que el tamano real coincida con el definido aqui. */
 .ecopipo-cintillo2-item {
   color: #fcf5ff;
   font-family: 'Baloo 2', sans-serif;
   font-weight: 600;
   font-size: 14px;
   padding: 10px 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .ecopipo-cintillo2-icon {
