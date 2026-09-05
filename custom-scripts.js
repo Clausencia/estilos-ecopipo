@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formFooter = contenedorFooter.querySelector('.footer-newsletter-form');
 
   if (tituloFooter) tituloFooter.textContent = 'Encuentra tu distribuidora';
-  if (descFooter) descFooter.textContent = 'Ingresa tu código postal para ver las tiendas más cercanas a ti.';
+  if (descFooter) descFooter.textContent = 'Ingresa tu código postal';
   if (formFooter) formFooter.style.display = 'none';
 
   const campoFooter = document.createElement('div');
