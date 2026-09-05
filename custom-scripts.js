@@ -135,3 +135,49 @@ document.addEventListener('DOMContentLoaded', () => {
   cintillo.parentNode.insertBefore(waveTop, cintillo);
   cintillo.parentNode.insertBefore(waveBottom, cintillo.nextSibling);
 });
+
+/* 7. Modal "La mama detras de Ecopipo"
+   El boton "CONOCELA" del banner de Ixchel abria (o abrira) una
+   pagina aparte para un texto breve -- se reemplaza por un modal para
+   no sacar al usuario del home por tan poco contenido. Se intercepta
+   el click del boton nativo del banner (que sigue siendo un <a>
+   editable desde el admin) y se previene su navegacion por defecto. */
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.querySelector('#ns-section-banners_1788583047003');
+  if (!section) return;
+
+  const boton = section.querySelectorAll('.btn')[0];
+  if (!boton) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'ecopipo-modal-ixchel';
+  modal.innerHTML =
+    '<div class="ecopipo-modal-backdrop"></div>' +
+    '<div class="ecopipo-modal-content" role="dialog" aria-modal="true" aria-labelledby="ecopipo-modal-ixchel-title">' +
+    '<button type="button" class="ecopipo-modal-close" aria-label="Cerrar">&times;</button>' +
+    '<h3 id="ecopipo-modal-ixchel-title">La mamá detrás de Ecopipo</h3>' +
+    '<p>Ecopipo nació en 2009 cuando su fundadora, Ixchel Anaya buscó una alternativa práctica, económica y sustentable para cuidar la piel de su bebé sin dañar el planeta. De esa necesidad surgió la marca mexicana hecha por y para mamás.</p>' +
+    '<p>Hoy, Ecopipo es un movimiento de alcance internacional con más de 1,900 distribuidoras en 19 países. A través de productos de alta calidad y un modelo de comercio justo, impulsamos la independencia financiera de miles de mujeres mientras llevamos un mensaje de ecología a cada hogar.</p>' +
+    '</div>';
+  document.body.appendChild(modal);
+
+  const abrirModal = () => {
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+  const cerrarModal = () => {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  modal.querySelector('.ecopipo-modal-close').addEventListener('click', cerrarModal);
+  modal.querySelector('.ecopipo-modal-backdrop').addEventListener('click', cerrarModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') cerrarModal();
+  });
+
+  boton.addEventListener('click', (e) => {
+    e.preventDefault();
+    abrirModal();
+  });
+});
