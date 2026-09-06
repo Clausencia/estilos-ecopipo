@@ -1695,3 +1695,61 @@ body.template-home .section-slideshow .heading-block {
   background-color: transparent !important;
   opacity: 1 !important;
 }
+
+/* 28. SELECTOR DE TALLA EN HOVER (GRID/CARRUSEL DE PRODUCTOS) */
+/* Inyectado por custom-scripts.js (seccion 10), inspirado en
+   timberland.com.mx. En mobile no hay hover real (y en touch a veces
+   requiere doble toque), asi que se muestra siempre visible ahi en
+   vez de depender de :hover. */
+.ecopipo-size-hover {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+  flex-wrap: wrap;
+  padding: 0 8px;
+}
+
+.product-item:hover .ecopipo-size-hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+  .ecopipo-size-hover {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+.ecopipo-size-pill {
+  background: #ffffff;
+  border: 1px solid #3C1053;
+  color: #3C1053;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  min-width: 28px;
+  text-align: center;
+}
+
+.ecopipo-size-pill:hover {
+  background: #3C1053;
+  color: #ffffff;
+}
+
+.ecopipo-size-pill.is-disabled {
+  opacity: 0.4;
+  text-decoration: line-through;
+  pointer-events: none;
+}

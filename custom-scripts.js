@@ -479,3 +479,61 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(() => {});
 });
+
+/* 10. Selector de talla en hover (grid/carrusel de productos)
+   Cada .product-item con mas de una variante trae un atributo
+   data-variants (JSON con precio, sku, disponibilidad e id por
+   variante) inyectado por el propio tema -- no hace falta pedir esa
+   info por otra via. Se construye una fila de tallas superpuesta a
+   la imagen, visible en hover (inspirado en timberland.com.mx). Cada
+   talla enlaza a "producto?variant=ID", que Tiendanube ya respeta
+   para preseleccionar esa variante en el PDP (confirmado en vivo).
+   Productos sin variantes reales (data-variants con un solo option0,
+   ej. simples/sin tallas) no muestran nada. */
+document.addEventListener('DOMContentLoaded', () => {
+  function construirSelectoresDeTalla() {
+    document.querySelectorAll('.product-item[data-variants]').forEach((item) => {
+      if (item.querySelector('.ecopipo-size-hover')) return;
+
+      let variantes;
+      try {
+        variantes = JSON.parse(item.getAttribute('data-variants'));
+      } catch (e) {
+        return;
+      }
+
+      const opciones = [...new Set(variantes.map((v) => v.option0).filter(Boolean))];
+      if (opciones.length < 2) return;
+
+      const enlace = item.querySelector('.js-product-item-image-link-private') || item.querySelector('a[href*="/productos/"]');
+      const contenedorImagen = item.querySelector('[class*="product-item-image-container"]');
+      if (!enlace || !contenedorImagen) return;
+
+      const urlBase = enlace.getAttribute('href').split('?')[0];
+
+      const overlay = document.createElement('div');
+      overlay.className = 'ecopipo-size-hover';
+      overlay.innerHTML = opciones
+        .map((opcion) => {
+          const variante = variantes.find((v) => v.option0 === opcion);
+          const disponible = variante ? variante.available : true;
+          const href = variante ? urlBase + '?variant=' + variante.id : urlBase;
+          return (
+            '<a href="' + href + '" class="ecopipo-size-pill' + (disponible ? '' : ' is-disabled') + '">' +
+            opcion +
+            '</a>'
+          );
+        })
+        .join('');
+
+      contenedorImagen.style.position = 'relative';
+      contenedorImagen.appendChild(overlay);
+    });
+  }
+
+  construirSelectoresDeTalla();
+  // Los grids/carruseles paginan por AJAX (ver seccion 4 sobre el
+  // mismo patron), asi que se observa el DOM en vez de correr una
+  // sola vez al cargar.
+  new MutationObserver(construirSelectoresDeTalla).observe(document.body, { childList: true, subtree: true });
+});
