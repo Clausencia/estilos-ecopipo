@@ -1667,3 +1667,31 @@ body.template-home .section-slideshow .heading-block {
   margin-top: -24px;
   margin-bottom: -24px;
 }
+
+/* 27. HOVER DE ZOOM EN EL CARRUSEL DE CATEGORIAS (CIRCULOS) */
+/* Reemplaza el efecto de capa opaca del tema por un zoom suave sobre
+   la imagen al pasar el mouse. overflow:hidden en el contenedor
+   circular recorta el excedente del scale para que no se salga del
+   circulo. Se neutraliza ademas cualquier fondo/opacidad que el
+   tema aplique en :hover, para que no quede ninguna capa oscura
+   detras del zoom. Solo tiene efecto en desktop (hover real); en
+   mobile simplemente no pasa nada, que es el comportamiento
+   esperado sin cursor. */
+.category-item-image {
+  overflow: hidden !important;
+}
+
+.category-item-image img {
+  transition: transform 0.3s ease !important;
+}
+
+.category-item-link:hover .category-item-image img {
+  transform: scale(1.08) !important;
+}
+
+.category-item-link:hover .category-item-image,
+.category-item-link:hover .category-item-image::before,
+.category-item-link:hover .category-item-image::after {
+  background-color: transparent !important;
+  opacity: 1 !important;
+}
