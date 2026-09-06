@@ -528,6 +528,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       contenedorImagen.style.position = 'relative';
       contenedorImagen.appendChild(overlay);
+      // Marca el producto para que el CSS (seccion 29) le quite el
+      // boton de compra: la foto + el selector ya llevan al producto.
+      // Los productos simples (sin variantes) no llegan a este punto
+      // porque arriba se corta con "opciones.length < 2 return".
+      item.classList.add('ecopipo-sin-boton');
     });
   }
 
@@ -536,4 +541,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // mismo patron), asi que se observa el DOM en vez de correr una
   // sola vez al cargar.
   new MutationObserver(construirSelectoresDeTalla).observe(document.body, { childList: true, subtree: true });
+});
+
+/* 11. Alinear alto de tarjetas del carrusel "En familia"
+   Sin el boton de compra (ver seccion 29 del CSS), la unica fuente
+   de diferencia de alto entre tarjetas es el aviso "¡Ultima unidad!"
+   que solo se muestra en algunos productos. Se iguala por JS en vez
+   de reservar espacio fijo en CSS porque ese aviso puede aparecer o
+   desaparecer segun el stock disponible en cualquier momento. */
+document.addEventListener('DOMContentLoaded', () => {
+  function alinearAlturaCarruselFamilia() {
+    const wrapper = document.querySelector('#ns-section-featured_products_2 .swiper-wrapper');
+    if (!wrapper) return;
+
+    const items = [...wrapper.querySelectorAll(':scope > .product-item')];
+    if (!items.length) return;
+
+    items.forEach((item) => { item.style.height = 'auto'; });
+    const alturaMaxima = Math.max(...items.map((item) => item.getBoundingClientRect().height));
+    items.forEach((item) => { item.style.height = alturaMaxima + 'px'; });
+  }
+
+  alinearAlturaCarruselFamilia();
+  window.addEventListener('resize', alinearAlturaCarruselFamilia);
+  new MutationObserver(alinearAlturaCarruselFamilia).observe(document.body, { childList: true, subtree: true });
 });

@@ -1753,3 +1753,16 @@ body.template-home .section-slideshow .heading-block {
   text-decoration: line-through;
   pointer-events: none;
 }
+
+/* 29. PRODUCTOS CON SELECTOR DE TALLA: SIN BOTON DE COMPRA */
+/* Solo en productos con variantes reales (los que reciben el overlay
+   de tallas de la seccion 28, marcados por script con la clase
+   ecopipo-sin-boton): la foto y el selector ya llevan al producto,
+   asi que el boton de compra sobra. Los productos simples (sin
+   variantes) conservan su boton normal. Al quitarlo, "¡Ultima
+   unidad!" (que solo aparece en algunos productos) dejaba con
+   distinta altura a cada tarjeta dentro del carrusel "En familia";
+   se igualan por JS (script 11). */
+.product-item.ecopipo-sin-boton .product-item-quick-shop-container {
+  display: none !important;
+}
