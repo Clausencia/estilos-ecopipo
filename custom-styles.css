@@ -1652,12 +1652,18 @@ body.template-home .section-slideshow .heading-block {
 .section-faq .heading-block::after {
   content: '';
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: 84px;
+  height: 84px;
   background-image: url('https://d1a9qnv764bsoo.cloudfront.net/stores/007/906/761/rte/PIPO-16.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   vertical-align: middle;
   margin-left: 8px;
+  /* Margenes negativos verticales para que el icono "rebase" su
+     renglon (se vea mas grande que el texto) sin agrandar el alto
+     real del bloque de titulo -- si no, el line-box crece con el
+     icono y empuja la imagen/acordeon de abajo. */
+  margin-top: -24px;
+  margin-bottom: -24px;
 }
