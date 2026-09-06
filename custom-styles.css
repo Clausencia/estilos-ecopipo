@@ -1643,3 +1643,21 @@ body.template-home .section-slideshow .heading-block {
   padding-left: 16px !important;
   padding-right: 16px !important;
 }
+
+/* 26. ICONO DE PIPO EN EL TITULO DE "PIPO RESPONDE" (FAQ) */
+/* El campo de titulo del editor solo admite texto -- se agrega la
+   mascota como pseudo-elemento despues del texto en vez de forzar
+   una imagen en un campo que no la soporta. Escopado a .section-faq
+   para no afectar el resto de .heading-block del sitio. */
+.section-faq .heading-block::after {
+  content: '';
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-image: url('https://d1a9qnv764bsoo.cloudfront.net/stores/007/906/761/rte/PIPO-16.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  margin-left: 8px;
+}
