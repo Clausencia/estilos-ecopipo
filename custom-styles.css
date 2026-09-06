@@ -1444,6 +1444,10 @@ body.template-home .section-slideshow .heading-block {
   margin: 0 0 20px;
 }
 
+/* Paleta ajustada a pedido: acento morado en las tarjetas (antes
+   teal), botones "Buscar"/"Visitar tienda" en teal (antes morado
+   oscuro), verde oficial de WhatsApp #2FD366 (antes #25D366) y texto
+   de botones en el blanco de marca #fcf5ff en vez de blanco puro. */
 .ecopipo-dist-buscador {
   display: flex;
   gap: 8px;
@@ -1464,8 +1468,8 @@ body.template-home .section-slideshow .heading-block {
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
-  background: #3C1053;
-  color: #ffffff;
+  background: #42C6D3;
+  color: #fcf5ff;
   font-family: 'Baloo 2', sans-serif;
   font-weight: 700;
   cursor: pointer;
@@ -1490,7 +1494,7 @@ body.template-home .section-slideshow .heading-block {
 
 .ecopipo-dist-card {
   border: 1px solid #E2E8F0;
-  border-left: 4px solid #42C6D3;
+  border-left: 4px solid #B573DE;
   border-radius: 8px;
   padding: 14px 16px;
   background: #ffffff;
@@ -1524,16 +1528,15 @@ body.template-home .section-slideshow .heading-block {
   font-weight: 700;
   font-size: 13px;
   text-decoration: none;
+  color: #fcf5ff;
 }
 
 .ecopipo-dist-actions a:first-child {
-  background: #25D366;
-  color: #ffffff;
+  background: #2FD366;
 }
 
 .ecopipo-dist-actions a:last-child {
-  background: #3C1053;
-  color: #ffffff;
+  background: #42C6D3;
 }
 
 /* El campo de CP que reemplaza el formulario nativo de newsletter en
