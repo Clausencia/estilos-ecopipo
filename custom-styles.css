@@ -1766,3 +1766,38 @@ body.template-home .section-slideshow .heading-block {
 .product-item.ecopipo-sin-boton .product-item-quick-shop-container {
   display: none !important;
 }
+
+/* 30. "ORDENAR POR" JUNTO AL BREADCRUMB (PAGINAS DE CATEGORIA) */
+/* Reubicado por JS (script 12) desde la barra de filtros hasta la
+   fila del breadcrumb, para eliminar el hueco entre el banner y el
+   dropdown de orden. */
+.ecopipo-breadcrumb-sort-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ecopipo-breadcrumb-sort-row .breadcrumbs {
+  margin-bottom: 0 !important;
+}
+
+.ecopipo-breadcrumb-sort-row .product-list-sort-by {
+  text-align: right;
+}
+
+/* Se sube todo el bloque (breadcrumb + titulo + "Ordenar por") sobre
+   el banner de la categoria para eliminar el espacio muerto debajo
+   de el; el fondo del listado de productos (donde arranca "Filtrar
+   por") sigue empezando justo donde termina el blanco, ya que solo
+   se reduce el alto que este bloque ocupa en el flujo del documento. */
+#ns-section-heading .page-header {
+  padding: 12px 0 !important;
+}
+
+#ns-section-heading {
+  margin-top: -100px !important;
+  position: relative;
+  z-index: 3;
+}

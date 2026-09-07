@@ -566,3 +566,35 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', alinearAlturaCarruselFamilia);
   new MutationObserver(alinearAlturaCarruselFamilia).observe(document.body, { childList: true, subtree: true });
 });
+
+/* 12. "Ordenar por" junto al breadcrumb en paginas de categoria
+   El dropdown "Ordenar por" vive por defecto en la barra de filtros,
+   muy por debajo del breadcrumb, dejando un hueco grande bajo el
+   banner. Se reubica junto al breadcrumb (misma fila y altura). El
+   widget que se mueve (.product-list-sort-by) ya es exclusivo de
+   escritorio (d-none d-md-inline-block por dentro), asi que mover su
+   posicion en el DOM no afecta el buscador/orden de categoria en
+   mobile, que usa un boton y modal aparte. */
+document.addEventListener('DOMContentLoaded', () => {
+  function moverOrdenarJuntoABreadcrumb() {
+    const titleRow = document.querySelector('.page-header-title-row');
+    if (!titleRow) return;
+
+    const wrap = titleRow.firstElementChild;
+    if (!wrap) return;
+
+    const breadcrumb = wrap.querySelector('.breadcrumbs');
+    const sortWidget = document.querySelector('.product-list-sort-by');
+    if (!breadcrumb || !sortWidget) return;
+    if (breadcrumb.parentElement.classList.contains('ecopipo-breadcrumb-sort-row')) return;
+
+    const row = document.createElement('div');
+    row.className = 'ecopipo-breadcrumb-sort-row';
+    wrap.insertBefore(row, breadcrumb);
+    row.appendChild(breadcrumb);
+    row.appendChild(sortWidget);
+  }
+
+  moverOrdenarJuntoABreadcrumb();
+  new MutationObserver(moverOrdenarJuntoABreadcrumb).observe(document.body, { childList: true, subtree: true });
+});
