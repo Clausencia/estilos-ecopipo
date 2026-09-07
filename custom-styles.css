@@ -1801,3 +1801,61 @@ body.template-home .section-slideshow .heading-block {
   position: relative;
   z-index: 3;
 }
+
+/* 31. CARRUSEL DE CATEGORIAS (ANTES DEL FOOTER) ESTILO TIMBERLAND */
+/* Pasa de circulos pequenos con texto debajo a tarjetas rectangulares
+   con foto de fondo y texto superpuesto (inspirado en
+   timberland.com.mx). El fondo decorativo de corazones/estrellas se
+   quita para que las tarjetas no compitan visualmente con el. */
+#ns-section-featured-categories_1788818704159 .js-carousel-section {
+  background-image: none !important;
+}
+
+#ns-section-featured-categories_1788818704159 .category-item,
+#ns-section-featured-categories_1788818704159 .swiper-slide {
+  width: 280px !important;
+  margin-right: 14px !important;
+}
+
+#ns-section-featured-categories_1788818704159 .category-item-link {
+  width: 280px !important;
+  position: relative;
+}
+
+#ns-section-featured-categories_1788818704159 .category-item-image {
+  width: 280px !important;
+  height: 140px !important;
+  border-radius: 14px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+#ns-section-featured-categories_1788818704159 .category-item-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+#ns-section-featured-categories_1788818704159 .category-item-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);
+  pointer-events: none;
+}
+
+#ns-section-featured-categories_1788818704159 .category-item-text {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  z-index: 2;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 16px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  margin: 0 !important;
+  padding: 0 12px !important;
+}
