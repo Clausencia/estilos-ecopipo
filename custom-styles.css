@@ -1859,3 +1859,16 @@ body.template-home .section-slideshow .heading-block {
   margin: 0 !important;
   padding: 0 12px !important;
 }
+
+/* 32. FIX ALTURA BANNER "AJUSTE MULTITALLA / BARRERA ANTIFUGAS" */
+/* Tiendanube guarda en el editor un "aspect-ratio" fijo por bloque de
+   imagen (805/477) que quedo de una version anterior del GIF; aunque
+   se resuba el mismo archivo el editor lo vuelve a aplicar tarde o
+   temprano (se confirmo que reaparece solo con navegar y volver, sin
+   editar nada). Se sobreescribe para que la imagen llene el 100% del
+   alto de su columna igual que el banner morado de al lado, en vez
+   de quedar encogida y desalineada. */
+#ns-section-banners_1788825982220 .banner-item img {
+  aspect-ratio: auto !important;
+  height: 100% !important;
+}
