@@ -598,3 +598,21 @@ document.addEventListener('DOMContentLoaded', () => {
   moverOrdenarJuntoABreadcrumb();
   new MutationObserver(moverOrdenarJuntoABreadcrumb).observe(document.body, { childList: true, subtree: true });
 });
+
+/* 13. Corregir destino del cintillo "Registrate y recibe 10%..."
+   El campo de link de la barra de anuncios quedo mal capturado en el
+   admin (guarda el texto literal "news letter" en vez de una URL),
+   lo que saca al usuario del sitio. Se corrige por JS en vez de en el
+   admin porque la barra se repite varias veces (efecto marquee) y
+   Tiendanube puede volver a duplicar ese enlace roto al reflowar el
+   carrusel de texto. */
+document.addEventListener('DOMContentLoaded', () => {
+  function corregirLinkCintilloNewsletter() {
+    document.querySelectorAll('a[href="news letter"]').forEach((a) => {
+      a.setAttribute('href', '/#ns-section-newsletter');
+    });
+  }
+
+  corregirLinkCintilloNewsletter();
+  new MutationObserver(corregirLinkCintilloNewsletter).observe(document.body, { childList: true, subtree: true });
+});
