@@ -1882,3 +1882,23 @@ body.template-home .section-slideshow .heading-block {
   padding-top: 32px;
   padding-bottom: 16px;
 }
+
+/* 34. SOMBRA MORADA EN BOTONES DEL BANNER "PAÑAL PREMIUM" */
+/* Mismo estilo de sombra (#3C1053) que ya usan los demas botones
+   verdes del sitio (ej. "Agregar al carrito" en las tarjetas de
+   producto), aqui aplicado a los botones "Comprar estampados" /
+   "Comprar lisos" que no lo traian. */
+#ns-section-banners_1788825982220 .btn.btn-primary {
+  box-shadow: 0 4px 0 #3C1053 !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+#ns-section-banners_1788825982220 .btn.btn-primary:hover {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+}
+
+#ns-section-banners_1788825982220 .btn.btn-primary:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
