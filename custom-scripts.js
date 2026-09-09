@@ -616,3 +616,28 @@ document.addEventListener('DOMContentLoaded', () => {
   corregirLinkCintilloNewsletter();
   new MutationObserver(corregirLinkCintilloNewsletter).observe(document.body, { childList: true, subtree: true });
 });
+
+/* 14. Titulo para el carrusel de categorias estilo Timberland
+   La plantilla de este bloque de categorias (seccion 31 del CSS) no
+   tiene campo de titulo en el editor de Tiendanube. Se agrega uno
+   por JS reutilizando las mismas clases del tema (heading-block h4)
+   que usan los demas titulos de seccion del sitio, para mantener la
+   tipografia uniforme en vez de definir un estilo nuevo. */
+document.addEventListener('DOMContentLoaded', () => {
+  function agregarTituloCarruselCategorias() {
+    const section = document.getElementById('ns-section-featured-categories_1788818704159');
+    if (!section) return;
+    if (section.querySelector('.ecopipo-carousel-title')) return;
+
+    const carousel = section.querySelector('.js-carousel-section');
+    if (!carousel) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'container ecopipo-carousel-title-wrap';
+    wrapper.innerHTML = '<div class="heading-block h4 block-fill ecopipo-carousel-title">Explora más de Ecopipo</div>';
+    carousel.parentNode.insertBefore(wrapper, carousel);
+  }
+
+  agregarTituloCarruselCategorias();
+  new MutationObserver(agregarTituloCarruselCategorias).observe(document.body, { childList: true, subtree: true });
+});

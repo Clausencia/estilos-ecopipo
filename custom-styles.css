@@ -1872,3 +1872,13 @@ body.template-home .section-slideshow .heading-block {
   aspect-ratio: auto !important;
   height: 100% !important;
 }
+
+/* 33. TITULO DEL CARRUSEL DE CATEGORIAS ESTILO TIMBERLAND */
+/* Inyectado por JS (script 14) reutilizando la clase real del tema
+   (heading-block h4) para que la tipografia sea identica a la de
+   otros titulos de seccion (ej. "Los indispensables"). Aqui solo se
+   define el espaciado alrededor. */
+#ns-section-featured-categories_1788818704159 .ecopipo-carousel-title-wrap {
+  padding-top: 32px;
+  padding-bottom: 16px;
+}
