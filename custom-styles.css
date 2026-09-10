@@ -1644,14 +1644,20 @@ body.template-home .section-slideshow .heading-block {
   padding-right: 16px !important;
 }
 
-/* Al quitar el max-width de arriba, el track del carrusel (swiper)
-   quedo tan ancho como la columna completa, por lo que la flecha de
-   "siguiente" (posicionada por el tema con right:16px respecto a esta
-   misma columna) terminaba encimada sobre la ultima tarjeta visible
-   en vez de tener espacio propio -- se perdia visualmente. Se acorta
-   el ancho del track (no el padding, que no recorta a los hijos que
-   se desbordan) para liberarle un carril limpio a la flecha. */
-#ns-section-featured_categories_pills .category-list-thumbnail .js-carousel-slider {
+/* Fix de la flecha "siguiente" encimada en los carruseles de
+   categorias/productos (.category-list-thumbnail): el tema posiciona
+   esa flecha con right:16px respecto a la columna completa, pero el
+   track del swiper ocupa esa misma columna al 100%, asi que la
+   flecha termina encimada sobre la ultima tarjeta visible en vez de
+   tener espacio propio -- se nota poco y parece "perdida". Bug nativo
+   del tema, no algo introducido por este archivo: se confirmo en los
+   4 carruseles de este tipo del sitio (Categorias destacadas, Los
+   indispensables, Los mas vendidos, el carrusel estilo Timberland).
+   Se acorta el ancho del track (no el padding, que no recorta a los
+   hijos que se desbordan) para liberarle un carril limpio a la
+   flecha, aplicado de forma general para cubrir cualquier instancia
+   presente o futura de este carrusel. */
+.category-list-thumbnail .js-carousel-slider {
   width: calc(100% - 56px) !important;
 }
 
