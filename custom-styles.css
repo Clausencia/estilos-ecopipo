@@ -1644,6 +1644,17 @@ body.template-home .section-slideshow .heading-block {
   padding-right: 16px !important;
 }
 
+/* Al quitar el max-width de arriba, el track del carrusel (swiper)
+   quedo tan ancho como la columna completa, por lo que la flecha de
+   "siguiente" (posicionada por el tema con right:16px respecto a esta
+   misma columna) terminaba encimada sobre la ultima tarjeta visible
+   en vez de tener espacio propio -- se perdia visualmente. Se acorta
+   el ancho del track (no el padding, que no recorta a los hijos que
+   se desbordan) para liberarle un carril limpio a la flecha. */
+#ns-section-featured_categories_pills .category-list-thumbnail .js-carousel-slider {
+  width: calc(100% - 56px) !important;
+}
+
 /* 26. ICONO DE PIPO EN EL TITULO DE "PIPO RESPONDE" (FAQ) */
 /* El campo de titulo del editor solo admite texto -- se agrega la
    mascota como pseudo-elemento despues del texto en vez de forzar
