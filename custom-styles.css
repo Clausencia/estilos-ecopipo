@@ -1932,3 +1932,33 @@ body.template-home .section-slideshow .heading-block {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
+
+/* 36. CENTRAR "CERTIFICADOS ECOPIPO" (SOLO 3 LOGOS, SIN NECESIDAD DE CARRUSEL) */
+/* Este bloque son solo 3 logos fijos, pero el tema lo arma con Swiper
+   (pensado para listas mas largas con scroll). El calculo de swiper
+   para centrar el track se descuadra en pantallas anchas (confirmado
+   en vivo: perfectamente centrado en 1280px, pero visiblemente
+   desplazado en ~2000px), dejando mucho mas espacio en un lado que en
+   el otro. Como no hace falta deslizar (entran los 3 siempre), se
+   anula el transform de swiper y se centra con flexbox normal, que no
+   tiene ese problema de calculo en ningun ancho. */
+#ns-section-featured-brands_1789067666915 .swiper-wrapper {
+  transform: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
+#ns-section-featured-brands_1789067666915 .swiper-slide:last-child {
+  margin-right: 0 !important;
+}
+
+@media (max-width: 480px) {
+  #ns-section-featured-brands_1789067666915 .swiper-slide {
+    margin-right: 20px !important;
+  }
+
+  #ns-section-featured-brands_1789067666915 .swiper-slide:last-child {
+    margin-right: 0 !important;
+  }
+}
