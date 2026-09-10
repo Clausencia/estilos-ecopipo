@@ -1902,3 +1902,24 @@ body.template-home .section-slideshow .heading-block {
   transform: translateY(4px) !important;
   box-shadow: 0 0 0 #3C1053 !important;
 }
+
+/* 35. BOTON "ELIGE TU KIT" DEL BANNER PRINCIPAL (SLIDESHOW) */
+/* Mismo estilo verde lima + sombra morada que los botones del banner
+   "Pañal Premium" (seccion 34), en vez del morado con sombra naranja
+   que traia antes, para mantener consistencia en las llamadas a la
+   accion del home. */
+#ns-section-slideshow .btn.btn-primary {
+  background-color: #BDD930 !important;
+  color: #36454F !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+}
+
+#ns-section-slideshow .btn.btn-primary:hover {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #3C1053 !important;
+}
+
+#ns-section-slideshow .btn.btn-primary:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 0 0 #3C1053 !important;
+}
