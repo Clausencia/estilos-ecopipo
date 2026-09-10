@@ -641,3 +641,33 @@ document.addEventListener('DOMContentLoaded', () => {
   agregarTituloCarruselCategorias();
   new MutationObserver(agregarTituloCarruselCategorias).observe(document.body, { childList: true, subtree: true });
 });
+
+/* 15. Ocultar el placeholder "Agregando.../¡Listo!" cuando esta inactivo
+   (carrusel "Productos similares")
+   El tema marca este mensaje como oculto poniendole "display: none" en su
+   propio atributo style, pero SIN !important. En el carrusel de productos
+   similares, ese display:none nunca llega a pintarse -- el mensaje queda
+   visible (inline-flex) encimado justo sobre el boton real "Agregar al
+   carrito", mezclando ambos textos. Se probaron reglas CSS con !important
+   y especificidad creciente (incluso artificialmente muy alta) sin exito:
+   por alguna razon la cascada de CSS no logra sobreescribir esta propiedad
+   en este elemento especifico, asi que se fuerza por JS en su lugar (ahi
+   si funciona de forma confiable). */
+document.addEventListener('DOMContentLoaded', () => {
+  function ocultarPlaceholderInactivo() {
+    document.querySelectorAll('.js-addtocart-placeholder').forEach((el) => {
+      const estiloInline = el.getAttribute('style') || '';
+      if (/display:\s*none/i.test(estiloInline) && getComputedStyle(el).display !== 'none') {
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
+
+  ocultarPlaceholderInactivo();
+  new MutationObserver(ocultarPlaceholderInactivo).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class'],
+  });
+});
