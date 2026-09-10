@@ -367,13 +367,19 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   display: none !important;
 }
 
-/* Botón estilo píldora cyan con sombra 3D morada idéntico a PDP */
-.swiper-slide .btn,
-.swiper-slide a.btn,
-.swiper-slide input[type="submit"],
-.swiper-slide .js-quickshop-modal-open,
-.swiper-slide .js-prod-submit-form,
-.swiper-slide .js-addtocart,
+/* Botón estilo píldora cyan con sombra 3D morada idéntico a PDP.
+   El selector ".swiper-slide .btn" tambien atrapaba al boton del
+   banner principal del home (seccion 13, "#ns-section-slideshow"),
+   que TAMBIEN vive dentro de un .swiper-slide por ser un carrusel de
+   Tiendanube, forzandole este mismo estilo cyan sin importar el color
+   que se eligiera para el en el editor. Se excluye explicitamente
+   ese banner de esta regla, que es solo para carruseles de producto. */
+.swiper-slide:not(#ns-section-slideshow *) .btn,
+.swiper-slide:not(#ns-section-slideshow *) a.btn,
+.swiper-slide:not(#ns-section-slideshow *) input[type="submit"],
+.swiper-slide:not(#ns-section-slideshow *) .js-quickshop-modal-open,
+.swiper-slide:not(#ns-section-slideshow *) .js-prod-submit-form,
+.swiper-slide:not(#ns-section-slideshow *) .js-addtocart,
 .section-products-related .btn,
 .section-products-related a.btn,
 .section-products-related input[type="submit"],
@@ -416,11 +422,11 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 }
 
 /* Hover: efecto push intermedio */
-.swiper-slide .btn:hover,
-.swiper-slide a.btn:hover,
-.swiper-slide input[type="submit"]:hover,
-.swiper-slide .js-quickshop-modal-open:hover,
-.swiper-slide .js-prod-submit-form:hover,
+.swiper-slide:not(#ns-section-slideshow *) .btn:hover,
+.swiper-slide:not(#ns-section-slideshow *) a.btn:hover,
+.swiper-slide:not(#ns-section-slideshow *) input[type="submit"]:hover,
+.swiper-slide:not(#ns-section-slideshow *) .js-quickshop-modal-open:hover,
+.swiper-slide:not(#ns-section-slideshow *) .js-prod-submit-form:hover,
 .section-products-related .btn:hover,
 .section-products-related a.btn:hover,
 .section-products-related input[type="submit"]:hover,
@@ -435,11 +441,11 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 }
 
 /* Active: efecto push completo al click */
-.swiper-slide .btn:active,
-.swiper-slide a.btn:active,
-.swiper-slide input[type="submit"]:active,
-.swiper-slide .js-quickshop-modal-open:active,
-.swiper-slide .js-prod-submit-form:active,
+.swiper-slide:not(#ns-section-slideshow *) .btn:active,
+.swiper-slide:not(#ns-section-slideshow *) a.btn:active,
+.swiper-slide:not(#ns-section-slideshow *) input[type="submit"]:active,
+.swiper-slide:not(#ns-section-slideshow *) .js-quickshop-modal-open:active,
+.swiper-slide:not(#ns-section-slideshow *) .js-prod-submit-form:active,
 .section-products-related .btn:active,
 .section-products-related a.btn:active,
 .section-products-related input[type="submit"]:active,
