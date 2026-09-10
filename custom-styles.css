@@ -1655,9 +1655,17 @@ body.template-home .section-slideshow .heading-block {
    indispensables, Los mas vendidos, el carrusel estilo Timberland).
    Se acorta el ancho del track (no el padding, que no recorta a los
    hijos que se desbordan) para liberarle un carril limpio a la
-   flecha, aplicado de forma general para cubrir cualquier instancia
-   presente o futura de este carrusel. */
-.category-list-thumbnail .js-carousel-slider {
+   flecha.
+   IMPORTANTE: se probo generalizar esto con un selector sin ID
+   (".category-list-thumbnail .js-carousel-slider") y aunque en Chrome
+   se veia igual, rompio la flecha en Safari/Opera/Vivaldi/Brave en la
+   seccion "Los mas vendidos" -- con el selector acotado por ID (como
+   quedo abajo) funciona en todos. No unificar de nuevo sin volver a
+   probar en esos navegadores. */
+#ns-section-featured_categories_pills .category-list-thumbnail .js-carousel-slider,
+#ns-section-featured-categories_1788813315512 .category-list-thumbnail .js-carousel-slider,
+#ns-section-featured-categories_1788818704159 .category-list-thumbnail .js-carousel-slider,
+#ns-section-featured_categories_images .category-list-thumbnail .js-carousel-slider {
   width: calc(100% - 56px) !important;
 }
 

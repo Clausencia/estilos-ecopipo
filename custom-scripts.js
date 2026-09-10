@@ -476,20 +476,6 @@ document.addEventListener('DOMContentLoaded', () => {
       img.src = url;
       img.alt = 'Categorías destacadas';
       flexRow.insertBefore(img, wrapper);
-
-      // El fetch a Sheets es asincrono y puede tardar mas (o ser
-      // frenado por bloqueadores de rastreo tipo Brave/Opera/Vivaldi/
-      // Safari) que en Chrome sin extensiones. Si tarda, este reacomodo
-      // del DOM llega despues de que el carrusel (Swiper) ya calculo el
-      // ancho de su track y el estado habilitado/deshabilitado de sus
-      // flechas, dejando esos valores desactualizados y la flecha de
-      // "siguiente" oculta aunque sí haya mas para ver. Se fuerza un
-      // recalculo explicito para que quede correcto sin importar cuanto
-      // haya tardado el fetch.
-      const carrusel = wrapper.querySelector('.js-carousel-slider');
-      if (carrusel && carrusel.swiper) {
-        carrusel.swiper.update();
-      }
     })
     .catch(() => {});
 });
