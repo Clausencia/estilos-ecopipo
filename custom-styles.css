@@ -688,7 +688,14 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
    normal + margin-top) y el overlay (position:absolute + top) no caen en
    el mismo pixel exacto, se ven las dos leyendas "Agregar al carrito"
    apiladas. Se posiciona el boton real tambien con position:absolute e
-   identico top para garantizar que siempre coincidan exactamente. */
+   identico top para garantizar que siempre coincidan exactamente.
+   En el carrusel de "Productos similares" el boton (input.js-addtocart)
+   queda pegado a la izquierda en vez de centrado: al ser .product-item
+   TAMBIEN .swiper-slide, compite con otra regla de este archivo pensada
+   para carruseles que le pone display:inline-flex, y un elemento inline
+   no se centra con margin:auto. Se centra el CONTENEDOR con flexbox en
+   vez de pelear por el display del boton -- funciona sin importar cual
+   de las dos reglas termine ganando esa pelea. */
 .product-item .item-submit-container {
   position: absolute !important;
   top: 10px !important;
@@ -696,6 +703,8 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   right: 0 !important;
   width: 100% !important;
   margin-top: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 /* El tema oculta el boton real (item-submit-container) con display:none
