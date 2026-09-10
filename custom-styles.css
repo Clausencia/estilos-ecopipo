@@ -1934,8 +1934,6 @@ body.template-home .section-slideshow .heading-block {
    que traia antes, para mantener consistencia en las llamadas a la
    accion del home. */
 #ns-section-slideshow .btn.btn-primary {
-  background-color: #BDD930 !important;
-  color: #3C1053 !important;
   box-shadow: 0 4px 0 #3C1053 !important;
 }
 
