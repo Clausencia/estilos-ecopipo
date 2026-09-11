@@ -643,53 +643,53 @@ document.addEventListener('DOMContentLoaded', () => {
   new MutationObserver(agregarTituloCarruselCategorias).observe(document.body, { childList: true, subtree: true });
 });
 
-/* 15. Ocultar boton/placeholder de "Agregar al carrito" cuando el propio
-   tema los marca como inactivos (carruseles de productos)
-   El tema oculta el boton real ("Agregar al carrito") mientras dura la
-   animacion "Agregando.../¡Listo!" poniendole "display: none" en su propio
-   atributo style (y lo mismo al reves con el placeholder del mensaje
-   cuando esta inactivo), pero SIN !important. En los carruseles de
-   productos (confirmado en "Productos similares" Y en "La piel de tu bebe
-   merece lo mejor") ese display:none nunca llega a pintarse -- boton real
-   y mensaje quedan visibles y encimados al mismo tiempo, mezclando sus
-   textos (se ve claramente al hacer click: aparecen "Agregar al carrito"
-   y "Agregando..." superpuestos). Se probaron reglas CSS con !important y
-   especificidad creciente (incluso artificialmente muy alta) sin exito:
-   por alguna razon la cascada de CSS no logra sobreescribir esta propiedad
-   en estos elementos, asi que se fuerza por JS en su lugar (ahi si
-   funciona de forma confiable).
-   El MutationObserver por si solo no basta: solo vuelve a correr cuando
-   ocurre OTRA mutacion en cualquier parte de la pagina, asi que si el
-   usuario hace click y no pasa nada mas, el boton se queda "atorado"
-   encimado hasta que algo no relacionado (otro click, una imagen que
-   carga) dispara una mutacion y de casualidad lo corrige (confirmado en
-   video: quedaba pegado varios segundos hasta el siguiente click en
-   OTRO producto). Una revision por tiempo limitada a los primeros 2
-   segundos tras el click TAMPOCO alcanza: la animacion/respuesta del
-   carrito puede tardar mas que eso (confirmado en video: tardo ~5
-   segundos en resolverse sola). Se usa en su lugar un intervalo
-   permanente de baja frecuencia corriendo todo el tiempo que dure la
-   pagina -- la revision en si es barata (recorrer un puñado de
-   elementos y mirar un atributo), asi que no tiene costo real dejarla
-   corriendo indefinidamente, y garantiza que cualquier superposicion se
-   autocorrija como maximo 200ms despues de aparecer, sin importar
-   cuanto tarde la animacion del tema. */
+/* 15. Boton de "Agregar al carrito" siempre visible, mensaje
+   "Agregando.../¡Listo!" siempre oculto (carruseles y grid de
+   productos)
+   El tema alterna entre el boton real y el mensaje de feedback
+   poniendo "display: none" en el atributo style de cada uno cuando le
+   toca estar oculto. El problema: en varios contextos (confirmado en
+   "Productos similares", en "La piel de tu bebe merece lo mejor", en
+   la plantilla alterna ".buy-button-container" que usan los productos
+   con variantes propias, y en el grid de categoria) ese "display:
+   none" viene con !important INCLUIDO EN EL TEXTO del atributo style.
+   Un !important puesto asi por el propio tema no se puede vencer desde
+   NINGUNA regla en una hoja de estilos externa sin importar cuanta
+   especificidad tenga -- el origen "inline" siempre gana esa
+   comparacion. Se probaron reglas CSS con !important y especificidad
+   creciente (incluso artificialmente muy alta): nunca funciono en
+   estos casos. La unica forma de ganarle es sobreescribiendo ese MISMO
+   atributo style por JS (ahi si funciona, porque no es una regla en
+   competencia sino un reemplazo directo del valor inline).
+   Se corrigen dos cosas a la vez:
+   - El mensaje "Agregando.../¡Listo!" se mantiene siempre oculto (el
+     carrito que se abre al agregar ya confirma la compra).
+   - El boton/contenedor real se mantiene siempre visible, para que no
+     desaparezca mientras dura la animacion (visto en vivo: hasta ~2
+     segundos de hueco en blanco donde estaba el boton).
+   Se revisa con un intervalo permanente en vez de solo reaccionar a
+   mutaciones puntuales, porque la animacion del tema puede tardar
+   varios segundos en resolverse por si sola y un click no siempre
+   dispara otra mutacion que reactive la revision. */
 document.addEventListener('DOMContentLoaded', () => {
-  function ocultarElementosMarcadosInactivos() {
-    document.querySelectorAll('.js-addtocart-placeholder, input.js-addtocart').forEach((el) => {
-      const estiloInline = el.getAttribute('style') || '';
-      if (/display:\s*none/i.test(estiloInline) && getComputedStyle(el).display !== 'none') {
+  function corregirBotonesAgregar() {
+    document.querySelectorAll('.js-addtocart-placeholder').forEach((el) => {
+      if (getComputedStyle(el).display !== 'none') {
         el.style.setProperty('display', 'none', 'important');
+      }
+    });
+    document.querySelectorAll('.item-submit-container, .buy-button-container').forEach((el) => {
+      if (getComputedStyle(el).display === 'none') {
+        el.style.setProperty('display', 'flex', 'important');
+      }
+    });
+    document.querySelectorAll('input.js-addtocart').forEach((el) => {
+      if (getComputedStyle(el).display === 'none') {
+        el.style.setProperty('display', 'flex', 'important');
       }
     });
   }
 
-  ocultarElementosMarcadosInactivos();
-  new MutationObserver(ocultarElementosMarcadosInactivos).observe(document.body, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ['style', 'class'],
-  });
-  setInterval(ocultarElementosMarcadosInactivos, 200);
+  corregirBotonesAgregar();
+  setInterval(corregirBotonesAgregar, 150);
 });
