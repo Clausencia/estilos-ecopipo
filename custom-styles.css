@@ -681,14 +681,20 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 }
 
 /* Botón "Comprar" del grid: misma apariencia y funcionamiento que "Agregar al carrito" del PDP */
-/* El tema tiene un bug propio (confirmado con nuestro CSS/JS desactivado): al
-   agregar CUALQUIER producto, a veces tambien muestra el overlay de feedback
-   del PRIMER producto de la pagina (un selector sin acotar en su script),
-   sin ocultar el boton real detras. Si el boton real (posicionado por flujo
-   normal + margin-top) y el overlay (position:absolute + top) no caen en
-   el mismo pixel exacto, se ven las dos leyendas "Agregar al carrito"
-   apiladas. Se posiciona el boton real tambien con position:absolute e
-   identico top para garantizar que siempre coincidan exactamente.
+/* Antes este contenedor se posicionaba con position:absolute para caer
+   exactamente encima del overlay "Agregando.../¡Listo!" (pensado para
+   que, si el tema fallaba al ocultar uno de los dos, al menos
+   coincidieran en el mismo lugar). Se probo eso, CSS con !important
+   creciente y hasta un intervalo de JS -- nada evito el bug de forma
+   confiable en todos los navegadores. Se comprobo en vivo (con TODO
+   nuestro CSS de este boton desactivado) que el bug de superposicion
+   es minimo/casi imperceptible en el tema nativo, porque el boton real
+   y el overlay conviven en flujo normal en vez de forzarse a ocupar el
+   MISMO pixel exacto -- si el toggle falla un instante, se ven uno
+   junto a otro en vez de encimados letra por letra. Ahora que el
+   overlay esta permanentemente oculto (ver mas abajo), ya no hace
+   falta igualar su posicion: se deja el boton en flujo normal, igual
+   que lo haria el tema por su cuenta.
    En el carrusel de "Productos similares" el boton (input.js-addtocart)
    queda pegado a la izquierda en vez de centrado: al ser .product-item
    TAMBIEN .swiper-slide, compite con otra regla de este archivo pensada
@@ -697,14 +703,10 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
    vez de pelear por el display del boton -- funciona sin importar cual
    de las dos reglas termine ganando esa pelea. */
 .product-item .item-submit-container {
-  position: absolute !important;
-  top: 10px !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  margin-top: 0 !important;
   display: flex !important;
   justify-content: center !important;
+  width: 100% !important;
+  margin-top: 0 !important;
 }
 
 /* El tema oculta el boton real (item-submit-container) con display:none
