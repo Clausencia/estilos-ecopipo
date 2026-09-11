@@ -543,28 +543,29 @@ document.addEventListener('DOMContentLoaded', () => {
   new MutationObserver(construirSelectoresDeTalla).observe(document.body, { childList: true, subtree: true });
 });
 
-/* 11. Alinear alto de tarjetas del carrusel "En familia"
-   Sin el boton de compra (ver seccion 29 del CSS), la unica fuente
-   de diferencia de alto entre tarjetas es el aviso "¡Ultima unidad!"
-   que solo se muestra en algunos productos. Se iguala por JS en vez
-   de reservar espacio fijo en CSS porque ese aviso puede aparecer o
-   desaparecer segun el stock disponible en cualquier momento. */
+/* 11. Alinear alto de tarjetas en los carruseles de productos
+   El nombre del producto (una o dos lineas) y avisos como "¡Ultima
+   unidad!" o "¡Solo quedan N en stock!" no siempre aparecen, asi que
+   cada tarjeta tiene un alto natural distinto y el boton de compra
+   queda a diferente altura segun la tarjeta. Se iguala por JS (no con
+   un alto fijo en CSS) porque ese contenido es dinamico -- aplica a
+   CUALQUIER carrusel de productos del sitio (no solo "En familia"),
+   igualando cada carrusel contra si mismo. */
 document.addEventListener('DOMContentLoaded', () => {
-  function alinearAlturaCarruselFamilia() {
-    const wrapper = document.querySelector('#ns-section-featured_products_2 .swiper-wrapper');
-    if (!wrapper) return;
+  function alinearAlturaCarruselesDeProductos() {
+    document.querySelectorAll('.swiper-wrapper').forEach((wrapper) => {
+      const items = [...wrapper.querySelectorAll(':scope > .product-item')];
+      if (!items.length) return;
 
-    const items = [...wrapper.querySelectorAll(':scope > .product-item')];
-    if (!items.length) return;
-
-    items.forEach((item) => { item.style.height = 'auto'; });
-    const alturaMaxima = Math.max(...items.map((item) => item.getBoundingClientRect().height));
-    items.forEach((item) => { item.style.height = alturaMaxima + 'px'; });
+      items.forEach((item) => { item.style.height = 'auto'; });
+      const alturaMaxima = Math.max(...items.map((item) => item.getBoundingClientRect().height));
+      items.forEach((item) => { item.style.height = alturaMaxima + 'px'; });
+    });
   }
 
-  alinearAlturaCarruselFamilia();
-  window.addEventListener('resize', alinearAlturaCarruselFamilia);
-  new MutationObserver(alinearAlturaCarruselFamilia).observe(document.body, { childList: true, subtree: true });
+  alinearAlturaCarruselesDeProductos();
+  window.addEventListener('resize', alinearAlturaCarruselesDeProductos);
+  new MutationObserver(alinearAlturaCarruselesDeProductos).observe(document.body, { childList: true, subtree: true });
 });
 
 /* 12. "Ordenar por" junto al breadcrumb en paginas de categoria
