@@ -678,12 +678,17 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.setProperty('display', 'none', 'important');
       }
     });
+    // Los productos con selector de tallas (clase "ecopipo-sin-boton",
+    // ver seccion 10) deben quedar SIN boton de compra a proposito --
+    // no forzarlos a mostrarse aqui, o se pelean con esa regla.
     document.querySelectorAll('.item-submit-container, .buy-button-container').forEach((el) => {
+      if (el.closest('.ecopipo-sin-boton')) return;
       if (getComputedStyle(el).display === 'none') {
         el.style.setProperty('display', 'flex', 'important');
       }
     });
     document.querySelectorAll('input.js-addtocart').forEach((el) => {
+      if (el.closest('.ecopipo-sin-boton')) return;
       if (getComputedStyle(el).display === 'none') {
         el.style.setProperty('display', 'flex', 'important');
       }

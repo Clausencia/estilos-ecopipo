@@ -1813,6 +1813,16 @@ body.template-home .section-slideshow .heading-block {
   display: none !important;
 }
 
+/* Algunos productos con variantes (ej. "Calzon Entrenador - Dinos")
+   usan la plantilla alterna ".buy-button-container" (ver seccion 31)
+   en vez de ".product-item-quick-shop-container", asi que la regla de
+   arriba no los cubria: el boton de compra se seguia mostrando ahi
+   aunque el producto tuviera el selector de tallas por encima,
+   compitiendo por el mismo espacio. */
+.product-item.ecopipo-sin-boton .buy-button-container {
+  display: none !important;
+}
+
 /* 30. "ORDENAR POR" JUNTO AL BREADCRUMB (PAGINAS DE CATEGORIA) */
 /* Reubicado por JS (script 12) desde la barra de filtros hasta la
    fila del breadcrumb, para eliminar el hueco entre el banner y el
