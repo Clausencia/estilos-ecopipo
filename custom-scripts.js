@@ -643,20 +643,24 @@ document.addEventListener('DOMContentLoaded', () => {
   new MutationObserver(agregarTituloCarruselCategorias).observe(document.body, { childList: true, subtree: true });
 });
 
-/* 15. Ocultar el placeholder "Agregando.../¡Listo!" cuando esta inactivo
-   (carrusel "Productos similares")
-   El tema marca este mensaje como oculto poniendole "display: none" en su
-   propio atributo style, pero SIN !important. En el carrusel de productos
-   similares, ese display:none nunca llega a pintarse -- el mensaje queda
-   visible (inline-flex) encimado justo sobre el boton real "Agregar al
-   carrito", mezclando ambos textos. Se probaron reglas CSS con !important
-   y especificidad creciente (incluso artificialmente muy alta) sin exito:
+/* 15. Ocultar boton/placeholder de "Agregar al carrito" cuando el propio
+   tema los marca como inactivos (carruseles de productos)
+   El tema oculta el boton real ("Agregar al carrito") mientras dura la
+   animacion "Agregando.../¡Listo!" poniendole "display: none" en su propio
+   atributo style (y lo mismo al reves con el placeholder del mensaje
+   cuando esta inactivo), pero SIN !important. En los carruseles de
+   productos (confirmado en "Productos similares" Y en "La piel de tu bebe
+   merece lo mejor") ese display:none nunca llega a pintarse -- boton real
+   y mensaje quedan visibles y encimados al mismo tiempo, mezclando sus
+   textos (se ve claramente al hacer click: aparecen "Agregar al carrito"
+   y "Agregando..." superpuestos). Se probaron reglas CSS con !important y
+   especificidad creciente (incluso artificialmente muy alta) sin exito:
    por alguna razon la cascada de CSS no logra sobreescribir esta propiedad
-   en este elemento especifico, asi que se fuerza por JS en su lugar (ahi
-   si funciona de forma confiable). */
+   en estos elementos, asi que se fuerza por JS en su lugar (ahi si
+   funciona de forma confiable). */
 document.addEventListener('DOMContentLoaded', () => {
-  function ocultarPlaceholderInactivo() {
-    document.querySelectorAll('.js-addtocart-placeholder').forEach((el) => {
+  function ocultarElementosMarcadosInactivos() {
+    document.querySelectorAll('.js-addtocart-placeholder, input.js-addtocart').forEach((el) => {
       const estiloInline = el.getAttribute('style') || '';
       if (/display:\s*none/i.test(estiloInline) && getComputedStyle(el).display !== 'none') {
         el.style.setProperty('display', 'none', 'important');
@@ -664,8 +668,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  ocultarPlaceholderInactivo();
-  new MutationObserver(ocultarPlaceholderInactivo).observe(document.body, {
+  ocultarElementosMarcadosInactivos();
+  new MutationObserver(ocultarElementosMarcadosInactivos).observe(document.body, {
     childList: true,
     subtree: true,
     attributes: true,
