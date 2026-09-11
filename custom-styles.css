@@ -1019,12 +1019,20 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
    transicion faltante, sino puro espaciado: 40px de padding superior
    mas un titulo vacio (antes tenia un "?" de prueba) que sumaba otros
    32px de gap de flexbox antes del carrusel de circulos. Se oculta el
-   bloque de titulo (queda vacio) y se reduce el padding superior. */
-.featured-categories-section .text-center.flex-shrink-0 {
+   bloque de titulo (queda vacio) y se reduce el padding superior.
+   IMPORTANTE: el selector original (".featured-categories-section
+   .text-center.flex-shrink-0", sin acotar) ocultaba por error el
+   titulo de CUALQUIER carrusel que comparta esa clase generica del
+   tema -- incluyendo "Los mas vendidos" y "Los indispensables", que
+   si tienen texto real configurado (bug detectado en vivo, no
+   relacionado con el redondeo de esquinas de las fotos). Se acota
+   solo a esta seccion especifica, que es la unica con el titulo
+   vacio. */
+#ns-section-featured_categories_images .text-center.flex-shrink-0 {
   display: none !important;
 }
 
-.featured-categories-section .d-flex.flex-column {
+#ns-section-featured_categories_images .d-flex.flex-column {
   padding-top: 16px !important;
 }
 
