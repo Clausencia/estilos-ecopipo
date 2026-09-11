@@ -83,17 +83,24 @@ del::after, s::after {
    asi que el estilo se aplica directo al elemento nativo, acotado por
    ID de seccion para no afectar otros divisores del sitio que usen
    este mismo bloque. El punteado se arma con un gradiente repetido
-   (no con border-style:dashed) para controlar el largo y separacion
-   exactos de cada guion, y el marco morado usa outline con
-   outline-offset en vez de box-shadow para poder separarlo de la
-   linea. */
+   (no con border-style:dashed) para poder alternar dos guiones largos
+   y uno corto, algo que un border dashed normal no permite. Se probo
+   antes con un marco morado alrededor (outline), pero en produccion
+   se veia mas como un recuadro que como una costura -- se quito. */
 #ns-section-divider_1789069002810 .divider-line {
   border: none !important;
   height: 1px !important;
-  background-image: repeating-linear-gradient(to right, #666 0, #666 6px, transparent 6px, transparent 14px) !important;
+  background-image: repeating-linear-gradient(
+    to right,
+    #666 0 10px,
+    transparent 10px 16px,
+    #666 16px 26px,
+    transparent 26px 32px,
+    #666 32px 36px,
+    transparent 36px 42px
+  ) !important;
   background-color: transparent !important;
-  outline: 1.5px solid #b573de !important;
-  outline-offset: 8px !important;
+  outline: none !important;
 }
 
 /* 8. BANNERS Y HEADINGS SECUNDARIOS */
