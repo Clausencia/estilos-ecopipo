@@ -799,6 +799,52 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   display: none !important;
 }
 
+/* Algunos productos (los que tienen variantes propias, ej. "Calzon
+   Entrenador - Dinos") usan una plantilla de boton distinta del tema
+   (.buy-button-container / .quickshop-actions) en vez de
+   .product-item-quick-shop-container. Ninguna de las reglas de arriba
+   la cubria, por eso ese boton en particular seguia mostrando el
+   mensaje "Agregando..." encimado aunque los demas ya estaban
+   corregidos. Se repite el mismo tratamiento (ocultar el mensaje,
+   dar forma de pildora al boton real) para esta plantilla alterna. */
+.product-item .buy-button-container .js-addtocart-placeholder {
+  display: none !important;
+}
+
+.product-item .buy-button-container {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.product-item .buy-button-container input.js-addtocart {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 160px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 0 16px !important;
+  margin: 10px auto 0 auto !important;
+  background-color: #42c6d3 !important;
+  background: #42c6d3 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  border-radius: 50px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 0 #3C1053 !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+}
+
 /* El tema envuelve el texto de cada estado (Comprar/Agregando/Listo) en un mini
    boton propio (btn btn-primary btn-small); se limpia para que no se vea un
    boton anidado dentro del pill principal */
