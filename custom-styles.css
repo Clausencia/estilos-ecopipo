@@ -76,13 +76,24 @@ del::after, s::after {
   background-color: currentColor !important; /* Toma el mismo color morado del texto */
   border-radius: 1px !important;
 }
-/* SEPARADOR ESTILO COSTURA */
-
-div.separador-costura {
-  border-bottom: 3px dashed #666;
-  box-shadow: 0 0 0 2px #b573de; /* Opcional para dar relieve */
-  width: 100%;
-  margin: 20px 0;
+/* SEPARADOR ESTILO COSTURA (arriba de "Certificados ecopipo") */
+/* El separador de esa seccion es un bloque nativo "Divisor" del
+   editor de Tiendanube (<hr class="divider-line">), no un div propio
+   -- ese tipo de bloque no permite pegar HTML/clases personalizadas,
+   asi que el estilo se aplica directo al elemento nativo, acotado por
+   ID de seccion para no afectar otros divisores del sitio que usen
+   este mismo bloque. El punteado se arma con un gradiente repetido
+   (no con border-style:dashed) para controlar el largo y separacion
+   exactos de cada guion, y el marco morado usa outline con
+   outline-offset en vez de box-shadow para poder separarlo de la
+   linea. */
+#ns-section-divider_1789069002810 .divider-line {
+  border: none !important;
+  height: 1px !important;
+  background-image: repeating-linear-gradient(to right, #666 0, #666 6px, transparent 6px, transparent 14px) !important;
+  background-color: transparent !important;
+  outline: 1.5px solid #b573de !important;
+  outline-offset: 8px !important;
 }
 
 /* 8. BANNERS Y HEADINGS SECUNDARIOS */
