@@ -696,7 +696,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   corregirBotonesAgregar();
-  setInterval(corregirBotonesAgregar, 150);
+  // requestAnimationFrame en vez de setInterval: corre justo antes de
+  // cada repintado del navegador (~cada 16ms), en vez de cada 150ms,
+  // para reducir al minimo posible la ventana en la que un parpadeo
+  // del tema alcanza a pintarse antes de que lo corrijamos.
+  function bucleCorreccion() {
+    corregirBotonesAgregar();
+    requestAnimationFrame(bucleCorreccion);
+  }
+  requestAnimationFrame(bucleCorreccion);
 });
 
 /* 16. Feedback propio de "Agregando..." al hacer click
