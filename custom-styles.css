@@ -76,6 +76,14 @@ del::after, s::after {
   background-color: currentColor !important; /* Toma el mismo color morado del texto */
   border-radius: 1px !important;
 }
+/* SEPARADOR ESTILO COSTURA */
+
+div.separador-costura {
+  border-bottom: 3px dashed #666;
+  box-shadow: 0 0 0 2px #b573de; /* Opcional para dar relieve */
+  width: 100%;
+  margin: 20px 0;
+}
 
 /* 8. BANNERS Y HEADINGS SECUNDARIOS */
 .eco-page-banner{width:100vw!important;position:relative!important;left:50%!important;right:50%!important;margin:-40px -50vw 25px -50vw!important;height:250px!important;overflow:hidden!important;background:#FCF5FF!important}
