@@ -657,7 +657,16 @@ document.addEventListener('DOMContentLoaded', () => {
    especificidad creciente (incluso artificialmente muy alta) sin exito:
    por alguna razon la cascada de CSS no logra sobreescribir esta propiedad
    en estos elementos, asi que se fuerza por JS en su lugar (ahi si
-   funciona de forma confiable). */
+   funciona de forma confiable).
+   El MutationObserver por si solo no basta: solo vuelve a correr cuando
+   ocurre OTRA mutacion en cualquier parte de la pagina, asi que si el
+   usuario hace click y no pasa nada mas, el boton se queda "atorado"
+   encimado hasta que algo no relacionado (otro click, una imagen que
+   carga) dispara una mutacion y de casualidad lo corrige (confirmado en
+   video: quedaba pegado varios segundos hasta el siguiente click en
+   OTRO producto). Se agrega ademas una revision activa por tiempo justo
+   despues de cada click en un boton de agregar, para cubrir toda la
+   animacion sin depender de que pase algo mas en la pagina. */
 document.addEventListener('DOMContentLoaded', () => {
   function ocultarElementosMarcadosInactivos() {
     document.querySelectorAll('.js-addtocart-placeholder, input.js-addtocart').forEach((el) => {
@@ -675,4 +684,18 @@ document.addEventListener('DOMContentLoaded', () => {
     attributes: true,
     attributeFilter: ['style', 'class'],
   });
+
+  document.addEventListener(
+    'click',
+    (evento) => {
+      if (!evento.target.closest('.js-addtocart, .js-prod-submit-form')) return;
+      let revisiones = 0;
+      const intervalo = setInterval(() => {
+        ocultarElementosMarcadosInactivos();
+        revisiones += 1;
+        if (revisiones > 20) clearInterval(intervalo);
+      }, 100);
+    },
+    true
+  );
 });
