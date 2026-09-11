@@ -1642,8 +1642,9 @@ body.template-home .section-slideshow .heading-block {
 
 /* Las fotos de cada pill (Velcro Liso/Estampado/Broches) quedaban con
    esquinas rectas, distinto a la foto estatica de al lado que ya
-   tiene 12px. Se iguala. */
-#ns-section-featured_categories_pills .category-item-image img {
+   tiene 12px. Se iguala, de forma general para cualquier carrusel de
+   categorias del sitio (confirmado tambien en "Los indispensables"). */
+.category-item-image img {
   border-radius: 12px !important;
 }
 
