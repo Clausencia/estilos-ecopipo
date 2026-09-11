@@ -698,3 +698,32 @@ document.addEventListener('DOMContentLoaded', () => {
   corregirBotonesAgregar();
   setInterval(corregirBotonesAgregar, 150);
 });
+
+/* 16. Feedback propio de "Agregando..." al hacer click
+   Con el mensaje nativo del tema permanentemente oculto (seccion 15),
+   ya no queda ningun indicador de que el click funciono mientras se
+   agrega el producto -- el usuario ve un vacio de aprox. 1 segundo
+   antes de que abra el carrito y no sabe si de verdad le dio al
+   boton. En vez de intentar reactivar el mecanismo del tema (la razon
+   de la seccion 15 es que ese mecanismo no es confiable), se cambia
+   el texto del boton real directamente, algo que controlamos por
+   completo y no compite con nada del tema. */
+document.addEventListener(
+  'click',
+  (evento) => {
+    const boton = evento.target.closest('input.js-addtocart');
+    if (!boton || boton.closest('.ecopipo-sin-boton')) return;
+
+    const valorOriginal = boton.value;
+    boton.value = 'Agregando...';
+    boton.style.setProperty('pointer-events', 'none', 'important');
+    boton.style.setProperty('opacity', '0.85', 'important');
+
+    setTimeout(() => {
+      boton.value = valorOriginal;
+      boton.style.removeProperty('pointer-events');
+      boton.style.removeProperty('opacity');
+    }, 1200);
+  },
+  true
+);
