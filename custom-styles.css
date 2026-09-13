@@ -2170,6 +2170,13 @@ body.template-home .section-slideshow .heading-block {
   object-fit: contain !important;
   border-radius: 0 !important;
   margin: 0 auto !important;
+  transform: translateY(-35px) !important;
+}
+
+/* La regla global de hover (linea ~1777) pone su propio scale(1.08) y
+   pisaria el translateY de arriba si no se combinan aqui los dos. */
+#ns-section-featured_categories_images .category-item-link:hover .category-item-image img {
+  transform: translateY(-35px) scale(1.08) !important;
 }
 
 /* Con tarjetas mas grandes que el circulo original, la separacion de
