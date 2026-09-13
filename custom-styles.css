@@ -2144,3 +2144,12 @@ body.template-home .section-slideshow .heading-block {
   border-radius: 0 !important;
   margin: 0 auto !important;
 }
+
+/* Con tarjetas mas grandes que el circulo original, la separacion de
+   48px (el maximo que permite el panel "Separacion entre elementos"
+   del editor) ya no alcanza: la tarjeta central, al agrandarse con el
+   efecto de la seccion 17 del JS, se encima con sus vecinas. Se forza
+   mas separacion por CSS, por encima del limite del panel. */
+#ns-section-featured_categories_images .swiper-slide {
+  margin-right: 64px !important;
+}
