@@ -823,85 +823,104 @@ document.addEventListener('DOMContentLoaded', () => {
    escribir el numero a mano por categoria (que quedaria desactualizado
    en cuanto se agregue o quite un producto), se trae por fetch la
    pagina de cada categoria y se lee ese mismo texto. Se guarda en
-   sessionStorage para no repetir las 5 peticiones en cada carga de
+   sessionStorage para no repetir las peticiones en cada carga de
    pagina dentro de la misma sesion del navegador. Categorias que no
    son un listado de productos normal (ej. "Look Total") no tienen ese
-   bloque -- esa tarjeta simplemente se queda sin subtitulo. */
-document.addEventListener('DOMContentLoaded', () => {
-  async function agregarConteoCategorias() {
-    const section = document.getElementById('ns-section-featured_categories_images');
-    if (!section) return;
+   bloque -- esa tarjeta simplemente se queda sin subtitulo.
+   Funcion compartida con la seccion 19: el modo "loop" del carrusel
+   (activado ahi) crea tarjetas clonadas para el scroll infinito, y esos
+   clones no traen el contador si todavia no se habia insertado en el
+   original al momento de clonar -- se vuelve a llamar esta misma
+   funcion despues de activar el loop para completarlas (usa
+   sessionStorage, asi que no repite peticiones de red). */
+async function ecopipoAgregarConteoCategorias(section) {
+  const enlaces = [...section.querySelectorAll('.category-item-link')];
 
-    const enlaces = [...section.querySelectorAll('.category-item-link')];
+  for (const enlace of enlaces) {
+    if (enlace.querySelector('.ecopipo-cat-count')) continue;
 
-    for (const enlace of enlaces) {
-      if (enlace.querySelector('.ecopipo-cat-count')) continue;
+    const href = enlace.getAttribute('href');
+    if (!href) continue;
 
-      const href = enlace.getAttribute('href');
-      if (!href) continue;
+    try {
+      const claveCache = 'ecopipo-cat-count:' + href;
+      let texto = sessionStorage.getItem(claveCache);
 
-      try {
-        const claveCache = 'ecopipo-cat-count:' + href;
-        let texto = sessionStorage.getItem(claveCache);
-
-        if (!texto) {
-          const respuesta = await fetch(href);
-          const html = await respuesta.text();
-          const doc = new DOMParser().parseFromString(html, 'text/html');
-          const conteo = doc.querySelector('.page-header-count');
-          texto = conteo ? conteo.textContent.trim() : '';
-          sessionStorage.setItem(claveCache, texto);
-        }
-
-        if (texto) {
-          const span = document.createElement('span');
-          span.className = 'ecopipo-cat-count';
-          span.textContent = texto;
-          const textoTitulo = enlace.querySelector('.category-item-text');
-          if (textoTitulo) textoTitulo.insertAdjacentElement('afterend', span);
-        }
-      } catch (e) {
-        // Si falla el fetch (sin internet, categoria eliminada, etc.)
-        // simplemente se deja esa tarjeta sin subtitulo.
+      if (texto === null) {
+        const respuesta = await fetch(href);
+        const html = await respuesta.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const conteo = doc.querySelector('.page-header-count');
+        texto = conteo ? conteo.textContent.trim() : '';
+        sessionStorage.setItem(claveCache, texto);
       }
+
+      if (texto) {
+        const span = document.createElement('span');
+        span.className = 'ecopipo-cat-count';
+        span.textContent = texto;
+        const textoTitulo = enlace.querySelector('.category-item-text');
+        if (textoTitulo) textoTitulo.insertAdjacentElement('afterend', span);
+      }
+    } catch (e) {
+      // Si falla el fetch (sin internet, categoria eliminada, etc.)
+      // simplemente se deja esa tarjeta sin subtitulo.
     }
   }
+}
 
-  agregarConteoCategorias();
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.getElementById('ns-section-featured_categories_images');
+  if (section) ecopipoAgregarConteoCategorias(section);
 });
 
-/* 19. Centrar el carrusel de categorias desde que carga la pagina
-   (ver seccion 37 del CSS). Por defecto Swiper arranca con la primera
-   tarjeta pegada al borde izquierdo (centeredSlides:false), por lo que
-   solo se alcanzan a ver 4 tarjetas completas y se pierde el efecto de
-   "tarjeta central mas grande" hasta que el usuario arrastra el
-   carrusel. Se activa centeredSlides en la instancia de Swiper que ya
-   inicializa el tema y se reposiciona en la categoria de en medio, asi
-   las tarjetas de los extremos se ven recortadas desde el inicio,
-   igual que en la referencia de diseno. Se reintenta con
-   requestAnimationFrame porque el tema inicializa Swiper de forma
-   asincrona y el elemento puede no tener ".swiper" todavia en
-   DOMContentLoaded. */
+/* 19. Centrar el carrusel de categorias desde que carga la pagina y
+   activar el modo "loop" (ver seccion 37 del CSS). Por defecto Swiper
+   arranca con la primera tarjeta pegada al borde izquierdo
+   (centeredSlides:false, loop:false), por lo que solo se alcanzan a
+   ver 4 tarjetas completas, se pierde el efecto de "tarjeta central
+   mas grande" hasta que el usuario arrastra el carrusel, y al llegar a
+   la ultima categoria queda un espacio vacio en vez de repetir el
+   carrusel desde el principio.
+   Swiper solo arma su mecanica de loop (duplicando tarjetas en cada
+   extremo para el efecto de scroll infinito) al inicializarse, asi que
+   activar centeredSlides + loop sobre la instancia que ya crea el tema
+   no alcanza con solo cambiar sus parametros -- hay que destruir esa
+   instancia y crear una nueva con las mismas opciones mas loop:true.
+   Se reintenta con requestAnimationFrame porque el tema inicializa
+   Swiper de forma asincrona y el elemento puede no tener ".swiper"
+   todavia en DOMContentLoaded. */
 document.addEventListener('DOMContentLoaded', () => {
-  function centrarCarruselCategorias(intentos) {
+  function centrarYActivarLoopCarruselCategorias(intentos) {
     const section = document.getElementById('ns-section-featured_categories_images');
     if (!section) return;
 
     const viewport = section.querySelector('.js-carousel-slider');
-    const sw = viewport && viewport.swiper;
+    let sw = viewport && viewport.swiper;
 
     if (!sw) {
-      if (intentos > 0) requestAnimationFrame(() => centrarCarruselCategorias(intentos - 1));
+      if (intentos > 0) {
+        requestAnimationFrame(() => centrarYActivarLoopCarruselCategorias(intentos - 1));
+      }
       return;
     }
 
-    sw.params.centeredSlides = true;
-    sw.params.centeredSlidesBounds = false;
-    sw.update();
+    if (!sw.params.loop) {
+      const paramsBase = Object.assign({}, sw.params);
+      sw.destroy(true, true);
+      sw = new Swiper(
+        viewport,
+        Object.assign({}, paramsBase, {
+          loop: true,
+          centeredSlides: true,
+          centeredSlidesBounds: false,
+          loopAdditionalSlides: 2,
+        })
+      );
+    }
 
-    const tarjetas = [...section.querySelectorAll('.category-item-link')];
-    const indiceCentral = Math.floor(sw.slides.length / 2);
-    sw.slideTo(indiceCentral, 0);
+    const indiceCentral = 2;
+    sw.slideToLoop(indiceCentral, 0);
     sw.updateActiveIndex();
 
     /* El calculo interno de Swiper para centrar (slidesGrid) no queda
@@ -910,10 +929,14 @@ document.addEventListener('DOMContentLoaded', () => {
        de la pantalla, lo que se nota como una ligera inclinacion en la
        tarjeta que deberia verse derecha. Se corrige midiendo el
        desface real en pantalla y ajustando el translate del swiper por
-       esa diferencia exacta. */
+       esa diferencia exacta. Con loop activo, la tarjeta realmente
+       centrada se identifica por la clase ".swiper-slide-active" (no
+       por indice, porque hay copias duplicadas con el mismo indice de
+       categoria). */
     const vpRect = viewport.getBoundingClientRect();
     const centroVp = vpRect.left + vpRect.width / 2;
-    const tarjetaCentral = tarjetas[indiceCentral];
+    const slideActivo = section.querySelector('.swiper-slide-active');
+    const tarjetaCentral = slideActivo && slideActivo.querySelector('.category-item-link');
     if (tarjetaCentral) {
       const r = tarjetaCentral.getBoundingClientRect();
       const desface = r.left + r.width / 2 - centroVp;
@@ -921,7 +944,10 @@ document.addEventListener('DOMContentLoaded', () => {
       sw.updateActiveIndex();
       sw.updateSlidesClasses();
     }
+
+    // Completar el contador de productos en las tarjetas clonadas por el loop.
+    ecopipoAgregarConteoCategorias(section);
   }
 
-  centrarCarruselCategorias(120);
+  centrarYActivarLoopCarruselCategorias(120);
 });
