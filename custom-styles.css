@@ -2123,6 +2123,16 @@ body.template-home .section-slideshow .heading-block {
   line-height: 1.15 !important;
   width: 100% !important;
   margin-top: 10px !important;
+  /* El tema tenia text-transform:uppercase por defecto, ignorando las
+     mayusculas/minusculas que se escriben en el editor. Se anula para
+     que el texto respete tal cual como se captura ahi.
+     "position:relative + top" (no mas margin-top) para bajar el
+     titulo SIN correr al contador de productos, que va justo debajo
+     en el flujo normal -- si se usara margin-top, el contador se
+     recorreria la misma distancia. */
+  text-transform: none !important;
+  position: relative !important;
+  top: 10px !important;
 }
 
 /* Contador de productos por categoria (ver script 18), tomado de la
