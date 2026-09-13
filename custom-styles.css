@@ -2153,3 +2153,15 @@ body.template-home .section-slideshow .heading-block {
 #ns-section-featured_categories_images .swiper-slide {
   margin-right: 64px !important;
 }
+
+/* El contenedor del carrusel (swiper) tiene una altura fija calculada
+   por el propio Swiper a partir del alto original de la tarjeta SIN
+   rotar; al inclinar las tarjetas (seccion 17 del JS) su caja
+   (bounding box) ocupa mas alto que el rectangulo sin rotar, y ese
+   contenedor con overflow:hidden se lo recortaba arriba y abajo. Se
+   deja en visible y se agrega espacio extra para que quepan giradas
+   por completo. */
+#ns-section-featured_categories_images .js-carousel-slider {
+  overflow: visible !important;
+  padding: 30px 0 !important;
+}
