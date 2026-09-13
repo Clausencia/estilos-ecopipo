@@ -2312,3 +2312,13 @@ body.template-home .section-slideshow .heading-block {
 #ns-section-featured_products .product-item-quick-shop-container {
   padding: 0 14px 24px !important;
 }
+
+/* El tema trae "overscroll-behavior: none" en html y body (en su CSS
+   base, no algo agregado por nosotros), lo que bloquea el gesto
+   nativo de "jalar hacia abajo para refrescar" en navegadores moviles
+   que lo soportan (ej. Chrome Android). Se quita esa restriccion en
+   todo el sitio para que el pull-to-refresh vuelva a funcionar. */
+html,
+body {
+  overscroll-behavior: auto !important;
+}
