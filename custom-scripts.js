@@ -985,7 +985,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const section = document.getElementById('ns-section-featured_products');
   const modal = document.getElementById('quickshop-modal');
-  if (!section || !modal || !window.LS || !window.LS.fillQuickshop) return;
+  if (!section || !modal) return;
 
   let contenedorOrigenForm = null;
 
@@ -1003,6 +1003,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const tarjeta = e.target.closest('.js-item-product');
     if (!tarjeta) return;
     if (!e.target.closest('a')) return;
+
+    /* window.LS (jQuery y el bundle de la tienda) se cargan de forma
+       asincrona -- en redes mas lentas (tipico en movil) el usuario
+       puede tocar un producto antes de que jQuery/LS terminen de
+       cargar. Antes esta seccion completa se desactivaba si LS no
+       estaba listo justo en el momento de DOMContentLoaded, lo que la
+       dejaba inutil en movil (el link navegaba normal a la ficha del
+       producto en vez de abrir el modal). Ahora la comprobacion se
+       hace en el momento del click, no al cargar la pagina -- para
+       cuando el usuario realmente toca algo, LS casi siempre ya esta
+       listo. */
+    if (!window.LS || !window.LS.fillQuickshop) return;
 
     e.preventDefault();
     devolverFormularioQuickshop();
