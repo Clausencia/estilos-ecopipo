@@ -2222,3 +2222,9 @@ body.template-home .section-slideshow .heading-block {
 .banners-section-full-width {
   background-image: none !important;
 }
+
+/* Quitar la linea divisoria debajo del menu principal (entre la
+   navegacion y el cintillo naranja de envios). */
+.js-head-main.head-main {
+  border-bottom: none !important;
+}
