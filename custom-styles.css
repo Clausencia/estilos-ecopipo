@@ -2085,23 +2085,31 @@ body.template-home .section-slideshow .heading-block {
   transform-origin: center center !important;
 }
 
-#ns-section-featured_categories_images .category-item:nth-child(5n+1) .category-item-link {
+/* El color se asigna por posicion del ".swiper-slide" (no del
+   ".category-item"): cada tarjeta vive sola dentro de su propio
+   swiper-slide, asi que ".category-item" es SIEMPRE el hijo unico
+   ("nth-child(1)") de su propio contenedor -- usar nth-child sobre
+   ".category-item" hacia que todas las tarjetas cayeran en la misma
+   regla y salieran del mismo color (bug detectado en vivo: las 5
+   tarjetas se veian moradas). Los swiper-slide si son hermanos entre
+   si dentro de swiper-wrapper, ahi el ciclo de 5 funciona. */
+#ns-section-featured_categories_images .swiper-slide:nth-child(5n+1) .category-item-link {
   background: #F3E8FB !important;
 }
 
-#ns-section-featured_categories_images .category-item:nth-child(5n+2) .category-item-link {
+#ns-section-featured_categories_images .swiper-slide:nth-child(5n+2) .category-item-link {
   background: #EFF7DC !important;
 }
 
-#ns-section-featured_categories_images .category-item:nth-child(5n+3) .category-item-link {
+#ns-section-featured_categories_images .swiper-slide:nth-child(5n+3) .category-item-link {
   background: #FFEBDA !important;
 }
 
-#ns-section-featured_categories_images .category-item:nth-child(5n+4) .category-item-link {
+#ns-section-featured_categories_images .swiper-slide:nth-child(5n+4) .category-item-link {
   background: #DDF4F6 !important;
 }
 
-#ns-section-featured_categories_images .category-item:nth-child(5n+5) .category-item-link {
+#ns-section-featured_categories_images .swiper-slide:nth-child(5n+5) .category-item-link {
   background: #FCE4EC !important;
 }
 
