@@ -765,20 +765,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const tarjetas = [...section.querySelectorAll('.category-item-link')];
     const anguloMaximo = 6;
 
-    tarjetas.forEach((tarjeta) => {
+    /* "paso" = distancia entre los centros de dos tarjetas consecutivas
+       (ancho de tarjeta + separacion). Sirve para medir que tan lejos
+       esta cada tarjeta del centro en unidades de "cuantas tarjetas de
+       distancia", en vez de pixeles crudos, para la formula del giro
+       de abajo. */
+    const centros = tarjetas.map((t) => {
+      const r = t.getBoundingClientRect();
+      return r.left + r.width / 2;
+    });
+    let paso = 0;
+    for (let i = 1; i < centros.length; i++) paso += Math.abs(centros[i] - centros[i - 1]);
+    paso = centros.length > 1 ? paso / (centros.length - 1) : 1;
+
+    tarjetas.forEach((tarjeta, idx) => {
       const r = tarjeta.getBoundingClientRect();
-      const centroTarjeta = r.left + r.width / 2;
+      const centroTarjeta = centros[idx];
       const distanciaFirmada = centroTarjeta - centroX;
       const distancia = Math.abs(distanciaFirmada);
       const distanciaMaxima = r.width * 1.4;
       const factor = Math.max(0, 1 - distancia / distanciaMaxima);
       const escala = (1 + factor * 0.18).toFixed(3);
-      const angulo = Math.max(
-        -anguloMaximo,
-        Math.min(anguloMaximo, (distanciaFirmada / r.width) * anguloMaximo)
-      ).toFixed(2);
 
-      tarjeta.style.transform = 'scale(' + escala + ') rotate(' + angulo + 'deg)';
+      /* Giro en forma de "cerro": 0 grados en la tarjeta central,
+         maximo en la tarjeta vecina (a 1 tarjeta de distancia), y de
+         vuelta a 0 en las tarjetas de los extremos (a 2 tarjetas de
+         distancia) -- estas ultimas ademas bajan un poco (translateY),
+         para que el conjunto forme una especie de triangulo con la
+         central mas grande y derecha, como en la referencia de diseno. */
+      const d = paso ? distanciaFirmada / paso : 0;
+      const dAbs = Math.abs(d);
+      const magnitudGiro = Math.max(0, 1 - Math.abs(dAbs - 1)) * anguloMaximo;
+      const angulo = (Math.sign(d) * magnitudGiro).toFixed(2);
+      const bajada = (Math.min(dAbs, 2) * 16).toFixed(1);
+
+      /* translateY va primero en la lista para que se aplique en el
+         espacio de pantalla ya rotado/escalado (si fuera al final,
+         "bajaria" en el eje ya inclinado de la propia tarjeta en vez
+         de bajar recto en pantalla). */
+      tarjeta.style.transform =
+        'translateY(' + bajada + 'px) rotate(' + angulo + 'deg) scale(' + escala + ')';
       tarjeta.style.transition = 'transform .15s ease-out';
       tarjeta.style.zIndex = factor > 0.5 ? '3' : '1';
     });
@@ -873,8 +899,28 @@ document.addEventListener('DOMContentLoaded', () => {
     sw.params.centeredSlidesBounds = false;
     sw.update();
 
+    const tarjetas = [...section.querySelectorAll('.category-item-link')];
     const indiceCentral = Math.floor(sw.slides.length / 2);
     sw.slideTo(indiceCentral, 0);
+    sw.updateActiveIndex();
+
+    /* El calculo interno de Swiper para centrar (slidesGrid) no queda
+       exacto despues de ensanchar el contenedor por CSS (seccion 37):
+       la tarjeta central queda unos pixeles desplazada del centro real
+       de la pantalla, lo que se nota como una ligera inclinacion en la
+       tarjeta que deberia verse derecha. Se corrige midiendo el
+       desface real en pantalla y ajustando el translate del swiper por
+       esa diferencia exacta. */
+    const vpRect = viewport.getBoundingClientRect();
+    const centroVp = vpRect.left + vpRect.width / 2;
+    const tarjetaCentral = tarjetas[indiceCentral];
+    if (tarjetaCentral) {
+      const r = tarjetaCentral.getBoundingClientRect();
+      const desface = r.left + r.width / 2 - centroVp;
+      sw.setTranslate(sw.translate - desface);
+      sw.updateActiveIndex();
+      sw.updateSlidesClasses();
+    }
   }
 
   centrarCarruselCategorias(120);
