@@ -2255,6 +2255,13 @@ body.template-home .section-slideshow .heading-block {
   border-radius: 12px !important;
   margin: 0 14px 10px !important;
   padding: 12px !important;
+  /* Alto fijo que alcanza para el peor caso (nombre de 2 lineas +
+     precio con descuento tachado + aviso de "solo quedan X en
+     stock"), para que el contenedor turquesa se vea siempre igual de
+     alto sin importar si un producto trae esas leyendas extra y otro
+     no (ver captura: "Balsamo" con descuento quedaba mas alto que el
+     resto). */
+  min-height: 175px !important;
 }
 
 #ns-section-featured_products .product-item-name {
@@ -2271,6 +2278,35 @@ body.template-home .section-slideshow .heading-block {
 #ns-section-featured_products .product-item-price {
   color: #42c6d3 !important;
   font-weight: 800 !important;
+  order: 1 !important;
+}
+
+/* El precio original tachado (product-item-price-compare) y el % de
+   descuento (product-item-discount) venian cada uno en su propia
+   linea, apilados debajo del precio -- se pone el precio regular en
+   la misma linea que el precio con descuento (como pidio la dueña del
+   sitio) usando flexbox en el contenedor; el % de descuento se deja
+   en su propia linea aparte (flex-basis:100%) porque en el ancho real
+   de estas tarjetas no cabe el precio + el precio tachado + el % de
+   descuento los tres juntos en una sola linea. */
+#ns-section-featured_products .product-item-price-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+}
+
+#ns-section-featured_products .product-item-price-compare {
+  font-size: 12px !important;
+  color: #888 !important;
+  order: 2 !important;
+}
+
+#ns-section-featured_products .product-item-discount {
+  font-size: 11px !important;
+  color: #9638D7 !important;
+  order: 3 !important;
+  flex-basis: 100% !important;
 }
 
 #ns-section-featured_products .product-item-quick-shop-container {
