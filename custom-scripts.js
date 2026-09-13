@@ -1036,6 +1036,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cierra) {
       devolverFormularioQuickshop();
       modal.classList.remove('modal-visible');
+      /* LS.fillQuickshop le agrega "modal-open" al <body> para
+         bloquear el scroll de fondo mientras el modal esta abierto,
+         pero esa clase se quita normalmente con el cierre nativo del
+         modal (que aqui no se usa, ver nota mas arriba) -- sin esto
+         se quedaba bloqueado el scroll de toda la pagina despues de
+         cerrar, y solo se liberaba recargando. */
+      document.body.classList.remove('modal-open');
     }
   });
 });
