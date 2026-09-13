@@ -2212,3 +2212,13 @@ body.template-home .section-slideshow .heading-block {
   padding-left: 12px !important;
   padding-right: 12px !important;
 }
+
+/* Quitar el patron decorativo de estrellas/garabatos lila
+   ("bg-mist-full.png") del home: aparecia repetido detras del
+   slideshow principal, las dos secciones de categorias destacadas
+   (incluido el carrusel circular) y la seccion de banners. */
+.js-slideshow-container,
+.js-carousel-section.featured-categories-section,
+.banners-section-full-width {
+  background-image: none !important;
+}
