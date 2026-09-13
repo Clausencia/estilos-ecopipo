@@ -2228,3 +2228,42 @@ body.template-home .section-slideshow .heading-block {
 .js-head-main.head-main {
   border-bottom: none !important;
 }
+
+/* Carrusel de productos destacados del home (justo antes de "Pipo
+   responde"): cada producto pasa a verse como una card completa,
+   igual al estilo ya usado en la seccion 7 (Paquetes y Kits) --
+   fondo blanco, esquinas redondeadas, sombra suave y borde superior
+   de color (ahi en morado, aqui en turquesa #42c6d3 a pedido) -- para
+   que la card se distinga del fondo blanco de la pagina. Todo el
+   producto (imagen, nombre, precio y boton de agregar al carrito)
+   queda dentro de la misma card. */
+#ns-section-featured_products .js-item-product {
+  background: #fff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  border-top: 4px solid #42c6d3 !important;
+  overflow: hidden !important;
+}
+
+#ns-section-featured_products .product-item-information {
+  padding: 0 !important;
+}
+
+#ns-section-featured_products .product-item-link {
+  display: block !important;
+  padding: 14px !important;
+}
+
+#ns-section-featured_products .product-item-name {
+  color: #1a202c !important;
+  font-weight: 700 !important;
+}
+
+#ns-section-featured_products .product-item-price {
+  color: #42c6d3 !important;
+  font-weight: 800 !important;
+}
+
+#ns-section-featured_products .product-item-quick-shop-container {
+  padding: 0 14px 14px !important;
+}
