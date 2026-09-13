@@ -843,3 +843,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   agregarConteoCategorias();
 });
+
+/* 19. Centrar el carrusel de categorias desde que carga la pagina
+   (ver seccion 37 del CSS). Por defecto Swiper arranca con la primera
+   tarjeta pegada al borde izquierdo (centeredSlides:false), por lo que
+   solo se alcanzan a ver 4 tarjetas completas y se pierde el efecto de
+   "tarjeta central mas grande" hasta que el usuario arrastra el
+   carrusel. Se activa centeredSlides en la instancia de Swiper que ya
+   inicializa el tema y se reposiciona en la categoria de en medio, asi
+   las tarjetas de los extremos se ven recortadas desde el inicio,
+   igual que en la referencia de diseno. Se reintenta con
+   requestAnimationFrame porque el tema inicializa Swiper de forma
+   asincrona y el elemento puede no tener ".swiper" todavia en
+   DOMContentLoaded. */
+document.addEventListener('DOMContentLoaded', () => {
+  function centrarCarruselCategorias(intentos) {
+    const section = document.getElementById('ns-section-featured_categories_images');
+    if (!section) return;
+
+    const viewport = section.querySelector('.js-carousel-slider');
+    const sw = viewport && viewport.swiper;
+
+    if (!sw) {
+      if (intentos > 0) requestAnimationFrame(() => centrarCarruselCategorias(intentos - 1));
+      return;
+    }
+
+    sw.params.centeredSlides = true;
+    sw.params.centeredSlidesBounds = false;
+    sw.update();
+
+    const indiceCentral = Math.floor(sw.slides.length / 2);
+    sw.slideTo(indiceCentral, 0);
+  }
+
+  centrarCarruselCategorias(120);
+});

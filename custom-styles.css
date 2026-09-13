@@ -2199,3 +2199,16 @@ body.template-home .section-slideshow .heading-block {
   overflow: visible !important;
   padding: 30px 0 !important;
 }
+
+/* El ".container" del tema (usado en todo el sitio para alinear el
+   contenido con margenes fijos) le dejaba espacio vacio sin usar a los
+   lados de este carrusel en particular. Se libera solo aqui (scoped al
+   ID de esta seccion) para que las tarjetas de los extremos tengan mas
+   espacio donde asomarse recortadas (ver seccion 19 del JS, que ademas
+   centra el carrusel desde que carga la pagina). */
+#ns-section-featured_categories_images .container {
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
