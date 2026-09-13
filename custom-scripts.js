@@ -951,3 +951,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   centrarYActivarLoopCarruselCategorias(120);
 });
+
+/* 20. Modal de "compra rapida" para el carrusel de productos del home
+   (justo antes de "Pipo responde"). Al hacer click en un producto de
+   esta seccion, en vez de navegar a su ficha (PDP) y sacar al usuario
+   del home, se abre el modal nativo de "Quick Shop" que ya trae el
+   tema Ipanema (imagen, nombre, precio, variantes y boton de agregar
+   al carrito) -- ese modal ya existe en el HTML (#quickshop-modal) y
+   el tema ya sabe llenarlo (LS.fillQuickshop), solo que normalmente se
+   dispara desde botones con la clase ".js-quickshop-modal-open" que
+   esta plantilla de carrusel no incluye.
+   Se detecto ademas una inconsistencia propia del tema: abrir el modal
+   con LS.fillQuickshop(...) le agrega la clase "in" (de un sistema de
+   modal viejo, tipo Bootstrap), pero el CSS actual del tema en
+   realidad posiciona el modal en pantalla segun la clase
+   "modal-visible" (de un sistema mas nuevo) -- sin agregar esa clase
+   a mano, el modal se queda montado fuera de la pantalla (mismo bug
+   se puede reproducir en la propia demo del tema). Por eso aqui se
+   agrega/quita "modal-visible" directamente en vez de depender de que
+   el propio tema lo haga. */
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.getElementById('ns-section-featured_products');
+  const modal = document.getElementById('quickshop-modal');
+  if (!section || !modal || !window.LS || !window.LS.fillQuickshop) return;
+
+  section.addEventListener('click', (e) => {
+    const link = e.target.closest('.product-item-link');
+    if (!link) return;
+
+    e.preventDefault();
+    window.LS.fillQuickshop(link);
+    requestAnimationFrame(() => modal.classList.add('modal-visible'));
+  });
+
+  modal.addEventListener('click', (e) => {
+    const cierra =
+      e.target.closest('.js-modal-close-private') ||
+      e.target.closest('.js-modal-overlay-private') ||
+      e.target === modal;
+    if (cierra) modal.classList.remove('modal-visible');
+  });
+});
