@@ -2072,9 +2072,9 @@ body.template-home .section-slideshow .heading-block {
 #ns-section-featured_categories_images .category-item-link {
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
+  align-items: flex-start !important;
   justify-content: flex-start !important;
-  text-align: center !important;
+  text-align: left !important;
   width: 220px !important;
   height: 300px !important;
   border-radius: 28px !important;
@@ -2118,10 +2118,27 @@ body.template-home .section-slideshow .heading-block {
   font-size: 22px !important;
   font-weight: 800 !important;
   color: #1a202c !important;
-  text-align: center !important;
+  text-align: left !important;
   z-index: 2 !important;
   line-height: 1.15 !important;
   width: 100% !important;
+  margin-top: 10px !important;
+}
+
+/* Contador de productos por categoria (ver script 18), tomado de la
+   propia pagina de cada categoria en vez de escribirse a mano, para
+   que se actualice solo si cambia el catalogo. Categorias que no son
+   un listado de productos normal (ej. "Look Total", una landing con
+   subcategorias) no traen ese dato -- esa tarjeta se queda sin
+   subtitulo, decision tomada con la dueña del sitio. */
+#ns-section-featured_categories_images .ecopipo-cat-count {
+  font-family: 'Baloo 2', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #555 !important;
+  text-align: left !important;
+  margin-top: 2px !important;
+  z-index: 2 !important;
 }
 
 #ns-section-featured_categories_images .category-item-image {

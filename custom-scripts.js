@@ -788,3 +788,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   requestAnimationFrame(actualizarEscalaCarruselCategorias);
 });
+
+/* 18. Contador de productos por tarjeta en el carrusel principal de
+   categorias (ver seccion 37 del CSS)
+   Tiendanube ya calcula cuantos productos tiene cada categoria y lo
+   escribe en un bloque de esa misma pagina (".page-header-count",
+   oculto en escritorio, pensado solo para mobile) -- en vez de
+   escribir el numero a mano por categoria (que quedaria desactualizado
+   en cuanto se agregue o quite un producto), se trae por fetch la
+   pagina de cada categoria y se lee ese mismo texto. Se guarda en
+   sessionStorage para no repetir las 5 peticiones en cada carga de
+   pagina dentro de la misma sesion del navegador. Categorias que no
+   son un listado de productos normal (ej. "Look Total") no tienen ese
+   bloque -- esa tarjeta simplemente se queda sin subtitulo. */
+document.addEventListener('DOMContentLoaded', () => {
+  async function agregarConteoCategorias() {
+    const section = document.getElementById('ns-section-featured_categories_images');
+    if (!section) return;
+
+    const enlaces = [...section.querySelectorAll('.category-item-link')];
+
+    for (const enlace of enlaces) {
+      if (enlace.querySelector('.ecopipo-cat-count')) continue;
+
+      const href = enlace.getAttribute('href');
+      if (!href) continue;
+
+      try {
+        const claveCache = 'ecopipo-cat-count:' + href;
+        let texto = sessionStorage.getItem(claveCache);
+
+        if (!texto) {
+          const respuesta = await fetch(href);
+          const html = await respuesta.text();
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const conteo = doc.querySelector('.page-header-count');
+          texto = conteo ? conteo.textContent.trim() : '';
+          sessionStorage.setItem(claveCache, texto);
+        }
+
+        if (texto) {
+          const span = document.createElement('span');
+          span.className = 'ecopipo-cat-count';
+          span.textContent = texto;
+          const textoTitulo = enlace.querySelector('.category-item-text');
+          if (textoTitulo) textoTitulo.insertAdjacentElement('afterend', span);
+        }
+      } catch (e) {
+        // Si falla el fetch (sin internet, categoria eliminada, etc.)
+        // simplemente se deja esa tarjeta sin subtitulo.
+      }
+    }
+  }
+
+  agregarConteoCategorias();
+});
