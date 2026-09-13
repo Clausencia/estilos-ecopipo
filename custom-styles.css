@@ -1051,7 +1051,8 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
 }
 
 #ns-section-featured_categories_images .d-flex.flex-column {
-  padding-top: 16px !important;
+  padding-top: 40px !important;
+  padding-bottom: 24px !important;
 }
 
 /* La franja blanca donde viven los controles del slider (paginado y
@@ -2048,4 +2049,90 @@ body.template-home .section-slideshow .heading-block {
   #ns-section-featured-brands_1789067666915 .swiper-slide:last-child {
     margin-right: 0 !important;
   }
+}
+
+/* 37. CARRUSEL PRINCIPAL DE CATEGORIAS: TARJETAS DE COLOR ESTILO
+   "LEOTHEME" (referencia: demo82.leotheme.com, home-2)
+   Se reemplaza el circulo con borde de color + texto debajo por una
+   tarjeta rectangular de esquinas redondeadas con fondo pastel propio
+   por categoria, titulo arriba y la foto dentro. El color de fondo se
+   asigna por posicion (nth-child, ciclo de 5) para que cada categoria
+   tenga un tono distinto sin depender de configuracion extra.
+   Las fotos actuales vienen recortadas en circulo desde el propio
+   archivo de imagen (no es un estilo CSS) -- por eso se siguen viendo
+   como "medallon" redondo dentro de la tarjeta en vez de una foto
+   libre como en la referencia. Si se suben fotos nuevas sin ese
+   recorte, se veran igual que en el sitio de referencia sin tocar
+   este CSS.
+   El efecto de "la tarjeta activa se agranda" (ver script 17) se
+   maneja por JS porque requiere medir la posicion de cada tarjeta en
+   tiempo real contra el centro visible del carrusel; texto e imagen
+   se centran dentro de la tarjeta con flexbox para que el efecto de
+   escala crezca parejo desde el centro. */
+#ns-section-featured_categories_images .category-item-link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  width: 220px !important;
+  height: 300px !important;
+  border-radius: 28px !important;
+  padding: 22px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transform-origin: center center !important;
+}
+
+#ns-section-featured_categories_images .category-item:nth-child(5n+1) .category-item-link {
+  background: #F3E8FB !important;
+}
+
+#ns-section-featured_categories_images .category-item:nth-child(5n+2) .category-item-link {
+  background: #EFF7DC !important;
+}
+
+#ns-section-featured_categories_images .category-item:nth-child(5n+3) .category-item-link {
+  background: #FFEBDA !important;
+}
+
+#ns-section-featured_categories_images .category-item:nth-child(5n+4) .category-item-link {
+  background: #DDF4F6 !important;
+}
+
+#ns-section-featured_categories_images .category-item:nth-child(5n+5) .category-item-link {
+  background: #FCE4EC !important;
+}
+
+#ns-section-featured_categories_images .category-item-text {
+  font-family: 'Baloo 2', sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: #1a202c !important;
+  text-align: center !important;
+  z-index: 2 !important;
+  line-height: 1.15 !important;
+  width: 100% !important;
+}
+
+#ns-section-featured_categories_images .category-item-image {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  z-index: 1 !important;
+  border-radius: 0 !important;
+}
+
+#ns-section-featured_categories_images .category-item-image img {
+  width: 72% !important;
+  height: auto !important;
+  max-height: 62% !important;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  margin: 0 auto !important;
 }

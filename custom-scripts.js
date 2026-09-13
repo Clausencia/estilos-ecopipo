@@ -735,3 +735,48 @@ document.addEventListener(
   },
   true
 );
+
+/* 17. Tarjeta activa mas grande en el carrusel principal de categorias
+   (ver seccion 37 del CSS)
+   Inspirado en demo82.leotheme.com (home-2): la tarjeta que queda mas
+   cerca del centro visible del carrusel se ve mas grande, sin importar
+   cual categoria sea, y el efecto se actualiza en vivo mientras se
+   arrastra. Ese carrusel de referencia usa Slick con centerMode, una
+   libreria distinta a la que ya usa este sitio (Swiper). En vez de
+   agregar una segunda libreria de carrusel solo para este efecto, se
+   mide en cada frame que tan cerca esta cada tarjeta del centro del
+   carrusel (con getBoundingClientRect) y se le aplica una escala
+   proporcional a esa cercania -- el resultado visual es el mismo,
+   sin depender de un modo de "centrado" que Swiper tendria que
+   inicializar con parametros que no controlamos (el carrusel lo arma
+   el propio tema de Tiendanube). */
+document.addEventListener('DOMContentLoaded', () => {
+  function actualizarEscalaCarruselCategorias() {
+    const section = document.getElementById('ns-section-featured_categories_images');
+    if (!section) return;
+
+    const viewport = section.querySelector('.js-carousel-slider');
+    if (!viewport) return;
+
+    const vp = viewport.getBoundingClientRect();
+    const centroX = vp.left + vp.width / 2;
+    const tarjetas = [...section.querySelectorAll('.category-item-link')];
+
+    tarjetas.forEach((tarjeta) => {
+      const r = tarjeta.getBoundingClientRect();
+      const centroTarjeta = r.left + r.width / 2;
+      const distancia = Math.abs(centroTarjeta - centroX);
+      const distanciaMaxima = r.width * 1.4;
+      const factor = Math.max(0, 1 - distancia / distanciaMaxima);
+      const escala = (1 + factor * 0.18).toFixed(3);
+
+      tarjeta.style.transform = 'scale(' + escala + ')';
+      tarjeta.style.transition = 'transform .15s ease-out';
+      tarjeta.style.zIndex = factor > 0.5 ? '3' : '1';
+    });
+
+    requestAnimationFrame(actualizarEscalaCarruselCategorias);
+  }
+
+  requestAnimationFrame(actualizarEscalaCarruselCategorias);
+});
