@@ -2094,23 +2094,23 @@ body.template-home .section-slideshow .heading-block {
    tarjetas se veian moradas). Los swiper-slide si son hermanos entre
    si dentro de swiper-wrapper, ahi el ciclo de 5 funciona. */
 #ns-section-featured_categories_images .swiper-slide:nth-child(5n+1) .category-item-link {
-  background: #F3E8FB !important;
+  background: #FCEEC5 !important;
 }
 
 #ns-section-featured_categories_images .swiper-slide:nth-child(5n+2) .category-item-link {
-  background: #EFF7DC !important;
+  background: #E9FB9A !important;
 }
 
 #ns-section-featured_categories_images .swiper-slide:nth-child(5n+3) .category-item-link {
-  background: #FFEBDA !important;
+  background: #F1DBFF !important;
 }
 
 #ns-section-featured_categories_images .swiper-slide:nth-child(5n+4) .category-item-link {
-  background: #DDF4F6 !important;
+  background: #FEAF6C !important;
 }
 
 #ns-section-featured_categories_images .swiper-slide:nth-child(5n+5) .category-item-link {
-  background: #FCE4EC !important;
+  background: #9CE8F0 !important;
 }
 
 #ns-section-featured_categories_images .category-item-text {
