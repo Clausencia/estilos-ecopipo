@@ -954,33 +954,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* 20. Modal de "compra rapida" para el carrusel de productos del home
    (justo antes de "Pipo responde"). Al hacer click en un producto de
-   esta seccion, en vez de navegar a su ficha (PDP) y sacar al usuario
-   del home, se abre el modal nativo de "Quick Shop" que ya trae el
-   tema Ipanema (imagen, nombre, precio, variantes y boton de agregar
-   al carrito) -- ese modal ya existe en el HTML (#quickshop-modal) y
-   el tema ya sabe llenarlo (LS.fillQuickshop), solo que normalmente se
-   dispara desde botones con la clase ".js-quickshop-modal-open" que
-   esta plantilla de carrusel no incluye.
-   Se detecto ademas una inconsistencia propia del tema: abrir el modal
-   con LS.fillQuickshop(...) le agrega la clase "in" (de un sistema de
-   modal viejo, tipo Bootstrap), pero el CSS actual del tema en
-   realidad posiciona el modal en pantalla segun la clase
-   "modal-visible" (de un sistema mas nuevo) -- sin agregar esa clase
-   a mano, el modal se queda montado fuera de la pantalla (mismo bug
-   se puede reproducir en la propia demo del tema). Por eso aqui se
-   agrega/quita "modal-visible" directamente en vez de depender de que
-   el propio tema lo haga. */
+   esta seccion (imagen o texto, cualquier area menos el boton de
+   agregar al carrito), en vez de navegar a su ficha (PDP) y sacar al
+   usuario del home, se abre el modal nativo de "Quick Shop" que ya
+   trae el tema Ipanema (imagen, nombre, precio, variantes y boton de
+   agregar al carrito) -- ese modal ya existe en el HTML
+   (#quickshop-modal) y el tema ya sabe llenarlo (LS.fillQuickshop),
+   solo que normalmente se dispara desde botones con la clase
+   ".js-quickshop-modal-open" que esta plantilla de carrusel no
+   incluye.
+   Se detectaron ademas dos inconsistencias propias del tema:
+   1) Abrir el modal con LS.fillQuickshop(...) le agrega la clase "in"
+      (de un sistema de modal viejo, tipo Bootstrap), pero el CSS
+      actual del tema en realidad posiciona el modal en pantalla segun
+      la clase "modal-visible" (de un sistema mas nuevo) -- sin esa
+      clase el modal se queda montado fuera de la pantalla.
+   2) LS.fillQuickshop mueve (no clona) el formulario real de "agregar
+      al carrito" del producto hacia el modal, y al cerrar intenta
+      devolverlo a un contenedor ".js-item-variants" dentro de la
+      tarjeta original -- pero esta plantilla de card (mas simple que
+      la de categoria) no tiene ese contenedor, asi que el formulario
+      se quedaba atrapado en el modal para siempre: la tarjeta original
+      perdia su boton, y al abrir otro producto sin haber corregido
+      esto el formulario anterior se quedaba pegado junto al nuevo
+      (dos botones). Por eso aqui se lleva registro manual de que
+      tarjeta "presto" su formulario y se regresa ahi mismo -- al
+      cerrar el modal, y tambien justo antes de abrir un producto
+      nuevo (por si el usuario paso de un producto a otro sin cerrar
+      primero). */
 document.addEventListener('DOMContentLoaded', () => {
   const section = document.getElementById('ns-section-featured_products');
   const modal = document.getElementById('quickshop-modal');
   if (!section || !modal || !window.LS || !window.LS.fillQuickshop) return;
 
+  let contenedorOrigenForm = null;
+
+  function devolverFormularioQuickshop() {
+    const formActual = document.querySelector('#quickshop-form .js-product-form');
+    if (formActual && contenedorOrigenForm) {
+      contenedorOrigenForm.appendChild(formActual);
+    }
+    contenedorOrigenForm = null;
+  }
+
   section.addEventListener('click', (e) => {
-    const link = e.target.closest('.product-item-link');
-    if (!link) return;
+    if (e.target.closest('.product-item-quick-shop-container')) return;
+
+    const tarjeta = e.target.closest('.js-item-product');
+    if (!tarjeta) return;
+    if (!e.target.closest('a')) return;
 
     e.preventDefault();
-    window.LS.fillQuickshop(link);
+    devolverFormularioQuickshop();
+
+    const linkReferencia = tarjeta.querySelector('.product-item-link');
+    contenedorOrigenForm = tarjeta.querySelector('.product-item-quick-shop-container');
+
+    modal.removeAttribute('style');
+    modal.classList.remove('in', 'modal-visible');
+    window.LS.fillQuickshop(linkReferencia);
     requestAnimationFrame(() => modal.classList.add('modal-visible'));
   });
 
@@ -989,6 +1021,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.target.closest('.js-modal-close-private') ||
       e.target.closest('.js-modal-overlay-private') ||
       e.target === modal;
-    if (cierra) modal.classList.remove('modal-visible');
+    if (cierra) {
+      devolverFormularioQuickshop();
+      modal.classList.remove('modal-visible');
+    }
   });
 });
