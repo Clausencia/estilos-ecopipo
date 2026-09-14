@@ -2439,3 +2439,25 @@ body {
     transform: translateY(30px) !important;
   }
 }
+
+/* Carrusel de "Categorias destacadas" (pills, ej. "Los mas vendidos" /
+   "Velcro Liso", "Velcro Estampado"...): el tema fija el tamaño de
+   cada tarjeta en 300px via --category-image-size (configurable en el
+   panel, pero sin variantes por dispositivo) -- en mobile eso es MAS
+   ANCHO que la pantalla, asi que la primera tarjeta ocupa toda la
+   vista y no deja ver ni un pedazo de la siguiente, pareciendo que
+   solo hay una categoria en vez de un carrusel deslizable. Se angosta
+   solo en mobile para que la siguiente tarjeta se asome como pista
+   visual de que hay que hacer swipe. La imagen tenia su propio ancho
+   fijo (heredado del mismo 300px) que sobresalia de la tarjeta ya
+   angosta -- se pasa a 100% para que escale con ella. */
+@media (max-width: 767px) {
+  #ns-section-featured_categories_pills .category-item {
+    width: 240px !important;
+  }
+
+  #ns-section-featured_categories_pills .category-item-image,
+  #ns-section-featured_categories_pills .category-item-image img {
+    width: 100% !important;
+  }
+}
