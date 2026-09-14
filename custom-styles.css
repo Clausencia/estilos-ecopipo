@@ -2429,3 +2429,13 @@ body {
     object-fit: contain !important;
   }
 }
+
+/* Banner "Estilo compartido" (unico banner de #ns-section-banners_one_column):
+   en mobile el titulo y el boton, centrados sobre la foto, quedaban
+   encimados justo sobre los rostros de mama y bebe. Se bajan 30px
+   solo en mobile; en desktop la foto es mas ancha/baja y no pasa. */
+@media (max-width: 767px) {
+  #ns-section-banners_one_column .media-content-floating {
+    transform: translateY(30px) !important;
+  }
+}
