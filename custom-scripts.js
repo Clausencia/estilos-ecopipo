@@ -17,24 +17,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* 2. Corrector Simbolo $
    Envuelve el signo de pesos en un span con fuente Arial para evitar
-   que se vea con el trazo doble de la tipografia decorativa del sitio.
-   Se corre al cargar y se repite a los 500ms/1500ms para alcanzar
-   contenido que aparece despues (ej. el carrusel de recomendados). */
-document.addEventListener('DOMContentLoaded', () => {
-  const corregirSimboloPeso = () => {
-    document.querySelectorAll('span, p, div, a, .price, .js-price-display').forEach((el) => {
-      if (el.children.length === 0 && el.textContent.includes('$')) {
-        el.innerHTML = el.textContent.replace(
-          /\$/g,
-          '<span style="font-family:Arial,sans-serif!important;display:inline-block">$</span>'
-        );
-      }
-    });
-  };
+   que se vea con el trazo doble de la tipografia decorativa del sitio
+   (Palanquin). Se corre al cargar y se repite a los 500ms/1500ms para
+   alcanzar contenido que aparece despues (ej. el carrusel de
+   recomendados).
+   Se expone como funcion global (ecopipoCorregirSimboloPeso) para que
+   otras secciones de este archivo puedan volver a llamarla cuando
+   inyectan contenido nuevo con precios en momentos que estos timeouts
+   fijos no alcanzan a cubrir -- por ejemplo el modal de compra rapida
+   (seccion 20), que puede abrirse minutos despues de cargada la
+   pagina, mucho mas tarde que el ultimo timeout de aqui. */
+function ecopipoCorregirSimboloPeso() {
+  document.querySelectorAll('span, p, div, a, .price, .js-price-display').forEach((el) => {
+    if (el.children.length === 0 && el.textContent.includes('$')) {
+      el.innerHTML = el.textContent.replace(
+        /\$/g,
+        '<span style="font-family:Arial,sans-serif!important;display:inline-block">$</span>'
+      );
+    }
+  });
+}
 
-  corregirSimboloPeso();
-  setTimeout(corregirSimboloPeso, 500);
-  setTimeout(corregirSimboloPeso, 1500);
+document.addEventListener('DOMContentLoaded', () => {
+  ecopipoCorregirSimboloPeso();
+  setTimeout(ecopipoCorregirSimboloPeso, 500);
+  setTimeout(ecopipoCorregirSimboloPeso, 1500);
 });
 
 /* 4. Texto "Agregar al carrito" en grid y carrusel
@@ -1026,6 +1033,16 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.remove('in', 'modal-visible');
     window.LS.fillQuickshop(linkReferencia);
     requestAnimationFrame(() => modal.classList.add('modal-visible'));
+
+    /* El modal puede abrirse minutos despues de cargada la pagina,
+       mucho mas tarde que los timeouts fijos del corrector del simbolo
+       $ (seccion 2), asi que su precio y precio tachado quedarian sin
+       corregir (fuente Palanquin con el trazo doble). Se vuelve a
+       llamar aqui mismo: una vez de inmediato y otra vez a los 400ms
+       por si el precio con descuento tarda en llegar (fillQuickshop a
+       veces trae los datos de variantes por un fetch aparte). */
+    ecopipoCorregirSimboloPeso();
+    setTimeout(ecopipoCorregirSimboloPeso, 400);
   });
 
   /* El listener de cierre se pone en "document" (no en "modal") porque
