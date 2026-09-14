@@ -1109,3 +1109,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   corregirEspaciadoCarruselExplora(120);
 });
+
+/* 22. Imagen propia para el placeholder "sin foto" de producto.
+   Cuando un producto no tiene fotos, Tiendanube pone su propio icono
+   generico (una camara gris) via un <img> real que apunta a
+   .../assets/stores/img/no-photo-*.webp (varios tamaños en el
+   srcset) -- es un asset compartido de la plataforma, no un archivo
+   propio de la tienda que se pueda reemplazar subiendo uno con el
+   mismo nombre. Se detecta por el nombre de archivo en src/srcset (y
+   sus variantes data-src/data-srcset, usadas por el lazy-load antes
+   de que la imagen entre en pantalla) y se reemplaza por la propia.
+   Se usa un MutationObserver (no solo un timeout) porque este
+   placeholder puede aparecer despues de la carga inicial: al paginar
+   el grid de categoria, al abrir el modal de compra rapida (seccion
+   20), etc. */
+document.addEventListener('DOMContentLoaded', () => {
+  const IMAGEN_SIN_FOTO = 'https://estilos-ecopipo.vercel.app/pipo-sin-foto.webp';
+
+  function esPlaceholderSinFoto(img) {
+    return (
+      (img.getAttribute('src') || '').includes('no-photo') ||
+      (img.getAttribute('srcset') || '').includes('no-photo') ||
+      (img.getAttribute('data-src') || '').includes('no-photo') ||
+      (img.getAttribute('data-srcset') || '').includes('no-photo')
+    );
+  }
+
+  function reemplazarEnRaiz(raiz) {
+    const imgs = raiz.matches && raiz.matches('img') ? [raiz] : [...raiz.querySelectorAll('img')];
+    imgs.forEach((img) => {
+      if (!esPlaceholderSinFoto(img)) return;
+      img.src = IMAGEN_SIN_FOTO;
+      img.removeAttribute('srcset');
+      if (img.hasAttribute('data-src')) img.setAttribute('data-src', IMAGEN_SIN_FOTO);
+      if (img.hasAttribute('data-srcset')) img.removeAttribute('data-srcset');
+    });
+  }
+
+  reemplazarEnRaiz(document.body);
+
+  new MutationObserver((mutaciones) => {
+    mutaciones.forEach((m) => {
+      m.addedNodes.forEach((nodo) => {
+        if (nodo.nodeType === 1) reemplazarEnRaiz(nodo);
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+});
