@@ -1028,10 +1028,18 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => modal.classList.add('modal-visible'));
   });
 
-  modal.addEventListener('click', (e) => {
+  /* El listener de cierre se pone en "document" (no en "modal") porque
+     el fondo oscurecido en mobile (ver seccion 38 del CSS) es un
+     elemento HERMANO de "#quickshop-modal" (hijo directo del <body>,
+     propio del tema: ".js-modal-overlay-private[data-target=...]"),
+     no un descendiente -- un listener en "modal" nunca recibiria esos
+     clicks por burbujeo. Se filtra por "data-target='#quickshop-modal'"
+     para no reaccionar a botones de cierre de otros modales del sitio
+     (carrito, menu movil) que comparten la misma clase
+     ".js-modal-close-private". */
+  document.addEventListener('click', (e) => {
     const cierra =
-      e.target.closest('.js-modal-close-private') ||
-      e.target.closest('.js-modal-overlay-private') ||
+      e.target.closest('[data-target="#quickshop-modal"].js-modal-close-private') ||
       e.target === modal;
     if (cierra) {
       devolverFormularioQuickshop();

@@ -2322,3 +2322,43 @@ html,
 body {
   overscroll-behavior: auto !important;
 }
+
+/* 38. MODAL DE "COMPRA RAPIDA" EN MOBILE: BOTTOM SHEET EN VEZ DE
+   PANTALLA COMPLETA
+   El tema (clases ".modal-width-full" en #quickshop-modal) hace que
+   este modal ocupe el 100% de ancho Y alto en mobile -- sin ningun
+   fondo oscurecido detras -- por lo que al abrirlo se siente como si
+   se hubiera navegado a otra pagina en vez de "compra rapida" sobre
+   la pagina actual. Se reduce su alto a ~68% de la pantalla, anclado
+   abajo (es un modal tipo "modal-bottom" segun sus propias clases),
+   con esquinas superiores redondeadas para que se lea como una hoja
+   que sube desde abajo.
+   Para el fondo oscurecido se reutiliza el overlay propio del tema
+   (".js-modal-overlay-private[data-target='#quickshop-modal']"), que
+   ya existe en el HTML con toda su logica de cierre nativa (clase
+   "js-modal-close-private": clickearlo cierra el modal solo, sin JS
+   propio) pero normalmente se queda en "display:none" porque
+   LS.fillQuickshop abre el modal con el metodo viejo de jQuery
+   (".modal('show')") en vez del ModalHandler propio del tema que es
+   el que normalmente lo muestra -- se le fuerza la visibilidad aqui
+   con CSS en vez de depender de ese flujo. Se usa ":has()" (soportado
+   en todos los navegadores moviles relevantes) para mostrarlo
+   unicamente mientras el modal esta realmente abierto (clase
+   "modal-visible", la misma que ya usa el propio tema en su CSS para
+   posicionar el modal -- ver seccion 20 de custom-scripts.js). */
+@media (max-width: 767px) {
+  #quickshop-modal.modal-visible {
+    top: auto !important;
+    height: 68vh !important;
+    max-height: 68vh !important;
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  body:has(#quickshop-modal.modal-visible)
+    .js-modal-overlay-private[data-target="#quickshop-modal"] {
+    display: block !important;
+    z-index: 19999 !important;
+  }
+}
