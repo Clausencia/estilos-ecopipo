@@ -1183,6 +1183,23 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
   font-family: 'Palanquin Dark', sans-serif !important;
 }
 
+/* Dentro del bloque de descripcion del PDP (".product-info-description",
+   que incluye el titulo "Descripcion", el contenido enriquecido que
+   escribe la dueña del sitio en el editor de productos -- que a veces
+   trae sus propios h1/h2/h3 -- y los acordeones tipo <details>/
+   <summary> como "Preguntas frecuentes") NO se quiere Nerko One (la
+   regla global de mas abajo, pensada para el h1 real del producto y
+   para T&C), sino Palanquin Dark, igual que el resto del texto de la
+   ficha. Se sobreescribe solo en este contenedor para no tocar el
+   titulo principal del producto (h1, fuera de este bloque) ni otros
+   h1/h2/h3 del sitio. */
+.product-info-description h1,
+.product-info-description h2,
+.product-info-description h3,
+.product-info-description summary {
+  font-family: 'Palanquin Dark', sans-serif !important;
+}
+
 /* 18. TIPOGRAFIA DE TITULOS DEL HOME */
 /* La guia de marca pide Nerko One para titulos, y asi se usa en PDP
    y T&C (sobre h1/h2/h3 reales, ver regla global mas arriba). El home
