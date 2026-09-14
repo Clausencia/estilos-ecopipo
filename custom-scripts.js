@@ -1071,3 +1071,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+/* 21. Corregir el "corrimiento" del carrusel "Explora mas de Ecopipo"
+   (estilo Timberland, seccion 31 del CSS) al deslizar en mobile.
+   Ese carrusel usa slidesPerView:"auto", con el espaciado entre
+   tarjetas puesto por nuestro propio CSS (margin-right: 14px) en vez
+   del espaciado nativo de Swiper -- pero Swiper seguia configurado
+   con su propio spaceBetween en 36px (el que trae por defecto/por
+   panel). Como Swiper mide el ancho real de cada tarjeta (que ya
+   incluye esos 14px de margen) y ADEMAS le suma su spaceBetween
+   configurado al calcular a donde saltar en cada swipe, terminaba
+   sumando el espaciado dos veces (14px reales + 36px de mas), y ese
+   sobrante se iba acumulando en cada swipe -- por eso la 2a foto ya
+   se veia cortada, la 3a mas, etc. Se pone spaceBetween en 0 (el
+   espacio real ya lo da el margin-right del CSS) para que Swiper deje
+   de sumarlo por su cuenta. */
+document.addEventListener('DOMContentLoaded', () => {
+  function corregirEspaciadoCarruselExplora(intentos) {
+    const section = document.getElementById('ns-section-featured-categories_1788818704159');
+    if (!section) return;
+
+    const viewport = section.querySelector('.js-carousel-slider');
+    const sw = viewport && viewport.swiper;
+
+    if (!sw) {
+      if (intentos > 0) {
+        requestAnimationFrame(() => corregirEspaciadoCarruselExplora(intentos - 1));
+      }
+      return;
+    }
+
+    if (sw.params.spaceBetween !== 0) {
+      sw.params.spaceBetween = 0;
+      sw.update();
+    }
+  }
+
+  corregirEspaciadoCarruselExplora(120);
+});
