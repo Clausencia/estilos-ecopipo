@@ -2345,20 +2345,52 @@ body {
    en todos los navegadores moviles relevantes) para mostrarlo
    unicamente mientras el modal esta realmente abierto (clase
    "modal-visible", la misma que ya usa el propio tema en su CSS para
-   posicionar el modal -- ver seccion 20 de custom-scripts.js). */
+   posicionar el modal -- ver seccion 20 de custom-scripts.js).
+
+   Dos ajustes mas, encontrados al probar en un iPhone real (no
+   reproducibles en un viewport de escritorio emulado):
+   1) "vh" en Safari mobile se calcula contra el alto de pantalla SIN
+      la barra de direcciones (el estado "expandido", que casi nunca
+      es el que ve el usuario) -- un modal a "68vh" terminaba mas alto
+      que el area realmente visible con la barra de direcciones
+      presente, tapando el boton "Agregar al carrito" y rompiendo el
+      flujo de compra en un click. Se cambia a "svh" (small viewport
+      height), que se calcula contra el peor caso (barra de
+      direcciones visible), garantizando que el modal completo entre
+      en pantalla.
+   2) La imagen del producto no tenia limite de alto (hereda
+      "width:100%" del tema, y su alto lo define la proporcion de la
+      foto) -- en fotos mas cuadradas/altas eso por si solo ya
+      empujaba el boton fuera de vista aunque el modal completo
+      entrara en pantalla. Se le pone un alto maximo y
+      "object-fit:contain" para que nunca compita por el espacio
+      vertical con el nombre/precio/boton. */
 @media (max-width: 767px) {
   #quickshop-modal.modal-visible {
     top: auto !important;
-    height: 68vh !important;
-    max-height: 68vh !important;
+    height: 58svh !important;
+    max-height: 58svh !important;
     border-top-left-radius: 20px !important;
     border-top-right-radius: 20px !important;
     box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25) !important;
+    overflow-y: auto !important;
   }
 
   body:has(#quickshop-modal.modal-visible)
     .js-modal-overlay-private[data-target="#quickshop-modal"] {
     display: block !important;
     z-index: 19999 !important;
+  }
+
+  #quickshop-modal.modal-visible .quickshop-image-container {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  #quickshop-modal.modal-visible .quickshop-image-container img {
+    width: auto !important;
+    max-width: 100% !important;
+    max-height: 26svh !important;
+    object-fit: contain !important;
   }
 }
