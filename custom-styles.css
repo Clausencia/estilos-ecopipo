@@ -1936,6 +1936,18 @@ body.template-home .section-slideshow .heading-block {
   z-index: 3;
 }
 
+/* En mobile el header ocupa mas alto (cintillo de promo + cintillo de
+   envio + nav apilados) que en desktop, asi que subir el bloque del
+   titulo -140px (pensado para desktop, para pegarlo al banner de la
+   categoria) lo dejaba tapado debajo del header en vez de solo pegado
+   al banner. Se quita el margen negativo en mobile: se pierde un poco
+   el "pegado al banner" ahi, pero el titulo vuelve a ser legible. */
+@media (max-width: 767px) {
+  #ns-section-heading {
+    margin-top: 0 !important;
+  }
+}
+
 /* 31. CARRUSEL DE CATEGORIAS (ANTES DEL FOOTER) ESTILO TIMBERLAND */
 /* Pasa de circulos pequenos con texto debajo a tarjetas rectangulares
    con foto de fondo y texto superpuesto (inspirado en
