@@ -1191,3 +1191,48 @@ document.addEventListener('DOMContentLoaded', () => {
   nuevo.innerHTML = viejo.innerHTML;
   viejo.replaceWith(nuevo);
 });
+
+/* 24. Barra de compra fija (sticky) en el PDP (ver seccion 39 del
+   CSS). Al bajar a leer la descripcion, el boton "Agregar al
+   carrito" original queda fuera de vista y se pierde la oportunidad
+   de compra -- se muestra una barra fija abajo con nombre, precio y
+   un boton propio, solo mientras el boton real este fuera de
+   pantalla (se usa IntersectionObserver sobre el boton real en vez de
+   un umbral de scroll fijo en px, para que funcione igual sin
+   importar cuanto contenido tenga cada producto arriba).
+   El boton de la barra NO duplica el formulario de compra (que tendria
+   que repetir la logica de variantes, cantidad, validaciones y AJAX
+   del tema) -- en vez de eso, simplemente hace click en el boton real
+   ".js-addtocart" del formulario original, que sigue oculto detras;
+   asi cualquier variante/cantidad que el usuario ya haya elegido se
+   respeta tal cual, y el feedback (carrito, mensajes de error si falta
+   elegir una variante, etc.) es el mismo que ya trae el tema. */
+document.addEventListener('DOMContentLoaded', () => {
+  const botonReal = document.querySelector('.js-product-form input.js-addtocart, .js-product-form button.js-addtocart');
+  const nombreEl = document.querySelector('h1.js-product-name');
+  const precioEl = document.querySelector('.js-product-form .js-price-display, .js-price-display');
+  if (!botonReal || !nombreEl || !precioEl) return;
+
+  const barra = document.createElement('div');
+  barra.id = 'ecopipo-sticky-comprar';
+  barra.innerHTML =
+    '<div class="ecopipo-sticky-info">' +
+    '<span class="ecopipo-sticky-nombre"></span>' +
+    '<span class="ecopipo-sticky-precio"></span>' +
+    '</div>' +
+    '<button type="button" class="ecopipo-sticky-boton">Agregar al carrito</button>';
+  barra.querySelector('.ecopipo-sticky-nombre').textContent = nombreEl.textContent.trim();
+  barra.querySelector('.ecopipo-sticky-precio').textContent = precioEl.textContent.trim();
+  document.body.appendChild(barra);
+
+  barra.querySelector('.ecopipo-sticky-boton').addEventListener('click', () => botonReal.click());
+
+  new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        barra.classList.toggle('ecopipo-sticky-visible', !entrada.isIntersecting);
+      });
+    },
+    { threshold: 0 }
+  ).observe(botonReal);
+});
