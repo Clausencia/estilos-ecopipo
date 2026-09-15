@@ -1792,6 +1792,22 @@ body.template-home .section-slideshow .heading-block {
   margin-bottom: -24px;
 }
 
+/* Cualquier OTRO acordeon de preguntas frecuentes que se agregue al
+   home (duplicando este bloque FAQ, ej. "¿Sabes cual absorbente
+   necesitas?") NO debe traer el icono de Pipo ni el color rotando por
+   pregunta -- eso es exclusivo de "Pipo responde". Se excluye por ID
+   (#ns-section-faq es esa seccion especifica) en vez de apuntar a la
+   seccion nueva por su propio ID, para que cualquier futura copia de
+   este bloque FAQ herede el estilo "generico" automaticamente, sin
+   tener que repetir esta regla cada vez que se duplique. */
+.section-faq:not(#ns-section-faq) .heading-block::after {
+  display: none !important;
+}
+
+.section-faq:not(#ns-section-faq) .faq-list .accordion-item {
+  border-left-color: #B573DE !important;
+}
+
 /* 27. HOVER DE ZOOM EN EL CARRUSEL DE CATEGORIAS (CIRCULOS) */
 /* Reemplaza el efecto de capa opaca del tema por un zoom suave sobre
    la imagen al pasar el mouse. overflow:hidden en el contenedor
