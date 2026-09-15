@@ -1808,6 +1808,15 @@ body.template-home .section-slideshow .heading-block {
   border-left-color: #B573DE !important;
 }
 
+/* "Pipo responde" usa Palanquin Dark (ver regla ".faq-list
+   .accordion-item-toggle-text, .faq-list .accordion-item-body" mas
+   arriba); en cualquier otro FAQ generico se usa la variante regular
+   Palanquin, no la Dark. */
+.section-faq:not(#ns-section-faq) .accordion-item-toggle-text,
+.section-faq:not(#ns-section-faq) .accordion-item-body {
+  font-family: 'Palanquin', sans-serif !important;
+}
+
 /* 27. HOVER DE ZOOM EN EL CARRUSEL DE CATEGORIAS (CIRCULOS) */
 /* Reemplaza el efecto de capa opaca del tema por un zoom suave sobre
    la imagen al pasar el mouse. overflow:hidden en el contenedor
