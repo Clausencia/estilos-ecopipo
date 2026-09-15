@@ -1156,3 +1156,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }).observe(document.body, { childList: true, subtree: true });
 });
+
+/* 23. Corregir jerarquia de encabezados en el PDP: el titulo
+   "Descripcion" viene fijo en la plantilla Ipanema como H3
+   (".product-description-heading"), saltandose el H2 -- la pagina va
+   directo de H1 (nombre del producto) a H3, lo cual esta mal para
+   SEO/accesibilidad (los lectores de pantalla y buscadores esperan
+   que los niveles bajen de uno en uno, sin saltos).
+   No se puede cambiar la etiqueta real de un elemento con CSS (solo
+   su apariencia), asi que se reemplaza el nodo por un <h2> real,
+   conservando clases/id/contenido para que el estilo no cambie. No se
+   toca el contenido de la descripcion en si (el texto enriquecido que
+   se escribe en el editor de productos), porque ese es contenido de
+   cada producto, no parte fija de la plantilla, y su nivel de
+   encabezado varia segun lo que haya escrito quien cargo el
+   producto. */
+document.addEventListener('DOMContentLoaded', () => {
+  const viejo = document.querySelector('.product-description-heading');
+  if (!viejo || viejo.tagName === 'H2') return;
+
+  const nuevo = document.createElement('h2');
+  for (const attr of viejo.attributes) nuevo.setAttribute(attr.name, attr.value);
+  nuevo.innerHTML = viejo.innerHTML;
+  viejo.replaceWith(nuevo);
+});
