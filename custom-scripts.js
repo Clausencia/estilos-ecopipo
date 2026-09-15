@@ -366,13 +366,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---- Modal ----
+  /* El titulo del modal ("Encuentra tu distribuidora") va en un <div>,
+     no en un <h3>: este modal se inyecta una sola vez por pagina y
+     queda pegado a document.body (oculto hasta que se abre), asi que
+     su HTML esta presente en TODAS las paginas del sitio, PDP
+     incluido -- si fuera un h3 real, herramientas de SEO/accesibilidad
+     que leen la jerarquia de encabezados de la pagina lo contarian
+     como si fuera un encabezado real del PDP (rompiendo su jerarquia
+     H1>H2>H3), cuando en realidad es solo el titulo de un dialogo del
+     footer. El atributo aria-labelledby del modal (mas abajo) sigue
+     funcionando igual de bien apuntando a un <div> por id -- no
+     requiere que el elemento referenciado sea un encabezado. */
   const modal = document.createElement('div');
   modal.id = 'ecopipo-modal-distribuidoras';
   modal.innerHTML =
     '<div class="ecopipo-modal-backdrop"></div>' +
     '<div class="ecopipo-modal-content" role="dialog" aria-modal="true" aria-labelledby="ecopipo-modal-dist-title">' +
     '<button type="button" class="ecopipo-modal-close" aria-label="Cerrar">&times;</button>' +
-    '<h3 id="ecopipo-modal-dist-title">Encuentra tu distribuidora</h3>' +
+    '<div id="ecopipo-modal-dist-title" class="ecopipo-modal-title">Encuentra tu distribuidora</div>' +
     '<div class="ecopipo-dist-buscador">' +
     '<input type="text" inputmode="numeric" maxlength="5" placeholder="Tu código postal" class="ecopipo-dist-input">' +
     '<button type="button" class="ecopipo-dist-buscar">Buscar</button>' +

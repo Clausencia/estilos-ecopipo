@@ -1451,10 +1451,19 @@ body.template-home .section-slideshow .heading-block {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.ecopipo-modal-content h3 {
+/* .ecopipo-modal-title cubre el modal de distribuidoras (sitio
+   completo, ver seccion mas abajo sobre por que su titulo es un <div>
+   y no un <h3>); h3 sigue cubriendo el modal "La mama detras de
+   Ecopipo" (seccion 7 del JS), que SI se queda como h3 real porque
+   solo se inyecta en el home (scoped a una seccion que no existe en
+   otras paginas), asi que no contamina la jerarquia de encabezados
+   del PDP ni de ninguna otra pagina. */
+.ecopipo-modal-content h3,
+.ecopipo-modal-content .ecopipo-modal-title {
   font-family: 'Baloo 2', sans-serif;
   color: #FF9030;
   font-size: 22px;
+  font-weight: 700;
   margin: 0 0 16px;
 }
 
@@ -1510,10 +1519,11 @@ body.template-home .section-slideshow .heading-block {
   max-width: 560px;
 }
 
-#ecopipo-modal-distribuidoras h3 {
+#ecopipo-modal-distribuidoras .ecopipo-modal-title {
   font-family: 'Baloo 2', sans-serif;
   color: #FF9030;
   font-size: 22px;
+  font-weight: 700;
   margin: 0 0 20px;
 }
 
