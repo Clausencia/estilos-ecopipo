@@ -2654,7 +2654,13 @@ body {
    exclusivo de este cintillo (no se reutiliza en otra parte del sitio,
    confirmado en vivo), y subir su z-index no interfirio con el menu
    desplegable ni con el menu movil (probado en vivo, ambos siguen
-   abriendo por encima). */
+   abriendo por encima).
+   Ese contenedor ".static-announcements" solo aparece en algunas
+   plantillas (home, categoria): en la ficha de producto (PDP),
+   Tiendanube deja el cintillo como hijo directo de "header" en vez de
+   envolverlo, asi que ahi se sube el z-index del propio cintillo en
+   vez del contenedor (no existe el contenedor que subir). Se dejan
+   ambas reglas porque cada plantilla usa una u otra estructura. */
 .static-announcements {
   z-index: 1001;
 }
@@ -2662,6 +2668,7 @@ body {
 .adbar[data-section-id="announcement-bar_1789527255675"] {
   position: relative;
   overflow: visible !important;
+  z-index: 1001;
 }
 
 .ecopipo-adbar-wave {

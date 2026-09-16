@@ -90,21 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 400);
 });
 
-/* 6. Segundo Cintillo (envio gratis) -- DESACTIVADO
+/* 6. Segundo Cintillo (envio gratis) -- REACTIVADO
    Tiendanube solo traia un slot nativo de barra de anuncios (el
    "adbar", arriba del header). Para tener un segundo cintillo debajo
    del menu y antes del banner principal -- como en referencias de
-   otras tiendas -- se inyectaba a mano como seccion hermana de
+   otras tiendas -- se inyecta a mano como seccion hermana de
    .section-header, fuera del wrapper sticky del header para que
    se desplace con el resto del contenido en vez de quedar fijo.
-   Ahora Tiendanube permite agregar un segundo bloque nativo de
-   anuncios desde el panel, y ese bloque (ver secciones 30 y 31) ya
-   cubre lo mismo -- texto y color editables desde el panel, olas,
-   icono de camion y cinta continua -- asi que este cintillo hecho a
-   mano se desactiva para no duplicarlo. Se deja el codigo completo
-   (no se borra) por si se necesita reactivar mas adelante. */
+   Se habia desactivado al migrar a un segundo bloque nativo de
+   anuncios (ver secciones 30 y 31), pero ese bloque nativo coincidio
+   con la aparicion de un bug en el carrito de compras (los botones
+   "Eliminar"/cambiar cantidad dejaron de funcionar, el click cierra el
+   modal). Se probo exhaustivamente (quitar z-index, regresar posicion
+   original, quitar iconos/olas, ocultar el bloque por completo) y el
+   bug persistio en todos los casos -- no lo causa este codigo -- pero
+   por precaucion se reactiva este cintillo hecho a mano mientras se
+   investiga a fondo, y el bloque nativo se deja oculto desde el panel
+   de Tiendanube. */
 document.addEventListener('DOMContentLoaded', () => {
-  const CINTILLO2_ACTIVO = false;
+  const CINTILLO2_ACTIVO = true;
   if (!CINTILLO2_ACTIVO) return;
 
   if (document.getElementById('ecopipo-cintillo2')) return;
