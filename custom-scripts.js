@@ -1388,3 +1388,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+/* 29. Convertir a <h2> real los titulos "Pañal premium liso" /
+   "Pañal premium estampado" del bloque de banners del home (arriba de
+   "Mas vendidos", por eso no lo cubre la seccion 28). Se agregaron
+   desde el panel como bloque de encabezado nivel H2, pero -- igual que
+   el resto de titulos de seccion del tema -- el panel solo cambia el
+   tamaño visual (clase "h2"), no la etiqueta real. Quedan ocultos
+   visualmente por CSS (ver seccion 44 de custom-styles.css) para que
+   no se encimen sobre los gifs; aqui solo se corrige la etiqueta para
+   que ese texto cuente como encabezado real para SEO. */
+document.addEventListener('DOMContentLoaded', () => {
+  if (!document.body.classList.contains('template-home')) return;
+
+  const seccionBanners = document.getElementById('ns-section-banners_1788825982220');
+  if (!seccionBanners) return;
+
+  seccionBanners.querySelectorAll('.heading-block.h2').forEach((titulo) => {
+    if (titulo.tagName !== 'H2') {
+      const reemplazo = document.createElement('h2');
+      for (const atributo of titulo.attributes) reemplazo.setAttribute(atributo.name, atributo.value);
+      while (titulo.firstChild) reemplazo.appendChild(titulo.firstChild);
+      titulo.replaceWith(reemplazo);
+    }
+  });
+});

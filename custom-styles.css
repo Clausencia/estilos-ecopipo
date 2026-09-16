@@ -2596,3 +2596,29 @@ body {
     grid-column: 1 !important;
   }
 }
+
+/* 44. ENCABEZADOS OCULTOS VISUALMENTE (H1 DEL LOGO Y H2 DE LOS
+   BANNERS "PAÑAL PREMIUM LISO/ESTAMPADO") PARA SEO SIN AFECTAR EL
+   DISEÑO */
+/* El H1 "Ecopipo" del logo (nativo del tema) usa "display:none" en
+   linea, lo que tambien lo oculta de lectores de pantalla. Aqui se
+   sobreescribe con la tecnica estandar de accesibilidad "visualmente
+   oculto" (se muestra como bloque de 1x1px, recortado y fuera de
+   flujo) en vez de display:none, para que el titulo siga siendo
+   accesible/rastreable sin verse ni ocupar espacio. Mismo tratamiento
+   para los H2 "Pañal premium liso" / "Pañal premium estampado" del
+   bloque de banners del home, agregados desde el panel para SEO, que
+   de otro modo se verian encimados sobre los gifs. */
+#logo h1,
+#ns-section-banners_1788825982220 .heading-block.h2 {
+  display: block !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
