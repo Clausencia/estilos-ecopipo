@@ -1118,19 +1118,26 @@ form[data-store*="product-form"] .js-addtocart-placeholder[style*="display:none"
    infinito (animation: marquee-scroll) sin opcion en el admin para
    desactivarlo. Con un solo mensaje configurado no tiene sentido que
    se desplace, asi que se congela la animacion y se muestra un unico
-   item centrado en vez de la tira repetida usada para el loop. */
-.adbar-marquee-track {
+   item centrado en vez de la tira repetida usada para el loop.
+   Se acota a [data-section-id="announcement"] para que aplique solo
+   al cintillo morado original -- el segundo cintillo nativo (seccion 46,
+   data-section-id="announcement-bar_1789527255675") SI necesita
+   moverse, y un "transform: ... !important" generico aqui le ganaria
+   a cualquier animacion sin importar la especificidad de esa otra
+   regla (un !important normal siempre le gana al valor que produce
+   una animacion CSS sobre esa misma propiedad). */
+.adbar[data-section-id="announcement"] .adbar-marquee-track {
   animation: none !important;
   transform: none !important;
   width: 100% !important;
 }
 
-.js-adbar-marquee-content {
+.adbar[data-section-id="announcement"] .js-adbar-marquee-content {
   width: 100% !important;
   justify-content: center !important;
 }
 
-.js-adbar-item:not(:first-child) {
+.adbar[data-section-id="announcement"] .js-adbar-item:not(:first-child) {
   display: none !important;
 }
 
