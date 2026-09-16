@@ -1362,3 +1362,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+/* 27. Convertir a H3 real los titulos de los acordeones (details/
+   summary) pegados dentro de la descripcion de producto -- por
+   ejemplo los pañales de la categoria 40832534 ("¿Cuántos pañales de
+   tela necesito para empezar?", etc.), donde el titulo de cada
+   pregunta es un <summary> con estilo inline copiado/pegado en el
+   editor de cada producto, sin ninguna etiqueta de encabezado real
+   (invisible para SEO como titulo de seccion).
+   No se puede editar la plantilla para esto porque el HTML vive
+   dentro del contenido de cada producto, no en un bloque del tema --
+   se envuelve el contenido de cada <summary> en un <h3> por JS al
+   cargar la pagina, en vez de pedir editar cada producto uno por uno.
+   El <h3> hereda todo el estilo (color, tamaño, negritas) del
+   <summary> que lo contiene via "font/color: inherit" y
+   "display:inline", asi que no cambia nada visualmente ni el
+   comportamiento nativo de abrir/cerrar del <details>. Aplica a
+   CUALQUIER producto que use este mismo patron (details/summary
+   dentro de ".product-description-content"), no solo a una categoria
+   en particular. */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.product-description-content details > summary').forEach((summary) => {
+    if (summary.querySelector('h3')) return;
+
+    const titulo = document.createElement('h3');
+    titulo.style.cssText = 'display:inline; margin:0; padding:0; font:inherit; font-weight:inherit; color:inherit;';
+    while (summary.firstChild) titulo.appendChild(summary.firstChild);
+    summary.appendChild(titulo);
+  });
+});
