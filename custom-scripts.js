@@ -90,14 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 400);
 });
 
-/* 6. Segundo Cintillo (envio gratis)
-   Tiendanube solo trae un slot nativo de barra de anuncios (el
+/* 6. Segundo Cintillo (envio gratis) -- DESACTIVADO
+   Tiendanube solo traia un slot nativo de barra de anuncios (el
    "adbar", arriba del header). Para tener un segundo cintillo debajo
    del menu y antes del banner principal -- como en referencias de
-   otras tiendas -- se inyecta a mano como seccion hermana de
+   otras tiendas -- se inyectaba a mano como seccion hermana de
    .section-header, fuera del wrapper sticky del header para que
-   se desplace con el resto del contenido en vez de quedar fijo. */
+   se desplace con el resto del contenido en vez de quedar fijo.
+   Ahora Tiendanube permite agregar un segundo bloque nativo de
+   anuncios desde el panel, y ese bloque (ver secciones 30 y 31) ya
+   cubre lo mismo -- texto y color editables desde el panel, olas,
+   icono de camion y cinta continua -- asi que este cintillo hecho a
+   mano se desactiva para no duplicarlo. Se deja el codigo completo
+   (no se borra) por si se necesita reactivar mas adelante. */
 document.addEventListener('DOMContentLoaded', () => {
+  const CINTILLO2_ACTIVO = false;
+  if (!CINTILLO2_ACTIVO) return;
+
   if (document.getElementById('ecopipo-cintillo2')) return;
 
   const header = document.querySelector('.section-header');
@@ -1412,4 +1421,91 @@ document.addEventListener('DOMContentLoaded', () => {
       titulo.replaceWith(reemplazo);
     }
   });
+});
+
+/* 30. Olas decorativas en el segundo cintillo nativo ("Barra de
+   anuncio wave" en el panel, bloque de anuncios agregado debajo del
+   cintillo morado original). Mismo efecto "wave divider" que el
+   cintillo hecho a mano (#ecopipo-cintillo2, ver seccion 6 y la
+   seccion 21 de custom-styles.css), aplicado ahora a un bloque NATIVO
+   de Tiendanube para que el texto y el color de fondo se puedan seguir
+   editando desde el panel (Colores > Color de fondo) sin tocar codigo.
+   El color de las olas se toma en vivo del color de fondo real del
+   bloque (en vez de un color fijo) para que, si mas adelante cambian
+   ese color desde el panel, las olas lo sigan automaticamente.
+   El selector usa el "data-section-id" propio de este bloque
+   (announcement-bar_1789527255675), no una clase generica, para no
+   afectar el cintillo morado original ni cualquier otro "adbar" que
+   se agregue despues. Las olas se insertan como hijos con
+   position:absolute (ver seccion 45 de custom-styles.css) para no
+   sumar altura real al bloque: el header de Tiendanube mide la altura
+   de estos cintillos para su propio comportamiento "sticky", y un
+   elemento fuera de flujo no afecta esa medicion. */
+document.addEventListener('DOMContentLoaded', () => {
+  const barra = document.querySelector('.adbar[data-section-id="announcement-bar_1789527255675"]');
+  if (!barra || barra.querySelector('.ecopipo-adbar-wave')) return;
+
+  const waveSVG =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" style="width:100%;height:100%;display:block">' +
+    '<defs><path id="ecopipo-adbar-wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs>' +
+    '<g class="ecopipo-adbar-wave-parallax1"><use xlink:href="#ecopipo-adbar-wave-path" x="50" y="3" fill="currentColor"></use></g>' +
+    '<g class="ecopipo-adbar-wave-parallax2"><use xlink:href="#ecopipo-adbar-wave-path" x="50" y="0" fill="currentColor"></use></g>' +
+    '<g class="ecopipo-adbar-wave-parallax3"><use xlink:href="#ecopipo-adbar-wave-path" x="50" y="9" fill="currentColor"></use></g>' +
+    '<g class="ecopipo-adbar-wave-parallax4"><use xlink:href="#ecopipo-adbar-wave-path" x="50" y="6" fill="currentColor"></use></g>' +
+    '</svg>';
+
+  const colorFondo = getComputedStyle(barra).backgroundColor;
+
+  const waveTop = document.createElement('div');
+  waveTop.className = 'ecopipo-adbar-wave ecopipo-adbar-wave-top';
+  waveTop.style.color = colorFondo;
+  waveTop.innerHTML = waveSVG;
+
+  const waveBottom = document.createElement('div');
+  waveBottom.className = 'ecopipo-adbar-wave ecopipo-adbar-wave-bottom';
+  waveBottom.style.color = colorFondo;
+  waveBottom.innerHTML = waveSVG;
+
+  barra.appendChild(waveTop);
+  barra.appendChild(waveBottom);
+});
+
+/* 31. Cinta continua + icono de camion en el segundo cintillo nativo,
+   y reubicarlo debajo del header (junto al cintillo hecho a mano,
+   #ecopipo-cintillo2, que se deja desactivado -- ver seccion 6, no se
+   borra su codigo por si se vuelve a necesitar).
+   El panel de Tiendanube ofrece "Marquesina" y "Carrusel" como modo de
+   animacion, pero ninguno de los dos logra una cinta que se desplace
+   sin parar con un solo "Anuncio" configurado (probado en vivo): estan
+   pensados para alternar entre VARIOS mensajes, no para el efecto de
+   "ticker" continuo. Aqui se toma control de la animacion por CSS
+   (seccion 46 de custom-styles.css) ignorando el modo elegido en el
+   panel, reutilizando la propia estructura que Tiendanube ya genera
+   para el modo "Marquesina" (duplica el contenido en dos bloques
+   ".js-adbar-marquee-content" iguales, pensados originalmente para su
+   propio loop) -- por eso este bloque debe permanecer en modo
+   "Marquesina" en el panel para que exista esa duplicacion.
+   Importante: esto asume un solo "Anuncio" configurado en el bloque.
+   Si mas adelante se agrega un segundo mensaje, esta seccion (y la 46
+   de custom-styles.css) necesitaria ajustarse. */
+document.addEventListener('DOMContentLoaded', () => {
+  const barra = document.querySelector('.adbar[data-section-id="announcement-bar_1789527255675"]');
+  if (!barra) return;
+
+  const ICONO_CAMION =
+    '<svg viewBox="0 0 640 512" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M0 96C0 78.3 14.3 64 32 64H384c17.7 0 32 14.3 32 32V128h60.6c11.3 0 22.2 4.5 30.2 12.5l70.1 70.1c8 8 12.5 18.9 12.5 30.2V352c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H592c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96H32c-17.7 0-32-14.3-32-32V96zM416 160V352h94.2L448 289.8V196.4L416 160zM496 464a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM160 416a48 48 0 1 0 0 96 48 48 0 1 0 0-96z"/></svg>';
+
+  barra.querySelectorAll('.js-adbar-item').forEach((item) => {
+    if (item.querySelector('.ecopipo-adbar-icon')) return;
+    const iconWrap = document.createElement('span');
+    iconWrap.className = 'ecopipo-adbar-icon';
+    iconWrap.innerHTML = ICONO_CAMION;
+    item.appendChild(iconWrap);
+  });
+
+  const seccionHeader = document.querySelector('.section-header');
+  if (seccionHeader && seccionHeader.nextElementSibling !== barra) {
+    seccionHeader.parentNode.insertBefore(barra, seccionHeader.nextSibling);
+  }
 });

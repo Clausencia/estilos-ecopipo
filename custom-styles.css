@@ -2622,3 +2622,96 @@ body {
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* 45. OLAS DECORATIVAS DEL SEGUNDO CINTILLO NATIVO ("BARRA DE ANUNCIO
+   WAVE") */
+/* Mismo efecto que la seccion 21 (olas del cintillo hecho a mano),
+   aplicado aqui al bloque nativo de anuncios agregado desde el panel
+   (ver seccion 30 de custom-scripts.js, que inserta las olas y les
+   asigna en JS el color de fondo real del bloque). Se usa
+   position:absolute para que las olas no sumen altura real al bloque
+   -- el header calcula la altura total de los cintillos para su
+   comportamiento "sticky", y un elemento fuera de flujo no afecta esa
+   medicion. */
+.adbar[data-section-id="announcement-bar_1789527255675"] {
+  position: relative;
+  overflow: visible !important;
+}
+
+.ecopipo-adbar-wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  overflow: hidden;
+  line-height: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.ecopipo-adbar-wave-top {
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.ecopipo-adbar-wave-bottom {
+  bottom: 0;
+  transform: translateY(100%) scaleY(-1);
+}
+
+@media (max-width: 767px) {
+  .ecopipo-adbar-wave {
+    height: 14px;
+  }
+}
+
+.ecopipo-adbar-wave .ecopipo-adbar-wave-parallax1 > use { animation: ecopipo-wave-move1 10s linear infinite; }
+.ecopipo-adbar-wave .ecopipo-adbar-wave-parallax2 > use { animation: ecopipo-wave-move2 8s linear infinite; opacity: .4; }
+.ecopipo-adbar-wave .ecopipo-adbar-wave-parallax3 > use { animation: ecopipo-wave-move1 6s linear infinite; opacity: .3; }
+.ecopipo-adbar-wave .ecopipo-adbar-wave-parallax4 > use { animation: ecopipo-wave-move2 4s linear infinite; opacity: .2; }
+
+/* 46. TEXTO, ICONO Y CINTA CONTINUA DEL SEGUNDO CINTILLO NATIVO */
+/* Texto mas grande y en negrita (por defecto el "adbar" nativo usa
+   12px/regular, se homologa a como se ve en el cintillo hecho a mano:
+   14px, Baloo 2, negrita). El icono de camion (insertado por JS,
+   seccion 31 de custom-scripts.js) usa la misma tecnica de
+   fill="currentColor" para heredar el "Color de textos" del panel.
+   La animacion (aqui, con mayor especificidad que la seccion 16 para
+   no chocar con la regla que congela el resto de los "adbar") toma el
+   ancho real del contenido ("max-content") y anima un translateX al
+   -50% -- funciona sin cortes porque Tiendanube ya duplica el
+   contenido en dos bloques ".js-adbar-marquee-content" iguales para
+   su propio modo "Marquesina" (ver comentario de la seccion 31: este
+   bloque debe permanecer en ese modo en el panel). */
+.adbar[data-section-id="announcement-bar_1789527255675"] .js-adbar-item {
+  font-family: 'Baloo 2', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+.ecopipo-adbar-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: inherit;
+  margin: 0 16px;
+}
+
+.adbar[data-section-id="announcement-bar_1789527255675"] .adbar-marquee-track {
+  width: max-content !important;
+  animation: ecopipo-adbar-scroll 20s linear infinite !important;
+}
+
+.adbar[data-section-id="announcement-bar_1789527255675"] .js-adbar-marquee-content {
+  width: max-content !important;
+  justify-content: flex-start !important;
+  flex-shrink: 0 !important;
+}
+
+@keyframes ecopipo-adbar-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
