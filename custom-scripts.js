@@ -455,49 +455,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* 9. Foto estatica junto al carrusel de "Categorias destacadas"
-   Reestructura #ns-section-featured_categories_pills (titulo +
-   carrusel de pills, antes en una sola fila) para agregar una imagen
-   fija a la izquierda -- inspirado en el layout de mezcaleroboots.com.
-   La URL de la imagen se lee de una celda de Google Sheets (via URL
-   de exportacion directa, ver seccion 8 sobre por que no se usa
-   "Publicar en la Web") en vez de venir escrita aqui, para que la
-   dueña pueda cambiar la foto ella misma editando esa celda, sin
-   pedir cambios
-   de codigo. */
-document.addEventListener('DOMContentLoaded', () => {
-  const FOTO_CATEGORIAS_CSV_URL =
-    'https://docs.google.com/spreadsheets/d/1D30antKw7uOxgZlKUU6G3COGF3kFPKV10mn95qPE1OI/export?format=csv&gid=270158370';
-
-  const section = document.getElementById('ns-section-featured_categories_pills');
-  if (!section) return;
-
-  const flexRow = section.querySelector('.d-flex.flex-row');
-  if (!flexRow) return;
-
-  fetch(FOTO_CATEGORIAS_CSV_URL)
-    .then((res) => res.text())
-    .then((texto) => {
-      const filas = texto.trim().split('\n');
-      const url = (filas[1] || '').trim();
-      if (!url) return;
-
-      const wrapper = document.createElement('div');
-      wrapper.className = 'ecopipo-cat-right';
-      while (flexRow.firstChild) {
-        wrapper.appendChild(flexRow.firstChild);
-      }
-      flexRow.appendChild(wrapper);
-
-      const img = document.createElement('img');
-      img.className = 'ecopipo-cat-photo';
-      img.src = url;
-      img.alt = 'Categorías destacadas';
-      flexRow.insertBefore(img, wrapper);
-    })
-    .catch(() => {});
-});
-
 /* 10. Selector de talla en hover (grid/carrusel de productos)
    Cada .product-item con mas de una variante trae un atributo
    data-variants (JSON con precio, sku, disponibilidad e id por
