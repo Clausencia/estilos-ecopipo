@@ -2639,7 +2639,26 @@ body {
    position:absolute para que las olas no sumen altura real al bloque
    -- el header calcula la altura total de los cintillos para su
    comportamiento "sticky", y un elemento fuera de flujo no afecta esa
-   medicion. */
+   medicion.
+   Al mover este cintillo debajo del header (seccion 31), Tiendanube lo
+   envuelve en un contenedor propio ".static-announcements", hermano
+   del contenedor real del logo/menu (".sticky-header-wrapper", que
+   tiene z-index:1000). Sin acotar el z-index de ".static-announcements"
+   (que por defecto queda mas bajo), la ola de arriba -- que a proposito
+   se sale de su propia caja hacia arriba, sobre el area del menu --
+   quedaba tapada por el fondo blanco del menu en vez de verse encima:
+   no es un problema de que la ola no se dibuje, sino de que se dibuja
+   "debajo" de un elemento vecino con mayor z-index. Se sube por encima
+   de ese valor para que la ola completa (arriba y abajo) se vea sobre
+   cualquier contenido vecino. ".static-announcements" es un contenedor
+   exclusivo de este cintillo (no se reutiliza en otra parte del sitio,
+   confirmado en vivo), y subir su z-index no interfirio con el menu
+   desplegable ni con el menu movil (probado en vivo, ambos siguen
+   abriendo por encima). */
+.static-announcements {
+  z-index: 1001;
+}
+
 .adbar[data-section-id="announcement-bar_1789527255675"] {
   position: relative;
   overflow: visible !important;
