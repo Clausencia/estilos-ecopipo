@@ -2607,3 +2607,19 @@ body {
 .ecopipo-talla-separador:first-child {
   margin-top: 0;
 }
+
+/* 42. CATEGORIA SIN LINK EN "MAS VENDIDOS" (PILLS) */
+/* Cuando una categoria de este carrusel no tiene un link asignado en
+   el admin, Tiendanube envuelve la imagen en un <span> en vez de un
+   <a> (misma clase "category-item-link") y omite el bloque de texto
+   de abajo -- por eso esa tarjeta se ve mas corta que sus vecinas con
+   link (imagen + titulo). Se alarga la imagen SOLO en ese caso para
+   que la tarjeta termine ~30px mas abajo que el texto de las que si
+   tienen titulo, en vez de quedar mas corta y desalineada. Pensado
+   para usar la primera categoria (sin link) como una foto que la
+   dueña del sitio pueda cambiar desde el panel de "Categorias
+   destacadas" sin pedir un cambio de codigo cada vez (reemplaza la
+   foto fija que antes se inyectaba por CSS/JS, seccion 25). */
+#ns-section-featured_categories_pills span.category-item-link .category-item-image {
+  height: 352px !important;
+}
