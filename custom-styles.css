@@ -2574,3 +2574,19 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
+
+/* 40. EXIGIR SELECCIONAR VARIANTE ANTES DE COMPRAR (PDP) */
+/* Ver seccion 25 del JS. Mensaje de error y marcado en rojo de los
+   botones de opcion cuando se intenta agregar al carrito sin haber
+   elegido variante (talla/color). */
+.ecopipo-variante-error {
+  color: #e53e3e;
+  font-family: 'Palanquin', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+
+.js-product-variants-group.ecopipo-variante-invalida .js-variant-button {
+  border-color: #e53e3e !important;
+}

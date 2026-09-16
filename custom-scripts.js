@@ -1236,3 +1236,88 @@ document.addEventListener('DOMContentLoaded', () => {
     { threshold: 0 }
   ).observe(botonReal);
 });
+
+/* 25. Exigir seleccionar variante antes de agregar al carrito (PDP).
+   El tema deja preseleccionada por default la primera opcion de cada
+   variante (ej. la primera talla) -- si el usuario no se da cuenta y
+   compra sin fijarse, puede terminar con la talla/color equivocado.
+   Se quita esa preseleccion al cargar la pagina (ver mas abajo) y, si
+   el usuario intenta agregar al carrito sin haber elegido, se bloquea
+   el envio, se marcan las opciones en rojo, se muestra "Por favor,
+   selecciona una opción" y se hace scroll hasta ahi.
+   Escopado a ".js-product-form" (el formulario real del PDP) y no a
+   toda la pagina: los carruseles de productos del home (ej. "Los mas
+   vendidos") tienen sus propias tarjetas con la misma clase de grupo
+   de variantes para su propio selector rapido, y no deben verse
+   afectadas por esto.
+   El click en el boton real se intercepta en fase de captura (no
+   escuchando el evento "submit" del formulario): el tema no dispara
+   un submit nativo al agregar al carrito, hace su propio manejo por
+   AJAX directamente sobre el click del boton, asi que un listener de
+   "submit" nunca se ejecutaria. */
+document.addEventListener('DOMContentLoaded', () => {
+  const formulario = document.querySelector('.js-product-form');
+  if (!formulario) return;
+
+  const grupos = [...formulario.querySelectorAll('.js-product-variants-group')].filter((grupo) => {
+    const select = grupo.querySelector('select.js-variation-option');
+    return select && select.options.length > 1;
+  });
+  if (!grupos.length) return;
+
+  grupos.forEach((grupo) => {
+    const select = grupo.querySelector('select.js-variation-option');
+    select.selectedIndex = -1;
+    grupo.querySelectorAll('.js-variant-button.selected').forEach((boton) => boton.classList.remove('selected'));
+    const etiqueta = grupo.querySelector('.js-insta-variation-label');
+    if (etiqueta) etiqueta.textContent = '';
+  });
+
+  function grupoSinSeleccion() {
+    return grupos.find((grupo) => grupo.querySelector('select.js-variation-option').selectedIndex === -1);
+  }
+
+  function mostrarError(grupo) {
+    let mensaje = grupo.querySelector('.ecopipo-variante-error');
+    if (!mensaje) {
+      mensaje = document.createElement('p');
+      mensaje.className = 'ecopipo-variante-error';
+      mensaje.textContent = 'Por favor, selecciona una opción';
+      grupo.appendChild(mensaje);
+    }
+    grupo.classList.add('ecopipo-variante-invalida');
+  }
+
+  function limpiarError(grupo) {
+    grupo.classList.remove('ecopipo-variante-invalida');
+    const mensaje = grupo.querySelector('.ecopipo-variante-error');
+    if (mensaje) mensaje.remove();
+  }
+
+  grupos.forEach((grupo) => {
+    grupo.querySelectorAll('.js-variant-button').forEach((boton) => {
+      boton.addEventListener('click', () => limpiarError(grupo));
+    });
+  });
+
+  const botonComprar = formulario.querySelector('input.js-addtocart, button.js-addtocart');
+  if (!botonComprar) return;
+
+  botonComprar.addEventListener(
+    'click',
+    (e) => {
+      const grupo = grupoSinSeleccion();
+      if (!grupo) return;
+
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      grupos.forEach((g) => {
+        if (g !== grupo) limpiarError(g);
+      });
+      mostrarError(grupo);
+      grupo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    },
+    true
+  );
+});
