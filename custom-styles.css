@@ -2550,3 +2550,49 @@ body {
 #ns-section-featured_categories_pills span.category-item-link .category-item-image {
   height: 352px !important;
 }
+
+/* 43. TITULO "MAS VENDIDOS" SOBRE LA 2A COLUMNA (NO SOBRE LA FOTO) */
+/* Con la foto fija ya quitada (ver seccion anterior), la primera
+   tarjeta del carrusel (sin link, la foto administrable) queda como
+   una columna propia -- se pide que el titulo de la seccion ya no
+   quede centrado sobre TODA la fila (incluida esa foto), sino que
+   arranque justo donde empieza la segunda tarjeta ("Velcro Liso"),
+   dejando la foto libre sin titulo encima.
+   Se arma como grid de 2 columnas: la primera del mismo ancho que las
+   tarjetas del carrusel (var(--category-image-size), la misma
+   variable que el tema ya usa para dimensionar cada tarjeta, para que
+   se mantenga alineado si ese tamaño cambia desde el panel) y vacia
+   en la fila del titulo; el titulo cae en la 2a columna, y el
+   carrusel completo pasa a la fila de abajo ocupando las dos columnas.
+   En mobile ese mismo offset (300px) no cabe -- el titulo se salia de
+   la pantalla -- asi que ahi se vuelve a una sola columna (titulo
+   arriba a todo el ancho, carrusel debajo), igual que el resto de
+   carruseles de categorias del sitio. */
+#ns-section-featured_categories_pills .d-flex.flex-row {
+  display: grid !important;
+  grid-template-columns: var(--category-image-size, 300px) 1fr !important;
+  grid-template-rows: auto 1fr !important;
+  align-items: start !important;
+  column-gap: 24px !important;
+  row-gap: 12px !important;
+}
+
+#ns-section-featured_categories_pills .heading-column {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+#ns-section-featured_categories_pills .category-list-thumbnail {
+  grid-column: 1 / -1 !important;
+  grid-row: 2 !important;
+}
+
+@media (max-width: 767px) {
+  #ns-section-featured_categories_pills .d-flex.flex-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  #ns-section-featured_categories_pills .heading-column {
+    grid-column: 1 !important;
+  }
+}
