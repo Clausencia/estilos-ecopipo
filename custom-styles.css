@@ -2590,3 +2590,20 @@ body {
 .js-product-variants-group.ecopipo-variante-invalida .js-variant-button {
   border-color: #e53e3e !important;
 }
+
+/* 41. SEPARADOR "TALLAS DE ADULTO" / "TALLAS DE NIÑOS" (VER SECCION 26 DEL JS) */
+.ecopipo-talla-separador {
+  display: block;
+  width: 100%;
+  font-family: 'Palanquin Dark', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #718096;
+  margin: 10px 0 6px;
+}
+
+.ecopipo-talla-separador:first-child {
+  margin-top: 0;
+}

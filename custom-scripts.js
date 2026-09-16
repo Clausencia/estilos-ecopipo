@@ -1321,3 +1321,44 @@ document.addEventListener('DOMContentLoaded', () => {
     true
   );
 });
+
+/* 26. Separador "Tallas de adulto" / "Tallas de niños" en productos
+   para toda la familia (ej. sudaderas), cuyo selector de talla mezcla
+   ambos sistemas en una sola lista plana (S, M, L, XL, 2, 4, 6...) sin
+   ninguna indicacion de cual es cual. Tiendanube no permite subtitulos
+   dentro de un mismo grupo de variantes desde el admin, asi que se
+   inserta aqui.
+   Regla deliberadamente conservadora: solo distingue tallas letra
+   estandar de adulto (XS/S/M/L/XL/XXL/XXXL) de tallas puramente
+   numericas -- otros valores personalizados del catalogo (ej.
+   "Chico", "Grande", "Bebé", "Adulto", "28 - 32", "6 - 8 años") son
+   ambiguos fuera de contexto (su significado real depende de en que
+   producto aparecen) y NO se etiquetan automaticamente para no
+   arriesgar una etiqueta incorrecta -- revisar esos caso por caso si
+   hace falta. */
+document.addEventListener('DOMContentLoaded', () => {
+  const ADULTO_REGEX = /^(XS|S|M|L|XL|XXL|XXXL|\dXL)$/i;
+  const NUMERICO_REGEX = /^\d+$/;
+
+  document.querySelectorAll('.js-product-variants-group').forEach((grupo) => {
+    const botones = [...grupo.querySelectorAll('.js-variant-button')];
+    if (botones.length < 2) return;
+
+    const tieneAdulto = botones.some((b) => ADULTO_REGEX.test((b.dataset.option || '').trim()));
+    const primerNumerico = botones.find((b) => NUMERICO_REGEX.test((b.dataset.option || '').trim()));
+    if (!tieneAdulto || !primerNumerico) return;
+
+    const separadorNinos = document.createElement('span');
+    separadorNinos.className = 'ecopipo-talla-separador';
+    separadorNinos.textContent = 'Tallas de niños';
+    primerNumerico.insertAdjacentElement('beforebegin', separadorNinos);
+
+    const primerBoton = botones[0];
+    if (ADULTO_REGEX.test((primerBoton.dataset.option || '').trim())) {
+      const separadorAdulto = document.createElement('span');
+      separadorAdulto.className = 'ecopipo-talla-separador';
+      separadorAdulto.textContent = 'Tallas de adulto';
+      primerBoton.insertAdjacentElement('beforebegin', separadorAdulto);
+    }
+  });
+});
