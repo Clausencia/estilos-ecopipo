@@ -1348,3 +1348,43 @@ document.addEventListener('DOMContentLoaded', () => {
     summary.appendChild(titulo);
   });
 });
+
+/* 28. Convertir a encabezados reales los titulos de seccion del home,
+   para SEO. Solo en la pagina de inicio (body.template-home), y solo
+   desde la seccion "Mas vendidos" (#ns-section-featured_categories_pills)
+   hacia abajo -- las secciones de arriba (anuncio, header, slideshow,
+   banners) no tienen titulo de texto. Cada titulo de seccion es un
+   <div class="heading-block h3|h4 ..."> del editor de bloques del tema
+   (no un encabezado real); se convierte a <h3>. Dentro de las secciones
+   de preguntas frecuentes ("Pipo responde", "¿Sabes cual absorbente
+   necesitas?"), el titulo de cada pregunta del acordeon es un
+   <span class="accordion-item-toggle-text">; se convierte a <h4>.
+   El tamaño/color/peso visual esta controlado por las clases (h3/h4,
+   accordion-item-toggle-text), no por la etiqueta, asi que cambiar la
+   etiqueta no altera el estilo. El click para abrir/cerrar el acordeon
+   esta en el contenedor padre (.js-accordion-private-toggle), no en el
+   <span>, asi que tampoco afecta ese comportamiento. */
+document.addEventListener('DOMContentLoaded', () => {
+  if (!document.body.classList.contains('template-home')) return;
+
+  const inicio = document.getElementById('ns-section-featured_categories_pills');
+  if (!inicio) return;
+  const secciones = [...document.querySelectorAll('.ns-section')];
+  const desdeInicio = secciones.slice(secciones.indexOf(inicio));
+
+  function convertirEtiqueta(el, nuevaEtiqueta) {
+    const reemplazo = document.createElement(nuevaEtiqueta);
+    for (const atributo of el.attributes) reemplazo.setAttribute(atributo.name, atributo.value);
+    while (el.firstChild) reemplazo.appendChild(el.firstChild);
+    el.replaceWith(reemplazo);
+  }
+
+  desdeInicio.forEach((seccion) => {
+    seccion.querySelectorAll('.heading-block').forEach((titulo) => {
+      if (titulo.tagName !== 'H3') convertirEtiqueta(titulo, 'h3');
+    });
+    seccion.querySelectorAll('.accordion-item-toggle-text').forEach((titulo) => {
+      if (titulo.tagName !== 'H4') convertirEtiqueta(titulo, 'h4');
+    });
+  });
+});
