@@ -1564,6 +1564,15 @@ body.template-home .section-slideshow .heading-block {
    un "width" fijo) para que igual pueda encogerse mas en pantallas muy
    angostas sin desbordar; min-width:0 quita el minimo implicito que
    los navegadores le dan a los inputs dentro de un flex container. */
+/* font-size:16px a proposito (no 15px): en iOS Safari, un input con
+   fuente menor a 16px dispara un zoom automatico al enfocarlo (para
+   legibilidad) que la pagina no controla -- el layout no cambia, pero
+   la parte visible de la pantalla se reduce, dejando el boton
+   "Buscar" (y, en la pantalla de resultados, el cierre "X" y las
+   tarjetas) fuera del area visible sin haber overflow real, solo
+   hace falta hacer scroll dentro del zoom. Con 16px ese zoom
+   automatico no se activa. No reproducible en el emulador de
+   escritorio porque ese comportamiento es exclusivo de iOS Safari. */
 .ecopipo-dist-input {
   flex: 0 1 130px;
   min-width: 0;
@@ -1571,7 +1580,7 @@ body.template-home .section-slideshow .heading-block {
   border-radius: 8px;
   padding: 10px 14px;
   font-family: 'Palanquin', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   color: #3C1053;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -1687,6 +1696,9 @@ body.template-home .section-slideshow .heading-block {
   margin-top: 8px;
 }
 
+/* font-size:16px por la misma razon que .ecopipo-dist-input (ver su
+   comentario): evita el zoom automatico de iOS Safari al enfocar un
+   input con fuente menor a 16px. */
 .ecopipo-dist-footer-input {
   flex: 1 1 auto;
   min-width: 0;
@@ -1695,7 +1707,7 @@ body.template-home .section-slideshow .heading-block {
   padding: 10px 14px;
   color: #fcf5ff;
   font-family: 'Palanquin', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .ecopipo-dist-footer-input::placeholder {
