@@ -1896,6 +1896,28 @@ body.template-home .section-slideshow .heading-block {
   pointer-events: none;
 }
 
+/* Tallado "en familia" (hasta 12 opciones): oculta las tallas mas
+   alla de PREVIEW_COUNT (seccion 10 del JS) hasta que se toca/hace
+   click en la pildora +N, que agrega esta clase al overlay. */
+.ecopipo-size-pill.ecopipo-size-rest {
+  display: none;
+}
+
+.ecopipo-size-hover.ecopipo-size-expanded .ecopipo-size-pill.ecopipo-size-rest {
+  display: inline-block;
+}
+
+.ecopipo-size-toggle {
+  background: #3C1053;
+  color: #ffffff;
+  border-color: #3C1053;
+  cursor: pointer;
+}
+
+.ecopipo-size-toggle:hover {
+  background: #2a0b3b;
+}
+
 /* 29. PRODUCTOS CON SELECTOR DE TALLA: SIN BOTON DE COMPRA */
 /* Solo en productos con variantes reales (los que reciben el overlay
    de tallas de la seccion 28, marcados por script con la clase

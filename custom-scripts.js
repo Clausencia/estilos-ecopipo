@@ -477,8 +477,22 @@ document.addEventListener('DOMContentLoaded', () => {
    talla enlaza a "producto?variant=ID", que Tiendanube ya respeta
    para preseleccionar esa variante en el PDP (confirmado en vivo).
    Productos sin variantes reales (data-variants con un solo option0,
-   ej. simples/sin tallas) no muestran nada. */
+   ej. simples/sin tallas) no muestran nada.
+   Productos "en familia" (adulto + niño en un mismo tallado, hasta 12
+   opciones: S/M/L/XL/XXL + 2/4/6/8/10/12/14) tapaban la foto por
+   completo con tantas pildoras -- en mobile, donde el selector queda
+   siempre visible (no hay hover real, ver seccion 28 del CSS), la foto
+   practicamente desaparecia. Con mas de PREVIEW_COUNT tallas, solo se
+   muestran las primeras y el resto queda oculto detras de una
+   "pildora" +N: al tocarla/hacer click se expande el tallado completo
+   (con boton "-" para volver a colapsar), en vez de mostrarlo siempre
+   entero. No distingue adulto/niño (ver seccion 26 del JS para esa
+   logica, propia del PDP) -- simplemente corta por posicion, en el
+   mismo orden en que ya vienen las variantes. Con 5 tallas o menos no
+   hay recorte: se muestran todas igual que antes. */
 document.addEventListener('DOMContentLoaded', () => {
+  const PREVIEW_COUNT = 4;
+
   function construirSelectoresDeTalla() {
     document.querySelectorAll('.product-item[data-variants]').forEach((item) => {
       if (item.querySelector('.ecopipo-size-hover')) return;
@@ -502,17 +516,33 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.createElement('div');
       overlay.className = 'ecopipo-size-hover';
       overlay.innerHTML = opciones
-        .map((opcion) => {
+        .map((opcion, indice) => {
           const variante = variantes.find((v) => v.option0 === opcion);
           const disponible = variante ? variante.available : true;
           const href = variante ? urlBase + '?variant=' + variante.id : urlBase;
+          const claseResto = indice >= PREVIEW_COUNT ? ' ecopipo-size-rest' : '';
           return (
-            '<a href="' + href + '" class="ecopipo-size-pill' + (disponible ? '' : ' is-disabled') + '">' +
+            '<a href="' + href + '" class="ecopipo-size-pill' + (disponible ? '' : ' is-disabled') + claseResto + '">' +
             opcion +
             '</a>'
           );
         })
         .join('');
+
+      if (opciones.length > PREVIEW_COUNT + 1) {
+        const restantes = opciones.length - PREVIEW_COUNT;
+        const boton = document.createElement('button');
+        boton.type = 'button';
+        boton.className = 'ecopipo-size-pill ecopipo-size-toggle';
+        boton.textContent = '+' + restantes;
+        boton.addEventListener('click', (evento) => {
+          evento.preventDefault();
+          evento.stopPropagation();
+          const expandido = overlay.classList.toggle('ecopipo-size-expanded');
+          boton.textContent = expandido ? '−' : '+' + restantes;
+        });
+        overlay.appendChild(boton);
+      }
 
       contenedorImagen.style.position = 'relative';
       contenedorImagen.appendChild(overlay);
