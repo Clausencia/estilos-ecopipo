@@ -1533,3 +1533,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 });
+
+/* 33. Boton flotante "volver arriba" en el home. No existe un boton
+   nativo de este tipo en el tema. Aparece solo despues de bajar mas o
+   menos media pantalla (evita mostrarlo de inmediato en viewports
+   altos, donde no hace falta), y hace scroll suave al inicio. Solo en
+   el home (el resto de paginas no lo pidieron, y en el PDP competiria
+   en la misma esquina con la barra fija de "Agregar al carrito", ver
+   seccion 24). */
+document.addEventListener('DOMContentLoaded', () => {
+  if (!document.body.classList.contains('template-home')) return;
+
+  const boton = document.createElement('button');
+  boton.id = 'ecopipo-volver-arriba';
+  boton.type = 'button';
+  boton.setAttribute('aria-label', 'Volver arriba');
+  boton.innerHTML =
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>';
+  document.body.appendChild(boton);
+
+  boton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    boton.classList.toggle('ecopipo-visible', window.scrollY > window.innerHeight * 0.6);
+  });
+});

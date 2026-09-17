@@ -2797,3 +2797,49 @@ body {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+/* 47. BOTON FLOTANTE "VOLVER ARRIBA" (SOLO HOME) */
+/* Insertado por custom-scripts.js (seccion 33). Oculto por defecto
+   (opacity+visibility, no display:none, para poder animar la entrada)
+   hasta que ese mismo script le agrega la clase "ecopipo-visible" al
+   pasar cierto punto de scroll. */
+#ecopipo-volver-arriba {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #42C6D3;
+  color: #fcf5ff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 500;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+
+#ecopipo-volver-arriba.ecopipo-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#ecopipo-volver-arriba:hover {
+  background: #369aa5;
+}
+
+@media (max-width: 767px) {
+  #ecopipo-volver-arriba {
+    right: 12px;
+    bottom: 12px;
+    width: 42px;
+    height: 42px;
+  }
+}
