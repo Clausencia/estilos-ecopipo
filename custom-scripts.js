@@ -482,16 +482,29 @@ document.addEventListener('DOMContentLoaded', () => {
    opciones: S/M/L/XL/XXL + 2/4/6/8/10/12/14) tapaban la foto por
    completo con tantas pildoras -- en mobile, donde el selector queda
    siempre visible (no hay hover real, ver seccion 28 del CSS), la foto
-   practicamente desaparecia. Con mas de PREVIEW_COUNT tallas, solo se
-   muestran las primeras y el resto queda oculto detras de una
-   "pildora" +N: al tocarla/hacer click se expande el tallado completo
-   (con boton "-" para volver a colapsar), en vez de mostrarlo siempre
-   entero. No distingue adulto/niño (ver seccion 26 del JS para esa
-   logica, propia del PDP) -- simplemente corta por posicion, en el
-   mismo orden en que ya vienen las variantes. Con 5 tallas o menos no
-   hay recorte: se muestran todas igual que antes. */
+   practicamente desaparecia. Con mas tallas de las que le tocan a su
+   PREVIEW_COUNT (ver mas abajo), solo se muestran las primeras y el
+   resto queda oculto detras de una "pildora" +N: al tocarla/hacer
+   click se expande el tallado completo (con boton "-" para volver a
+   colapsar), en vez de mostrarlo siempre entero. No distingue
+   adulto/niño (ver seccion 26 del JS para esa logica, propia del PDP)
+   -- simplemente corta por posicion, en el mismo orden en que ya
+   vienen las variantes.
+   PREVIEW_COUNT no es un numero fijo: algunas categorias (Leggings,
+   Natacion, Escolar/Batitas) usan tallas por rango de edad en texto
+   largo ("6 a 24 meses", "2 a 4 años") en vez de letras/numeros
+   cortos -- ahi hasta 3-4 opciones alcanzaban a tapar la foto porque
+   cada pildora es demasiado ancha para compartir fila con las demas
+   (el navegador las apila, una por linea). Se calcula el largo
+   promedio del texto de las opciones: con promedio corto (S, XL, 12,
+   etc.) se muestran hasta 3 antes de recortar; con promedio largo
+   (rangos de edad) solo 1. Si el recorte dejaria oculta una sola
+   opcion, mejor se muestran todas seguidas (un "+1" para ocultar una
+   sola talla no aporta nada). */
 document.addEventListener('DOMContentLoaded', () => {
-  const PREVIEW_COUNT = 3;
+  const PREVIEW_COUNT_CORTO = 3;
+  const PREVIEW_COUNT_LARGO = 1;
+  const LARGO_PROMEDIO_UMBRAL = 6;
 
   function construirSelectoresDeTalla() {
     document.querySelectorAll('.product-item[data-variants]').forEach((item) => {
@@ -513,6 +526,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const urlBase = enlace.getAttribute('href').split('?')[0];
 
+      const largoPromedio = opciones.reduce((suma, o) => suma + o.length, 0) / opciones.length;
+      const previewCount = largoPromedio > LARGO_PROMEDIO_UMBRAL ? PREVIEW_COUNT_LARGO : PREVIEW_COUNT_CORTO;
+      // Si solo quedaria 1 talla oculta, se muestran todas seguidas
+      // en vez de un "+1" que no ahorra espacio real.
+      const hayRecorte = opciones.length > previewCount + 1;
+
       const overlay = document.createElement('div');
       overlay.className = 'ecopipo-size-hover';
       overlay.innerHTML = opciones
@@ -520,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const variante = variantes.find((v) => v.option0 === opcion);
           const disponible = variante ? variante.available : true;
           const href = variante ? urlBase + '?variant=' + variante.id : urlBase;
-          const claseResto = indice >= PREVIEW_COUNT ? ' ecopipo-size-rest' : '';
+          const claseResto = hayRecorte && indice >= previewCount ? ' ecopipo-size-rest' : '';
           return (
             '<a href="' + href + '" class="ecopipo-size-pill' + (disponible ? '' : ' is-disabled') + claseResto + '">' +
             opcion +
@@ -529,8 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .join('');
 
-      if (opciones.length > PREVIEW_COUNT + 1) {
-        const restantes = opciones.length - PREVIEW_COUNT;
+      if (hayRecorte) {
+        const restantes = opciones.length - previewCount;
         const boton = document.createElement('button');
         boton.type = 'button';
         boton.className = 'ecopipo-size-pill ecopipo-size-toggle';
