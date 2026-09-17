@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
    mismo orden en que ya vienen las variantes. Con 5 tallas o menos no
    hay recorte: se muestran todas igual que antes. */
 document.addEventListener('DOMContentLoaded', () => {
-  const PREVIEW_COUNT = 4;
+  const PREVIEW_COUNT = 3;
 
   function construirSelectoresDeTalla() {
     document.querySelectorAll('.product-item[data-variants]').forEach((item) => {
