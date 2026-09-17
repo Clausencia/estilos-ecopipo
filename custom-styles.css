@@ -1526,6 +1526,17 @@ body.template-home .section-slideshow .heading-block {
   max-width: 560px;
 }
 
+/* En mobile, el padding lateral general del modal (32px, pensado para
+   el modal de Ixchel que comparte esta clase) dejaba menos aire del
+   necesario para las tarjetas de resultado -- se reduce solo aqui
+   (no en la regla compartida) para no achicar el otro modal. */
+@media (max-width: 767px) {
+  #ecopipo-modal-distribuidoras .ecopipo-modal-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 #ecopipo-modal-distribuidoras .ecopipo-modal-title {
   font-family: 'Baloo 2', sans-serif;
   color: #FF9030;
@@ -1562,6 +1573,8 @@ body.template-home .section-slideshow .heading-block {
   font-family: 'Palanquin', sans-serif;
   font-size: 15px;
   color: #3C1053;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .ecopipo-dist-buscar {
@@ -1575,6 +1588,8 @@ body.template-home .section-slideshow .heading-block {
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .ecopipo-dist-resultados {
@@ -1593,12 +1608,21 @@ body.template-home .section-slideshow .heading-block {
   margin: 0;
 }
 
+/* "-webkit-text-size-adjust:100%" en la tarjeta y sus hijos por el
+   mismo motivo que en el cintillo hecho a mano (seccion 15): Safari en
+   iPhone real infla el tamano de texto en ciertos contenedores por su
+   cuenta, algo que el emulador de escritorio no reproduce. Sin esto,
+   en un iPhone real el texto de las tarjetas y botones podia salir mas
+   grande de lo definido aqui, empujando el ancho total mas alla del
+   modal (requeria scroll horizontal para ver "Visitar tienda"). */
 .ecopipo-dist-card {
   border: 1px solid #E2E8F0;
   border-left: 4px solid #B573DE;
   border-radius: 8px;
-  padding: 14px 16px;
+  padding: 14px 12px;
   background: #ffffff;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .ecopipo-dist-card h4 {
@@ -1617,19 +1641,21 @@ body.template-home .section-slideshow .heading-block {
 
 .ecopipo-dist-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .ecopipo-dist-actions a {
   display: inline-block;
   border-radius: 999px;
-  padding: 6px 16px;
+  padding: 6px 14px;
   font-family: 'Baloo 2', sans-serif;
   font-weight: 700;
   font-size: 13px;
   text-decoration: none;
   color: #fcf5ff;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .ecopipo-dist-actions a:first-child {
