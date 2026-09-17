@@ -1513,3 +1513,23 @@ document.addEventListener('DOMContentLoaded', () => {
     seccionHeader.parentNode.insertBefore(barra, seccionHeader.nextSibling);
   }
 });
+
+/* 32. Texto del boton de checkout ("Iniciar compra" -> "Iniciar
+   pago"). El boton ya tenia su estilo propio (capsula verde lima con
+   sombra naranja y efecto "push" al presionar, ver seccion 9 de
+   custom-styles.css) hecho antes por fuera de este repo (en Google Tag
+   Manager); se trae aqui el cambio de texto para administrar todo el
+   codigo del sitio en un solo lugar. El texto vive en el atributo
+   "value" porque el boton nativo del tema es un <input type="submit">,
+   no un <button>/<a> con texto en su interior. */
+document.addEventListener('DOMContentLoaded', () => {
+  document
+    .querySelectorAll('[data-store="checkout-button"], a.js-cart-submit, .js-ajax-cart-submit input, a[href*="checkout"], input[name="go_to_checkout"]')
+    .forEach((boton) => {
+      if (boton.tagName === 'INPUT') {
+        boton.value = 'Iniciar pago';
+      } else {
+        boton.textContent = 'Iniciar pago';
+      }
+    });
+});
