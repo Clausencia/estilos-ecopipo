@@ -1542,10 +1542,20 @@ body.template-home .section-slideshow .heading-block {
   display: flex;
   gap: 8px;
   margin-bottom: 20px;
+  max-width: 100%;
 }
 
+/* El campo solo recibe un codigo postal (5 digitos), no necesita ser
+   tan ancho como el resto del formulario -- con flex:1 1 auto crecia
+   a ocupar casi todo el modal, dejando el boton "Buscar" pegado al
+   borde derecho (en mobile, a veces fuera del area visible sin hacer
+   scroll horizontal). Se fija un ancho chico via flex-basis (en vez de
+   un "width" fijo) para que igual pueda encogerse mas en pantallas muy
+   angostas sin desbordar; min-width:0 quita el minimo implicito que
+   los navegadores le dan a los inputs dentro de un flex container. */
 .ecopipo-dist-input {
-  flex: 1 1 auto;
+  flex: 0 1 130px;
+  min-width: 0;
   border: 1px solid #E2E8F0;
   border-radius: 8px;
   padding: 10px 14px;
@@ -1555,6 +1565,7 @@ body.template-home .section-slideshow .heading-block {
 }
 
 .ecopipo-dist-buscar {
+  flex: 0 0 auto;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;

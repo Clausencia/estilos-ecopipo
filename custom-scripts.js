@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '<button type="button" class="ecopipo-modal-close" aria-label="Cerrar">&times;</button>' +
     '<div id="ecopipo-modal-dist-title" class="ecopipo-modal-title">Encuentra tu distribuidora</div>' +
     '<div class="ecopipo-dist-buscador">' +
-    '<input type="text" inputmode="numeric" maxlength="5" placeholder="Tu código postal" class="ecopipo-dist-input">' +
+    '<input type="text" inputmode="numeric" maxlength="5" placeholder="Código Postal" class="ecopipo-dist-input">' +
     '<button type="button" class="ecopipo-dist-buscar">Buscar</button>' +
     '</div>' +
     '<div class="ecopipo-dist-resultados"></div>' +
